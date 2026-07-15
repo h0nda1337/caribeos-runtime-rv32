@@ -1,0 +1,9 @@
+suite=up
+result=PASS
+reported_elapsed_seconds=49.3
+process_gate_1=PID1 XNU task/thread/pmap created and entered U-mode PASS
+musl=real musl libc on XNU-CaribeOS RV32 PASS
+bash=arrays loops arithmetic functions conditionals case PASS
+exec=transactional ELF32 EXEC and DYN paths PASS
+panic_count=0
+unexpected_traps=0

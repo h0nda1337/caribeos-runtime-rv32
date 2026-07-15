@@ -1,0 +1,43 @@
+# Generated build trees, logs, images, and release binaries
+/build/
+/third_party/
+*.o
+*.obj
+*.a
+*.so
+*.d
+*.elf
+*.bin
+*.img
+*.iso
+*.dtb
+*.map
+*.log
+*.tmp
+*.cache
+*.core
+*.tar
+*.tar.gz
+*.tar.xz
+*.zip
+
+# Historical zero-length/debug scratch files at the repository root
+/bootbin
+/bootelf
+/idx
+/ring\[aidx
+
+# Local tooling and editor state
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.local
+*.local.*

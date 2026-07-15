@@ -1,0 +1,8 @@
+Windows PowerShell 5.1.26100.8457
+git version 2.54.0.windows.1
+riscv64-unknown-elf-gcc.exe (GCC) 15.1.0
+GNU Make 4.4.1
+QEMU emulator version 11.0.0
+OpenSBI v1.7
+cmake version 4.3.2
+ninja 1.13.2

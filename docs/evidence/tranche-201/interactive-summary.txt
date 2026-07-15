@@ -1,0 +1,8 @@
+suite=interactive
+result=PASS
+reported_elapsed_seconds=15.5
+tty=NS16550 RX IRQ canonical ring ready PASS
+pselect6=blocked without polling and woke for TTY readiness PASS
+bash=GNU Bash 5.3 child exited status 0
+reaping=PID1 reaped Bash PID2 PASS
+job_control=waitid job-control options accepted PASS

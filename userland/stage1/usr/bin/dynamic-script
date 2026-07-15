@@ -1,0 +1,2 @@
+#!/bin/dynamic-bias-probe --via-shebang
+# CaribeOS stage1 shebang execveat probe.

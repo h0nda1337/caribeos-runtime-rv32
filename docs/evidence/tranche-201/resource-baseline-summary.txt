@@ -1,0 +1,15 @@
+suite=gate14-resource-baseline
+result=PASS
+pmap_create_destroy=19998/19998
+backing_alloc_free=69993/69993
+ofd_retain_release=29997/29997
+free_pages_before_after=55268/55268
+wired_pages_before_after=10138/10138
+kernel_stacks_active_before_after=20/20
+kernel_stacks_total_before_after=20/20
+zones_before_after=34/34
+zone_active_before_after=55783/55783
+zone_bytes_before_after=2878744/2878744
+kernel_pt_growth=0
+kernel_l0_growth=0
+zombies=0

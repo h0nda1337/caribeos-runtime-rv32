@@ -1,0 +1,2 @@
+initrd-walker=cpio-derived-directories
+path=/usr/lib/caribe.note

@@ -1,0 +1,6 @@
+NAME=CaribeOS
+ID=caribeos
+VERSION_ID=0.1-stage1
+PRETTY_NAME="CaribeOS stage1 initrd on XNU/RISC-V"
+CARIBE_BOOT_CHAIN="OpenSBI->CaribeBootX->XNU-CaribeOS"
+CARIBE_INIT="/sbin/init"

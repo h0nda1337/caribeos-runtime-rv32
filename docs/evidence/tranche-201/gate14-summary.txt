@@ -1,0 +1,13 @@
+suite=process-gate-14-stress
+result=PASS
+reported_elapsed_seconds=28.8
+rounds=10000
+fork=10000
+u_mode_entry=10000
+exec=10000
+getcpu_cpu1=10000
+exit=10000
+reap=10000
+errors=0
+stale_tlb=0
+lock_overlap=0

@@ -1,0 +1,12 @@
+suite=smp-gates-a-f
+result=PASS
+boots=6
+reported_elapsed_seconds=310.6
+gate_a=hart1 independent tp sscratch stvec kernel stack interrupt stack cpu_data PASS
+gate_b=rounds 64 hart0_acks 64 hart1_acks 64 unexpected 0 PASS
+gate_c=processor online idle thread active per-hart timer interrupt observed PASS
+gate_d=rounds 10000 requests 10000 completions 10000 cpu 1 errors 0 PASS
+gate_e=rounds 1024 local_fences 1031 remote_fences 1031 stale 0 errors 0 PASS
+gate_f=cpu0 50000 cpu1 50000 locked_total 100000 overlap 0 errors 0 PASS
+online_mask=0x00000003
+active_pmap_mask=0x00000003

@@ -1,0 +1,7 @@
+CaribeOS stage1 initrd userspace
+boot_chain=OpenSBI->CaribeBootX->XNU-CaribeOS
+kernel=xnu-caribeos-rv32-full-stage0
+rootfs=initrd-newc
+abi=linux-rv32
+init=/sbin/init
+manager=/sbin/caribed
