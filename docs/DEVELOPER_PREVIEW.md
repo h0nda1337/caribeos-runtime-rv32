@@ -36,8 +36,9 @@ security, POSIX, filesystem, or Linux ABI compatibility.
 
 ## Redistribution Gate
 
-Original CaribeOS runtime code is licensed under BSD-2-Clause. Public binary
-distribution still requires all third-party notices and same-place
-corresponding source for the included GNU Bash/musl binaries. The original
-archive and hash are immutable; any public repack must use a new filename and
-manifest rather than overwriting it.
+Original CaribeOS runtime code is licensed under BSD-2-Clause. The public
+Release keeps all third-party notices and places
+`caribeos-tranche-201-corresponding-source.zip` beside the preview for the
+included GNU Bash/musl binaries. The original archive and hash are immutable;
+any future repack must use a new filename and manifest rather than overwriting
+it.

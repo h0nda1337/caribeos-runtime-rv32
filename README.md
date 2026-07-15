@@ -105,8 +105,10 @@ other external components. See
 [docs/PUBLIC_LICENSE_REVIEW.md](docs/PUBLIC_LICENSE_REVIEW.md),
 [NOTICE.md](NOTICE.md), and [THIRD_PARTY.md](THIRD_PARTY.md).
 
-Binary redistribution of the Developer Preview additionally requires the
-verified same-place corresponding-source asset described in those documents.
+The public-preview Release distributes
+`caribeos-tranche-201-corresponding-source.zip` beside the Developer Preview.
+See the [Tranche 201 release notes](docs/TRANCHE_201_RELEASE_NOTES.md) for the
+curated asset set, exact source tags, and verification procedure.
 
 When reporting a problem, include the selected mode, kernel SHA-256, tool
 versions, complete serial log, CPU count, and whether UP or SMP failed. Never

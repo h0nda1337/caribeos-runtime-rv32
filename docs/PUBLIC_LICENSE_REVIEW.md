@@ -63,11 +63,13 @@ A structured audit found 40 ZIP entries and a valid `cpio-newc` initrd with 50
 entries, including one GNU Bash ELF. The package includes APSL, Bash GPL v3,
 and musl license texts. It does not bundle QEMU or OpenSBI.
 
-The preview does not contain corresponding Bash/musl source. Before public
-release, an additional same-place source asset must include the exact Bash and
+The immutable preview archive does not contain corresponding Bash/musl source.
+The separately verified same-place asset
+`caribeos-tranche-201-corresponding-source.zip` supplies the exact Bash and
 musl archives, all five Bash patches, required build/control scripts, licenses,
-and a hash manifest. The preserved preview ZIP must not be overwritten. This is
-a binary-release gate, not a defect in the approved CaribeOS source license.
+runtime source snapshots, and a hash manifest. The preserved preview ZIP is
+not overwritten. This separation is a binary-distribution boundary, not a
+change to the approved CaribeOS source license.
 
 ## Review Results
 
@@ -76,9 +78,13 @@ a binary-release gate, not a defect in the approved CaribeOS source license.
 - original-code SPDX and copyright headers: PASS;
 - generated and third-party exclusion policy: PASS;
 - `NOTICE.md`, `THIRD_PARTY.md`, and README boundary statements: PASS;
-- preservation of XNU/APSL and external component licenses: PASS.
+- preservation of XNU/APSL and external component licenses: PASS;
+- corresponding-source inventory and restored manifest: PASS;
+- project-controlled corresponding-source secret scan: PASS;
+- reviewed upstream Bash false positive: configuration text, not a credential.
 
-The repositories and preview must nevertheless remain private until the
-corresponding-source candidate, final Release notes, secret and size scans,
-32/32 publication gate, and public post-change verification all pass. A
-qualified legal review may still be appropriate for the distributor.
+The repositories and preview remain private until the final source archive is
+regenerated from the public-preview commit, final asset hashes pass, and the
+32/32 publication gate is recorded. Public clone, Release download, and hash
+verification are post-publication gates. A qualified legal review may still be
+appropriate for the distributor.

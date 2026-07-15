@@ -25,8 +25,10 @@ under their respective licenses. CaribeOS build wrappers and integration code
 may be BSD-2-Clause when listed in the scope manifest, but that does not change
 the license of the component they build or invoke.
 
-The public Developer Preview must place verified corresponding source for its
-Bash and musl binaries beside the binary assets. See `THIRD_PARTY.md` and
-`docs/PUBLIC_LICENSE_REVIEW.md` for versions, hashes, and redistribution gates.
+The public Developer Preview places verified corresponding source for its Bash
+and musl binaries beside the binary asset as
+`caribeos-tranche-201-corresponding-source.zip`. See `THIRD_PARTY.md` and
+`docs/PUBLIC_LICENSE_REVIEW.md` for versions, hashes, and redistribution
+boundaries.
 
 This is a technical notice, not legal advice.

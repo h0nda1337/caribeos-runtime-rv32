@@ -103,8 +103,8 @@ future public repack requires a new filename, manifest, and hashes.
 - Original CaribeOS runtime code now has an explicit BSD-2-Clause allowlist and
   source-header policy. The header transformation preserves every licensed
   file body exactly relative to the pre-license Git commit.
-- A same-place corresponding-source archive for the bundled GNU Bash and musl
-  inputs must be completed before public binary distribution.
+- The verified corresponding-source archive must be regenerated from the final
+  public-preview commit and attached beside the Developer Preview.
 - The focused UP integration test did not rerun the long Tranche 201 suites.
   Their preserved 35/35 and 19/19 evidence remains attached to the immutable
   technical milestone.

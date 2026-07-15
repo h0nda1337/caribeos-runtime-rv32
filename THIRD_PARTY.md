@@ -23,8 +23,9 @@ The BSD-2-Clause license in this repository applies only to original CaribeOS
 runtime code. It does not relicense XNU, GNU Bash, musl, OpenSBI, QEMU, the
 toolchain, generated data, or any other external component.
 
-Before public binary distribution, the Release must include a same-place
-corresponding-source asset containing the exact Bash 5.3 archive, official
-patches 1-5, musl 1.2.5 archive, maintained build-control scripts, applicable
-license texts, and a cryptographic manifest. See
-`docs/PUBLIC_LICENSE_REVIEW.md` for the technical review and exact hashes.
+The public-preview Release includes the same-place asset
+`caribeos-tranche-201-corresponding-source.zip`. It contains the exact Bash 5.3
+archive, official patches 1-5, musl 1.2.5 archive, maintained build-control
+scripts, applicable license texts, runtime source snapshots, and a
+cryptographic manifest. See `docs/PUBLIC_LICENSE_REVIEW.md` for the technical
+review and exact upstream hashes.
