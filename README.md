@@ -95,6 +95,14 @@ local raw snapshot or packaged as private release assets.
 The companion kernel source is
 [h0nda1337/caribeos-xnu-rv32](https://github.com/h0nda1337/caribeos-xnu-rv32).
 
+## License Status
+
+Public distribution is not yet authorized: the original runtime code's project
+license is awaiting an explicit owner decision. Third-party and companion XNU
+terms do not supply a license for this repository. See
+[docs/PUBLIC_LICENSE_REVIEW.md](docs/PUBLIC_LICENSE_REVIEW.md),
+[NOTICE.md](NOTICE.md), and [THIRD_PARTY.md](THIRD_PARTY.md).
+
 When reporting a problem, include the selected mode, kernel SHA-256, tool
 versions, complete serial log, CPU count, and whether UP or SMP failed. Never
 include credentials or proprietary SDK material.
