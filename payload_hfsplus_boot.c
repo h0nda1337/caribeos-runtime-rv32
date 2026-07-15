@@ -102,7 +102,7 @@ static int virtio_blk_read_sectors(uint64_t lba, uint32_t count, void* buf){
     for (uint32_t i = 0; i < total; i++)
         dst[i] = src[i];
 
-    return 0; /* siempre OK: RAM no falla :) */
+    return 0; /* RAM-backed reads have no emulated device error path. */
 }
 
 /* ===== HFS+ ===== */
