@@ -90,6 +90,7 @@ local raw snapshot or packaged as private release assets.
 - [ROADMAP.md](ROADMAP.md), [SUPPORT.md](SUPPORT.md), and [SECURITY.md](SECURITY.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 - [docs/DEVELOPMENT_WITH_CODEX.md](docs/DEVELOPMENT_WITH_CODEX.md) and [CITATION.cff](CITATION.cff)
+- [docs/SOURCE_TREE.md](docs/SOURCE_TREE.md)
 
 The companion kernel source is
 [h0nda1337/caribeos-xnu-rv32](https://github.com/h0nda1337/caribeos-xnu-rv32).

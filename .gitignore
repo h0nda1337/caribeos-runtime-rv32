@@ -16,6 +16,10 @@
 *.tmp
 *.cache
 *.core
+*.bak
+*.bak.*
+*.orig
+*.rej
 *.tar
 *.tar.gz
 *.tar.xz
