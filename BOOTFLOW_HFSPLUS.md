@@ -183,7 +183,8 @@ El 2026-05-25 tambien quedo verificado el primer ELF stage0 construido desde
 el arbol XNU:
 
 ```powershell
-$root = 'C:\Users\Angelo\Documents\Codex\2026-05-16\baja-lo-mas-que-se-pueda'
+$root = $env:CARIBEOS_WORKSPACE
+if (-not $root) { throw 'Set CARIBEOS_WORKSPACE to the workspace root.' }
 $xnu = Join-Path $root 'xnu-2050.48.11'
 $caribe = Join-Path $root 'caribeos-corrected-xnu-rv32imacsu\caribeos'
 $kernel = Join-Path $xnu 'BUILD\obj\RELEASE_RISCV32\osfmk\RELEASE\xnu-caribeos-rv32-stage0.elf'

@@ -28,6 +28,8 @@
 /ring\[aidx
 
 # Local tooling and editor state
+__pycache__/
+*.py[cod]
 .vs/
 .vscode/
 .idea/
