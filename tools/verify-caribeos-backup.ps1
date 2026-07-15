@@ -11,18 +11,40 @@ function Assert-Exit([string]$Operation) {
   }
 }
 
+function Invoke-Git {
+  param([string]$Repository, [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
+  $savedPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $commandOutput = & git -C $Repository @Arguments 2>&1
+  $exitCode = $LASTEXITCODE
+  $ErrorActionPreference = $savedPreference
+  foreach ($line in $commandOutput) {
+    Write-Output ([string]$line)
+  }
+  if ($exitCode -ne 0) {
+    throw "git $($Arguments -join ' ') failed in $Repository with exit code $exitCode"
+  }
+}
+
 try {
   $backup = (Resolve-Path -LiteralPath $BackupDirectory).Path
   $bundles = @(
-    Join-Path $backup "caribeos-xnu-tranche201.bundle",
-    Join-Path $backup "caribeos-runtime-tranche201.bundle"
+    (Join-Path $backup "caribeos-xnu-tranche201.bundle")
+    (Join-Path $backup "caribeos-runtime-tranche201.bundle")
   )
+  $bundleVerifier = Join-Path $backup ".bundle-verifier.git"
+  if (-not (Test-Path -LiteralPath $bundleVerifier -PathType Container)) {
+    Invoke-Git $backup init --bare ".bundle-verifier.git" | Out-Null
+  }
+  $isBare = (Invoke-Git $bundleVerifier rev-parse --is-bare-repository).Trim()
+  if ($isBare -ne "true") {
+    throw "Bundle verifier is not a bare Git repository: $bundleVerifier"
+  }
   foreach ($bundle in $bundles) {
     if (-not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
       throw "Missing bundle: $bundle"
     }
-    & git bundle verify $bundle
-    Assert-Exit "git bundle verify $bundle"
+    Invoke-Git $bundleVerifier bundle verify $bundle
   }
 
   $sumFile = Join-Path $backup "SHA256SUMS.txt"
@@ -52,12 +74,9 @@ try {
     $names = @("xnu", "runtime")
     for ($i = 0; $i -lt $bundles.Count; $i++) {
       $clone = Join-Path $testRoot $names[$i]
-      & git clone $bundles[$i] $clone
-      Assert-Exit "clone test $($bundles[$i])"
-      & git -C $clone fsck --full
-      Assert-Exit "git fsck $clone"
-      & git -C $clone rev-parse "tranche-201-stage2-complete^{tag}" | Out-Null
-      Assert-Exit "annotated tag check $clone"
+      Invoke-Git $backup clone $bundles[$i] $clone
+      Invoke-Git $clone fsck --full
+      Invoke-Git $clone rev-parse "tranche-201-stage2-complete^{tag}" | Out-Null
     }
   }
 

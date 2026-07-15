@@ -5,9 +5,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-function Assert-Exit([string]$Operation) {
-  if ($LASTEXITCODE -ne 0) {
-    throw "$Operation failed with exit code $LASTEXITCODE"
+function Invoke-Git {
+  param([string]$Repository, [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
+  $savedPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $commandOutput = & git -C $Repository @Arguments 2>&1
+  $exitCode = $LASTEXITCODE
+  $ErrorActionPreference = $savedPreference
+  foreach ($line in $commandOutput) {
+    Write-Output ([string]$line)
+  }
+  if ($exitCode -ne 0) {
+    throw "git $($Arguments -join ' ') failed in $Repository with exit code $exitCode"
   }
 }
 
@@ -20,24 +29,21 @@ try {
 
   $xnuBundle = Join-Path $backup "caribeos-xnu-tranche201.bundle"
   $runtimeBundle = Join-Path $backup "caribeos-runtime-tranche201.bundle"
+  New-Item -ItemType Directory -Path $destination | Out-Null
+  $bundleVerifier = Join-Path $destination ".bundle-verifier.git"
+  Invoke-Git $destination init --bare ".bundle-verifier.git" | Out-Null
   foreach ($bundle in @($xnuBundle, $runtimeBundle)) {
-    & git bundle verify $bundle
-    Assert-Exit "git bundle verify $bundle"
+    Invoke-Git $bundleVerifier bundle verify $bundle
   }
 
-  New-Item -ItemType Directory -Path $destination | Out-Null
   $xnuRestore = Join-Path $destination "caribeos-xnu-rv32"
   $runtimeRestore = Join-Path $destination "caribeos-runtime-rv32"
-  & git clone $xnuBundle $xnuRestore
-  Assert-Exit "XNU restore clone"
-  & git clone $runtimeBundle $runtimeRestore
-  Assert-Exit "runtime restore clone"
+  Invoke-Git $destination clone $xnuBundle $xnuRestore
+  Invoke-Git $destination clone $runtimeBundle $runtimeRestore
 
   foreach ($repository in @($xnuRestore, $runtimeRestore)) {
-    & git -C $repository fsck --full
-    Assert-Exit "git fsck $repository"
-    & git -C $repository rev-parse "tranche-201-stage2-complete^{tag}" | Out-Null
-    Assert-Exit "annotated tag check $repository"
+    Invoke-Git $repository fsck --full
+    Invoke-Git $repository rev-parse "tranche-201-stage2-complete^{tag}" | Out-Null
   }
 
   Write-Host "Restore completed in new directory: $destination"

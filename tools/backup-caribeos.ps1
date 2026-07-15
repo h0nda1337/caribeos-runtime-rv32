@@ -10,9 +10,16 @@ $ErrorActionPreference = "Stop"
 
 function Invoke-Git {
   param([string]$Repository, [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
-  & git -C $Repository @Arguments
-  if ($LASTEXITCODE -ne 0) {
-    throw "git $($Arguments -join ' ') failed in $Repository with exit code $LASTEXITCODE"
+  $savedPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $commandOutput = & git -C $Repository @Arguments 2>&1
+  $exitCode = $LASTEXITCODE
+  $ErrorActionPreference = $savedPreference
+  foreach ($line in $commandOutput) {
+    Write-Output ([string]$line)
+  }
+  if ($exitCode -ne 0) {
+    throw "git $($Arguments -join ' ') failed in $Repository with exit code $exitCode"
   }
 }
 
@@ -97,10 +104,10 @@ try {
   $runtimeBundle = Join-Path $destination "caribeos-runtime-tranche201.bundle"
   Invoke-Git $XnuPath bundle create $xnuBundle --all
   Invoke-Git $RuntimePath bundle create $runtimeBundle --all
-  & git bundle verify $xnuBundle
-  if ($LASTEXITCODE -ne 0) { throw "XNU bundle verification failed" }
-  & git bundle verify $runtimeBundle
-  if ($LASTEXITCODE -ne 0) { throw "runtime bundle verification failed" }
+  $bundleVerifier = Join-Path $destination ".bundle-verifier.git"
+  Invoke-Git $destination init --bare ".bundle-verifier.git" | Out-Null
+  Invoke-Git $bundleVerifier bundle verify $xnuBundle
+  Invoke-Git $bundleVerifier bundle verify $runtimeBundle
   Invoke-Git $XnuPath fsck --full
   Invoke-Git $RuntimePath fsck --full
 
