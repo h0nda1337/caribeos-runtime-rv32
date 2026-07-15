@@ -23,6 +23,33 @@ HEAD and annotated-tag checks, `git fsck --full`, clean-tree checks, static and
 documentation validators, workflow linting, YAML parsing, path scans, and
 PowerShell parsing.
 
+## Deterministic RV32 Assembly Links
+
+A focused rebuild audit found that rules which passed `.S` files directly to
+the GCC link driver embedded random `cc*.o` temporary names in ELF symbol
+tables. The executable bytes remained stable, but the complete ELF hashes and
+the initrd hash did not. The affected rules now compile named object files
+first and link those explicit prerequisites. Negative dynamic-loader fixtures
+use separate objects so their preprocessor definitions remain isolated.
+
+The corrected graph passed two normal targeted rebuilds after timestamp-only
+source invalidation. The gate restored all source timestamps and verified:
+
+- 28 source inputs invalidated on each pass;
+- 33 directly linked RV32 outputs;
+- 11 derived ELF or shared-object fixtures;
+- 34 deterministic object files;
+- 79 of 79 artifacts byte-identical between passes;
+- zero random `cc*.o` symbols in the final ELF files;
+- `build/initrd.img` size: 3,506,804 bytes;
+- `build/initrd.img` SHA-256:
+  `9393175b120fc79d210d72da625f233fd17d369970391c394be0528061d017fa`.
+
+A current-source reference build using the former one-step command also
+produced the same loadable image as the new two-step rule. This confirms that
+the build-graph correction changes non-loadable naming metadata, not RV32 code
+or data presented to the kernel.
+
 ## Isolated Integration Procedure
 
 The preserved preview ZIP was hash-checked and extracted into a new test
@@ -81,6 +108,8 @@ future public repack requires a new filename, manifest, and hashes.
 - The focused UP integration test did not rerun the long Tranche 201 suites.
   Their preserved 35/35 and 19/19 evidence remains attached to the immutable
   technical milestone.
+- The deterministic rebuild gate is focused build evidence. It does not
+  replace the preserved boot and restore suites.
 
 See [Building](../BUILDING.md), the
 [Developer Preview boundary](DEVELOPER_PREVIEW.md), and

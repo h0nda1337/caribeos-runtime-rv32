@@ -310,79 +310,79 @@ build/kernel_xnu_stage0_trap.S.o: kernel_xnu_stage0_trap.S
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -c $< -o $@
 
-build/kernel_xnu_entry.elf: kernel_xnu_entry.c kernel_xnu_stage0_trap.S rv32_payload.ld build/kernel_xnu_stage0_trap.S.o
+build/kernel_xnu_entry.elf: build/kernel_xnu_entry.c.o build/kernel_xnu_stage0_trap.S.o rv32_payload.ld
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) $(TGT32) $(LD32) -static -Wl,--gc-sections -Wl,-T rv32_payload.ld -Wl,--no-relax kernel_xnu_entry.c build/kernel_xnu_stage0_trap.S.o -o $@
+	$(CC32) $(CFLAGS32) $(TGT32) $(LD32) -static -Wl,--gc-sections -Wl,-T rv32_payload.ld -Wl,--no-relax $< build/kernel_xnu_stage0_trap.S.o -o $@
 
-build/init_smoke.elf: userland/init_smoke.S
-	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x10000 -Wl,--no-relax $< -o $@
-
-build/init_stage1.elf: userland/init_stage1.S
+build/init_smoke.elf: build/userland/init_smoke.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x10000 -Wl,--no-relax $< -o $@
 
-build/process_exit7.elf: userland/process_exit7.S
+build/init_stage1.elf: build/userland/init_stage1.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x10000 -Wl,--no-relax $< -o $@
+
+build/process_exit7.elf: build/userland/process_exit7.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x18000 -Wl,--no-relax $< -o $@
 
-build/process_two_task.elf: userland/process_two_task.S
+build/process_two_task.elf: build/userland/process_two_task.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x1a000 -Wl,--no-relax $< -o $@
 
-build/process_fork_vm.elf: userland/process_fork_vm.S
+build/process_fork_vm.elf: build/userland/process_fork_vm.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x1c000 -Wl,--no-relax $< -o $@
 
-build/process_fd_parent.elf: userland/process_fd_parent.S
+build/process_fd_parent.elf: build/userland/process_fd_parent.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x1e000 -Wl,--no-relax $< -o $@
 
-build/process_fd_exec.elf: userland/process_fd_exec.S
+build/process_fd_exec.elf: build/userland/process_fd_exec.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x20000 -Wl,--no-relax $< -o $@
 
-build/process_exec_parent.elf: userland/process_exec_parent.S
+build/process_exec_parent.elf: build/userland/process_exec_parent.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x22000 -Wl,--no-relax $< -o $@
 
-build/process_exec_child.elf: userland/process_exec_child.S
+build/process_exec_child.elf: build/userland/process_exec_child.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x26000 -Wl,--no-relax $< -o $@
 
-build/process_exec_badinterp.elf: userland/process_exec_badinterp.S userland/process_exec_badinterp.ld
+build/process_exec_badinterp.elf: build/userland/process_exec_badinterp.S.o userland/process_exec_badinterp.ld
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-T,userland/process_exec_badinterp.ld -Wl,--no-relax $< -o $@
 
-build/process_wait_parent.elf: userland/process_wait_parent.S
+build/process_wait_parent.elf: build/userland/process_wait_parent.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2e000 -Wl,--no-relax $< -o $@
 
-build/process_signal_parent.elf: userland/process_signal_parent.S
+build/process_signal_parent.elf: build/userland/process_signal_parent.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x32000 -Wl,--no-relax $< -o $@
 
-build/process_signal_self.elf: userland/process_signal_self.S
+build/process_signal_self.elf: build/userland/process_signal_self.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x36000 -Wl,--no-relax $< -o $@
 
-build/process_tty_input.elf: userland/process_tty_input.S
+build/process_tty_input.elf: build/userland/process_tty_input.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x3a000 -Wl,--no-relax $< -o $@
 
-build/caribed.elf: userland/caribed.S
+build/caribed.elf: build/userland/caribed.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x20000 -Wl,--no-relax $< -o $@
 
-build/caribectl.elf: userland/caribectl.S
+build/caribectl.elf: build/userland/caribectl.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x30000 -Wl,--no-relax $< -o $@
 
-build/interp_probe.elf: userland/interp_probe.S
+build/interp_probe.elf: build/userland/interp_probe.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x22000 -Wl,--no-relax $< -o $@
 
-build/dynamic_probe.elf: userland/dynamic_probe.S
+build/dynamic_probe.elf: build/userland/dynamic_probe.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x24000 -Wl,--no-relax $< -o $@
 
@@ -390,27 +390,35 @@ build/dynamic_bias_probe.elf: $(DYNAMIC_PROBE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(DYNAMIC_PROBE_ELF) $@ ET_DYN
 
-build/dynamic_badver_probe.elf: userland/dynamic_probe.S
+build/dynamic_badver_probe.S.o: userland/dynamic_probe.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_VERNEED_OTHER=3 -nostdlib -static -Wl,-Ttext=0x24000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_VERNEED_OTHER=3 -c $< -o $@
+
+build/dynamic_badver_probe.elf: build/dynamic_badver_probe.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x24000 -Wl,--no-relax $< -o $@
 
 build/dynamic_badver_bias_probe.elf: $(DYNAMIC_BADVER_PROBE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(DYNAMIC_BADVER_PROBE_ELF) $@ ET_DYN
 
-build/dynamic_badmainversym_probe.elf: userland/dynamic_probe.S
+build/dynamic_badmainversym_probe.S.o: userland/dynamic_probe.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_MAIN_BUCKETS_VERSYM_INDEX=3 -nostdlib -static -Wl,-Ttext=0x24000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_MAIN_BUCKETS_VERSYM_INDEX=3 -c $< -o $@
+
+build/dynamic_badmainversym_probe.elf: build/dynamic_badmainversym_probe.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x24000 -Wl,--no-relax $< -o $@
 
 build/dynamic_badmainversym_bias_probe.elf: $(DYNAMIC_BADMAINVERSYM_PROBE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(DYNAMIC_BADMAINVERSYM_PROBE_ELF) $@ ET_DYN
 
-build/ld-caribe-rv32.so.1: userland/ld_caribe.S
+build/ld-caribe-rv32.so.1: build/userland/ld_caribe.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x40000 -Wl,--no-relax $< -o $@
 
-build/libcaribe_probe.elf: userland/libcaribe_probe.S
+build/libcaribe_probe.elf: build/userland/libcaribe_probe.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x26000 -Wl,--no-relax $< -o $@
 
@@ -418,7 +426,7 @@ build/libcaribe-probe.so.1: $(LIBCARIBE_PROBE_BASE_ELF) scripts/elf32-set-type.p
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_PROBE_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_extra.elf: userland/libcaribe_extra.S
+build/libcaribe_extra.elf: build/userland/libcaribe_extra.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x28000 -Wl,--no-relax $< -o $@
 
@@ -426,7 +434,7 @@ build/libcaribe-extra.so.1: $(LIBCARIBE_EXTRA_BASE_ELF) scripts/elf32-set-type.p
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_EXTRA_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_chain.elf: userland/libcaribe_chain.S
+build/libcaribe_chain.elf: build/userland/libcaribe_chain.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2a000 -Wl,--no-relax $< -o $@
 
@@ -434,7 +442,7 @@ build/libcaribe-chain.so.1: $(LIBCARIBE_CHAIN_BASE_ELF) scripts/elf32-set-type.p
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_CHAIN_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_buckets.elf: userland/libcaribe_buckets.S
+build/libcaribe_buckets.elf: build/userland/libcaribe_buckets.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
 
@@ -442,33 +450,49 @@ build/libcaribe-buckets.so.1: $(LIBCARIBE_BUCKETS_BASE_ELF) scripts/elf32-set-ty
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_BUCKETS_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_buckets_badversym.elf: userland/libcaribe_buckets.S
+build/libcaribe_buckets_badversym.S.o: userland/libcaribe_buckets.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_VERSYM_INDEX=3 -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_VERSYM_INDEX=3 -c $< -o $@
+
+build/libcaribe_buckets_badversym.elf: build/libcaribe_buckets_badversym.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
 
 build/libcaribe-buckets-badversym.so.1: $(LIBCARIBE_BUCKETS_BADVERSYM_BASE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_BUCKETS_BADVERSYM_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_buckets_noversym.elf: userland/libcaribe_buckets.S
+build/libcaribe_buckets_noversym.S.o: userland/libcaribe_buckets.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_NO_VERSYM=1 -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_NO_VERSYM=1 -c $< -o $@
+
+build/libcaribe_buckets_noversym.elf: build/libcaribe_buckets_noversym.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
 
 build/libcaribe-buckets-noversym.so.1: $(LIBCARIBE_BUCKETS_NOVERSYM_BASE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_BUCKETS_NOVERSYM_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_buckets_sysv_badversym.elf: userland/libcaribe_buckets.S
+build/libcaribe_buckets_sysv_badversym.S.o: userland/libcaribe_buckets.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_NO_GNU_HASH=1 -DCARIBE_BUCKETS_VERSYM_INDEX=3 -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_NO_GNU_HASH=1 -DCARIBE_BUCKETS_VERSYM_INDEX=3 -c $< -o $@
+
+build/libcaribe_buckets_sysv_badversym.elf: build/libcaribe_buckets_sysv_badversym.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
 
 build/libcaribe-buckets-sysv-badversym.so.1: $(LIBCARIBE_BUCKETS_SYSV_BADVERSYM_BASE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/elf32-set-type.py $(LIBCARIBE_BUCKETS_SYSV_BADVERSYM_BASE_ELF) $@ ET_DYN
 
-build/libcaribe_buckets_badvername.elf: userland/libcaribe_buckets.S
+build/libcaribe_buckets_badvername.S.o: userland/libcaribe_buckets.S
 	@mkdir -p $(dir $@)
-	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_BAD_VERDEF_NAME=1 -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
+	$(CC32) $(CFLAGS32) -DCARIBE_BUCKETS_BAD_VERDEF_NAME=1 -c $< -o $@
+
+build/libcaribe_buckets_badvername.elf: build/libcaribe_buckets_badvername.S.o
+	@mkdir -p $(dir $@)
+	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x2c000 -Wl,--no-relax $< -o $@
 
 build/libcaribe-buckets-badvername.so.1: $(LIBCARIBE_BUCKETS_BADVERNAME_BASE_ELF) scripts/elf32-set-type.py
 	@mkdir -p $(dir $@)
@@ -566,11 +590,11 @@ build/cpu1_probe.elf: build/cpu1_probe.o $(MUSL_SYSROOT)/usr/lib/libc.a
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/gate14_stress.elf: userland/gate14_stress.S
+build/gate14_stress.elf: build/userland/gate14_stress.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x3c000 -Wl,--no-relax $< -o $@
 
-build/gate14_worker.elf: userland/gate14_worker.S
+build/gate14_worker.elf: build/userland/gate14_worker.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x3e000 -Wl,--no-relax $< -o $@
 
@@ -586,7 +610,7 @@ build/gate15_process_stress.elf: build/gate15_process_stress.o $(MUSL_SYSROOT)/u
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/gate15_worker.elf: userland/gate15_worker.S
+build/gate15_worker.elf: build/userland/gate15_worker.S.o
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdlib -static -Wl,-Ttext=0x40000 -Wl,--no-relax $< -o $@
 
