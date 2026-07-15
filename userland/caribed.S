@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 	.equ	AT_FDCWD, -100
 	.equ	AT_EMPTY_PATH, 0x1000
 	.equ	O_RDONLY, 0

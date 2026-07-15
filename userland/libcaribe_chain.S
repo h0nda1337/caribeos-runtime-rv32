@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 	.equ	DT_NULL, 0
 	.equ	DT_HASH, 4
 	.equ	DT_STRTAB, 5

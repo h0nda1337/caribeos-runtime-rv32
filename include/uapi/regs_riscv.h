@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 #pragma once
 /* Constantes útiles RV32 (se irá poblando a medida que avances) */
 #define SSTATUS_SIE   (1u<<1)

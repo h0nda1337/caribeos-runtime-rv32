@@ -5,7 +5,8 @@ the last stable semantic gate and add focused evidence.
 
 ## Publication Baseline
 
-- finish runtime licensing, third-party source packaging, documentation, and CI;
+- maintain the runtime BSD-2-Clause scope while finishing third-party source
+  packaging, documentation, and CI;
 - verify build/run instructions from clean public clones;
 - publish a separate public-preview tag without moving the technical tag;
 - attach a preview, corresponding source, hashes, and compact evidence.

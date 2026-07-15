@@ -1,3 +1,6 @@
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 SBI ?= 1
 PYTHON ?= python
 XNU_FULL_STAGE0 ?= ../../xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf

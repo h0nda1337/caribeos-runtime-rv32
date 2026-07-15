@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 	.equ	SYS_EXIT_GROUP, 94
 	.equ	SYS_GETCPU, 168
 	.equ	SYS_MUNMAP, 215

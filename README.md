@@ -97,11 +97,16 @@ The companion kernel source is
 
 ## License Status
 
-Public distribution is not yet authorized: the original runtime code's project
-license is awaiting an explicit owner decision. Third-party and companion XNU
-terms do not supply a license for this repository. See
+Original CaribeOS runtime code carrying the project SPDX header is licensed
+under BSD-2-Clause; see [LICENSE](LICENSE) and the exact allowlist in
+[docs/RUNTIME_LICENSE_SCOPE.json](docs/RUNTIME_LICENSE_SCOPE.json). This grant
+does not relicense XNU, GNU Bash, musl, OpenSBI, QEMU, generated material, or
+other external components. See
 [docs/PUBLIC_LICENSE_REVIEW.md](docs/PUBLIC_LICENSE_REVIEW.md),
 [NOTICE.md](NOTICE.md), and [THIRD_PARTY.md](THIRD_PARTY.md).
+
+Binary redistribution of the Developer Preview additionally requires the
+verified same-place corresponding-source asset described in those documents.
 
 When reporting a problem, include the selected mode, kernel SHA-256, tool
 versions, complete serial log, CPU count, and whether UP or SMP failed. Never

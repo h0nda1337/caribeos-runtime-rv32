@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
     .section .bss,"aw",@nobits
     .balign 16
 __s_stack_area:

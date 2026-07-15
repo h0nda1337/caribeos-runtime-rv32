@@ -23,6 +23,10 @@ generated ELF/image/log output.
 - Preserve the real `HFSPlusFileRecord` layout, including BSD `special` before
   `userInfo[4]`.
 - Keep all third-party versions, URLs, hashes, licenses, and patches explicit.
+- Add the project BSD-2-Clause header only to original CaribeOS runtime code
+  and classify it in `docs/RUNTIME_LICENSE_SCOPE.json`.
+- Never add the project header to third-party, derived, generated, binary,
+  data, or mixed/uncertain-provenance material.
 - Do not treat a marker-only payload as a complete subsystem implementation.
 - Do not move or rewrite `tranche-201-stage2-complete`.
 

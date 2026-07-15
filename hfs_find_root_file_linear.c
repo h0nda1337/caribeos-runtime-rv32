@@ -1,4 +1,9 @@
 /*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
+/*
  * Búsqueda lineal en el directorio raíz HFS+
  * Ajusta los tipos (HFSPlusCatalogKey, HFSPlusCatalogFile, etc.)
  * a tus propios typedefs/structs de payload_hfsplus_boot.c

@@ -3,18 +3,30 @@
 CaribeOS is an independent experimental project. It is not affiliated with,
 endorsed by, or supported by Apple Inc.
 
-The companion kernel derives from Apple's open-source XNU 2050.48.11 and
-retains its APSL and file-level notices. This runtime does not contain macOS or
-proprietary Apple SDK components.
+Original CaribeOS runtime code identified by
+`SPDX-License-Identifier: BSD-2-Clause` is Copyright (c) 2026 h0nda1337 and is
+licensed under the BSD-2-Clause terms in `LICENSE`. The complete machine-readable
+allowlist and reviewed exclusions are recorded in
+`docs/RUNTIME_LICENSE_SCOPE.json`.
 
-OpenSBI, QEMU, musl, GNU Bash, GCC, and other tools remain governed by their
-own licenses. The build scripts download third-party source only from recorded
-upstream locations and verify pinned SHA-256 values where implemented.
+The BSD-2-Clause grant applies only to original CaribeOS runtime code in that
+scope. It does not relicense external, derived, generated, mixed-provenance,
+binary, or data files. Existing notices and file-level terms take precedence
+for material outside that scope.
 
-The original CaribeOS runtime material does not yet have a selected top-level
-project license. Do not infer reuse permission from the repository's visibility
-or from a third-party component's license. Public visibility and binary release
-remain blocked until the owner resolves this policy and the corresponding-source
-requirements documented in `docs/PUBLIC_LICENSE_REVIEW.md`.
+The companion XNU-CaribeOS kernel derives from Apple's open-source XNU
+2050.48.11. It remains under APSL 2.0 and its file-level notices. Nothing in the
+runtime `LICENSE` changes XNU's license or grants rights to macOS or proprietary
+Apple SDK material.
+
+GNU Bash remains under GPL-3.0-or-later. musl retains its MIT-style terms.
+OpenSBI, QEMU, GCC, binutils, make, and all other external components remain
+under their respective licenses. CaribeOS build wrappers and integration code
+may be BSD-2-Clause when listed in the scope manifest, but that does not change
+the license of the component they build or invoke.
+
+The public Developer Preview must place verified corresponding source for its
+Bash and musl binaries beside the binary assets. See `THIRD_PARTY.md` and
+`docs/PUBLIC_LICENSE_REVIEW.md` for versions, hashes, and redistribution gates.
 
 This is a technical notice, not legal advice.

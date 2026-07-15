@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 """Copy an ELF32 little-endian image while changing its e_type field."""
 
 import argparse

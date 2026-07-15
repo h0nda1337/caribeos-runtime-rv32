@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 ENTRY(_start)
 
 /* Cargaremos el payload en 0x80400000 (fuera del rango del booter) */

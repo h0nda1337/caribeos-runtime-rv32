@@ -73,8 +73,9 @@ future public repack requires a new filename, manifest, and hashes.
 
 - Public, unauthenticated clone behavior and public remote CI remain pending
   while both repositories are private.
-- The runtime still requires an explicit owner-selected project license and
-  source-header policy. No license is inferred by this report.
+- Original CaribeOS runtime code now has an explicit BSD-2-Clause allowlist and
+  source-header policy. The header transformation preserves every licensed
+  file body exactly relative to the pre-license Git commit.
 - A same-place corresponding-source archive for the bundled GNU Bash and musl
   inputs must be completed before public binary distribution.
 - The focused UP integration test did not rerun the long Tranche 201 suites.

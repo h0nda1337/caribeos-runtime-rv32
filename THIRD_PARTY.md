@@ -9,9 +9,22 @@
 | GNU Bash | [5.3 plus official patches 1-5](https://www.gnu.org/software/bash/) | GPL-3.0-or-later | Interactive shell | RV32 static build configuration | License text included; same-place corresponding source required |
 | GNU GCC/binutils/make | Local cross toolchain | GPL and exceptions | Build tools | None | Toolchain not redistributed |
 
+Original CaribeOS build wrappers, configuration headers, and integration
+scripts that mention or invoke Bash, musl, OpenSBI, QEMU, or the toolchain are
+BSD-2-Clause only when they carry the CaribeOS SPDX header and appear in
+`docs/RUNTIME_LICENSE_SCOPE.json`. They are not copies of those projects and do
+not change any upstream license.
+
 The source archives and extracted trees under `third_party/` are local build
 inputs and are not committed. `scripts/build-musl-rv32.ps1` and
 `scripts/build-bash-rv32.ps1` record upstream URLs and expected hashes.
 
-See `docs/PUBLIC_LICENSE_REVIEW.md` for the currently blocked runtime project
-license and Developer Preview redistribution review.
+The BSD-2-Clause license in this repository applies only to original CaribeOS
+runtime code. It does not relicense XNU, GNU Bash, musl, OpenSBI, QEMU, the
+toolchain, generated data, or any other external component.
+
+Before public binary distribution, the Release must include a same-place
+corresponding-source asset containing the exact Bash 5.3 archive, official
+patches 1-5, musl 1.2.5 archive, maintained build-control scripts, applicable
+license texts, and a cryptographic manifest. See
+`docs/PUBLIC_LICENSE_REVIEW.md` for the technical review and exact hashes.

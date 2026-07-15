@@ -1,3 +1,6 @@
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 param(
   [ValidateSet("up", "smp", "process-gate-1", "process-gate-2", "process-gate-2-smp", "process-gate-3", "process-gate-3-smp", "process-gate-4", "process-gate-4-smp", "process-gate-5", "process-gate-5-smp", "process-gate-6", "process-gate-6-smp", "process-gate-7", "process-gate-7-smp", "process-gate-7-only", "process-gate-7-only-smp", "process-gate-8", "process-gate-8-smp", "process-gate-8-only", "process-gate-8-only-smp", "process-gate-9", "process-gate-9-smp", "process-gate-9-only", "process-gate-9-only-smp", "process-gate-10-only", "process-gate-10-only-smp", "process-gate-11", "process-gate-11-smp", "process-gate-12", "process-gate-12-smp", "process-gate-13", "process-gate-13-smp", "process-gate-14", "process-gate-15", "process-gate-15-smp", "process-gates", "interactive", "process-stress", "process-stability", "gate-a", "gate-b", "gate-c", "gate-d", "gate-e", "gate-f", "gates", "both", "all")]
   [string]$Mode = "up",

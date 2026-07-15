@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 #include <stdint.h>
 #include "include/uapi/trap.h"
 #include "booter/plic_min.h"

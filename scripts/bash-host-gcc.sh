@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 set -e
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)

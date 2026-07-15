@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 
 printf '[gnu-bash] version=%s machine=%s\n' "$BASH_VERSION" "$MACHTYPE"
 

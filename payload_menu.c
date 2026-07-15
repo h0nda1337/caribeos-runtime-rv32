@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 #include <stdint.h>
 #define UART_BASE 0x10000000u
 #define UART_RBR  (*(volatile uint8_t*)(UART_BASE + 0))

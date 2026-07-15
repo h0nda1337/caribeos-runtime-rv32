@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
     .section .text.xnu_stage0_trap_vector, "ax", @progbits
     .globl xnu_stage0_trap_vector
     .type xnu_stage0_trap_vector, @function

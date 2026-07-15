@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 h0nda1337
+# SPDX-License-Identifier: BSD-2-Clause
+
 import argparse
 import pathlib
 import stat

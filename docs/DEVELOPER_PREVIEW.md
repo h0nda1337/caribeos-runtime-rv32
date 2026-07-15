@@ -36,7 +36,8 @@ security, POSIX, filesystem, or Linux ABI compatibility.
 
 ## Redistribution Gate
 
-Public distribution requires the runtime project license, all third-party
-notices, and same-place corresponding source for the included GNU Bash/musl
-binaries. The original archive and hash are immutable; any public repack must
-use a new filename and manifest rather than overwriting it.
+Original CaribeOS runtime code is licensed under BSD-2-Clause. Public binary
+distribution still requires all third-party notices and same-place
+corresponding source for the included GNU Bash/musl binaries. The original
+archive and hash are immutable; any public repack must use a new filename and
+manifest rather than overwriting it.

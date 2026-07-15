@@ -25,6 +25,18 @@ kernel scheduling.
 - SHA-256: `c63fe4bfbaeaf674a4092c1c579cfe472fc433d2e89b4f55307484ed820e595e`
 - Tag: `tranche-201-stage2-complete`
 
+## Licensing
+
+Original CaribeOS runtime code identified by the project SPDX header is
+BSD-2-Clause. XNU remains under APSL 2.0 and its file-level notices, GNU Bash
+remains GPL-3.0-or-later, musl retains its MIT-style terms, and OpenSBI, QEMU,
+and all other external components retain their own licenses. BSD-2-Clause does
+not relicense any external component.
+
+The public-preview Release is not yet issued. Its final notes and asset list
+must name the verified corresponding-source package beside every Bash/musl
+binary asset before this document is treated as release-complete.
+
 ## Limitations
 
 This is an experimental QEMU-only preview. The Linux personality, IOKit,

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 static int printf(const char *fmt, ...){ (void)fmt; return 0; }
 /* CaribeBootX - HFS+ RAM-disk + ELF32 (RV32)
  * Lee una imagen HFS+ mapeada en RAM (sin virtio).

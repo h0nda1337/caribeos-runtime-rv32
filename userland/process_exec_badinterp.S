@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+
 	.section .interp, "a", @progbits
 	.asciz	"/lib/ld-gate6-missing.so.1"
 
