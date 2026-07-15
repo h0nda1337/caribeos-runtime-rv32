@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/h0nda1337/caribeos-runtime-rv32/security/advisories/new
+    about: Report security issues privately through GitHub Security Advisories.
+  - name: XNU kernel port issues
+    url: https://github.com/h0nda1337/caribeos-xnu-rv32/issues
+    about: Report kernel, pmap, scheduler, ABI, and Linux personality issues here.
