@@ -8,6 +8,10 @@ Run the preservation helpers from this repository:
 .\tools\restore-caribeos-backup.ps1 -BackupDirectory <timestamped-backup> -DestinationRoot <new-path>
 ```
 
+`-BackupRoot` is optional. Without it, the script uses
+`CARIBEOS_BACKUP_ROOT` when set, then falls back to `CaribeOS-Backups` under
+the current user's Documents directory.
+
 The backup script detects the sibling XNU repository, rejects incomplete Git
 operations, creates `--all` bundles, verifies them, hashes outputs, and never
 deletes older backups. Optional GitHub push requires an existing

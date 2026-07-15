@@ -1,5 +1,5 @@
 param(
-  [string]$BackupRoot = "F:\CaribeOS-Backups",
+  [string]$BackupRoot = $env:CARIBEOS_BACKUP_ROOT,
   [string]$XnuPath,
   [string]$RuntimePath,
   [switch]$SkipRawSnapshot,
@@ -7,6 +7,14 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+if (-not $BackupRoot) {
+  $documents = [Environment]::GetFolderPath("MyDocuments")
+  if (-not $documents) {
+    throw "BackupRoot is required when the Documents directory is unavailable."
+  }
+  $BackupRoot = Join-Path $documents "CaribeOS-Backups"
+}
 
 function Invoke-Git {
   param([string]$Repository, [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
