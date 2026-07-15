@@ -3,7 +3,7 @@
 Run the preservation helpers from this repository:
 
 ```powershell
-.\tools\backup-caribeos.ps1 -BackupRoot F:\CaribeOS-Backups
+.\tools\backup-caribeos.ps1 -BackupRoot <backup-root>
 .\tools\verify-caribeos-backup.ps1 -BackupDirectory <timestamped-backup>
 .\tools\restore-caribeos-backup.ps1 -BackupDirectory <timestamped-backup> -DestinationRoot <new-path>
 ```

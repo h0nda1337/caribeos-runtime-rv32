@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this experimental runtime, cite the repository and exact commit or tag."
+title: "CaribeOS RV32 Runtime"
+type: software
+authors:
+  - family-names: "Apolinar"
+    given-names: "Angelo"
+    alias: "h0nda1337"
+repository-code: "https://github.com/h0nda1337/caribeos-runtime-rv32"
+version: "Tranche 201"
+abstract: >-
+  Runtime, boot chain, image construction, RV32 userland, QEMU runners, and
+  semantic gates for the experimental XNU-CaribeOS RV32IMACSU port.
+keywords:
+  - CaribeOS
+  - RISC-V
+  - RV32IMACSU
+  - OpenSBI
+  - QEMU
+  - HFS+
+  - GNU Bash
