@@ -65,3 +65,13 @@ Important generated files include:
 
 Do not commit these files. Use the private release package and its
 `SHA256SUMS.txt` for binary distribution.
+
+## Reproducibility Boundary
+
+The exact XNU ELF, fresh GitHub restore, isolated HFS+ update, UP Stage 1 boot,
+immutable-preview distinction, and remaining publication blockers are recorded
+in the [runtime reproducibility report](docs/REPRODUCIBILITY_REPORT.md).
+
+The verified workflow uses the recorded Windows toolchain. It is not yet a
+hermetic container build, and public unauthenticated clone and remote-CI checks
+remain pending while the repositories are private.
