@@ -1,5 +1,8 @@
 # CaribeOS Runtime for RV32IMACSU
 
+[![Static checks](https://github.com/h0nda1337/caribeos-runtime-rv32/actions/workflows/static-checks.yml/badge.svg?branch=main)](https://github.com/h0nda1337/caribeos-runtime-rv32/actions/workflows/static-checks.yml?query=branch%3Amain)
+[![Documentation checks](https://github.com/h0nda1337/caribeos-runtime-rv32/actions/workflows/documentation-checks.yml/badge.svg?branch=main)](https://github.com/h0nda1337/caribeos-runtime-rv32/actions/workflows/documentation-checks.yml?query=branch%3Amain)
+
 Experimental XNU-based RV32IMACSU operating system with Sv32, SMP, a Linux
 personality, real processes, and interactive GNU Bash.
 
@@ -11,6 +14,9 @@ This repository owns the runtime side of the port: CaribeBootX, HFS+ boot
 integration, the RV32 userland/initrd, musl and Bash build recipes, QEMU launch
 targets, serial assertions, and process/SMP gates. The companion XNU repository
 owns the kernel implementation.
+
+The badges above report the public static and documentation checks. They do not
+represent a full image rebuild or the preserved long-form boot suites.
 
 ## Required Boot Chain
 
