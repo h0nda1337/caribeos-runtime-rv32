@@ -64,12 +64,16 @@ From this directory in PowerShell:
 .\testproject.ps1 -Mode up -Seconds 45
 .\testproject.ps1 -Mode gates -Seconds 50
 .\testproject.ps1 -Mode interactive -Seconds 120
+.\testproject.ps1 -Mode console
 .\testproject.ps1 -Mode process-stability -Seconds 300
 .\testproject.ps1 -Mode process-stress -Seconds 300 -StressRounds 10000
 ```
 
 `testproject.ps1` finds the sibling XNU tree, rebuilds the current kernel, runs
 the selected QEMU boots, and performs semantic assertions over serial output.
+`interactive` is the automated Bash gate. `console` rebuilds the same boot
+chain and leaves GNU Bash attached to the current terminal; quit QEMU with
+`Ctrl+A`, then `X`.
 See [TESTING.md](TESTING.md).
 
 ## Preserved Tranche 201 Kernel

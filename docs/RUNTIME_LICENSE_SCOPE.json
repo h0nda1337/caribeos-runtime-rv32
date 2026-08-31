@@ -91,6 +91,7 @@
                               "scripts/qemu-monitor-query.ps1",
                               "scripts/qemu-rv32.sh",
                               "scripts/qemu-rv32-bash-interactive.ps1",
+                              "scripts/qemu-rv32-console.ps1",
                               "scripts/qemu-rv32-disk-smoke.ps1",
                               "scripts/qemu-rv32-elf.sh",
                               "scripts/qemu-rv32-forcebin.sh",
