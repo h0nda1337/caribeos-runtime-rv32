@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 SBI ?= 1
+.DEFAULT_GOAL := all
 PYTHON ?= python
 XNU_FULL_STAGE0 ?= ../../xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf
 KERNEL_ELF ?= $(XNU_FULL_STAGE0)
@@ -102,6 +103,12 @@ endif
 
 ARCH32 ?= rv32imac_zicsr_zifencei
 CFLAGS32  := $(TGT32) -I. -march=$(ARCH32) -mabi=ilp32 -ffreestanding -nostdlib -O2 -Wall -Wextra
+SECURITY_DEPS := third_party/monocypher-4.0.2
+MBEDTLS_DEPS := third_party/mbedtls-3.6.5
+CFLAGS32 += -ffunction-sections -fdata-sections -fno-builtin \
+  -I$(SECURITY_DEPS)/src -I$(SECURITY_DEPS)/src/optional \
+  -I$(MBEDTLS_DEPS)/include -I$(MBEDTLS_DEPS)/library \
+  -DMBEDTLS_CONFIG_FILE='"security/mbedtls_config.h"' -DCARIBE_FREESTANDING
 
 ifeq ($(SBI),1)
   LINK_LD := mfw/link_sbi.ld
@@ -115,6 +122,10 @@ CSRCS := mfw/mfw.c mfw/virt_dtb.c \
          booter/uart.c booter/print.c booter/bootargs_pack.c \
          booter/mmu_sv32.c booter/plic_min.c booter/console.c booter/trap.c \
          booter/hfsplus_boot.c booter/booter.c \
+         booter/caribe_security.c security/catkey.c security/crypto_port.c \
+         $(SECURITY_DEPS)/src/monocypher.c \
+         $(SECURITY_DEPS)/src/optional/monocypher-ed25519.c \
+         $(MBEDTLS_DEPS)/library/sha256.c \
          virtio_blk_legacy.c
 
 ifeq ($(SBI),1)
@@ -127,7 +138,11 @@ COBJS := $(patsubst %.c,build/%.c.o,$(CSRCS))
 SOBJS := $(patsubst %.S,build/%.S.o,$(SSRCS))
 OBJS  := $(COBJS) $(SOBJS)
 
-all: mfw/virt_dtb.c build/caribe_rv32.elf build/caribe_rv32.bin
+.PHONY: security_deps
+security_deps:
+	$(PYTHON) scripts/prepare-security-deps.py
+
+all: security_deps mfw/virt_dtb.c build/caribe_rv32.elf build/caribe_rv32.bin
 
 kernel_entry: build/kernel_xnu_entry.elf
 
@@ -300,8 +315,19 @@ build/%.S.o: %.S
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -c $< -o $@
 
-build/caribe_rv32.elf: $(OBJS)
-	$(CC32) $(CFLAGS32) $(OBJS) $(LDFLAGS32) -o $@
+$(COBJS): | security_deps
+
+.PHONY: security_config_force
+security_config_force:
+
+build/security-config.h: security_config_force scripts/configure-security.py
+	$(PYTHON) scripts/configure-security.py --trust-header "$(DEV_TRUST_HEADER)" --output $@
+
+$(COBJS): security/mbedtls_config.h
+build/booter/caribe_security.c.o: build/security-config.h security/catkey.h include/uapi/caribe_ssbi.h
+
+build/caribe_rv32.elf: $(OBJS) $(LINK_LD)
+	$(CC32) $(CFLAGS32) $(OBJS) $(LDFLAGS32) -Wl,--gc-sections -lgcc -o $@
 
 build/caribe_rv32.bin: build/caribe_rv32.elf
 	$(OBJCOPY32) -O binary $< $@

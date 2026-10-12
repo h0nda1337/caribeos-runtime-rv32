@@ -32,3 +32,16 @@ and musl binaries beside the binary asset as
 boundaries.
 
 This is a technical notice, not legal advice.
+
+CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
+are original CaribeOS integration code under BSD-2-Clause when listed in the
+runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2
+(BSD-2-Clause OR CC0-1.0); SHA-256 uses unmodified Mbed TLS 3.6.5 (the
+Apache-2.0 option). Their upstream notices must accompany redistributed code
+or binaries. The runtime license does not relicense either library.
+
+SecureSBI is a separate, modified OpenSBI source tree, not a CBX payload.
+OpenSBI's original copyrights and file-level licenses remain applicable.
+New CaribeSSBI code carries its own original-code BSD-2-Clause notices.
+No production private keys, proprietary Motorola firmware, or Xbox code are
+included. Experimental software verification is not hardware attestation.

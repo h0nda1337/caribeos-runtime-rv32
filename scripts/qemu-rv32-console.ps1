@@ -3,6 +3,8 @@
 
 param(
   [string]$QemuPath = "",
+  [string]$Bios = "default",
+  [string]$BootElf = "",
   [ValidateRange(1, 2)]
   [int]$Smp = 1,
   [ValidateRange(64, 2048)]
@@ -27,7 +29,11 @@ function Resolve-ProjectPath {
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $root = Split-Path -Parent $scriptDir
-$elf = Join-Path $root "build\caribe_rv32.elf"
+$elf = if ($BootElf) {
+  Resolve-ProjectPath -Root $root -Path $BootElf
+} else {
+  Join-Path $root "build\caribe_rv32.elf"
+}
 $disk = if ($DiskImage) {
   Resolve-ProjectPath -Root $root -Path $DiskImage
 } else {
@@ -85,7 +91,7 @@ $qemuArgs = @(
   "-nographic",
   "-no-reboot",
   "-no-shutdown",
-  "-bios", "default",
+  "-bios", $Bios,
   "-kernel", $elf,
   "-drive", "if=none,file=$disk,format=raw,id=vd0",
   "-device", "virtio-blk-device,drive=vd0",
@@ -93,7 +99,7 @@ $qemuArgs = @(
 )
 
 Write-Host "Starting CaribeOS persistent serial console."
-Write-Host "Boot chain: OpenSBI -> CaribeBootX -> XNU-CaribeOS -> GNU Bash"
+Write-Host "Boot chain: SBI M-mode firmware -> CaribeBootX -> XNU-CaribeOS -> GNU Bash"
 Write-Host "Wait for: bash-5.3$"
 Write-Host "Quit QEMU: press Ctrl+A, release both keys, then press X."
 Write-Host "Command line: $QemuPath $($qemuArgs -join ' ')"

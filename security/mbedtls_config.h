@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) 2026 h0nda1337
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
+#ifndef CARIBE_MBEDTLS_CONFIG_H
+#define CARIBE_MBEDTLS_CONFIG_H
+#define MBEDTLS_CONFIG_VERSION 0x03060500
+#define MBEDTLS_SHA256_C
+#define MBEDTLS_PLATFORM_ZEROIZE_ALT
+#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+#if defined(_WIN32)
+#define MBEDTLS_PLATFORM_C
+#endif
+#endif

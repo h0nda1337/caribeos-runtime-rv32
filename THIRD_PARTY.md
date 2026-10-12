@@ -8,6 +8,11 @@
 | musl | [1.2.5](https://musl.libc.org/) | MIT-style terms in `COPYRIGHT` | RV32 libc and static userland | Build configuration/wrappers | License text included; corresponding source asset required for the public preview |
 | GNU Bash | [5.3 plus official patches 1-5](https://www.gnu.org/software/bash/) | GPL-3.0-or-later | Interactive shell | RV32 static build configuration | License text included; same-place corresponding source required |
 | GNU GCC/binutils/make | Local cross toolchain | GPL and exceptions | Build tools | None | Toolchain not redistributed |
+| SecureSBI | OpenSBI v1.9, `cbf9f6734dd85a982c63e3cb5db7ffe09da839ca` | OpenSBI file licenses, primarily BSD-2-Clause | Optional modified M-mode firmware | CaribeSSBI discovery, guest denial, Windows LLVM build fix | Separate source tree; not bundled in the Tranche 201 assets |
+| Monocypher | [4.0.2](https://github.com/LoupVaillant/Monocypher/tree/4.0.2), `0d85f98c9d9b0227e42cf795cb527dff372b40a4` | BSD-2-Clause OR CC0-1.0; BSD option used | Standard Ed25519 verifier including optional Ed25519 module | None | Any new CBX binary must retain the upstream BSD notice |
+| Mbed TLS | [3.6.5](https://github.com/Mbed-TLS/mbedtls/tree/v3.6.5), `e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df` | Apache-2.0 OR GPL-2.0-or-later; Apache option used | SHA-256 only, original CaribeOS zeroization adapter | None to upstream sources | Any new CBX binary must include Apache-2.0 and applicable upstream notices |
+| Python cryptography | [43.0.3 reference host environment](https://cryptography.io/) | Apache-2.0 OR BSD-3-Clause and bundled dependency notices | Host-only developer Ed25519 signing | None | Not shipped in firmware, repository, or preview |
+| LLVM/Clang/lld | Local LLVM 22.1.4 | Apache-2.0 with LLVM exceptions | SecureSBI RV32 PIE build on Windows | None | Toolchain not redistributed |
 
 Original CaribeOS build wrappers, configuration headers, and integration
 scripts that mention or invoke Bash, musl, OpenSBI, QEMU, or the toolchain are
@@ -29,3 +34,11 @@ archive, official patches 1-5, musl 1.2.5 archive, maintained build-control
 scripts, applicable license texts, runtime source snapshots, and a
 cryptographic manifest. See `docs/PUBLIC_LICENSE_REVIEW.md` for the technical
 review and exact upstream hashes.
+
+Security sources are pinned by [security/dependencies.json](security/dependencies.json)
+and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
+ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream
+trees include their complete license texts. This change publishes source and
+wrappers only, not a new binary Release. The preserved Tranche 201 source
+asset does not cover these new dependencies; future binary packaging must
+include the exact new sources and notices rather than reusing that old asset.

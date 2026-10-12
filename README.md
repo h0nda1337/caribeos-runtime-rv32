@@ -56,6 +56,13 @@ uses `/kernel.elf`, and transfers control to XNU-CaribeOS.
 The Linux personality maps selected Linux-compatible syscalls onto XNU. It
 does not contain a Linux kernel.
 
+The `develop/caribesecurity-v0.1` branch adds optional SecureSBI (modified
+OpenSBI v1.9), functional CaribeSSBI discovery, and Ed25519/SHA-256 CatKey
+verification inside CaribeBootX. Stock OpenSBI remains supported. QEMU remains
+ORANGE even after signature verification: there is no authenticated hardware
+root, protected signing key, or trusted attestation. See
+[CaribeSecurity v0.1](docs/CARIBE_SECURITY.md).
+
 ## Quick Verification
 
 From this directory in PowerShell:
@@ -101,6 +108,10 @@ local raw snapshot or packaged as private release assets.
 - [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 - [docs/DEVELOPMENT_WITH_CODEX.md](docs/DEVELOPMENT_WITH_CODEX.md) and [CITATION.cff](CITATION.cff)
 - [docs/SOURCE_TREE.md](docs/SOURCE_TREE.md)
+- [docs/CARIBE_SECURITY.md](docs/CARIBE_SECURITY.md)
+- [docs/CATKEY_V1.md](docs/CATKEY_V1.md)
+- [docs/CARIBE_HYPERVISOR.md](docs/CARIBE_HYPERVISOR.md)
+- [docs/CATKEY_PORTAL_CONTRACT.md](docs/CATKEY_PORTAL_CONTRACT.md)
 
 The companion kernel source is
 [h0nda1337/caribeos-xnu-rv32](https://github.com/h0nda1337/caribeos-xnu-rv32).

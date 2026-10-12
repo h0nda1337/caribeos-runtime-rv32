@@ -10,6 +10,7 @@
 #include "booter/plic_min.h"
 #include "booter/console.h"
 #include "booter/hfsplus_boot.h"
+#include "booter/caribe_security.h"
 
 void uart_init(uint32_t base);
 void uart_puts(const char *);
@@ -46,6 +47,7 @@ void __attribute__((noreturn)) s_mode_entry(uintptr_t hartid, void *dtb)
                               (uint32_t)ba.aclint_base);
     mmu_sv32_enable();
     uart_puts("\r\nMMU Sv32 activa (identidad).\r\n");
+    caribe_security_init();
 
     trap_init(trap_handler);
     timer_init((uint32_t)ba.aclint_base, (uint32_t)hartid);

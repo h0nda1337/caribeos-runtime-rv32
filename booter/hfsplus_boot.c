@@ -8,6 +8,7 @@
 #include "include/uapi/xnu_bootargs.h"
 #include "booter/fdt_min.h"
 #include "booter/hfsplus_boot.h"
+#include "booter/caribe_security.h"
 #include "virtio_blk_legacy.h"
 
 void uart_puts(const char *);
@@ -727,11 +728,11 @@ static int hfsplus_read_file(const char *path, uint8_t *dst, uint32_t cap,
             p(" cap=");
             pdec(cap);
             p("\r\n");
-            return -1;
+            return -2;
         }
 
         if (fork_read(&fk, 0, dst, (uint32_t)fk.size))
-            return -1;
+            return -2;
 
         if (outSize)
             *outSize = (uint32_t)fk.size;
@@ -739,6 +740,18 @@ static int hfsplus_read_file(const char *path, uint8_t *dst, uint32_t cap,
     }
 
     return -1;
+}
+
+static uint32_t read_security_manifest(const char *path, uint8_t *manifest)
+{
+    uint32_t size = 0;
+    int result = hfsplus_read_file(path, manifest, CATKEY_RECORD_SIZE, &size);
+    if (result == -1)
+        return 0;
+    /* Present but unreadable/empty is invalid, not an unsigned image. */
+    if (result != 0 || size == 0)
+        return CATKEY_RECORD_SIZE + 1u;
+    return size;
 }
 
 static int extract_named_flag(const char *text, int len, const char *name,
@@ -1018,6 +1031,17 @@ static int elf32_load_and_jump(uint8_t *img, uint32_t size,
     xnu_boot_args.initrd_size = initrd_size;
     xnu_boot_args.command_line_paddr = (uint32_t)(uintptr_t)xnu_cmdline;
     xnu_boot_args.command_line_size = slen(xnu_cmdline) + 1u;
+    /* reserved[0..7] belong to XNU's loader acknowledgement. */
+    xnu_boot_args.reserved[8] = CARIBE_SECURITY_EVIDENCE_MAGIC;
+    xnu_boot_args.reserved[9] =
+        (uint32_t)(uintptr_t)caribe_security_get_evidence();
+    xnu_boot_args.reserved[10] = sizeof(caribe_security_evidence);
+    xnu_boot_args.reserved[11] = 1;
+    p("[CaribeSecurity] handoff magic=");
+    uart_puthex32(caribe_security_get_evidence()->magic);
+    p(" verified=");
+    uart_puthex32(caribe_security_get_evidence()->verified_images);
+    p("\r\n");
     xnu_boot_args.memory_map_count = xnu_build_memory_map(
         xnu_boot_args.mem_base, xnu_boot_args.mem_size,
         xnu_boot_args.kernel_base, xnu_boot_args.kernel_size,
@@ -1055,6 +1079,8 @@ int caribe_hfsplus_boot(uint32_t hartid, uintptr_t dtb)
     char initrdPath[128];
     uint32_t kernelSize = 0;
     uint32_t initrdSize = 0;
+    uint8_t manifest[CATKEY_RECORD_SIZE];
+    uint32_t manifestSize = 0;
     const char *path;
     const char *initrd_path;
 
@@ -1074,6 +1100,7 @@ int caribe_hfsplus_boot(uint32_t hartid, uintptr_t dtb)
                           initrdPath, (int)sizeof(initrdPath),
                           xnu_cmdline, (int)sizeof(xnu_cmdline));
     append_dtb_bootargs(dtb, xnu_cmdline, (int)sizeof(xnu_cmdline));
+    caribe_security_policy(xnu_cmdline);
     path = kernelPath[0] ? kernelPath : "/kernel.elf";
 
     p("[boot] cargando ");
@@ -1092,6 +1119,11 @@ int caribe_hfsplus_boot(uint32_t hartid, uintptr_t dtb)
     pdec(kernelSize);
     p("\r\n");
 
+    manifestSize = read_security_manifest("/kernel.catkey", manifest);
+    caribe_security_image("kernel.elf", CATKEY_PERM_KERNEL,
+                          HFS_KERNEL_LOAD_BUFFER, kernelSize,
+                          manifest, manifestSize);
+
     initrd_path = initrdPath[0] ? initrdPath : "/initrd.img";
     if (hfsplus_read_file(initrd_path, HFS_INITRD_LOAD_BUFFER,
                           HFS_INITRD_LOAD_CAP, &initrdSize) == 0) {
@@ -1102,9 +1134,16 @@ int caribe_hfsplus_boot(uint32_t hartid, uintptr_t dtb)
         p(" size=");
         pdec(initrdSize);
         p("\r\n");
+        manifestSize = read_security_manifest("/initrd.catkey", manifest);
+        caribe_security_image("initrd.img", CATKEY_PERM_INITRD,
+                              HFS_INITRD_LOAD_BUFFER, initrdSize,
+                              manifest, manifestSize);
     } else {
         initrdSize = 0;
         p("[boot] sin initrd opcional\r\n");
+        /* Required policy covers the complete kernel + userspace bundle. */
+        caribe_security_image("initrd.img", CATKEY_PERM_INITRD,
+                              HFS_INITRD_LOAD_BUFFER, 0, manifest, 0);
     }
 
     if (elf32_load_and_jump(HFS_KERNEL_LOAD_BUFFER, kernelSize,

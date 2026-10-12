@@ -1,0 +1,16 @@
+{
+  "monocypher": {
+    "url": "https://github.com/LoupVaillant/Monocypher.git",
+    "tag": "4.0.2",
+    "commit": "0d85f98c9d9b0227e42cf795cb527dff372b40a4",
+    "directory": "monocypher-4.0.2",
+    "license": "BSD-2-Clause OR CC0-1.0"
+  },
+  "mbedtls": {
+    "url": "https://github.com/Mbed-TLS/mbedtls.git",
+    "tag": "v3.6.5",
+    "commit": "e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df",
+    "directory": "mbedtls-3.6.5",
+    "license": "Apache-2.0 OR GPL-2.0-or-later"
+  }
+}
