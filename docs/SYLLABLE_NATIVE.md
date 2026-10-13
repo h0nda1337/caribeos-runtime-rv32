@@ -119,11 +119,12 @@ does not claim to be the complete AppServer.
 
 ## Remaining Work
 
-The genuine Message implementation has been obtained and audited,
-not compiled: it needs geometry, Variant, Handler/Looper/Messenger,
-and integration with the now tested [GNU RV32-musl C++ runtime](CXX_RV32_MUSL.md).
-Its historical unchecked Unflatten input
-must be hardened before accepting untrusted client messages.
+The genuine Message data core now compiles and executes with a bounded
+LGPL source patch and real String/geometry/GNU C++ integration. It is not the
+complete Message/Looper subsystem: Variant, Handler/Looper/Messenger delivery
+remains explicitly excluded. The historical one-argument Unflatten API is
+trusted-buffer-only; actual port and nested Message input now uses the
+actual-length overload. See [Message core](SYLLABLE_MESSAGE_CORE.md).
 
 AppServer itself still needs semaphores/thread APIs, FreeType,
 font/bitmap/video adapters, configuration and loader support. Desktop, Dock
@@ -151,3 +152,6 @@ large/copied-va_list/error/embedded-NUL formats, 16 fork/exec cycles and
 10,000 independent-process String/native-port exchanges. It includes all
 GNU C++/IPC/area/visual gates. This does not start Message or AppServer.
 See [String source changes](../ports/syllable/patches/README.md).
+The additional `-SyllableMessage` profile runs the genuine Message data core
+with 10,000 malformed guard-page inputs, 10,000 independent exec'd Post/Read
+exchanges and 16 process lifecycle tests. This does not start AppServer.

@@ -1,0 +1,60 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/message.cpp",
+      "sha256": "b84c471b023ecaf17463a6a7dd5ffb376b49b43ea0ada0364c0d5a0d485faa38",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/message.h",
+      "sha256": "4052416bbeba977470c890cddcc0c0e45a0d444ea1c3c1e4a20deb38beeb63b6",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/flattenable.h",
+      "sha256": "1e7008ac81d8a87b780a5b2d7ad189e11146ba702d990c985e06091bbfca7cce",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/typecodes.h",
+      "sha256": "34ef0392dfe16f31d636b64f616585cba5baa4e76f3b8dcc92bb11d7d38e64d2",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/gui/point.h",
+      "sha256": "d169476f71eed6a11ef782a6c37237a0cf786c5e63461f4021a8943c3a8d5b18",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/gui/rect.h",
+      "sha256": "463772a0b43fd34e587b7b6fba297aa2933da576f95c189e045927270a248578",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/gui/gfxtypes.h",
+      "sha256": "d0a3badf8e2cdf0943c28653ec9bb689a7583fbff5c93960338b242e73c24f14",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "adaptedSha256": {
+    "message.cpp": "7bb5a1c40d6b324dd22225cf2a3ac08d24c67a186a17bd26334a6d7c25159c19",
+    "include/util/message.h": "3f0c8ab9327183d5e66b7e8643459d2e65d97a69fa6bba5f198b953100f94578",
+    "include/util/flattenable.h": "1e7008ac81d8a87b780a5b2d7ad189e11146ba702d990c985e06091bbfca7cce",
+    "include/util/typecodes.h": "34ef0392dfe16f31d636b64f616585cba5baa4e76f3b8dcc92bb11d7d38e64d2",
+    "include/gui/point.h": "d169476f71eed6a11ef782a6c37237a0cf786c5e63461f4021a8943c3a8d5b18",
+    "include/gui/rect.h": "463772a0b43fd34e587b7b6fba297aa2933da576f95c189e045927270a248578",
+    "include/gui/gfxtypes.h": "d0a3badf8e2cdf0943c28653ec9bb689a7583fbff5c93960338b242e73c24f14"
+  },
+  "patchSha256": "a00a1281beeb16f41d917f253cb5c1cb07eb2d10b287117bf262b50a95ea730a",
+  "compiledProfile": "CARIBE_SYLLABLE_MESSAGE_CORE",
+  "maxWireBytes": 8192,
+  "maxNestedDepth": 16,
+  "license": "LGPL-2.0-only",
+  "excluded": [
+    "Looper/Handler delivery",
+    "Messenger/ReturnAddress",
+    "Variant methods"
+  ],
+  "legacyUnflatten": "Trusted complete buffers only; never use for untrusted transport"
+}

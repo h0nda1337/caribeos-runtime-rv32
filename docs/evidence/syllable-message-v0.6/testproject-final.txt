@@ -1,0 +1,5 @@
+F: free space: 730.11 GB
+==> refresh and link latest XNU-CaribeOS RV32 kernel
+XNU kernel: 943004 bytes, linked 2026-10-13 01:43:52
+Build log: F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\testproject-latest-xnu-build.txt
+PASS graphics gates A-E: F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\graphics-tests\opensbi-smp2-syllable-message

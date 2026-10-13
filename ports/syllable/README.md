@@ -62,6 +62,12 @@ Run `testproject.ps1 -Mode graphics -Smp 2 -SyllableString` for its four gates
 plus C++, native IPC/areas, graphics/input/restart and Bash. Message, Looper
 and AppServer are not yet built by that profile.
 
+The further `-SyllableMessage` profile executes the genuine Message **data
+core** with a bounded LGPL patch, unchanged geometry/type interfaces,
+real Message Post/Read transport and adversarial guest guard-page tests.
+Looper/Handler/Variant delivery is excluded, not stubbed. See
+[Message core limits and gates](../../docs/SYLLABLE_MESSAGE_CORE.md).
+
 Desktop, Dock and FileBrowser have **not** been compiled or started.
 Their inspected entry files carry LGPL version 2 notices, but every additional
 file must still be reviewed individually. Their shared libsyllable/AppServer

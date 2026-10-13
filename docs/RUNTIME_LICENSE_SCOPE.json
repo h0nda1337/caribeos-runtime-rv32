@@ -104,6 +104,7 @@
                               "scripts/prepare-graphics-deps.py",
                               "scripts/prepare-syllable-native.py",
                               "scripts/prepare-syllable-string.py",
+                              "scripts/prepare-syllable-message.py",
                               "scripts/test-graphics.py",
                               "scripts/qemu-rv32-graphics.ps1",
                               "scripts/qemu-monitor-query.ps1",
@@ -130,6 +131,7 @@
                               "tests/test_catkey.py",
                               "tests/test_graphics_profile.py",
                               "tests/test_syllable_string_sources.py",
+                              "tests/test_syllable_message_sources.py",
                               "tools/backup-caribeos.ps1",
                               "tools/catkey.py",
                               "tools/CREATE_PRIVATE_RELEASE.ps1",
@@ -141,6 +143,7 @@
                               "userland/caribed.S",
                               "userland/cpu1_probe.c",
                               "userland/syllable_string_probe.cpp",
+                              "userland/syllable_message_probe.cpp",
                               "userland/dynamic_probe.S",
                               "userland/gate14_stress.S",
                               "userland/gate14_worker.S",
@@ -161,6 +164,7 @@
                               "userland/cxx_runtime_probe.cpp",
                               "ports/syllable/native/areas.c",
                               "ports/syllable/native/msgport.c",
+                              "ports/syllable/native/message_io.h",
                               "ports/syllable/native/atheos/types.h",
                               "userland/syllable_component.cpp",
                               "userland/caribe_surface.cpp",
@@ -217,6 +221,11 @@
                                           "path": "docs/evidence/syllable-string-v0.5/*",
                                           "classification": "GENERATED_EVIDENCE",
                                           "reason": "Real String QEMU gate output, scanouts, pins and rebuild hashes are evidence data, not source code."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-message-v0.6/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Message data-core QEMU gates, scanouts, pins and rebuild hashes are evidence data, not source code."
                                       },
                                       {
                                           "path":  "virt.dts",

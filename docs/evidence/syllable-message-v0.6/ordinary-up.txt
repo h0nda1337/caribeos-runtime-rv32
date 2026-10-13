@@ -1,0 +1,1 @@
+PASS graphics gates A-E: F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\graphics-tests\opensbi-smp1-native-areas

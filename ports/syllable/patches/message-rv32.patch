@@ -1,0 +1,835 @@
+--- a/message.cpp
++++ b/message.cpp
+@@ -1,3 +1,10 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * Port the genuine data core, not Looper/Handler/Variant implementations.
++ * Bound and validate serialized data, preserve state on failures, scrub
++ * process addresses, fix copy lifetime and use alignment-safe RV32 reads.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libsyllable.so - the highlevel API library for Syllable
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *  Copyright (C) 2003 - 2004 Syllable Team
+@@ -20,17 +27,55 @@
+ 
+ #include <malloc.h>
+ #include <assert.h>
+-#include <atheos/kernel.h>
++#include <atheos/msgport.h>
++#include "message_io.h"
++#include <errno.h>
++#include <string.h>
++#include <stdio.h>
++#include <unistd.h>
++#include <new>
++#include <utility>
++#define dbprintf(...) fprintf( stderr, __VA_ARGS__ )
+ 
+ #include <util/message.h>
+-#include <gui/region.h>
++#include <gui/rect.h>
++#include <gui/gfxtypes.h>
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ #include <util/looper.h>
+ #include <util/messenger.h>
+ #include <util/variant.h>
++#endif
+ 
+ #include <stdexcept>
+ 
+ using namespace os;
++
++static constexpr size_t CARIBE_MESSAGE_LIMIT = 8192;
++
++static void CaribeLoadGeometry( Point& cValue, const uint8* pBytes )
++{
++	memcpy( &cValue.x, pBytes, 4 );
++	memcpy( &cValue.y, pBytes + 4, 4 );
++}
++static void CaribeLoadGeometry( IPoint& cValue, const uint8* pBytes )
++{
++	memcpy( &cValue.x, pBytes, 4 );
++	memcpy( &cValue.y, pBytes + 4, 4 );
++}
++static void CaribeLoadGeometry( Rect& cValue, const uint8* pBytes )
++{
++	memcpy( &cValue.left, pBytes, 4 );
++	memcpy( &cValue.top, pBytes + 4, 4 );
++	memcpy( &cValue.right, pBytes + 8, 4 );
++	memcpy( &cValue.bottom, pBytes + 12, 4 );
++}
++static void CaribeLoadGeometry( IRect& cValue, const uint8* pBytes )
++{
++	memcpy( &cValue.left, pBytes, 4 );
++	memcpy( &cValue.top, pBytes + 4, 4 );
++	memcpy( &cValue.right, pBytes + 8, 4 );
++	memcpy( &cValue.bottom, pBytes + 12, 4 );
++}
+ 
+ #define ARRAY_NAME( array )  reinterpret_cast<char*>(static_cast<DataArray_s*>(psArray)+1)
+ #define FIRST_CHUNK( array ) reinterpret_cast<Chunk_s*>(ARRAY_NAME((array)) + (psArray)->nNameLength)
+@@ -52,6 +97,7 @@
+ 	m_nTargetToken = -1;
+ 	m_nReplyToken = -1;
+ 	m_hReplyPort = -1;
++	m_hReplyProc = -1;
+ 	m_nFlags = 0;
+ 	m_nFlattenedSize = _GetStaticSize();
+ }
+@@ -72,6 +118,7 @@
+ 	m_nTargetToken = -1;
+ 	m_nReplyToken = -1;
+ 	m_hReplyPort = -1;
++	m_hReplyProc = -1;
+ 	m_nFlags = 0;
+ 	m_nFlattenedSize = _GetStaticSize();
+ 	*this = cMsg;
+@@ -89,32 +136,31 @@
+ 
+ Message & Message::operator=( const Message & cMsg )
+ {
+-	m_nCode = cMsg.m_nCode;
+-	m_nTargetToken = cMsg.m_nTargetToken;
+-	m_nReplyToken = cMsg.m_nReplyToken;
+-	m_hReplyPort = cMsg.m_hReplyPort;
+-	m_hReplyProc = cMsg.m_hReplyProc;
+-
++	if( this == &cMsg ) return *this;
++	Message cCopy( cMsg.m_nCode );
++	cCopy.m_nTargetToken = cMsg.m_nTargetToken;
++	cCopy.m_nReplyToken = cMsg.m_nReplyToken;
++	cCopy.m_hReplyPort = cMsg.m_hReplyPort;
++	cCopy.m_hReplyProc = cMsg.m_hReplyProc;
++	cCopy.m_nFlattenedSize = cMsg.m_nFlattenedSize;
++	for( DataArray_s *psSrcArray = cMsg.m_psFirstArray; psSrcArray != NULL; psSrcArray = psSrcArray->psNext )
++	{
++		DataArray_s *psNewArray = ( DataArray_s * ) malloc( psSrcArray->nCurSize );
++		if( psNewArray == NULL ) throw std::bad_alloc();
++		memcpy( psNewArray, psSrcArray, psSrcArray->nCurSize );
++		psNewArray->psNext = NULL;
++		psNewArray->nMaxSize = psSrcArray->nCurSize;
++		cCopy._AddArray( psNewArray );
++	}
++	std::swap( m_nCode, cCopy.m_nCode );
++	std::swap( m_nTargetToken, cCopy.m_nTargetToken );
++	std::swap( m_nReplyToken, cCopy.m_nReplyToken );
++	std::swap( m_hReplyPort, cCopy.m_hReplyPort );
++	std::swap( m_hReplyProc, cCopy.m_hReplyProc );
++	std::swap( m_nFlattenedSize, cCopy.m_nFlattenedSize );
++	std::swap( m_psFirstArray, cCopy.m_psFirstArray );
+ 	m_nFlags = 0;
+ 	m_pcNext = NULL;
+-	m_psFirstArray = NULL;
+-	m_nFlattenedSize = cMsg.m_nFlattenedSize;
+-
+-	DataArray_s *psSrcArray;
+-
+-	for( psSrcArray = cMsg.m_psFirstArray; psSrcArray != NULL; psSrcArray = psSrcArray->psNext )
+-	{
+-		DataArray_s *psNewArray = ( DataArray_s * ) malloc( psSrcArray->nCurSize );
+-
+-		if( psNewArray != NULL )
+-		{
+-			memcpy( psNewArray, psSrcArray, psSrcArray->nCurSize );
+-
+-			psNewArray->psNext = NULL;
+-			psNewArray->nMaxSize = psSrcArray->nCurSize;
+-			_AddArray( psNewArray );
+-		}
+-	}
+ 	return ( *this );
+ }
+ 
+@@ -140,6 +186,7 @@
+ 	m_nTargetToken = -1;
+ 	m_nReplyToken = -1;
+ 	m_hReplyPort = -1;
++	m_hReplyProc = -1;
+ 	m_nFlags = 0;
+ 	m_nFlattenedSize = _GetStaticSize();
+ 
+@@ -219,29 +266,28 @@
+ 
+ status_t Message::Flatten( uint8 *pBuffer, size_t nSize ) const
+ {
+-	DataArray_s *psArray;
+-	int nPos = _GetStaticSize();	// Position start after size, and code
+-
+-	assert( pBuffer != NULL );
+-
+-	( ( int32 * )pBuffer )[1] = m_nCode;
+-	( ( int32 * )pBuffer )[2] = m_nTargetToken;
+-	( ( int32 * )pBuffer )[3] = m_nReplyToken;
+-	( ( int32 * )pBuffer )[4] = m_hReplyPort;
+-	( ( int32 * )pBuffer )[5] = m_hReplyProc;
+-	( ( int32 * )pBuffer )[6] = m_nFlags & ~REPLY_SENT;
+-
+-	for( psArray = m_psFirstArray; psArray != NULL; psArray = psArray->psNext )
+-	{
+-		if( size_t ( nPos + psArray->nCurSize ) > nSize )
+-		{
+-			errno = EOVERFLOW;
+-			return ( -1 );
+-		}
++	if( pBuffer == NULL || nSize < GetFlattenedSize() || GetFlattenedSize() > CARIBE_MESSAGE_LIMIT )
++	{
++		errno = pBuffer == NULL ? EINVAL : EOVERFLOW;
++		return -1;
++	}
++	int32 nHeader[7] = { m_nFlattenedSize, m_nCode, m_nTargetToken, m_nReplyToken,
++	                    m_hReplyPort, m_hReplyProc, static_cast<int32>( m_nFlags & ~REPLY_SENT ) };
++	memcpy( pBuffer, nHeader, sizeof( nHeader ) );
++	size_t nPos = sizeof( nHeader );
++	for( DataArray_s *psArray = m_psFirstArray; psArray != NULL; psArray = psArray->psNext )
++	{
+ 		memcpy( &pBuffer[nPos], psArray, psArray->nCurSize );
++		DataArray_s nWire;
++		memset( &nWire, 0, sizeof( nWire ) );
++		nWire.nMaxSize = nWire.nCurSize = psArray->nCurSize;
++		nWire.nChunkSize = psArray->nChunkSize;
++		nWire.nCount = psArray->nCount;
++		nWire.nTypeCode = psArray->nTypeCode;
++		nWire.nNameLength = psArray->nNameLength;
++		memcpy( &pBuffer[nPos], &nWire, sizeof( nWire ) );
+ 		nPos += psArray->nCurSize;
+ 	}
+-	( ( size_t * )pBuffer )[0] = nPos;	// Put the size as first int in the buffer
+ 	return ( 0 );
+ }
+ 
+@@ -265,52 +311,102 @@
+ 
+ status_t Message::Unflatten( const uint8 *pBuffer )
+ {
+-	size_t nSize;
+-
+-	assert( pBuffer != NULL );
+-
+-	MakeEmpty();
+-
+-	nSize = ( ( size_t * )pBuffer )[0];
+-	m_nCode = ( ( int32 * )pBuffer )[1];
+-	m_nTargetToken = ( ( int32 * )pBuffer )[2];
+-	m_nReplyToken = ( ( int32 * )pBuffer )[3];
+-	m_hReplyPort = ( ( int32 * )pBuffer )[4];
+-	m_hReplyProc = ( ( int32 * )pBuffer )[5];
+-	m_nFlags = ( ( int32 * )pBuffer )[6] & ~REPLY_SENT;
+-
+-	size_t nPos = _GetStaticSize();	// Position start after size, and code
+-
+-	for( ; nPos < nSize; )
+-	{
+-		DataArray_s *psSrcArray = ( DataArray_s * ) & pBuffer[nPos];
+-		DataArray_s *psNewArray = ( DataArray_s * ) malloc( psSrcArray->nCurSize );
+-
+-		if( psNewArray != NULL )
+-		{
+-			memcpy( psNewArray, psSrcArray, psSrcArray->nCurSize );
+-
+-			psNewArray->psNext = NULL;
+-			psNewArray->nMaxSize = psSrcArray->nCurSize;
+-			nPos += psSrcArray->nCurSize;
+-			_AddArray( psNewArray );
+-		}
+-		else
+-		{
+-			dbprintf( "Message::Unflatten() out of memory\n" );
+-			break;
+-		}
+-	}
+-	m_nFlattenedSize = nSize;
+-
+-	if( nPos != nSize )
+-	{
+-		dbprintf( "Message::Unflatten() mismatch between size %d, and bytes read %d\n", nSize, nPos );
+-		MakeEmpty();
+-		errno = EINVAL;
+-		return ( -1 );
+-	}
+-
++	// Legacy trusted-buffer API cannot establish the caller's actual extent.
++	if( pBuffer == NULL ) { errno = EINVAL; return -1; }
++	uint32 nSize;
++	memcpy( &nSize, pBuffer, sizeof( nSize ) );
++	return Unflatten( pBuffer, nSize );
++}
++
++bool Message::_ValidateFlattened( const uint8 *pBuffer, size_t nSize, unsigned nDepth )
++{
++	if( pBuffer == NULL || nSize < 28 || nSize > CARIBE_MESSAGE_LIMIT || nDepth > 16 ) return false;
++	uint32 nDeclared;
++	memcpy( &nDeclared, pBuffer, sizeof( nDeclared ) );
++	if( nDeclared != nSize ) return false;
++	size_t nPos = 28;
++	while( nPos < nSize )
++	{
++		if( nSize - nPos < sizeof( DataArray_s ) ) return false;
++		DataArray_s cArray;
++		memcpy( &cArray, pBuffer + nPos, sizeof( cArray ) );
++		if( cArray.nCurSize < static_cast<int>( sizeof( DataArray_s ) ) ||
++		    static_cast<size_t>( cArray.nCurSize ) > nSize - nPos || cArray.nCount <= 0 ||
++		    cArray.nCount > 8192 || cArray.nChunkSize < 0 ||
++		    cArray.nNameLength > cArray.nCurSize - sizeof( DataArray_s ) ) return false;
++		size_t nEnd = nPos + cArray.nCurSize;
++		size_t nData = nPos + sizeof( DataArray_s ) + cArray.nNameLength;
++		if( memchr( pBuffer + nPos + sizeof( DataArray_s ), 0, cArray.nNameLength ) != NULL ) return false;
++		size_t nScalar = 0;
++		switch( cArray.nTypeCode )
++		{
++		case T_INT8: case T_BOOL: nScalar = 1; break;
++		case T_INT16: nScalar = 2; break;
++		case T_POINTER: case T_INT32: case T_FLOAT: case T_COLOR32: nScalar = 4; break;
++		case T_INT64: case T_DOUBLE: case T_POINT: case T_IPOINT: nScalar = 8; break;
++		case T_RECT: case T_IRECT: nScalar = 16; break;
++		default: break;
++		}
++		if( nScalar != 0 && cArray.nChunkSize != static_cast<int>( nScalar ) ) return false;
++		if( cArray.nChunkSize != 0 && static_cast<uint64>( cArray.nChunkSize ) * cArray.nCount != nEnd - nData ) return false;
++		for( int nIndex = 0; nIndex < cArray.nCount; ++nIndex )
++		{
++			size_t nChunk = cArray.nChunkSize;
++			if( nChunk == 0 )
++			{
++				if( nEnd - nData < sizeof( int32 ) ) return false;
++				int32 nLength;
++				memcpy( &nLength, pBuffer + nData, sizeof( nLength ) );
++				if( nLength < 0 ) return false;
++				nData += sizeof( nLength );
++				nChunk = nLength;
++			}
++			if( nChunk > nEnd - nData ) return false;
++			if( cArray.nTypeCode == T_STRING && ( nChunk == 0 || pBuffer[nData + nChunk - 1] != 0 ) ) return false;
++			if( cArray.nTypeCode == T_BOOL && pBuffer[nData] > 1 ) return false;
++			if( cArray.nTypeCode == T_MESSAGE && !_ValidateFlattened( pBuffer + nData, nChunk, nDepth + 1 ) ) return false;
++			nData += nChunk;
++		}
++		if( nData != nEnd ) return false;
++		nPos = nEnd;
++	}
++	return nPos == nSize;
++}
++
++status_t Message::Unflatten( const uint8 *pBuffer, size_t nSize )
++{
++	static_assert( sizeof( DataArray_s ) == 28, "RV32 Message wire layout changed" );
++	if( !_ValidateFlattened( pBuffer, nSize, 0 ) ) { errno = EINVAL; return -1; }
++	int32 nHeader[7];
++	memcpy( nHeader, pBuffer, sizeof( nHeader ) );
++	Message cDecoded( nHeader[1] );
++	cDecoded.m_nTargetToken = nHeader[2];
++	cDecoded.m_nReplyToken = nHeader[3];
++	cDecoded.m_hReplyPort = nHeader[4];
++	cDecoded.m_hReplyProc = nHeader[5];
++	cDecoded.m_nFlags = nHeader[6] & ~REPLY_SENT;
++	cDecoded.m_nFlattenedSize = nSize;
++	for( size_t nPos = sizeof( nHeader ); nPos < nSize; )
++	{
++		DataArray_s cArray;
++		memcpy( &cArray, pBuffer + nPos, sizeof( cArray ) );
++		DataArray_s *psNew = static_cast<DataArray_s *>( malloc( cArray.nCurSize ) );
++		if( psNew == NULL ) { errno = ENOMEM; return -1; }
++		memcpy( psNew, pBuffer + nPos, cArray.nCurSize );
++		psNew->psNext = NULL;
++		psNew->nMaxSize = cArray.nCurSize;
++		cDecoded._AddArray( psNew );
++		nPos += cArray.nCurSize;
++	}
++	std::swap( m_nCode, cDecoded.m_nCode );
++	std::swap( m_nTargetToken, cDecoded.m_nTargetToken );
++	std::swap( m_nReplyToken, cDecoded.m_nReplyToken );
++	std::swap( m_hReplyPort, cDecoded.m_hReplyPort );
++	std::swap( m_hReplyProc, cDecoded.m_hReplyProc );
++	std::swap( m_nFlags, cDecoded.m_nFlags );
++	std::swap( m_nFlattenedSize, cDecoded.m_nFlattenedSize );
++	std::swap( m_psFirstArray, cDecoded.m_psFirstArray );
++	m_pcNext = NULL;
+ 	return ( 0 );
+ }
+ 
+@@ -319,7 +415,7 @@
+ 
+ Message::Chunk_s * Message::_GetChunkAddr( DataArray_s * psArray, int nIndex ) const
+ {
+-	if( nIndex >= psArray->nCount )
++	if( nIndex < 0 || nIndex >= psArray->nCount )
+ 	{
+ 		return ( NULL );
+ 	}
+@@ -567,8 +663,20 @@
+ 
+ status_t Message::AddData( const char *pzName, int nType, const void *pData, uint32 nSize, bool bFixedSize, int nMaxCountHint )
+ {
+-	assert( pzName != NULL );
+-	assert( pData != NULL );
++	if( pzName == NULL || pData == NULL || strlen( pzName ) > 255 ||
++	    nMaxCountHint < 1 || ( bFixedSize && nSize == 0 ) )
++	{
++		errno = EINVAL;
++		return -1;
++	}
++	uint64 nAllocation = sizeof( DataArray_s ) + strlen( pzName ) +
++	    ( static_cast<uint64>( nSize ) + ( bFixedSize ? 0 : sizeof( Chunk_s ) ) ) * nMaxCountHint;
++	if( nAllocation > CARIBE_MESSAGE_LIMIT || nSize + static_cast<uint64>( m_nFlattenedSize ) +
++	    sizeof( DataArray_s ) + strlen( pzName ) + sizeof( Chunk_s ) > CARIBE_MESSAGE_LIMIT )
++	{
++		errno = EMSGSIZE;
++		return -1;
++	}
+ 
+ 	DataArray_s *psArray = _FindArray( pzName, nType );
+ 
+@@ -626,6 +734,7 @@
+ 
+ 	if( nIndex == 0 && psArray->nCount == 1 )
+ 	{
++		m_nFlattenedSize -= psArray->nCurSize;
+ 		_RemoveArray( psArray );
+ 		free( psArray );
+ 		return ( 0 );
+@@ -1143,6 +1252,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ status_t Message::AddVariant( const char *pzName, const Variant & cVal )
+ {
+ 	DataArray_s *psArray;
+@@ -1182,6 +1292,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#endif
+ status_t Message::FindData( const char *pzName, int nType, const void **ppData, size_t *pnSize, int nIndex ) const
+ {
+ 	DataArray_s *psArray = _FindArray( pzName, nType );
+@@ -1250,7 +1361,7 @@
+ 	{
+ 		return ( nError );
+ 	}
+-	return ( pcVal->Unflatten( ( uint8 * )pBuffer ) );
++	return ( pcVal->Unflatten( ( uint8 * )pBuffer, nSize ) );
+ }
+ 
+ //----------------------------------------------------------------------------
+@@ -1268,11 +1379,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			void **ppData = ( void ** )FIRST_CHUNK( psArray );
+-
+-			*ppVal = ppData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			void *ppData;
++			memcpy( &ppData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( void* ) * nIndex, sizeof( ppData ) );
++
++			*ppVal = ppData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1294,11 +1406,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			int8 *pnData = reinterpret_cast < int8 *>( FIRST_CHUNK( psArray ) );
+-
+-			*pnVal = pnData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			int8 pnData;
++				memcpy( &pnData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( int8 ) * nIndex, sizeof( pnData ) );
++
++			*pnVal = pnData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1320,11 +1433,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			int16 *pnData = reinterpret_cast < int16 *>( FIRST_CHUNK( psArray ) );
+-
+-			*pnVal = pnData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			int16 pnData;
++				memcpy( &pnData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( int16 ) * nIndex, sizeof( pnData ) );
++
++			*pnVal = pnData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1346,11 +1460,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			int32 *pnData = reinterpret_cast < int32 *>( FIRST_CHUNK( psArray ) );
+-
+-			*pnVal = pnData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			int32 pnData;
++				memcpy( &pnData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( int32 ) * nIndex, sizeof( pnData ) );
++
++			*pnVal = pnData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1365,11 +1480,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			int64 *pnData = reinterpret_cast < int64 *>( FIRST_CHUNK( psArray ) );
+-
+-			*pnVal = pnData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			int64 pnData;
++				memcpy( &pnData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( int64 ) * nIndex, sizeof( pnData ) );
++
++			*pnVal = pnData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1391,11 +1507,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			bool *pbData = reinterpret_cast < bool *>( FIRST_CHUNK( psArray ) );
+-
+-			*pbVal = pbData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			bool pbData;
++				memcpy( &pbData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( bool ) * nIndex, sizeof( pbData ) );
++
++			*pbVal = pbData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1417,11 +1534,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			float *pvData = reinterpret_cast < float *>( FIRST_CHUNK( psArray ) );
+-
+-			*pvVal = pvData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			float pvData;
++				memcpy( &pvData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( float ) * nIndex, sizeof( pvData ) );
++
++			*pvVal = pvData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1443,11 +1561,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			double *pvData = reinterpret_cast < double *>( FIRST_CHUNK( psArray ) );
+-
+-			*pvVal = pvData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			double pvData;
++				memcpy( &pvData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( double ) * nIndex, sizeof( pvData ) );
++
++			*pvVal = pvData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1469,20 +1588,22 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
++		if( nIndex >= 0 and nIndex < psArray->nCount )
+ 		{
+ 			if( psArray->nTypeCode == T_RECT )
+ 			{
+-				Rect *pcData = reinterpret_cast < Rect * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = pcData[nIndex];
++				Rect pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( Rect ) * nIndex );
++
++				*pcVal = pcData;
+ 				return ( 0 );
+ 			}
+ 			else if( psArray->nTypeCode == T_IRECT )
+ 			{
+-				IRect *pcData = reinterpret_cast < IRect * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = static_cast < Rect > ( pcData[nIndex] );
++				IRect pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( IRect ) * nIndex );
++
++				*pcVal = static_cast < Rect > ( pcData );
+ 				return ( 0 );
+ 			}
+ 		}
+@@ -1498,20 +1619,22 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
++		if( nIndex >= 0 and nIndex < psArray->nCount )
+ 		{
+ 			if( psArray->nTypeCode == T_IRECT )
+ 			{
+-				IRect *pcData = reinterpret_cast < IRect * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = pcData[nIndex];
++				IRect pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( IRect ) * nIndex );
++
++				*pcVal = pcData;
+ 				return ( 0 );
+ 			}
+ 			else if( psArray->nTypeCode == T_RECT )
+ 			{
+-				Rect *pcData = reinterpret_cast < Rect * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = static_cast < IRect > ( pcData[nIndex] );
++				Rect pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( Rect ) * nIndex );
++
++				*pcVal = static_cast < IRect > ( pcData );
+ 				return ( 0 );
+ 			}
+ 		}
+@@ -1535,20 +1658,23 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
++		if( nIndex >= 0 and nIndex < psArray->nCount )
+ 		{
+ 			if( psArray->nTypeCode == T_POINT )
+ 			{
+-				Point *pcData = reinterpret_cast < Point * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = pcData[nIndex];
++				Point pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( Point ) * nIndex );
++
++				pcVal->x = pcData.x; pcVal->y = pcData.y;
+ 				return ( 0 );
+ 			}
+ 			else if( psArray->nTypeCode == T_IPOINT )
+ 			{
+-				IPoint *pcData = reinterpret_cast < IPoint * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = static_cast < Point > ( pcData[nIndex] );
++				IPoint pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( IPoint ) * nIndex );
++
++				Point cConverted( pcData );
++				pcVal->x = cConverted.x; pcVal->y = cConverted.y;
+ 				return ( 0 );
+ 			}
+ 		}
+@@ -1564,20 +1690,23 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
++		if( nIndex >= 0 and nIndex < psArray->nCount )
+ 		{
+ 			if( psArray->nTypeCode == T_IPOINT )
+ 			{
+-				IPoint *pcData = reinterpret_cast < IPoint * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = pcData[nIndex];
++				IPoint pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( IPoint ) * nIndex );
++
++				pcVal->x = pcData.x; pcVal->y = pcData.y;
+ 				return ( 0 );
+ 			}
+ 			else if( psArray->nTypeCode == T_POINT )
+ 			{
+-				Point *pcData = reinterpret_cast < Point * >( FIRST_CHUNK( psArray ) );
+-
+-				*pcVal = static_cast < IPoint > ( pcData[nIndex] );
++				Point pcData;
++				CaribeLoadGeometry( pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( Point ) * nIndex );
++
++				IPoint cConverted( pcData );
++				pcVal->x = cConverted.x; pcVal->y = cConverted.y;
+ 				return ( 0 );
+ 			}
+ 		}
+@@ -1600,11 +1729,12 @@
+ 
+ 	if( psArray != NULL )
+ 	{
+-		if( nIndex < psArray->nCount )
+-		{
+-			Color32_s *pcData = reinterpret_cast < Color32_s * >( FIRST_CHUNK( psArray ) );
+-
+-			*pcVal = pcData[nIndex];
++		if( nIndex >= 0 and nIndex < psArray->nCount )
++		{
++			Color32_s pcData;
++				memcpy( &pcData, reinterpret_cast<const uint8*>( FIRST_CHUNK( psArray ) ) + sizeof( Color32_s ) * nIndex, sizeof( pcData ) );
++
++			*pcVal = pcData;
+ 			return ( 0 );
+ 		}
+ 	}
+@@ -1658,6 +1788,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ status_t Message::FindVariant( const char *pzName, Variant * pcVal, int nIndex ) const
+ {
+ 	const void *pBuffer;
+@@ -1678,6 +1809,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#endif
+ status_t Message::GetNameInfo( const char *pzName, int *pnType, int *pnCount ) const
+ {
+ 	DataArray_s *psArray = _FindArray( pzName, T_ANY_TYPE );
+@@ -1776,16 +1908,17 @@
+ 
+ bool Message::IsSourceRemote( void ) const
+ {
+-	return ( get_process_id( NULL ) != m_hReplyProc );
+-}
+-
+-//----------------------------------------------------------------------------
+-// NAME:
+-// DESC:
+-// NOTE:
+-// SEE ALSO:
+-//----------------------------------------------------------------------------
+-
++	return ( getpid() != m_hReplyProc );
++}
++
++//----------------------------------------------------------------------------
++// NAME:
++// DESC:
++// NOTE:
++// SEE ALSO:
++//----------------------------------------------------------------------------
++
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ Messenger Message::ReturnAddress( void ) const
+ {
+ 	return ( Messenger( m_hReplyPort, m_nReplyToken, m_hReplyProc ) );
+@@ -1798,6 +1931,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#endif
+ bool Message::IsReply( void ) const
+ {
+ 	return ( m_nFlags & IS_REPLY );
+@@ -1810,6 +1944,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ status_t Message::SendReply( int nCode, Handler * pcReplyHandler )
+ {
+ 	Message cMsg( nCode );
+@@ -1948,6 +2083,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#endif
+ status_t Message::_Post( port_id hPort, uint32 nTarget, port_id hReplyPort, int nReplyTarget, proc_id hReplyProc )
+ {
+ 	uint8 *pBuffer;
+@@ -2009,6 +2145,7 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
+ void Message::_SetReplyHandler( Handler * pcHandler )
+ {
+ 	Looper *pcLooper = NULL;
+@@ -2036,19 +2173,18 @@
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
++#endif
+ status_t Message::_ReadPort( port_id hPort, bigtime_t nTimeOut )
+ {
+ 	uint8 *pBuffer = new uint8[8192];	// FIXME: Check size first
+ 	int nError = -1;
+ 
+-	if( get_msg_x( hPort, NULL, pBuffer, 8192, nTimeOut ) >= 0 )
+-	{
+-		nError = Unflatten( pBuffer );
++	size_t nReceived = 0;
++	if( caribe_get_message( hPort, NULL, pBuffer, 8192, nTimeOut, &nReceived ) >= 0 )
++	{
++		nError = Unflatten( pBuffer, nReceived );
+ 	}
+ 	delete[]pBuffer;
+ 
+ 	return ( nError );
+ }
+-
+-
+-
+--- a/include/util/message.h
++++ b/include/util/message.h
+@@ -1,3 +1,8 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * Bounded Unflatten overload and validation, portable packed chunk access.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libsyllable.so - the highlevel API library for Syllable
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *  Copyright (C) 2003 - 2004 Syllable Team
+@@ -102,6 +107,9 @@
+     size_t	GetFlattenedSize( void ) const;
+     status_t	Flatten( uint8* pBuffer, size_t nSize ) const;
+     status_t	Unflatten( const uint8* pBuffer );
++    status_t Unflatten( const uint8* pBuffer, size_t nSize );
++    status_t ReadPort( port_id hPort, bigtime_t nTimeOut = INFINITE_TIMEOUT ) { return _ReadPort( hPort, nTimeOut ); }
++    status_t PostPort( port_id hPort, uint32 nTargetToken = 0 ) { return _Post( hPort, nTargetToken ); }
+ 
+     status_t	AddData( const char* pzName, int nType, const void* pData,
+ 			 uint32 nSize, bool bFixedSize = true, int nMaxCountHint = 1 );
+@@ -202,12 +210,13 @@
+ 	  // Array of Chunk_s structs (or raw data chunks if fixed size) follows
+     };
+ 
+-    struct Chunk_s
++    struct __attribute__((packed)) Chunk_s
+     {
+ 	int	nDataSize;
+     };
+     
+     Chunk_s*	 _GetChunkAddr( DataArray_s* psArray, int nIndex )  const;
++    static bool _ValidateFlattened( const uint8* pBuffer, size_t nSize, unsigned nDepth );
+     uint8*	 _CreateArray(  const char* pzName, int nType, const void* pData, uint32 nSize,
+ 				bool bFixedSize = true, int nMaxCountHint = 1 );
+     uint8*	 _ExpandArray( DataArray_s* psArray, const void* pData, uint32 nSize );

@@ -66,6 +66,15 @@ original LGPL notices and is not a substitute Font engine. The original
 preparer and independent test application are BSD-2-Clause; they do not
 relicense the library, helper or patch. No new binary Release is published.
 
+The additional genuine libsyllable Message data-core source/header patch and
+unchanged Flattenable/typecodes/geometry headers also retain LGPL-2.0-only.
+Original Kurt Skauen and Syllable Team notices remain intact. The bounded
+profile explicitly excludes Looper/Handler/Variant delivery; it is not a
+complete AppServer library. The original exact-length native receive adapter,
+source preparer and independent tests remain BSD-2-Clause, without relicensing
+any Syllable input. Future binary distributions need exact corresponding
+sources and relink materials; no new binary asset is published by this update.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

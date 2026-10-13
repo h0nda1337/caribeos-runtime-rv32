@@ -60,5 +60,24 @@ class ProfileGuards(unittest.TestCase):
         struct.pack_into("<I", elf, 52, 1)
         self.check_rejected(elf, "neither native TLS")
 
+    def test_unported_message_delivery_is_not_claimed_as_available(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build", prefix="message-profile-guard-") as directory:
+            root = Path(directory)
+            for name in ("syllable-message-probe.elf", "libcaribe-syllable-message.a", "syllable-message/sources.json"):
+                path = root / "build" / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"host-only fixture")
+            with patch.object(runner, "ROOT", root), patch.object(runner, "verify_abi"), \
+                    patch.object(runner, "build_hashes", return_value={"xnu": "fixture"}), \
+                    patch.object(sys, "argv", ["test-graphics.py", "--syllable-message"]), \
+                    patch.object(runner.subprocess, "check_output", return_value="os::Message::SendReply"), \
+                    patch.object(runner.subprocess, "Popen") as qemu:
+                with self.assertRaisesRegex(RuntimeError, "native thread gates required"):
+                    runner.run()
+                qemu.assert_not_called()
+            result = root / "build/graphics-tests/opensbi-smp1-syllable-message/result.json"
+            self.assertEqual(json.loads(result.read_text())["result"], "FAIL")
+            runner.RUN_RESULT_PATH = None
+
 if __name__ == "__main__":
     unittest.main()

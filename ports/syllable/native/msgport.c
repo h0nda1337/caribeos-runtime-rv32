@@ -3,6 +3,7 @@
  * Original Syllable API adapter to XNU native ports, not AtheOS kernel code.
  */
 #include <atheos/msgport.h>
+#include "message_io.h"
 #include <uapi/caribe_ipc.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -48,7 +49,7 @@ status_t delete_port(port_id id)
     return call(&arg);
 }
 static int transfer(port_id id, uint32_t code, void *buffer, int size,
-    bigtime_t timeout, int sending, uint32_t *received_code)
+    bigtime_t timeout, int sending, uint32_t *received_code, size_t *received_size)
 {
     struct caribe_ipc_request arg;
     int result;
@@ -81,15 +82,22 @@ static int transfer(port_id id, uint32_t code, void *buffer, int size,
         }
     } while (result < 0 && errno == ETIMEDOUT && (infinite || elapsed < (uint64_t)timeout));
     if (!result && !sending && received_code) *received_code = arg.code;
+    if (!result && !sending && received_size) *received_size = arg.size;
     return result;
 }
 status_t send_msg_x(port_id id, uint32 code, const void *buffer, int size, bigtime_t timeout)
 {
-    return transfer(id, code, (void *)buffer, size, timeout, 1, 0);
+    return transfer(id, code, (void *)buffer, size, timeout, 1, 0, 0);
 }
 status_t get_msg_x(port_id id, uint32 *code, void *buffer, int size, bigtime_t timeout)
 {
-    return transfer(id, 0, buffer, size, timeout, 0, code);
+    return transfer(id, 0, buffer, size, timeout, 0, code, 0);
+}
+status_t caribe_get_message(port_id id, uint32 *code, void *buffer,
+    int capacity, bigtime_t timeout, size_t *received_size)
+{
+    if (!received_size) { errno = EINVAL; return -1; }
+    return transfer(id, 0, buffer, capacity, timeout, 0, code, received_size);
 }
 status_t send_msg(port_id id, uint32 code, const void *buffer, int size)
 {

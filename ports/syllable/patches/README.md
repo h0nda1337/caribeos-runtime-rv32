@@ -24,3 +24,11 @@ are retained in `build/syllable-string/`. Application objects, the separate
 String archive and GNU archive permit relinking; a future binary distribution
 must provide these exact materials and instructions. This source-only update
 does not release new binaries or expand Tranche 201's old source asset.
+
+`message-rv32.patch` modifies the same pinned revision's genuine Message
+source/header under LGPL-2.0-only, retaining all original notices. It compiles
+an explicit data-core-only profile, not complete Looper/Handler/Variant delivery.
+Its bounded parser, alignment and lifetime changes are described in
+[Message core](../../../docs/SYLLABLE_MESSAGE_CORE.md). The unsupported methods
+are absent rather than implemented as success-returning stubs. Exact upstream
+and adapted sources plus the full license remain in build/syllable-message.

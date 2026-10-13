@@ -19,11 +19,12 @@ WORKSPACE = ROOT.parent.parent
 IMACSU_CPU = "rv32,f=false,d=false,h=false,zfa=false"
 RUN_RESULT_PATH = None
 
-def build_hashes(native_cxx=False, syllable_string=False):
+def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / ("build/initrd-syllable.img" if syllable_string else
+        "initrd": ROOT / ("build/initrd-message.img" if syllable_message else
+                          "build/initrd-syllable.img" if syllable_string else
                           "build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
         "syllableComponent": ROOT / "build/syllable-component.elf",
         "syllableLibrary": ROOT / "build/libcaribe-syllable-decorator.a",
@@ -82,11 +83,13 @@ def main():
     parser.add_argument("--native-areas", action="store_true", help="Run real shared-area gates and native IPC before graphics")
     parser.add_argument("--native-cxx", action="store_true", help="Run GNU C++/musl gates plus native areas and IPC")
     parser.add_argument("--syllable-string", action="store_true", help="Run genuine Syllable String plus C++/IPC/area gates")
+    parser.add_argument("--syllable-message", action="store_true", help="Run genuine bounded Message data core plus String/C++/IPC/area gates")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.syllable_string = args.syllable_string or args.syllable_message
     args.native_cxx = args.native_cxx or args.syllable_string
     args.native_areas = args.native_areas or args.native_cxx
     args.native_ipc = args.native_ipc or args.native_areas
@@ -97,7 +100,9 @@ def main():
         name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
     if args.live:
         name += "-live"
-    if args.syllable_string:
+    if args.syllable_message:
+        name += "-syllable-message"
+    elif args.syllable_string:
         name += "-syllable-string"
     elif args.native_cxx:
         name += "-native-cxx"
@@ -112,7 +117,16 @@ def main():
     result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes(args.native_cxx, args.syllable_string)
+    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message)
+    if args.syllable_message:
+        for name, filename in (("syllableMessageProbe", "syllable-message-probe.elf"),
+                               ("syllableMessageLibrary", "libcaribe-syllable-message.a"),
+                               ("syllableMessageSources", "syllable-message/sources.json")):
+            artifacts[name] = hashlib.sha256((ROOT / "build" / filename).read_bytes()).hexdigest()
+        definitions = subprocess.check_output(["riscv64-unknown-elf-nm", "-C", "--defined-only",
+                          str(ROOT / "build/libcaribe-syllable-message.a")], text=True)
+        if any(name in definitions for name in ("Message::SendReply", "Message::ReturnAddress", "Message::AddVariant", "Message::FindVariant")):
+            raise RuntimeError("unexpected full Message/Looper profile; native thread gates required")
     if args.syllable_string:
         for name, filename in (("syllableStringProbe", "syllable-string-probe.elf"),
                                ("syllableStringLibrary", "libcaribe-syllable-string.a"),
@@ -203,6 +217,7 @@ def main():
                     or "[native-area] FAIL" in text
                     or "[native-cxx] FAIL" in text
                     or "[syllable-string] FAIL" in text
+                    or "[syllable-message] FAIL" in text
                     or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
                 raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
@@ -284,6 +299,21 @@ def main():
                     (out / f"gate-syllable-string-{gate}.txt").write_text("\n".join(lines) + "\n")
                 if "independent exec String/native-port rounds=10000 large-messages=10" not in string_text:
                     raise RuntimeError("Syllable String/native IPC stress evidence missing")
+            if args.syllable_message:
+                start = len(serial)
+                uart.sendall(b"/bin/syllable-message-probe; echo SYLLABLE_MESSAGE_STATUS=$?\n")
+                wait("[syllable-message] genuine Message data-core gates A-D PASS; no Looper stubs, no Wayland/X11",
+                     timeout=240, after=start)
+                wait("\nSYLLABLE_MESSAGE_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                message_text = pump()[start:]
+                for gate in "ABCD":
+                    lines = [line for line in message_text.splitlines() if f"[syllable-message-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing genuine Message data-core gate {gate}")
+                    (out / f"gate-syllable-message-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "malformed=10000 all-truncations guard-page" not in message_text or "real Post/Read rounds=10000" not in message_text:
+                    raise RuntimeError("Message malformed/transport stress evidence missing")
             if args.native_ipc:
                 start = len(serial)
                 uart.sendall(b"/bin/native-ipc-probe; echo NATIVE_IPC_STATUS=$?\n")
@@ -441,6 +471,12 @@ def main():
                                     "tlsModel": tls_model, "softFloatAbi": True,
                                     "threadModel": "single"} if args.native_cxx else None,
                       "kernelSha256": artifacts["xnu"],
+                      "syllableMessage": {"gates": ["A", "B", "C", "D"], "malformedInputs": 10000,
+                                          "transportRounds": 10000, "forkExecCycles": 16,
+                                          "maxWireBytes": 8192, "nestedDepthLimit": 16,
+                                          "profile": "genuine data core, Looper/Variant delivery excluded",
+                                          "legacyUnflatten": "trusted complete buffers only",
+                                          "appServerBuilt": False} if args.syllable_message else None,
                       "syllableString": {"gates": ["A", "B", "C", "D"], "trimRounds": 10000,
                                          "ipcRounds": 10000, "forkExecCycles": 16,
                                          "component": "genuine libsyllable os::String",

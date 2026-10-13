@@ -1,0 +1,1 @@
+[native-ipc-gate-A] ABI FIFO bounds EFAULT no-loss permissions generations timeout PASS

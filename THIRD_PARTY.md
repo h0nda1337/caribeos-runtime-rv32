@@ -72,6 +72,17 @@ preparer/test are BSD-2-Clause; neither relicenses these library inputs.
 No new binary asset is released and the older source asset is not represented
 as corresponding source for this new profile.
 
+The genuine Message data-core profile compiles additional pinned libsyllable
+Message, Flattenable/typecode and geometry interfaces under LGPL-2.0-only.
+An auditable LGPL source/header patch adds bounded RV32 serialization and
+explicitly omits unported Looper/Handler/Variant methods, without fake stubs.
+The original exact-byte-count receive adapter and tests are BSD-2-Clause,
+but do not relicense Message or its interfaces. Full notices and COPYING.LIB,
+exact upstream/adapted source hashes, application objects and separate library
+archives are retained for future corresponding-source/relink packaging.
+See [Message core](docs/SYLLABLE_MESSAGE_CORE.md). No new binary Release is
+published and the old source asset does not cover these new dependencies.
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

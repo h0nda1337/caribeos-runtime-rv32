@@ -1,0 +1,20 @@
+{
+  "type": "forced Message and native receive adapter recompilation, probe relink and selected/base image regeneration",
+  "result": "PASS",
+  "after": {
+    "build/initrd-message.img": "9c2ef94729f14ba278c9c5a982213ec768df29ad56d526bb0d7c3ac8ca66a517",
+    "build/syllable-message-probe.elf": "42e4570e37f73f39796cfc57f93d42f8acace0b1890cd593755dc62c5e6aab2d",
+    "build/libcaribe-syllable-native.a": "8eb2da9d1ac922c6cfd34a98f92ec3b9ff8579935c8a2ea3fff1bf994fa79a72",
+    "build/libcaribe-syllable-message.a": "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6",
+    "build/cxx-runtime-probe.elf": "00e02537e8443e98684048b6fd5fa9f4c9899e9010ae88a1bd71319d1792dcb4",
+    "build/initrd.img": "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+  },
+  "before": {
+    "build/initrd-message.img": "9c2ef94729f14ba278c9c5a982213ec768df29ad56d526bb0d7c3ac8ca66a517",
+    "build/syllable-message-probe.elf": "42e4570e37f73f39796cfc57f93d42f8acace0b1890cd593755dc62c5e6aab2d",
+    "build/libcaribe-syllable-native.a": "8eb2da9d1ac922c6cfd34a98f92ec3b9ff8579935c8a2ea3fff1bf994fa79a72",
+    "build/libcaribe-syllable-message.a": "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6",
+    "build/cxx-runtime-probe.elf": "00e02537e8443e98684048b6fd5fa9f4c9899e9010ae88a1bd71319d1792dcb4",
+    "build/initrd.img": "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+  }
+}
