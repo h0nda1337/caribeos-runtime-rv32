@@ -19,11 +19,20 @@ WORKSPACE = ROOT.parent.parent
 IMACSU_CPU = "rv32,f=false,d=false,h=false,zfa=false"
 RUN_RESULT_PATH = None
 
-def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False):
+def guest_failure(text):
+    markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
+               "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
+               "[native-sync] FAIL")
+    return ("panic" in text.lower() or "unexpected trap" in text.lower()
+            or any(marker in text for marker in markers)
+            or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
+
+def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False, native_sync=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / ("build/initrd-message.img" if syllable_message else
+        "initrd": ROOT / ("build/initrd-sync.img" if native_sync else
+                          "build/initrd-message.img" if syllable_message else
                           "build/initrd-syllable.img" if syllable_string else
                           "build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
         "syllableComponent": ROOT / "build/syllable-component.elf",
@@ -84,6 +93,8 @@ def main():
     parser.add_argument("--native-cxx", action="store_true", help="Run GNU C++/musl gates plus native areas and IPC")
     parser.add_argument("--syllable-string", action="store_true", help="Run genuine Syllable String plus C++/IPC/area gates")
     parser.add_argument("--syllable-message", action="store_true", help="Run genuine bounded Message data core plus String/C++/IPC/area gates")
+    parser.add_argument("--native-sync", action="store_true", help="Run native XNU counting semaphore gates progressively")
+    parser.add_argument("--sync-gate", choices=tuple("ABCDE"), default="E", help="Last semaphore gate to run")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
@@ -91,7 +102,7 @@ def main():
     args = parser.parse_args()
     args.syllable_string = args.syllable_string or args.syllable_message
     args.native_cxx = args.native_cxx or args.syllable_string
-    args.native_areas = args.native_areas or args.native_cxx
+    args.native_areas = args.native_areas or args.native_cxx or args.native_sync
     args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
         parser.error("--live-seconds requires --live and a nonnegative duration")
@@ -100,6 +111,8 @@ def main():
         name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
     if args.live:
         name += "-live"
+    if args.native_sync:
+        name += f"-native-sync-{args.sync_gate.lower()}"
     if args.syllable_message:
         name += "-syllable-message"
     elif args.syllable_string:
@@ -117,7 +130,15 @@ def main():
     result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message)
+    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync)
+    if args.native_sync:
+        artifacts["nativeSyncProbe"] = hashlib.sha256((ROOT / "build/native-sync-probe.elf").read_bytes()).hexdigest()
+        kernel = WORKSPACE / "xnu-2050.48.11/osfmk/riscv32/native_sync.h"
+        user = ROOT / "include/uapi/caribe_sync.h"
+        def sync_declarations(path):
+            return path.read_text().split("#ifndef CARIBE_NATIVE_SYNC_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
+        if sync_declarations(kernel) != sync_declarations(user):
+            raise RuntimeError("native semaphore kernel/userspace ABI mismatch")
     if args.syllable_message:
         for name, filename in (("syllableMessageProbe", "syllable-message-probe.elf"),
                                ("syllableMessageLibrary", "libcaribe-syllable-message.a"),
@@ -212,14 +233,8 @@ def main():
                 except (BlockingIOError, socket.timeout):
                     pass
             text = serial.decode(errors="replace")
-            if ("panic" in text.lower() or "unexpected trap" in text.lower() or "fatal user signal" in text
-                    or "[native-ipc] FAIL" in text
-                    or "[native-area] FAIL" in text
-                    or "[native-cxx] FAIL" in text
-                    or "[syllable-string] FAIL" in text
-                    or "[syllable-message] FAIL" in text
-                    or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
-                raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
+            if guest_failure(text):
+                raise RuntimeError(f"guest regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
                 raise RuntimeError(f"QEMU exited: {out / 'qemu.txt'}")
             return text
@@ -314,6 +329,24 @@ def main():
                     (out / f"gate-syllable-message-{gate}.txt").write_text("\n".join(lines) + "\n")
                 if "malformed=10000 all-truncations guard-page" not in message_text or "real Post/Read rounds=10000" not in message_text:
                     raise RuntimeError("Message malformed/transport stress evidence missing")
+            if args.native_sync:
+                start = len(serial)
+                uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
+                wait(f"[native-sync] gates A-{args.sync_gate} PASS; native XNU counting semaphores, no user-thread claims",
+                     timeout=240, after=start)
+                wait("\nNATIVE_SYNC_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                sync_text = pump()[start:]
+                for gate in "ABCDE"[:ord(args.sync_gate) - ord("A") + 1]:
+                    lines = [line for line in sync_text.splitlines() if f"[native-sync-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing native semaphore gate {gate}")
+                    (out / f"gate-native-sync-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if args.sync_gate >= "D" and "rounds=10000 acquisitions=20000 releases=20000 scheduler-waits=" not in sync_text:
+                    raise RuntimeError("native semaphore stress evidence missing")
+                if args.sync_gate == "E" and ("deletion/reuse EIDRM=16; owner exit/exec wakes=16;" not in sync_text
+                        or "sleep EINTR/remainder=3 PASS" not in sync_text):
+                    raise RuntimeError("native semaphore/clock lifecycle evidence missing")
             if args.native_ipc:
                 start = len(serial)
                 uart.sendall(b"/bin/native-ipc-probe; echo NATIVE_IPC_STATUS=$?\n")
@@ -461,6 +494,11 @@ def main():
                       "privateVm": {"forkExecIsolationCycles": 32, "zeroingRecycleCycles": 256},
                       "nativeIpc": {"gates": ["A", "B", "C", "D"], "pingPongRounds": 10000,
                                     "maxPayload": 8192} if args.native_ipc else None,
+                      "nativeSync": {"gates": list("ABCDE"[:ord(args.sync_gate) - ord("A") + 1]),
+                                     "objects": 64, "recycleCycles": 256 if args.sync_gate >= "B" else 0,
+                                     "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
+                                     "profile": "native counting semaphores, creator-owned lifecycle",
+                                     "userThreadsImplemented": False} if args.native_sync else None,
                       "nativeAreas": {"gates": ["A", "B", "C", "D", "E"], "sharedMemoryRounds": 10000,
                                       "objects": 32, "views": 64, "poolPages": 1024,
                                       "recycleCycles": 256, "sharedFramebuffer": [800, 600],

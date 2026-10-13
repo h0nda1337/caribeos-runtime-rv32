@@ -7,6 +7,9 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <sys/types.h>
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
 #define OS_NAME_LENGTH 64
 #define INFINITE_TIMEOUT INT64_MAX
 typedef int32_t status_t;
@@ -14,6 +17,7 @@ typedef int32_t port_id;
 typedef int32_t proc_id;
 typedef int32_t thread_id;
 typedef int32_t area_id;
+typedef int32_t sem_id;
 typedef uint32_t flags_t;
 typedef int64_t bigtime_t;
 typedef uint32_t uint32;

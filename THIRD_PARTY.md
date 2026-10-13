@@ -83,6 +83,15 @@ archives are retained for future corresponding-source/relink packaging.
 See [Message core](docs/SYLLABLE_MESSAGE_CORE.md). No new binary Release is
 published and the old source asset does not cover these new dependencies.
 
+Native counting semaphores additionally consume unchanged
+`atheos/semaphore.h` at the same Syllable revision. Its normalized SHA-256 is
+`804102b669523edd9b18e1642f08199ee8e7ad42ad227420a3a41ea772d307f1`.
+The preparer preserves the original LGPL-2.0-only notices and complete
+COPYING.LIB. The independently written musl/RV32 API/type adapters and tests
+are BSD-2-Clause, not copied Syllable semaphore kernel code. The backend is
+native XNU/APSL 2.0. No third-party header enters the BSD source allowlist,
+and no new binary package is published. See [counting profile](docs/SYLLABLE_NATIVE_SYNC.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

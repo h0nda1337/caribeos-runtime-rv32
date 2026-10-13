@@ -132,7 +132,10 @@
                               "tests/test_graphics_profile.py",
                               "tests/test_syllable_string_sources.py",
                               "tests/test_syllable_message_sources.py",
+                              "tests/test_syllable_native_sources.py",
+                              "tests/test_sync_evidence_guards.py",
                               "tools/backup-caribeos.ps1",
+                              "tools/collect-syllable-sync-evidence.py",
                               "tools/catkey.py",
                               "tools/CREATE_PRIVATE_RELEASE.ps1",
                               "tools/PUSH_TO_GITHUB_PRIVATE.ps1",
@@ -161,10 +164,15 @@
                               "userland/private_vm_probe.c",
                               "userland/native_ipc_probe.c",
                               "userland/native_area_probe.c",
+                              "userland/native_sync_probe.c",
                               "userland/cxx_runtime_probe.cpp",
                               "ports/syllable/native/areas.c",
                               "ports/syllable/native/msgport.c",
                               "ports/syllable/native/message_io.h",
+                              "ports/syllable/native/semaphore.c",
+                              "ports/syllable/native/syllable/types.h",
+                              "ports/syllable/native/syllable/stddef.h",
+                              "include/uapi/caribe_sync.h",
                               "ports/syllable/native/atheos/types.h",
                               "userland/syllable_component.cpp",
                               "userland/caribe_surface.cpp",
@@ -211,6 +219,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-sync-v0.7/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Native counting semaphore/clock QEMU gates, scanouts, hashes and actual process regression results are evidence data, not original runtime code."
+                                      },
                                       {
                                           "path": "ports/syllable/patches/*.patch",
                                           "classification": "DERIVED_SOURCE_PATCH",

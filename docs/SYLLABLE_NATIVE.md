@@ -155,3 +155,11 @@ See [String source changes](../ports/syllable/patches/README.md).
 The additional `-SyllableMessage` profile runs the genuine Message data core
 with 10,000 malformed guard-page inputs, 10,000 independent exec'd Post/Read
 exchanges and 16 process lifecycle tests. This does not start AppServer.
+
+The optional `-NativeSync` profile adds native counting semaphores, actual
+scheduler waits and owner exit/exec cleanup. Gates A-E progress from ABI and
+capacity to 10,000 shared-memory exchanges and blocked deletion/signal tests.
+They also detect and correct the previous successful-return clock_nanosleep
+stub through measured sleeps and remaining-time tests. Recursive/RW policies
+and native user threads remain explicitly unavailable. See
+[synchronization scope](SYLLABLE_NATIVE_SYNC.md).

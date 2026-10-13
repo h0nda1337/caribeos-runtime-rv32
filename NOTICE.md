@@ -75,6 +75,13 @@ source preparer and independent tests remain BSD-2-Clause, without relicensing
 any Syllable input. Future binary distributions need exact corresponding
 sources and relink materials; no new binary asset is published by this update.
 
+The native counting-semaphore adapter is original BSD-2-Clause integration
+code. Its pinned public Syllable semaphore header remains LGPL-2.0-only with
+Kurt Skauen's original notices unchanged. The native XNU implementation remains
+APSL 2.0; the runtime license does not relicense either external interface or
+kernel. Counting semantics do not imply native GUI threads, recursive kernel
+mutexes, reader/writer locks or a complete libsyllable/AppServer library.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

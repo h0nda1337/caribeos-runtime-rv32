@@ -1,0 +1,80 @@
+{
+  "type": "Forced native_sync/linux_exec/linux_syscall and semaphore/msgport/area/probe recompile, relink and initrd regeneration",
+  "result": "PASS",
+  "before": [
+    {
+      "path": "../../xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
+      "sha256": "8af38adb36da0b1a5d600037362fdb8363bbbf10c323de692f25a6559b9ecdbd"
+    },
+    {
+      "path": "build/native-sync-probe.elf",
+      "sha256": "c0488d00ef21907374a98b35255c48d77678462d9daf839228aa2bc58aa9c9cc"
+    },
+    {
+      "path": "build/syllable_semaphore.o",
+      "sha256": "95a4e7588211d94be6f750ba6e0cae1dc6a9272fb4900dd9eb29f3d58833a9cc"
+    },
+    {
+      "path": "build/libcaribe-syllable-native.a",
+      "sha256": "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+    },
+    {
+      "path": "build/initrd-sync.img",
+      "sha256": "51cd25afc115c8fcab6eaafe52da259c9aaa93413b1c8cd7b5cb16d6c8d46934"
+    },
+    {
+      "path": "build/initrd.img",
+      "sha256": "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+    },
+    {
+      "path": "build/libcaribe-syllable-message.a",
+      "sha256": "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+    },
+    {
+      "path": "build/libcaribe-syllable-string.a",
+      "sha256": "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+    },
+    {
+      "path": "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a",
+      "sha256": "058d0a82fbd3132b59d7e5d57eb2291f80ad490ba15468d02f1603119621ef03"
+    }
+  ],
+  "after": [
+    {
+      "path": "../../xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
+      "sha256": "8af38adb36da0b1a5d600037362fdb8363bbbf10c323de692f25a6559b9ecdbd"
+    },
+    {
+      "path": "build/native-sync-probe.elf",
+      "sha256": "c0488d00ef21907374a98b35255c48d77678462d9daf839228aa2bc58aa9c9cc"
+    },
+    {
+      "path": "build/syllable_semaphore.o",
+      "sha256": "95a4e7588211d94be6f750ba6e0cae1dc6a9272fb4900dd9eb29f3d58833a9cc"
+    },
+    {
+      "path": "build/libcaribe-syllable-native.a",
+      "sha256": "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+    },
+    {
+      "path": "build/initrd-sync.img",
+      "sha256": "51cd25afc115c8fcab6eaafe52da259c9aaa93413b1c8cd7b5cb16d6c8d46934"
+    },
+    {
+      "path": "build/initrd.img",
+      "sha256": "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+    },
+    {
+      "path": "build/libcaribe-syllable-message.a",
+      "sha256": "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+    },
+    {
+      "path": "build/libcaribe-syllable-string.a",
+      "sha256": "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+    },
+    {
+      "path": "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a",
+      "sha256": "058d0a82fbd3132b59d7e5d57eb2291f80ad490ba15468d02f1603119621ef03"
+    }
+  ]
+}

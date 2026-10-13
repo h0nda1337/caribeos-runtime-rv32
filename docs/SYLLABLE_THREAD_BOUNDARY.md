@@ -2,7 +2,11 @@
 
 Audited 2026-10-13 after the genuine String/Message data-core checkpoints.
 This is a dependency audit, not a claim that the missing interfaces work.
-The tested kernel remains `bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f`.
+The String/Message checkpoint used kernel
+`bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f`.
+The next counting-semaphore profile is tracked separately in
+[native synchronization](SYLLABLE_NATIVE_SYNC.md); it does not resolve the
+shared-task user-thread or GNU per-thread TLS barriers below.
 
 ## Verified Obstacles
 
@@ -27,6 +31,10 @@ Its constructor does not initialize m_nOwner, and its recursive argument is
 effectively ignored by the current source. These upstream issues must be patched
 with LGPL notices and tests before Locker becomes a production dependency.
 No success-returning semaphore/thread stub is supplied by the current port.
+Native counting semaphore create/delete/acquire/release is now implemented
+with real XNU scheduler waits and progressive lifecycle gates. Unimplemented
+recursive/RW/sleep-on-sem policies return ENOTSUP. Original Locker is still
+not compiled or represented as fully available by this counting-only milestone.
 
 ## Progressive Gates
 

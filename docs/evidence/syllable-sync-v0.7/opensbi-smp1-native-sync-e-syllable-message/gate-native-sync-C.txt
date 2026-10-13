@@ -1,0 +1,1 @@
+[native-sync-gate-C] local/global permissions; exit and successful exec cleanup=16; failed exec preserves objects PASS

@@ -1,0 +1,1 @@
+[native-sync-gate-E] deletion/reuse EIDRM=16; owner exit/exec wakes=16; signal credit preservation; sleep EINTR/remainder=3 PASS

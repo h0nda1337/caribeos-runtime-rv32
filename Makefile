@@ -607,7 +607,10 @@ build/syllable_msgport.o: ports/syllable/native/msgport.c ports/syllable/native/
 build/syllable_areas.o: ports/syllable/native/areas.c ports/syllable/native/atheos/types.h include/uapi/caribe_area.h build/syllable-native/sources.json
 	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
 
-build/libcaribe-syllable-native.a: build/syllable_msgport.o build/syllable_areas.o
+build/syllable_semaphore.o: ports/syllable/native/semaphore.c ports/syllable/native/atheos/types.h ports/syllable/native/syllable/types.h ports/syllable/native/syllable/stddef.h include/uapi/caribe_sync.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -Wall -Wextra -c $< -o $@
+
+build/libcaribe-syllable-native.a: build/syllable_msgport.o build/syllable_areas.o build/syllable_semaphore.o
 	$(GRAPHICS_AR) rcsD $@ $^
 
 build/native_ipc_probe.o: userland/native_ipc_probe.c include/uapi/caribe_ipc.h build/syllable-native/sources.json
@@ -695,6 +698,18 @@ build/syllable-message-probe.elf: build/syllable_message_probe.o build/libcaribe
 	  build/libcaribe-syllable-native.a -L$(CXX_SYSROOT)/lib/rv32imac/ilp32 -lstdc++ -o $@
 
 build/initrd-message.img: build/initrd.img build/cxx-runtime-probe.elf build/syllable-string-probe.elf build/syllable-message-probe.elf
+
+build/native_sync_probe.o: userland/native_sync_probe.c include/uapi/caribe_sync.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -Wall -Wextra -c $< -o $@
+
+build/native-sync-probe.elf: build/native_sync_probe.o build/libcaribe-syllable-native.a $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  build/native_sync_probe.o build/libcaribe-syllable-native.a -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd-sync.img: build/initrd-message.img build/native-sync-probe.elf
 
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
@@ -852,7 +867,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -866,9 +881,10 @@ build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-mes
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
-	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
-	  $(if $(filter build/initrd-syllable.img build/initrd-message.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
-	  $(if $(filter build/initrd-message.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
+	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
+	  $(if $(filter build/initrd-message.img build/initrd-sync.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
+	  $(if $(filter build/initrd-sync.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \

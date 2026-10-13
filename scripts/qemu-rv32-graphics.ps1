@@ -11,6 +11,8 @@ param(
     [switch]$NativeCxx,
     [switch]$SyllableString,
     [switch]$SyllableMessage,
+    [switch]$NativeSync,
+    [ValidateSet("A", "B", "C", "D", "E")][string]$SyncGate = "E",
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
@@ -29,7 +31,8 @@ if (-not $SkipKernelBuild) {
 Push-Location $root
 try {
     $makeArguments = @("all", "hfs_kernel", "hfs_initrd")
-    if ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
+    if ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
+    elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
     elseif ($SyllableString) { $makeArguments += "INITRD_IMG=build/initrd-syllable.img" }
     elseif ($NativeCxx) { $makeArguments += "INITRD_IMG=build/initrd-cxx.img" }
     & make @makeArguments *> (Join-Path $build "graphics-runtime-build.txt")
@@ -59,6 +62,7 @@ try {
     if ($NativeCxx) { $arguments += "--native-cxx" }
     if ($SyllableString) { $arguments += "--syllable-string" }
     if ($SyllableMessage) { $arguments += "--syllable-message" }
+    if ($NativeSync) { $arguments += @("--native-sync", "--sync-gate", $SyncGate.ToUpperInvariant()) }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

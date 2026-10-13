@@ -15,6 +15,8 @@ param(
   [switch]$NativeCxx,
   [switch]$SyllableString,
   [switch]$SyllableMessage,
+  [switch]$NativeSync,
+  [ValidateSet("A", "B", "C", "D", "E")][string]$SyncGate = "E",
   [switch]$NegativeVersionChecks
 )
 
@@ -1813,7 +1815,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate
   exit $LASTEXITCODE
 }
 

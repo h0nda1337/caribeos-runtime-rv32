@@ -1,0 +1,32 @@
+PASS all 15 actual process runner targets
+Full local log SHA-256: 5b0df9ba2f7caafb2a27ccfa8f3a86edfecf60000883bf144f2334f9e80acc6d
+==> make boot_stage1 QEMU_SMOKE_SECONDS=45
+OK: boot_stage1
+==> make boot_stage1_process_gate_2 QEMU_SMOKE_SECONDS=45
+OK: boot_stage1_process_gate_2
+==> make boot_stage1_process_gate_3 QEMU_SMOKE_SECONDS=45
+OK: boot_stage1_process_gate_3
+==> make boot_stage1_process_gate_4 QEMU_SMOKE_SECONDS=120
+OK: boot_stage1_process_gate_4
+==> make boot_stage1_process_gate_5 QEMU_SMOKE_SECONDS=120
+OK: boot_stage1_process_gate_5
+==> make boot_stage1_process_gate_6 QEMU_SMOKE_SECONDS=300
+OK: boot_stage1_process_gate_6
+==> make boot_stage1_process_gate_7_only QEMU_SMOKE_SECONDS=90
+OK: boot_stage1_process_gate_7_only
+==> make boot_stage1_process_gate_8_only QEMU_SMOKE_SECONDS=90
+OK: boot_stage1_process_gate_8_only
+==> make boot_stage1_process_gate_9_only QEMU_SMOKE_SECONDS=100
+OK: boot_stage1_process_gate_9_only
+==> make boot_stage1_process_gate_10_only QEMU_SMOKE_SECONDS=120
+OK: boot_stage1_process_gate_10_only
+==> make boot_stage1_process_gate_11 QEMU_SMOKE_SECONDS=120
+OK: boot_stage1_process_gate_11
+==> make boot_stage1_process_gate_12 QEMU_SMOKE_SECONDS=180
+OK: boot_stage1_process_gate_12
+==> make boot_stage1_process_gate_13 QEMU_SMOKE_SECONDS=180
+OK: boot_stage1_process_gate_13
+==> make boot_stage1_process_gate_14 QEMU_SMOKE_SECONDS=240
+OK: boot_stage1_process_gate_14
+==> make boot_stage1_process_gate_15 QEMU_SMOKE_SECONDS=90 GATE15_SECONDS=90
+OK: boot_stage1_process_gate_15

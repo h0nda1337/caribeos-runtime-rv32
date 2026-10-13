@@ -16,6 +16,12 @@ runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
 
 class ProfileGuards(unittest.TestCase):
+    def test_guest_sync_failure_is_detected_without_waiting_for_timeout(self):
+        self.assertTrue(runner.guest_failure("[native-sync] FAIL line=1 errno=14"))
+        self.assertFalse(runner.guest_failure("[native-sync-gate-E] sleep EINTR/remainder=3 PASS"))
+        self.assertTrue(runner.guest_failure("[smp-gate-f] lock test FAIL\n"))
+        self.assertTrue(runner.guest_failure("panic: unhandled exception"))
+
     def check_rejected(self, elf, expected):
         with tempfile.TemporaryDirectory(dir=ROOT / "build", prefix="profile-guard-") as directory:
             root = Path(directory)
@@ -76,6 +82,29 @@ class ProfileGuards(unittest.TestCase):
                     runner.run()
                 qemu.assert_not_called()
             result = root / "build/graphics-tests/opensbi-smp1-syllable-message/result.json"
+            self.assertEqual(json.loads(result.read_text())["result"], "FAIL")
+            runner.RUN_RESULT_PATH = None
+
+    def test_semaphore_abi_mismatch_is_rejected_before_qemu(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build", prefix="sync-profile-guard-") as directory:
+            root = Path(directory)
+            probe = root / "build/native-sync-probe.elf"
+            kernel = root / "xnu-2050.48.11/osfmk/riscv32/native_sync.h"
+            user = root / "include/uapi/caribe_sync.h"
+            for path in (probe, kernel, user):
+                path.parent.mkdir(parents=True, exist_ok=True)
+            probe.write_bytes(b"host-only fixture")
+            kernel.write_text("#ifndef CARIBE_NATIVE_SYNC_H\n#define CARIBE_SYNC_ABI 1\n#ifdef KERNEL\n#endif\n")
+            user.write_text("#ifndef CARIBE_NATIVE_SYNC_H\n#define CARIBE_SYNC_ABI 2\n#endif\n")
+            with patch.object(runner, "ROOT", root), patch.object(runner, "WORKSPACE", root), \
+                    patch.object(runner, "verify_abi"), \
+                    patch.object(runner, "build_hashes", return_value={"xnu": "fixture"}), \
+                    patch.object(sys, "argv", ["test-graphics.py", "--native-sync", "--sync-gate", "A"]), \
+                    patch.object(runner.subprocess, "Popen") as qemu:
+                with self.assertRaisesRegex(RuntimeError, "semaphore kernel/userspace ABI mismatch"):
+                    runner.run()
+                qemu.assert_not_called()
+            result = root / "build/graphics-tests/opensbi-smp1-native-sync-a-native-areas/result.json"
             self.assertEqual(json.loads(result.read_text())["result"], "FAIL")
             runner.RUN_RESULT_PATH = None
 
