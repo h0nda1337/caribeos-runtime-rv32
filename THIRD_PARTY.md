@@ -59,6 +59,19 @@ scripts, applicable license texts, runtime source snapshots, and a
 cryptographic manifest. See `docs/PUBLIC_LICENSE_REVIEW.md` for the technical
 review and exact upstream hashes.
 
+The native Syllable String profile compiles the authentic libsyllable
+implementation at the same pinned Syllable revision, retaining LGPL-2.0-only.
+The public String header is unchanged after LF normalization. A versioned
+LGPL source patch fixes reverse-trim underflow, ctype argument handling and
+va_list formatting. The existing Font byte-length helper is isolated with
+its original notices; no Font engine is implemented by that extraction.
+Upstream/adapted hashes, full COPYING.LIB, application objects and a separate
+String archive are retained for future corresponding-source/relink packages.
+See [patch provenance](ports/syllable/patches/README.md). The original
+preparer/test are BSD-2-Clause; neither relicenses these library inputs.
+No new binary asset is released and the older source asset is not represented
+as corresponding source for this new profile.
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

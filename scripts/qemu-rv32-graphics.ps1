@@ -9,6 +9,7 @@ param(
     [switch]$NativeIpc,
     [switch]$NativeAreas,
     [switch]$NativeCxx,
+    [switch]$SyllableString,
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
@@ -27,7 +28,8 @@ if (-not $SkipKernelBuild) {
 Push-Location $root
 try {
     $makeArguments = @("all", "hfs_kernel", "hfs_initrd")
-    if ($NativeCxx) { $makeArguments += "INITRD_IMG=build/initrd-cxx.img" }
+    if ($SyllableString) { $makeArguments += "INITRD_IMG=build/initrd-syllable.img" }
+    elseif ($NativeCxx) { $makeArguments += "INITRD_IMG=build/initrd-cxx.img" }
     & make @makeArguments *> (Join-Path $build "graphics-runtime-build.txt")
     if ($LASTEXITCODE -ne 0) { throw "Runtime build failed: build/graphics-runtime-build.txt" }
     if (-not $PythonPath) {
@@ -53,6 +55,7 @@ try {
     if ($NativeIpc) { $arguments += "--native-ipc" }
     if ($NativeAreas) { $arguments += "--native-areas" }
     if ($NativeCxx) { $arguments += "--native-cxx" }
+    if ($SyllableString) { $arguments += "--syllable-string" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

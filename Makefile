@@ -651,6 +651,29 @@ build/cxx-runtime-probe.elf: build/cxx_runtime_probe.o $(CXX_LIBRARY)
 
 build/initrd-cxx.img: build/initrd.img build/cxx-runtime-probe.elf
 
+build/syllable-string/sources.json: scripts/prepare-syllable-string.py ports/syllable/patches/string-rv32.patch ports/syllable/COPYING.LIB
+	$(PYTHON) scripts/prepare-syllable-string.py
+
+SYLLABLE_STRING_FLAGS = $(CXX_RUNTIME_FLAGS) -Ibuild/syllable-string/include \
+  -Iports/syllable/native -Ibuild/syllable-native/include
+
+build/syllable_string.o: build/syllable-string/sources.json $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_STRING_FLAGS) -Wall -Wextra \
+	  -c build/syllable-string/string.cpp -o $@
+
+build/libcaribe-syllable-string.a: build/syllable_string.o
+	$(GRAPHICS_AR) rcsD $@ $^
+
+build/syllable_string_probe.o: userland/syllable_string_probe.cpp build/syllable-string/sources.json build/syllable-native/sources.json $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_STRING_FLAGS) -Wall -Wextra -c $< -o $@
+
+build/syllable-string-probe.elf: build/syllable_string_probe.o build/libcaribe-syllable-string.a build/libcaribe-syllable-native.a $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_STRING_FLAGS) -Wl,--gc-sections \
+	  build/syllable_string_probe.o build/libcaribe-syllable-string.a build/libcaribe-syllable-native.a \
+	  -L$(CXX_SYSROOT)/lib/rv32imac/ilp32 -lstdc++ -o $@
+
+build/initrd-syllable.img: build/initrd.img build/cxx-runtime-probe.elf build/syllable-string-probe.elf
+
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include \
@@ -807,7 +830,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img build/initrd-cxx.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img build/initrd-syllable.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -821,7 +844,8 @@ build/initrd.img build/initrd-cxx.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_EL
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
-	  $(if $(filter build/initrd-cxx.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-syllable.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \

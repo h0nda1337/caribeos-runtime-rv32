@@ -1,0 +1,1 @@
+[native-area-gate-E] child-rendered shared framebuffer 800x600 GPU presented zero-leak PASS

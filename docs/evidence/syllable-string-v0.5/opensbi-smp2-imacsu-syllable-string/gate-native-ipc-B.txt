@@ -1,0 +1,1 @@
+[native-ipc-gate-B] pool ports=32 messages=64 exhaustion recycling=256 zero-leak PASS

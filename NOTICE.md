@@ -58,6 +58,14 @@ Original CaribeOS build controls and its independent test application remain
 BSD-2-Clause. This profile publishes source/build controls, not a new binary
 Release. Current single-thread/emulated-TLS limits are documented explicitly.
 
+The genuine libsyllable os::String implementation and the separate RV32
+source patch retain LGPL-2.0-only. Original Kurt Skauen and Syllable Team
+notices remain intact; the public String header is unchanged apart from
+normalized line endings. An isolated existing Font UTF-8 helper keeps its
+original LGPL notices and is not a substitute Font engine. The original
+preparer and independent test application are BSD-2-Clause; they do not
+relicense the library, helper or patch. No new binary Release is published.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

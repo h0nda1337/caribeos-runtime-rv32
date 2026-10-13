@@ -103,6 +103,7 @@
                               "scripts/prepare-security-deps.py",
                               "scripts/prepare-graphics-deps.py",
                               "scripts/prepare-syllable-native.py",
+                              "scripts/prepare-syllable-string.py",
                               "scripts/test-graphics.py",
                               "scripts/qemu-rv32-graphics.ps1",
                               "scripts/qemu-monitor-query.ps1",
@@ -128,6 +129,7 @@
                               "testproject.ps1",
                               "tests/test_catkey.py",
                               "tests/test_graphics_profile.py",
+                              "tests/test_syllable_string_sources.py",
                               "tools/backup-caribeos.ps1",
                               "tools/catkey.py",
                               "tools/CREATE_PRIVATE_RELEASE.ps1",
@@ -138,6 +140,7 @@
                               "userland/caribectl.S",
                               "userland/caribed.S",
                               "userland/cpu1_probe.c",
+                              "userland/syllable_string_probe.cpp",
                               "userland/dynamic_probe.S",
                               "userland/gate14_stress.S",
                               "userland/gate14_worker.S",
@@ -204,6 +207,17 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "ports/syllable/patches/*.patch",
+                                          "classification": "DERIVED_SOURCE_PATCH",
+                                          "spdxLicenseIdentifier": "LGPL-2.0-only",
+                                          "reason": "Patches modify pinned LGPL Syllable sources and retain that license, not the original-code BSD license."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-string-v0.5/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Real String QEMU gate output, scanouts, pins and rebuild hashes are evidence data, not source code."
+                                      },
                                       {
                                           "path":  "virt.dts",
                                           "classification":  "DERIVED_DEVICE_TREE_DATA",

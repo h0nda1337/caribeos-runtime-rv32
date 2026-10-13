@@ -1,0 +1,6 @@
+error: No valid patches in input (allow with "--allow-empty")
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.007s
+
+OK

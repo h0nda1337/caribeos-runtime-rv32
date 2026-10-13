@@ -1,0 +1,25 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/string.cpp",
+      "sha256": "be51692bd68f9f917e8f4397177320295b8a258ccd66477a64885ce69cac501e",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/string.h",
+      "sha256": "a7931e6500afbb5f5bb8aea8cbf558500b0d7258aab354c650e08df89ffb9ab7",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/gui/font.h",
+      "sha256": "440148c1995bb22d0d9e043aa3375b4bec89c406052d85521345b98ea0229894",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "patchSha256": "418bdf394f573d76bd23d24b3fa8dff491a0470542dca006468dd8c954160c57",
+  "adaptedStringSha256": "d2bc6646bfe3a9ef11884c4ad35ab73ee9b6bbdd99fe5d1b1edd444aa3446ea6",
+  "utf8HelperSha256": "c36be33f82da7966499d371b6881cc790437091c6ead7a27dc559dc85adc8c65",
+  "license": "LGPL-2.0-only",
+  "note": "Real String implementation; isolated existing UTF-8 helper, no Font/AppServer replacement."
+}

@@ -1,0 +1,21 @@
+[graphics-gate-C] independent RV32-musl Syllable DefaultDecorator process started PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] independent RV32-musl Syllable DefaultDecorator process started PASS
+[graphics-gate-C] userspace frame presented PASS
+[graphics-gate-C] userspace frame presented PASS

@@ -54,6 +54,14 @@ unresolved. See [C++ profile](../../docs/CXX_RV32_MUSL.md).
 See [native foundations](../../docs/SYLLABLE_NATIVE.md) for the separately
 tested XNU ports/shared areas and their explicit limits.
 
+Genuine libsyllable `os::String` is now separately compiled against that GNU
+runtime and exercised inside XNU. The original public header is retained;
+the [LGPL patch](patches/README.md) fixes historical trim/format bugs and
+isolates the existing UTF-8 helper without claiming a Font implementation.
+Run `testproject.ps1 -Mode graphics -Smp 2 -SyllableString` for its four gates
+plus C++, native IPC/areas, graphics/input/restart and Bash. Message, Looper
+and AppServer are not yet built by that profile.
+
 Desktop, Dock and FileBrowser have **not** been compiled or started.
 Their inspected entry files carry LGPL version 2 notices, but every additional
 file must still be reviewed individually. Their shared libsyllable/AppServer

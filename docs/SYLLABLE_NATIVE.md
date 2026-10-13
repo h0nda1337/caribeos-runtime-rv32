@@ -120,7 +120,7 @@ does not claim to be the complete AppServer.
 ## Remaining Work
 
 The genuine Message implementation has been obtained and audited,
-not compiled: it needs geometry, String/Variant, Handler/Looper/Messenger,
+not compiled: it needs geometry, Variant, Handler/Looper/Messenger,
 and integration with the now tested [GNU RV32-musl C++ runtime](CXX_RV32_MUSL.md).
 Its historical unchecked Unflatten input
 must be hardened before accepting untrusted client messages.
@@ -141,3 +141,13 @@ and 16 independent fork/exec cycles before the native IPC/area/visual gates.
 This removes the basic single-thread C++ runtime obstacle, not native threads:
 the installed GCC uses emulated TLS and a single-thread model. Appropriate
 native Syllable thread/Looper/semaphore integration is still required.
+
+The optional `-SyllableString` graphics profile additionally compiles and
+executes genuine libsyllable `os::String`, not a compatibility reimplementation.
+It keeps the original public header and licenses, with an auditable LGPL
+source patch for musl/RV32 portability and historical trim/formatting bugs.
+Four gates cover the actual API, 10,000 empty/all-space trim operations,
+large/copied-va_list/error/embedded-NUL formats, 16 fork/exec cycles and
+10,000 independent-process String/native-port exchanges. It includes all
+GNU C++/IPC/area/visual gates. This does not start Message or AppServer.
+See [String source changes](../ports/syllable/patches/README.md).

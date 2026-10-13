@@ -1,0 +1,18 @@
+{
+  "type": "forced String library/probe recompilation and image regeneration, not fresh-host rebuild",
+  "before": {
+    "build/libcaribe-syllable-string.a": "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0",
+    "build/initrd-cxx.img": "424b07e560ea0551f16e89fc6e60e5ff67b7fac150c0a7efaff6370e79d1893a",
+    "build/initrd-syllable.img": "9d12b38d85db7a47b265ab3081805901c49dbfff002414667820b3497346b887",
+    "build/syllable-string-probe.elf": "cb55e191080aa25feaba8cc8421ed11792fa45e8d9afa031a1084600cf2a478a",
+    "build/initrd.img": "9bbdfb4cf2fc9d58554fd6242bb0d50704cdf458cbecaf7a585a6afa4baa2b69"
+  },
+  "result": "PASS",
+  "after": {
+    "build/libcaribe-syllable-string.a": "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0",
+    "build/initrd-cxx.img": "424b07e560ea0551f16e89fc6e60e5ff67b7fac150c0a7efaff6370e79d1893a",
+    "build/initrd-syllable.img": "9d12b38d85db7a47b265ab3081805901c49dbfff002414667820b3497346b887",
+    "build/syllable-string-probe.elf": "cb55e191080aa25feaba8cc8421ed11792fa45e8d9afa031a1084600cf2a478a",
+    "build/initrd.img": "9bbdfb4cf2fc9d58554fd6242bb0d50704cdf458cbecaf7a585a6afa4baa2b69"
+  }
+}

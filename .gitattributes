@@ -8,6 +8,8 @@
 *.ld text eol=lf
 *.sh text eol=lf
 *.py text eol=lf
+# Unified-diff context intentionally prefixes original tabs/blank lines with a space.
+*.patch text eol=lf whitespace=-blank-at-eol,-space-before-tab
 *.md text eol=lf
 *.txt text eol=lf
 Makefile text eol=lf

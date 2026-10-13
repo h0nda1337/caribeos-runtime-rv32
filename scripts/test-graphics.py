@@ -19,11 +19,12 @@ WORKSPACE = ROOT.parent.parent
 IMACSU_CPU = "rv32,f=false,d=false,h=false,zfa=false"
 RUN_RESULT_PATH = None
 
-def build_hashes(native_cxx=False):
+def build_hashes(native_cxx=False, syllable_string=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / ("build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
+        "initrd": ROOT / ("build/initrd-syllable.img" if syllable_string else
+                          "build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
         "syllableComponent": ROOT / "build/syllable-component.elf",
         "syllableLibrary": ROOT / "build/libcaribe-syllable-decorator.a",
         "sessionManager": ROOT / "build/caribe-session.elf",
@@ -80,11 +81,13 @@ def main():
     parser.add_argument("--native-ipc", action="store_true", help="Run native Syllable port gates before graphics")
     parser.add_argument("--native-areas", action="store_true", help="Run real shared-area gates and native IPC before graphics")
     parser.add_argument("--native-cxx", action="store_true", help="Run GNU C++/musl gates plus native areas and IPC")
+    parser.add_argument("--syllable-string", action="store_true", help="Run genuine Syllable String plus C++/IPC/area gates")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.native_cxx = args.native_cxx or args.syllable_string
     args.native_areas = args.native_areas or args.native_cxx
     args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
@@ -94,7 +97,9 @@ def main():
         name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
     if args.live:
         name += "-live"
-    if args.native_cxx:
+    if args.syllable_string:
+        name += "-syllable-string"
+    elif args.native_cxx:
         name += "-native-cxx"
     elif args.native_areas:
         name += "-native-areas"
@@ -107,7 +112,12 @@ def main():
     result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes(args.native_cxx)
+    artifacts = build_hashes(args.native_cxx, args.syllable_string)
+    if args.syllable_string:
+        for name, filename in (("syllableStringProbe", "syllable-string-probe.elf"),
+                               ("syllableStringLibrary", "libcaribe-syllable-string.a"),
+                               ("syllableStringSources", "syllable-string/sources.json")):
+            artifacts[name] = hashlib.sha256((ROOT / "build" / filename).read_bytes()).hexdigest()
     if args.native_cxx:
         for name, path in (("nativeCxxProbe", "build/cxx-runtime-probe.elf"),
                            ("gnuLibstdcxx", "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a")):
@@ -192,6 +202,7 @@ def main():
                     or "[native-ipc] FAIL" in text
                     or "[native-area] FAIL" in text
                     or "[native-cxx] FAIL" in text
+                    or "[syllable-string] FAIL" in text
                     or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
                 raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
@@ -258,6 +269,21 @@ def main():
                     (out / f"gate-native-cxx-{gate}.txt").write_text("\n".join(lines) + "\n")
                 if "exceptions=10000 destructors=10000" not in cxx_text:
                     raise RuntimeError("GNU exception/unwind stress evidence missing")
+            if args.syllable_string:
+                start = len(serial)
+                uart.sendall(b"/bin/syllable-string-probe; echo SYLLABLE_STRING_STATUS=$?\n")
+                wait("[syllable-string] genuine Syllable String gates A-D PASS; native XNU, no Wayland/X11",
+                     timeout=240, after=start)
+                wait("\nSYLLABLE_STRING_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                string_text = pump()[start:]
+                for gate in "ABCD":
+                    lines = [line for line in string_text.splitlines() if f"[syllable-string-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing genuine Syllable String gate {gate}")
+                    (out / f"gate-syllable-string-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "independent exec String/native-port rounds=10000 large-messages=10" not in string_text:
+                    raise RuntimeError("Syllable String/native IPC stress evidence missing")
             if args.native_ipc:
                 start = len(serial)
                 uart.sendall(b"/bin/native-ipc-probe; echo NATIVE_IPC_STATUS=$?\n")
@@ -415,6 +441,10 @@ def main():
                                     "tlsModel": tls_model, "softFloatAbi": True,
                                     "threadModel": "single"} if args.native_cxx else None,
                       "kernelSha256": artifacts["xnu"],
+                      "syllableString": {"gates": ["A", "B", "C", "D"], "trimRounds": 10000,
+                                         "ipcRounds": 10000, "forkExecCycles": 16,
+                                         "component": "genuine libsyllable os::String",
+                                         "appServerBuilt": False} if args.syllable_string else None,
                       "artifactSha256": artifacts,
                       "screenshots": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in captures}}
             result_path.write_text(json.dumps(result, indent=2) + "\n")

@@ -1,0 +1,158 @@
+--- a/string.cpp
++++ b/string.cpp
+@@ -1,4 +1,10 @@
+-
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * Isolate the existing UTF-8 helper, use portable integer types and headers,
++ * fix empty/all-space RStrip and unsigned ctype arguments, and copy va_list
++ * for bounded two-pass formatting with strong exception safety.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libatheos.so - the highlevel API library for AtheOS
+  *  Copyright (C) 2001  Kurt Skauen
+  *
+@@ -20,9 +26,13 @@
+ 
+ #include <stdio.h>
+ #include <ctype.h>
++#include <string.h>
++#include <strings.h>
++#include <stdexcept>
++#include <vector>
+ 
+ #include <util/string.h>
+-#include <gui/font.h>
++#include "utf8_length.h"
+ 
+ using namespace os;
+ 
+@@ -79,14 +89,14 @@
+ {
+ 	int nNumChars = 0;
+ 
+-	for( uint i = 0; i < m_cString.size(); i += utf8_char_length( m_cString[i] ) )
++	for( size_t i = 0; i < m_cString.size(); i += utf8_char_length( m_cString[i] ) )
+ 	{
+ 		nNumChars++;
+ 	}
+ 	return ( nNumChars );
+ }
+ 
+-String &String::String::Resize( int nNewLen )
++String &String::Resize( int nNewLen )
+ {
+ 	m_cString.resize( nNewLen );
+ 	return ( *this );
+@@ -95,27 +105,21 @@
+ 
+ String &String::Format( const char *pzFormat, va_list pArgs )
+ {
+-	int nMaxLen = 4096;
+-	char zBuffer[nMaxLen];
+-	int nLen = vsnprintf( zBuffer, nMaxLen, pzFormat, pArgs );
+-
+-	if( nLen < nMaxLen )
+-	{
+-		m_cString = zBuffer;
+-		return ( *this );
+-	}
+-	while( nLen >= nMaxLen )
+-	{
+-		nMaxLen *= 2;
+-		char *pzBuffer = new char[nMaxLen];
+-
+-		nLen = vsnprintf( pzBuffer, nMaxLen, pzFormat, pArgs );
+-		if( nLen < nMaxLen )
+-		{
+-			m_cString = pzBuffer;
+-		}
+-		delete[]pzBuffer;
+-	}
++	va_list cMeasure;
++	va_copy( cMeasure, pArgs );
++	int nLen = vsnprintf( NULL, 0, pzFormat, cMeasure );
++	va_end( cMeasure );
++	if( nLen < 0 )
++		throw std::runtime_error( "Syllable String format measurement failed" );
++	std::vector<char> cBuffer( static_cast<size_t>( nLen ) + 1 );
++	va_list cRender;
++	va_copy( cRender, pArgs );
++	int nWritten = vsnprintf( cBuffer.data(), cBuffer.size(), pzFormat, cRender );
++	va_end( cRender );
++	if( nWritten != nLen )
++		throw std::runtime_error( "Syllable String format result changed" );
++	std::string cResult( cBuffer.data(), static_cast<size_t>( nWritten ) );
++	m_cString.swap( cResult );
+ 	return ( *this );
+ }
+ 
+@@ -124,7 +128,15 @@
+ 	va_list sArgList;
+ 
+ 	va_start( sArgList, pzFormat );
+-	Format( pzFormat, sArgList );
++	try
++	{
++		Format( pzFormat, sArgList );
++	}
++	catch( ... )
++	{
++		va_end( sArgList );
++		throw;
++	}
+ 	va_end( sArgList );
+ 	return ( *this );
+ }
+@@ -142,7 +154,7 @@
+ 
+ 	for( i = m_cString.begin(); i != m_cString.end(  ); ++i )
+ 	{
+-		if( isspace( *i ) == false )
++		if( isspace( static_cast<unsigned char>( *i ) ) == false )
+ 		{
+ 			break;
+ 		}
+@@ -153,34 +165,27 @@
+ 
+ String &String::RStrip()
+ {
+-	uint nSpaces = 0;
+-
+-	for( uint i = m_cString.size() - 1; i >= 0; --i )
+-	{
+-		if( isspace( m_cString[i] ) == false )
+-		{
+-			break;
+-		}
+-		nSpaces++;
+-	}
+-	m_cString.resize( m_cString.size() - nSpaces );
++	size_t nEnd = m_cString.size();
++	while( nEnd > 0 && isspace( static_cast<unsigned char>( m_cString[nEnd - 1] ) ) )
++		--nEnd;
++	m_cString.resize( nEnd );
+ 	return ( *this );
+ }
+ 
+ String &String::Lower()
+ {
+-	for( uint i = 0; i < m_cString.size(); ++i )
++	for( size_t i = 0; i < m_cString.size(); ++i )
+ 	{
+-		m_cString[i] = tolower( m_cString[i] );
++		m_cString[i] = tolower( static_cast<unsigned char>( m_cString[i] ) );
+ 	}
+ 	return ( *this );
+ }
+ 
+ String &String::Upper()
+ {
+-	for( uint i = 0; i < m_cString.size(); ++i )
++	for( size_t i = 0; i < m_cString.size(); ++i )
+ 	{
+-		m_cString[i] = toupper( m_cString[i] );
++		m_cString[i] = toupper( static_cast<unsigned char>( m_cString[i] ) );
+ 	}
+ 	return ( *this );
+ }
