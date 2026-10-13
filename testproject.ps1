@@ -7,6 +7,7 @@ param(
   [int]$Seconds = 45,
   [ValidateRange(1, 2)]
   [int]$Smp = 1,
+  [string]$Cpu = "",
   [ValidateSet(100, 1000, 10000)]
   [int]$StressRounds = 10000,
   [switch]$KeepHistory,
@@ -17,6 +18,9 @@ param(
   [switch]$SyllableMessage,
   [switch]$FreeType,
   [switch]$NativeThreads,
+  [switch]$NativeFutex,
+  [switch]$DisableNativeFutex,
+  [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
   [switch]$DisableNativeThreads,
   [ValidateSet("A", "B", "C", "D")][string]$ThreadGate = "D",
   [ValidateSet("A", "B", "C", "D")][string]$FontGate = "D",
@@ -26,6 +30,9 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if ($Cpu -and $Mode -notin @("graphics", "graphics-live")) {
+  throw "Explicit CPU selection is currently supported for graphics runners only."
+}
 
 function Require-Command {
   param([string]$Name)
@@ -1820,7 +1827,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex
   exit $LASTEXITCODE
 }
 

@@ -1,0 +1,1 @@
+[native-thread-gate-A] genuine same-task U-mode entry, independent stack/TP, suspended start, shared increments=10000, join/reaper PASS

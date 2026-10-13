@@ -104,3 +104,8 @@ OpenSBI's original copyrights and file-level licenses remain applicable.
 New CaribeSSBI code carries its own original-code BSD-2-Clause notices.
 No production private keys, proprietary Motorola firmware, or Xbox code are
 included. Experimental software verification is not hardware attestation.
+
+The independently written private-futex probe and runner/host guards retain
+the runtime's BSD-2-Clause terms. The corresponding native XNU scheduler
+backend retains APSL-2.0. It adds no external Linux kernel code and does not
+relicense musl, GNU or Syllable or claim pthread compatibility.

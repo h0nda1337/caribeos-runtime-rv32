@@ -22,7 +22,7 @@ RUN_RESULT_PATH = None
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
@@ -34,6 +34,32 @@ def scanout_fnv(image):
         red, green, blue = data[offset:offset + 3]
         value = ((value ^ ((red << 16) | (green << 8) | blue)) * 16777619) & 0xffffffff
     return value
+
+
+def validate_futex_log(text, gate, disabled=False):
+    """Check every selected guest marker before retaining any gate logs."""
+    selected = ["off"] if disabled else list("ABCD"[:ord(gate)-ord("A")+1])
+    checked = {}
+    for letter in selected:
+        marker = "[native-futex] disabled profile" if letter == "off" else f"[native-futex-gate-{letter}]"
+        lines = [line for line in text.splitlines() if marker in line]
+        if not lines or not all("PASS" in line for line in lines):
+            raise RuntimeError(f"missing actual private futex gate {letter}")
+        checked[f"gate-native-futex-{letter}.txt"] = "\n".join(lines)+"\n"
+    banner = ("disabled profile worker futex=ENOTSUP; conservative raw-thread syscall boundary PASS" if disabled else
+              f"gates A-{gate} PASS; private futex scheduler waits, not pthread or threaded libc")
+    if banner not in text or guest_failure(text):
+        raise RuntimeError("incomplete or failed private futex profile")
+    if not disabled and gate >= "B" and "rounds=10000 actual waiters woken=10000 acknowledgements=10000 zero lost events PASS" not in text:
+        raise RuntimeError("missing actual 10000 futex wakes")
+    if not disabled and gate >= "C" and "sixteen simultaneous waiters; zero/one/fifteen bounded wakes and separate address key PASS" not in text:
+        raise RuntimeError("missing bounded simultaneous futex wakes")
+    if not disabled and gate >= "D" and "blocked cancellations=64 owner-exit cycles=8; same-VA distinct-pmap isolation; zero waiter leaks PASS" not in text:
+        raise RuntimeError("missing futex cancellation/owner cleanup")
+    count = 1 if disabled else (1 if gate >= "B" else 0)+(16 if gate >= "C" else 0)+(72 if gate >= "D" else 0)
+    if f"created=reaped={count} live=0 all slots retired PASS" not in text:
+        raise RuntimeError("missing futex final reaper resources")
+    return checked
 
 
 def verify_font_elf(path):
@@ -125,12 +151,19 @@ def main():
     parser.add_argument("--native-threads", action="store_true", help="Run genuine shared-task raw RV32 thread gates, not pthread/GNU TLS")
     parser.add_argument("--thread-gate", choices=tuple("ABCD"), default="D")
     parser.add_argument("--native-threads-disabled", action="store_true", help="Verify default-off raw-thread creation rejects without boot opt-in")
+    parser.add_argument("--native-futex", action="store_true", help="Run private futex scheduler gates, not pthread")
+    parser.add_argument("--native-futex-disabled", action="store_true")
+    parser.add_argument("--futex-gate", choices=tuple("ABCD"), default="D")
+    parser.add_argument("--futex-timeout", type=float, default=240, help="Bounded diagnostic wait for the futex guest command")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
-    args.native_threads = args.native_threads or args.native_threads_disabled
+    args.native_futex = args.native_futex or args.native_futex_disabled
+    if args.native_futex and args.native_threads_disabled:
+        parser.error("futex gates require enabled native threads")
+    args.native_threads = args.native_threads or args.native_threads_disabled or args.native_futex
     args.syllable_string = args.syllable_string or args.syllable_message
     args.native_cxx = args.native_cxx or args.syllable_string
     args.native_areas = args.native_areas or args.native_cxx or args.native_sync or args.freetype or args.native_threads
@@ -146,6 +179,8 @@ def main():
         name += f"-native-sync-{args.sync_gate.lower()}"
     if args.native_threads:
         name += "-native-threads-disabled" if args.native_threads_disabled else f"-native-threads-{args.thread_gate.lower()}"
+    if args.native_futex:
+        name += "-futex-disabled" if args.native_futex_disabled else f"-futex-{args.futex_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -166,6 +201,10 @@ def main():
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
     artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync, args.freetype, args.native_threads)
+    if args.native_futex:
+        verify_font_elf(ROOT / "build/native-futex-probe.elf")
+        artifacts["initrd"] = hashlib.sha256((ROOT / "build/initrd-futex.img").read_bytes()).hexdigest()
+        artifacts["nativeFutexProbe"] = hashlib.sha256((ROOT / "build/native-futex-probe.elf").read_bytes()).hexdigest()
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -266,7 +305,8 @@ def main():
            "-serial", f"tcp:127.0.0.1:{uart_port},server=on,wait=off",
            "-snapshot", "-no-reboot", "-S",
            "-append", ("smp-start smp-gate-f " if args.smp == 2 else "") +
-           ("native-threads " if args.native_threads and not args.native_threads_disabled else "") + "process-gate-11"]
+           ("native-threads " if args.native_threads and not args.native_threads_disabled else "") +
+           ("native-futex " if args.native_futex and not args.native_futex_disabled else "") + "process-gate-11"]
     if args.cpu:
         cmd += ["-cpu", args.cpu]
     serial = bytearray()
@@ -407,6 +447,19 @@ def main():
                     raise RuntimeError("native raw-thread lifecycle/preemption evidence missing")
                 if args.thread_gate >= "D" and "foreign process START/CANCEL/INFO/JOIN denied=64 owner unchanged PASS" not in thread_text:
                     raise RuntimeError("native raw-thread process ownership evidence missing")
+            if args.native_futex:
+                start = len(serial)
+                option = "--profile-off" if args.native_futex_disabled else f"--gate {args.futex_gate}"
+                uart.sendall(f"/bin/native-futex-probe {option}; echo NATIVE_FUTEX_STATUS=$?\n".encode())
+                marker = ("[native-futex] disabled profile worker futex=ENOTSUP; conservative raw-thread syscall boundary PASS"
+                          if args.native_futex_disabled else
+                          f"[native-futex] gates A-{args.futex_gate} PASS; private futex scheduler waits, not pthread or threaded libc")
+                wait(marker, timeout=args.futex_timeout, after=start)
+                wait("\nNATIVE_FUTEX_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                futex_text = pump()[start:]
+                for filename, contents in validate_futex_log(futex_text, args.futex_gate, args.native_futex_disabled).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -601,6 +654,13 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "nativeFutex": {"gates": ["off"] if args.native_futex_disabled else list("ABCD"[:ord(args.futex_gate)-ord("A")+1]),
+                                      "enabled": not args.native_futex_disabled, "privateOnly": True,
+                                      "pthreadImplemented": False,
+                                      "createdReaped": 1 if args.native_futex_disabled else (1 if args.futex_gate >= "B" else 0)+(16 if args.futex_gate >= "C" else 0)+(72 if args.futex_gate >= "D" else 0),
+                                      "actualWakes": 10000 if not args.native_futex_disabled and args.futex_gate >= "B" else 0,
+                                      "blockedCancellations": 64 if not args.native_futex_disabled and args.futex_gate >= "D" else 0,
+                                      "ownerExitCycles": 8 if not args.native_futex_disabled and args.futex_gate >= "D" else 0} if args.native_futex else None,
                       "nativeThreads": {"gates": ["off"] if args.native_threads_disabled else list("ABCD"[:ord(args.thread_gate) - ord("A") + 1]),
                                         "enabled": not args.native_threads_disabled,
                                         "profile": "raw RV32 U-mode threads sharing an XNU task/pmap, CPU0 only",
@@ -641,6 +701,19 @@ def main():
             result_path.write_text(json.dumps(result, indent=2) + "\n")
             print(f"PASS graphics gates A-E: {out}", flush=True)
         except Exception as failure:
+            if qmp is not None and proc.poll() is None:
+                try:
+                    registers = {"cpus": qmp.call("query-cpus-fast"), "registers": []}
+                    for cpu in range(args.smp):
+                        registers["registers"].append(qmp.call("human-monitor-command", **{"command-line": "info registers", "cpu-index": cpu}))
+                    argument = re.search(r"x10/a0\s+([0-9a-f]{8})", registers["registers"][0])
+                    if argument:
+                        address = int(argument.group(1), 16)
+                        if address >= 0x80000000:
+                            registers["lockArgumentMemory"] = qmp.call("human-monitor-command", **{"command-line": f"x /8wx 0x{address:08x}", "cpu-index": 0})
+                    (out / "failed-cpus.json").write_text(json.dumps(registers, indent=2)+"\n")
+                except Exception as diagnostic_failure:
+                    (out / "failed-cpus-error.txt").write_text(str(diagnostic_failure)+"\n")
             result_path.write_text(json.dumps({"result": "FAIL", "smp": args.smp,
                                   "bios": args.bios, "error": str(failure)}, indent=2) + "\n")
             raise

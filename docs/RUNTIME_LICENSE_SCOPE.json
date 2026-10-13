@@ -17,7 +17,12 @@
     "licensedCodeFiles":  [
                               "include/uapi/caribe_thread.h",
                               "userland/native_thread_probe.c",
+                              "userland/native_futex_probe.c",
+                              "tests/test_native_futex_guards.py",
+                              "tests/test_graphics_disk_lock.ps1",
+                              "tools/collect-native-futex-evidence.py",
                               "scripts/test-native-thread-rebuild.ps1",
+                              "scripts/test-native-futex-matrix.ps1",
                               "scripts/test-native-thread-process-regression.ps1",
                               "tools/collect-native-thread-evidence.py",
                               "tests/test_native_thread_guards.py",

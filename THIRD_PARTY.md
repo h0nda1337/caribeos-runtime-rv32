@@ -110,6 +110,12 @@ does not modify or relicense musl, GNU emutls, Syllable or any other external
 component, and is not a threaded libc/GNU compatibility claim. See
 [thread boundary and gates](docs/SYLLABLE_NATIVE_THREADS.md).
 
+The private-futex probe, runner integration and adversarial host log guards
+are also original BSD-2-Clause runtime code; the independent native XNU
+backend remains APSL-2.0. No upstream libc, Linux kernel futex implementation
+or Syllable code is copied or relicensed by this dependency checkpoint.
+See [private-only contract](docs/SYLLABLE_PRIVATE_FUTEX.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

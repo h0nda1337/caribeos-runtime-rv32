@@ -14,6 +14,9 @@ param(
     [switch]$NativeSync,
     [switch]$FreeType,
     [switch]$NativeThreads,
+    [switch]$NativeFutex,
+    [switch]$DisableNativeFutex,
+    [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
     [switch]$DisableNativeThreads,
     [ValidateSet("A", "B", "C", "D")][string]$ThreadGate = "D",
     [ValidateSet("A", "B", "C", "D")][string]$FontGate = "D",
@@ -21,7 +24,9 @@ param(
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
-$NativeThreads = $NativeThreads -or $DisableNativeThreads
+$NativeFutex = $NativeFutex -or $DisableNativeFutex
+if ($NativeFutex -and $DisableNativeThreads) { throw "Futex gates require enabled native threads" }
+$NativeThreads = $NativeThreads -or $DisableNativeThreads -or $NativeFutex
 function Invoke-LoggedBuild {
     param([string]$Program, [string[]]$Parameters, [string]$Log)
     $previous = $ErrorActionPreference
@@ -36,6 +41,17 @@ function Invoke-LoggedBuild {
 }
 $root = Split-Path -Parent $PSScriptRoot
 $workspace = Split-Path -Parent (Split-Path -Parent $root)
+$diskLock = New-Object Threading.Mutex($false, 'Local\CaribeOS-HFS-Graphics')
+$ownsDiskLock = $false
+try {
+    try { $ownsDiskLock = $diskLock.WaitOne(0) }
+    catch [Threading.AbandonedMutexException] { $ownsDiskLock = $true }
+    if (-not $ownsDiskLock) { throw "Another graphics runner owns the HFS disk rebuild/run lock. Finish that run first." }
+$activeDiskUsers = @(Get-CimInstance Win32_Process -Filter "name='qemu-system-riscv32.exe'" |
+    Where-Object { $_.CommandLine -match '(?i)hfsplus\.img' })
+if ($activeDiskUsers.Count) {
+    throw "Refusing HFS rebuild while QEMU uses hfsplus.img (PIDs: $($activeDiskUsers.ProcessId -join ', ')). Finish that run first."
+}
 foreach ($path in @("msys64\ucrt64\bin", "msys64\usr\bin")) {
     $candidate = Join-Path $workspace $path
     if (Test-Path -LiteralPath $candidate) { $env:PATH = "$candidate;$env:PATH" }
@@ -52,7 +68,7 @@ try {
     if ($FreeType -or $NativeThreads) {
         $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
         if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
-        $makeArguments += $(if ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
+        $makeArguments += $(if ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
     }
     elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
@@ -89,9 +105,15 @@ try {
     if ($FreeType) { $arguments += @("--freetype", "--font-gate", $FontGate.ToUpperInvariant()) }
     if ($NativeThreads) { $arguments += @("--native-threads", "--thread-gate", $ThreadGate.ToUpperInvariant()) }
     if ($DisableNativeThreads) { $arguments += "--native-threads-disabled" }
+    if ($NativeFutex) { $arguments += @("--native-futex", "--futex-gate", $FutexGate.ToUpperInvariant()) }
+    if ($DisableNativeFutex) { $arguments += "--native-futex-disabled" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }
 } finally {
     Pop-Location
+}
+} finally {
+    if ($ownsDiskLock) { $diskLock.ReleaseMutex() }
+    $diskLock.Dispose()
 }
