@@ -3,6 +3,13 @@
 `testproject.ps1` is the release runner. It rebuilds XNU before every selected
 suite and rejects missing commands, missing semantic markers, nonzero make
 status, panic patterns, and gate-specific counter failures.
+Stage1 smoke runs use `Seconds` as a deadline and can stop when PID1 reports
+its terminal `DEAD` state after cleanup. Every semantic/counter assertion still
+runs against the complete serial log. The low-level SBI runner supports
+`-WaitFullDuration` for deliberate post-exit dwell tests.
+Interactive runners start QEMU paused, connect UART and their private QMP
+endpoint, then explicitly resume and verify the VM is running. This avoids
+Windows TCP chardev startup hangs without weakening any boot marker checks.
 
 ## Tranche 201 Validation Set
 

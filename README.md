@@ -18,6 +18,11 @@ owns the kernel implementation.
 The badges above report the public static and documentation checks. They do not
 represent a full image rebuild or the preserved long-form boot suites.
 
+The separate `develop/graphics-v0.1` branch adds native virtio GPU/input and
+an authentic Syllable AppServer decorator running in userspace. See
+[graphics commands and boundaries](docs/GRAPHICS_V0_1.md). This is not yet a
+complete Syllable Desktop; Wayland and X11 remain unavailable.
+
 ## Required Boot Chain
 
 ```text

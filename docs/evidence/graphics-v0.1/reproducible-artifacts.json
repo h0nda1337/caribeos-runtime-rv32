@@ -1,0 +1,9 @@
+{
+  "../../xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf": "1b6b12a5b297a5a8b9a26fcf7eb89e8b2c0b9a0a8f1e18f2a85a0d0d0b0a54ac",
+  "build/caribe_rv32.elf": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+  "build/syllable-component.elf": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+  "build/libcaribe-syllable-decorator.a": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+  "build/caribe-session.elf": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+  "build/private-vm-probe.elf": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938",
+  "build/initrd.img": "7ec5c95f586a3bade3c2ff9208233fd56aa1996fc897f805267ff2971d034ab7"
+}

@@ -1,0 +1,20 @@
+{
+  "result": "LIVE_CLOSED",
+  "smp": 2,
+  "bios": "..\\..\\securesbi\\build\\platform\\generic\\firmware\\fw_dynamic.bin",
+  "cpu": "QEMU default",
+  "baseIsa": "rv32imafdch",
+  "automatedInputGates": false,
+  "artifactSha256": {
+    "xnu": "1b6b12a5b297a5a8b9a26fcf7eb89e8b2c0b9a0a8f1e18f2a85a0d0d0b0a54ac",
+    "cbx": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+    "initrd": "7ec5c95f586a3bade3c2ff9208233fd56aa1996fc897f805267ff2971d034ab7",
+    "syllableComponent": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+    "syllableLibrary": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+    "sessionManager": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+    "privateVmProbe": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938"
+  },
+  "screenshots": {
+    "01-syllable.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82"
+  }
+}

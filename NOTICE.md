@@ -33,6 +33,14 @@ boundaries.
 
 This is a technical notice, not legal advice.
 
+The experimental graphics branch builds the authentic Syllable AppServer
+DefaultDecorator and WindowDecorator under LGPL-2.0-only. Kurt Skauen and
+Syllable Team notices are preserved. The CaribeOS Layer/interface adapter
+is also LGPL-2.0-only, explicitly excluded from the runtime BSD allowlist.
+See [Syllable port](ports/syllable/README.md) and its complete COPYING.LIB.
+The public-domain font8x8 retains Daniel Hepper/Marcel Sondaar/IBM notices.
+This source update does not publish new binaries or alter Tranche 201 assets.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

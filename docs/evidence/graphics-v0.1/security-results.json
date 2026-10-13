@@ -1,0 +1,74 @@
+{
+  "qemu": [
+    {
+      "name": "standard-orange-up",
+      "result": "PASS"
+    },
+    {
+      "name": "securesbi-orange-up",
+      "result": "PASS"
+    },
+    {
+      "name": "signed-standard-up",
+      "result": "PASS"
+    },
+    {
+      "name": "signed-securesbi-up",
+      "result": "PASS"
+    },
+    {
+      "name": "signed-securesbi-smp",
+      "result": "PASS"
+    },
+    {
+      "name": "signed-securesbi-no-h",
+      "result": "PASS"
+    },
+    {
+      "name": "missing-manifest",
+      "result": "PASS"
+    },
+    {
+      "name": "modified-manifest",
+      "result": "PASS"
+    },
+    {
+      "name": "incorrect-signature",
+      "result": "PASS"
+    },
+    {
+      "name": "modified-kernel",
+      "result": "PASS"
+    },
+    {
+      "name": "modified-initrd",
+      "result": "PASS"
+    },
+    {
+      "name": "oversized-manifest",
+      "result": "PASS"
+    },
+    {
+      "name": "oversized-permissive",
+      "result": "PASS"
+    },
+    {
+      "name": "empty-permissive",
+      "result": "PASS"
+    },
+    {
+      "name": "bash-standard-up",
+      "result": "PASS"
+    },
+    {
+      "name": "bash-signed-securesbi-smp",
+      "result": "PASS"
+    },
+    {
+      "name": "default-enrollment-cleared",
+      "result": "PASS"
+    }
+  ],
+  "hardware_root": "UNAVAILABLE",
+  "green_state": "NOT_TESTED"
+}

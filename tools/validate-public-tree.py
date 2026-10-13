@@ -196,7 +196,7 @@ def validate_tree(root: Path, kind: str, tracked: list[str], errors: list[str]) 
 
 
 def runtime_code_candidates(tracked: list[str]) -> set[str]:
-    extensions = {".c", ".h", ".s", ".ld", ".sh", ".py", ".ps1"}
+    extensions = {".c", ".cpp", ".h", ".hpp", ".s", ".ld", ".sh", ".py", ".ps1"}
     candidates: set[str] = set()
     for relative in tracked:
         normalized = relative.replace("\\", "/")
@@ -288,7 +288,11 @@ def validate_runtime_license(root: Path, tracked: list[str], errors: list[str]) 
 
     for relative in sorted(excluded & tracked_set):
         text = (root / relative).read_text(encoding="utf-8", errors="strict")
-        if RUNTIME_COPYRIGHT in text or RUNTIME_SPDX in text:
+        record = next(item for item in excluded_records if item["path"] == relative)
+        expected_spdx = record.get("spdxLicenseIdentifier")
+        if expected_spdx and f"SPDX-License-Identifier: {expected_spdx}" not in text:
+            errors.append(f"excluded runtime file lacks its declared license: {relative}")
+        if RUNTIME_SPDX in text or (not expected_spdx and RUNTIME_COPYRIGHT in text):
             errors.append(f"excluded runtime file carries the project header: {relative}")
 
     required_boundaries = {

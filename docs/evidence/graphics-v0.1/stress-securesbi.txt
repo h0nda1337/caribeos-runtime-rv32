@@ -1,0 +1,31 @@
+[smp-gate-c] processor_start slot=1 via SBI HSM
+[smp-gate-a] hart=0 slot=1 cpu_data=0x80502118 stack=0x80528fe0 int_stack=0x8050d000
+[smp-gate-a] per-hart tp/sscratch/stvec/stacks PASS
+[smp-gate-c] processor-state=4 idle-thread=0x904425a0 idle-entries=163 timer-irqs=1
+[smp-gate-c] XNU idle thread and per-hart timer PASS
+[smp-gate-d] rounds=10000 requests=10000 completions=10000 cpu=1 errors=0
+[smp-gate-d] bound XNU kernel thread synchronization PASS
+[smp-gate-e] rounds=1024 active-mask=0x00000003 local-fences=1031 remote-fences=1031 stale=0 errors=0
+[smp-gate-e] shared translation RFENCE coherence PASS
+[smp-gate-f] ast-signals=1 ast-ipis-total=1 ast-ipis-delta=1 remote-preemptions=1 preempt-cpu=1 before-release=1 wake-ipis=3 prior-signals=0x00000001 unhandled=0
+[smp-gate-f] preempt-state=6 current-pri=81 new-pri=95 processor-cpu-id=1 active-thread=0x90441958 expected-active=0x90441958 next-thread=0x00000000
+[smp-gate-f] workers=2 cpu0=50000 cpu1=50000 locked-total=100000 overlap=0 online-mask=0x00000003 active-pmap-mask=0x00000003 errors=0
+[smp-gate-f] dual-processor kernel scheduler and RV32A locks PASS
+[process-gate-14-stress] baseline processes=3 zombies=0 tasks=4 threads=19 user-pmaps=7 pt-pages=23 user-pt-pages=17 kernel-pt-pages=6 backing=48 ofd=3 arena=3 free-pages=54191 wired-pages=11215 kernel-stacks=20/20 PASS
+[process-gate-14-stress] strict-baseline cycle=1 zones=34 active=54706 bytes=2827048 no-warmup PASS
+[process-gate-14-stress] progress=1/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=1000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=2000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=3000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=4000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=5000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=6000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=7000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=8000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] progress=9000/10000 cpu1-lifecycles resources=baseline PASS kernel-pt-growth=0
+[process-gate-14-stress] cycles=10000 fork=10000 entry=10000 exec=10000 getcpu=10000 exit=10000 reap=10000 errors=0 PASS
+[process-gate-14-stress] resource-baseline=stable pmap-create/destroy=19998/19998 backing-alloc/free=79992/79992 zombies=0 PASS
+[process-gate-14-stress] ofd-retain/release=29997/29997 rates=3/3 live=3 references=10 PASS
+[process-gate-14-stress] user-pt-baseline=17/17 kernel-pt-growth=0 kernel-l0-growth=0 last-kernel-l0-va=0xffc00000 PASS
+[process-gate-14-stress] physical-baseline free-pages=54191/54191 wired-pages=11215/11215 kernel-stacks-active=20/20 kernel-stacks-total=20/20 PASS
+[process-gate-14-stress] zone-baseline zones=34/34 active=54706/54706 bytes=2827048/2827048 PASS

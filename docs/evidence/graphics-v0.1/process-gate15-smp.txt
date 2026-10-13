@@ -1,0 +1,28 @@
+[smp-gate-c] processor_start slot=1 via SBI HSM
+[smp-gate-a] hart=1 slot=1 cpu_data=0x80502118 stack=0x80528fe0 int_stack=0x8050d000
+[smp-gate-a] per-hart tp/sscratch/stvec/stacks PASS
+[smp-gate-c] processor-state=4 idle-thread=0x904425a0 idle-entries=1 timer-irqs=1
+[smp-gate-c] XNU idle thread and per-hart timer PASS
+[smp-gate-d] rounds=10000 requests=10000 completions=10000 cpu=1 errors=0
+[smp-gate-d] bound XNU kernel thread synchronization PASS
+[smp-gate-e] rounds=1024 active-mask=0x00000003 local-fences=1031 remote-fences=1031 stale=0 errors=0
+[smp-gate-e] shared translation RFENCE coherence PASS
+[smp-gate-f] ast-signals=1 ast-ipis-total=1 ast-ipis-delta=1 remote-preemptions=1 preempt-cpu=1 before-release=1 wake-ipis=3 prior-signals=0x00000001 unhandled=0
+[smp-gate-f] preempt-state=6 current-pri=81 new-pri=95 processor-cpu-id=1 active-thread=0x90441958 expected-active=0x90441958 next-thread=0x00000000
+[smp-gate-f] workers=2 cpu0=50000 cpu1=50000 locked-total=100000 overlap=0 online-mask=0x00000003 active-pmap-mask=0x00000003 errors=0
+[smp-gate-f] dual-processor kernel scheduler and RV32A locks PASS
+[process-gate-15] fork-only-exit-wait rounds=4 PASS
+[process-gate-15] fork-exec-exit-wait rounds=4 PASS
+[process-gate-15] pipes=10 bytes=640 alloc-close/read-write verified PASS
+[process-gate-15] signals=10 handlers=10 siginfo=10 altstack=10 PASS
+[process-gate-15] pipelines=1 processes=2 transfer-bytes=12288 PASS
+[process-gate-15] child-batches=1 batch-width=10 fork-exit-wait=10 zombies=0 PASS
+[process-gate-15] fork-only-exit-wait rounds=1000 PASS
+[process-gate-15] fork-exec-exit-wait rounds=1000 PASS
+[process-gate-15] pipes=1000 bytes=64000 alloc-close/read-write verified PASS
+[process-gate-15] signals=1000 handlers=1000 siginfo=1000 altstack=1000 PASS
+[process-gate-15] pipelines=100 processes=200 transfer-bytes=1228800 PASS
+[process-gate-15] child-batches=10 batch-width=10 fork-exit-wait=100 zombies=0 PASS
+[process-gate-15] tty-lines=1000 content=validated canonical-blocking PASS
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS
+[process-gate-11] Gate 11 persistent interactive Bash PASS

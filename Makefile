@@ -73,6 +73,7 @@ INITRD_BADVERNAME_IMG ?= build/initrd_badvername.img
 QEMU_SMOKE_SECONDS ?= 30
 GATE15_SECONDS ?= 180
 STAGE1_FILES := \
+	userland/stage1/etc/caribe/session.conf \
 	userland/stage1/etc/os-release \
 	userland/stage1/etc/caribe-release \
 	userland/stage1/etc/passwd \
@@ -544,6 +545,57 @@ build/musl_probe.elf: build/musl_probe.o $(MUSL_SYSROOT)/usr/lib/libc.a
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
+build/syllable-port/sources.json: scripts/prepare-graphics-deps.py ports/syllable/COPYING.LIB
+	$(PYTHON) scripts/prepare-graphics-deps.py
+
+GRAPHICS_AR ?= $(patsubst %gcc,%ar,$(CC32))
+GRAPHICS_LIBRARY_OBJECTS = build/syllable_defaultdecorator.o build/syllable_windowdecorator.o build/caribe_surface.o
+GRAPHICS_FLAGS = $(CFLAGS32) -nostdinc -nostdinc++ -I$(MUSL_SYSROOT)/usr/include -Iinclude -Iports/syllable -Ibuild/syllable-port -fno-exceptions -fno-rtti -fno-use-cxa-atexit -fno-threadsafe-statics -ffunction-sections -fdata-sections
+
+build/syllable_component.o: userland/syllable_component.cpp ports/syllable/adapter.h include/uapi/caribe_graphics.h build/syllable-port/sources.json
+	$(CC32) -x c++ $(GRAPHICS_FLAGS) -c $< -o $@
+
+build/syllable_defaultdecorator.o: build/syllable-port/sources.json ports/syllable/adapter.h
+	$(CC32) -x c++ $(GRAPHICS_FLAGS) -c build/syllable-port/defaultdecorator.cpp -o $@
+
+build/syllable_windowdecorator.o: build/syllable-port/sources.json ports/syllable/adapter.h
+	$(CC32) -x c++ $(GRAPHICS_FLAGS) -c build/syllable-port/windowdecorator.cpp -o $@
+
+build/caribe_surface.o: userland/caribe_surface.cpp build/syllable-port/sources.json
+	$(CC32) -x c++ $(GRAPHICS_FLAGS) -c $< -o $@
+
+build/libcaribe-syllable-decorator.a: $(GRAPHICS_LIBRARY_OBJECTS)
+	$(GRAPHICS_AR) rcsD $@ $^
+
+build/syllable-component.elf: build/syllable_component.o build/libcaribe-syllable-decorator.a $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  build/syllable_component.o build/libcaribe-syllable-decorator.a -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/caribe_session.o: userland/caribe_session.c $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include -ffunction-sections -fdata-sections -c $< -o $@
+
+build/caribe-session.elf: build/caribe_session.o $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/private_vm_probe.o: userland/private_vm_probe.c $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include -ffunction-sections -fdata-sections -c $< -o $@
+
+build/private-vm-probe.elf: build/private_vm_probe.o $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd.img: build/syllable-component.elf build/caribe-session.elf build/private-vm-probe.elf
+
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include \
@@ -709,6 +761,10 @@ build/initrd.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) 
 	  sbin/interactive-init=$(INTERACTIVE_INIT_ELF) \
 	  bin/caribectl=$(CARIBECTL_ELF) \
 	  bin/musl-probe=$(MUSL_PROBE_ELF) \
+	  bin/syllable-component=build/syllable-component.elf \
+	  bin/caribe-session=build/caribe-session.elf \
+	  bin/private-vm-probe=build/private-vm-probe.elf \
+	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \
 	  bin/pipeline-sigpipe=$(PIPELINE_SIGPIPE_ELF) \

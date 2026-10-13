@@ -10,7 +10,8 @@ param(
   [ValidateSet("", "A", "B", "C", "D", "E", "F")]
   [string]$RequireSmpGate = "",
   [string]$Append = "",
-  [string]$DiskImage = ""
+  [string]$DiskImage = "",
+  [switch]$WaitFullDuration
 )
 
 $ErrorActionPreference = "Stop"
@@ -109,7 +110,20 @@ if ($SmokeTest) {
     -RedirectStandardError $stderr
 
   try {
-    Start-Sleep -Seconds $Seconds
+    $deadline = (Get-Date).AddSeconds($Seconds)
+    do {
+      Start-Sleep -Milliseconds 100
+      if ($proc.HasExited) { break }
+      if (-not $WaitFullDuration -and $RequireStage1 -and
+          (Test-Path -LiteralPath $serial)) {
+        $progress = Get-Content -LiteralPath $serial -Raw
+        # PID1 logs DEAD only after the complete userspace lifecycle and cleanup.
+        if ($progress -match '(?m)^\[linux-process\] pid=1 state=DEAD ' -or
+            $progress -match '(?m)(panic|scause=|stval=|sepc=)') {
+          break
+        }
+      }
+    } while ((Get-Date) -lt $deadline)
   } finally {
     if (Get-Process -Id $proc.Id -ErrorAction SilentlyContinue) {
       Stop-Process -Id $proc.Id -ErrorAction SilentlyContinue

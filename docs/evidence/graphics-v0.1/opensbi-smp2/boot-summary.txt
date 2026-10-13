@@ -1,0 +1,52 @@
+[CaribeBootX-RV32] S-mode up. hart=0
+[CaribeSecurity] ORANGE: firmware root unverified; trusted attestation unavailable
+[CaribeSecurity] policy=PERMISSIVE
+[CaribeSecurity] unsigned image measured: kernel.elf
+[CaribeSecurity] unsigned image measured: initrd.img
+[ELF] metadata snapshotted before overlapping LOADs
+[ELF] LOAD vaddr=0x80410000 filesz=762856 memsz=762856
+[ELF] LOAD vaddr=0x804ca3e8 filesz=1928 memsz=34466868
+[CaribeSecurity] handoff magic=0x31534543 verified=0x00000000
+[ELF] saltando entry=0x80476d92 hart=0 dtb=0x8fe00000 args=0x8020e800 mmap=9
+[XNU-CaribeOS] riscv32_kernel_entry
+[boot-report] chain OpenSBI -> CaribeBootX -> XNU-CaribeOS -> /sbin/init
+[boot-report] firmware OpenSBI spec=0x03000000 impl=0x00000001:0x00010007 ext=0x0000007f
+[boot-report] bootloader CaribeBootX v=2 flags=0x00000000 ack=0x584e5541
+[boot-report] CaribeSecurity ORANGE root-unverified cssbi=0x00000000 reported-verified-images=0x00000000 required-policy=0
+[boot-report] cpu hart=0 harts=2 isa=rv32imafdch_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zmmul_za64rs_zaamo_zalrsc_zawrs_zfa_zca_zcf_zcd_zba_zbb_zbc_zbs_sdtrig_shcounterenw_shgatpa_shtvala_shvsatpa_shvstvala_shvstvecd_sscc mmu=riscv,sv32
+[boot-report] memory active=0x80000000+0x10000000 banks=1 usable_pages=55420
+[boot-report] image kernel=0x80410000+0x0219901c initrd=0x84000000+0x003cc0ec dtb=0x8fe00000+0x00001c19
+[boot-report] fdt model=riscv-virtio,qemu compatible=riscv-virtio nodes=37 reserved=0
+[boot-report] devices uart=0x10000000 irq=10 plic=0x0c000000 aclint=0x02000000 virtio=8
+[XNU-CaribeOS] PE_init_platform
+[XNU-CaribeOS] PE_init_platform stage0 shim
+[XNU-CaribeOS] kernel_early_bootstrap
+[XNU-CaribeOS] kernel_bootstrap
+[XNU-CaribeOS] startup: kernel_thread_create
+[XNU-CaribeOS] startup: load_context
+[XNU-CaribeOS] machine_load_context
+[XNU-CaribeOS] machine_load_context: switch
+[XNU-CaribeOS] kernel_bootstrap_thread
+[smp-gate-c] processor_start slot=1 via SBI HSM
+[smp-gate-a] hart=1 slot=1 cpu_data=0x80502118 stack=0x80528fe0 int_stack=0x8050d000
+[smp-gate-a] per-hart tp/sscratch/stvec/stacks PASS
+[smp-gate-c] processor-state=4 idle-thread=0x904425a0 idle-entries=1 timer-irqs=2
+[smp-gate-c] XNU idle thread and per-hart timer PASS
+[smp-gate-d] rounds=10000 requests=10000 completions=10000 cpu=1 errors=0
+[smp-gate-d] bound XNU kernel thread synchronization PASS
+[smp-gate-e] rounds=1024 active-mask=0x00000003 local-fences=1031 remote-fences=1031 stale=0 errors=0
+[smp-gate-e] shared translation RFENCE coherence PASS
+[smp-gate-f] ast-signals=1 ast-ipis-total=1 ast-ipis-delta=1 remote-preemptions=1 preempt-cpu=1 before-release=1 wake-ipis=3 prior-signals=0x00000001 unhandled=0
+[smp-gate-f] preempt-state=6 current-pri=81 new-pri=95 processor-cpu-id=1 active-thread=0x90441958 expected-active=0x90441958 next-thread=0x00000000
+[smp-gate-f] workers=2 cpu0=50000 cpu1=50000 locked-total=100000 overlap=0 online-mask=0x00000003 active-pmap-mask=0x00000003 errors=0
+[smp-gate-f] dual-processor kernel scheduler and RV32A locks PASS
+[XNU-CaribeOS] PE_init_iokit
+[XNU-CaribeOS] bsd_init: real Linux PID1 bootstrap
+[XNU-CaribeOS] bsd_init: PID1 handed to XNU scheduler
+[session] wayland: blocked: AF_UNIX/SCM_RIGHTS/shared VM/epoll; config=read-only-initrd; pid=37
+[session] x11: blocked: Wayland compositor and Xwayland port; config=read-only-initrd; pid=38
+[session] syllable: AppServer decorator component only; config=read-only-initrd; pid=40
+[session] syllable: AppServer decorator component only; config=read-only-initrd; pid=41
+GRAPHICS_RETURN_TO_BASH_PASS
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS
+[process-gate-11] Gate 11 persistent interactive Bash PASS

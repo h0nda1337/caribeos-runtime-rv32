@@ -1,0 +1,36 @@
+{
+  "syllableCommit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "file": "defaultdecorator.cpp",
+      "upstreamSha256": "a732e8186630dc491f9027b3e09c8ecd4f955ef7dbd1ea324416fa5a5219a1e6",
+      "adaptedSha256": "c0cab0a2318cc9b55bb8dcb063c6801f066c01aba4eae8ba4e586d18b48348dd",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "file": "defaultdecorator.h",
+      "upstreamSha256": "fc82c6d3d6353d484ea0d02173103a843add0ba0f31650d58ea662c0fea99fa8",
+      "adaptedSha256": "5956451ab47709fab36895e39332d418967e19fe45e0f0fb5a64ceeb198e3ddf",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "file": "windowdecorator.cpp",
+      "upstreamSha256": "82623c0d3e9443406fda6236ac0b90edb9f6c0908376dfc45eec43fa752eb1bb",
+      "adaptedSha256": "82623c0d3e9443406fda6236ac0b90edb9f6c0908376dfc45eec43fa752eb1bb",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "file": "windowdecorator.h",
+      "upstreamSha256": "df3a83923a7c6f8b69ec8ea95d8f2ca1c95d9e17af53707e71cfd7ff89a51573",
+      "adaptedSha256": "df3a83923a7c6f8b69ec8ea95d8f2ca1c95d9e17af53707e71cfd7ff89a51573",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "fontCommit": "8e279d2d864e79128e96188a6b9526cfa3fbfef9",
+  "fontLicense": "public domain",
+  "adaptations": [
+    "bounded CaribeTitle replaces std::string",
+    "caribe_max replaces std::max",
+    "Layer/geometry/font compatibility adapter; no AppServer IPC emulation"
+  ]
+}

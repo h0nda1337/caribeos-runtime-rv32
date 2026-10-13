@@ -76,6 +76,49 @@ function Get-AvailableTcpPort {
   }
 }
 
+function Connect-QemuEndpoint {
+  param([int]$EndpointPort, [DateTime]$Deadline, [Diagnostics.Process]$Process)
+
+  while ([DateTime]::UtcNow -lt $Deadline) {
+    if ($Process.HasExited) {
+      throw "QEMU exited before opening TCP endpoint $EndpointPort."
+    }
+    $candidate = [Net.Sockets.TcpClient]::new()
+    try {
+      $candidate.Connect("127.0.0.1", $EndpointPort)
+      $candidate.NoDelay = $true
+      return $candidate
+    } catch {
+      $candidate.Dispose()
+      Start-Sleep -Milliseconds 100
+    }
+  }
+  throw "Timed out connecting to QEMU TCP endpoint $EndpointPort."
+}
+
+function Invoke-QmpCommand {
+  param([IO.StreamReader]$Reader, [IO.StreamWriter]$Writer,
+        [string]$Command, [int]$RequestId, [hashtable]$Arguments = @{})
+
+  $request = @{execute = $Command; id = $RequestId}
+  if ($Arguments.Count) { $request.arguments = $Arguments }
+  $Writer.WriteLine(($request | ConvertTo-Json -Compress))
+  while ($true) {
+    $line = $Reader.ReadLine()
+    if ($null -eq $line) {
+      throw "QMP disconnected during $Command."
+    }
+    $response = $line | ConvertFrom-Json
+    if ($response.PSObject.Properties['id'] -and
+        $response.id -eq $RequestId) {
+      if ($response.PSObject.Properties['error']) {
+        throw "QMP $Command failed: $($response.error | ConvertTo-Json -Compress)"
+      }
+      return $response.return
+    }
+  }
+}
+
 function Send-SerialLine {
   param(
     [Net.Sockets.NetworkStream]$Stream,
@@ -194,12 +237,18 @@ $stderr = Join-Path $buildDir "qemu.stderr.log"
 Remove-Item -LiteralPath $serial -Force -ErrorAction SilentlyContinue
 Remove-Item -LiteralPath $stdout -Force -ErrorAction SilentlyContinue
 Remove-Item -LiteralPath $stderr -Force -ErrorAction SilentlyContinue
+Remove-Item -LiteralPath (Join-Path $buildDir 'qemu-registers.txt') `
+  -Force -ErrorAction SilentlyContinue
 $serialWriter = [IO.StreamWriter]::new(
   $serial, $false, [Text.Encoding]::ASCII, 8192)
 $serialWriter.AutoFlush = $true
 
 if ($Port -eq 0) {
   $Port = Get-AvailableTcpPort
+}
+$qmpPort = Get-AvailableTcpPort
+while ($qmpPort -eq $Port -or $qmpPort -eq $MonitorPort) {
+  $qmpPort = Get-AvailableTcpPort
 }
 $monitorTarget = if ($MonitorPort -eq 0) {
   "none"
@@ -212,8 +261,10 @@ $qemuArgs = @(
   "-smp", "$Smp",
   "-m", "256",
   "-display", "none",
-  "-serial", "tcp:127.0.0.1:${Port},server=on,wait=on",
+  "-serial", "tcp:127.0.0.1:${Port},server=on,wait=off",
   "-monitor", $monitorTarget,
+  "-qmp", "tcp:127.0.0.1:${qmpPort},server=on,wait=off",
+  "-S",
   "-no-reboot",
   "-no-shutdown",
   "-bios", $Bios,
@@ -457,6 +508,10 @@ for ($batch = 0; $batch -lt 10; $batch++) {
 
 $gate15Steps = @(
   [pscustomobject]@{
+    Command = 'set +o history; history -c; echo gate15-history-disabled'
+    Patterns = @('(?m)^gate15-history-disabled$')
+  },
+  [pscustomobject]@{
     Command = 'echo gate15-warmup-start'
     Patterns = @('(?m)^gate15-warmup-start$')
   },
@@ -483,6 +538,12 @@ $gate15Steps = @(
   [pscustomobject]@{
     Command = '/bin/gate15-batches 1 10 >/dev/null; echo warmup-batches=$?'
     Patterns = @('(?m)^warmup-batches=0$')
+  },
+  # Private heap pages are now accounted for. Prime the snapshot parser's
+  # reusable buffers before measuring; retain all exact no-drift assertions.
+  [pscustomobject]@{
+    Command = 'IFS= read -r R < /proc/caribe/resources; IFS= read -r R < /proc/caribe/resources; IFS= read -r R < /proc/caribe/resources; echo warmup-resource-buffers=0'
+    Patterns = @('(?m)^warmup-resource-buffers=0$')
   },
   [pscustomobject]@{
     Command = 'IFS= read -r R < /proc/caribe/resources; printf "%s\n" "$R"'
@@ -571,6 +632,9 @@ $proc = Start-Process `
 $prompt = 'bash-5.3$ '
 $client = $null
 $stream = $null
+$qmpClient = $null
+$qmpReader = $null
+$qmpWriter = $null
 $text = ""
 $failure = $null
 $initialPromptSeen = $false
@@ -587,26 +651,27 @@ $buffer = [byte[]]::new(8192)
 
 try {
   $connectDeadline = [DateTime]::UtcNow.AddSeconds([Math]::Min(15, $Seconds))
-  while (-not $client -and [DateTime]::UtcNow -lt $connectDeadline) {
-    if ($proc.HasExited) {
-      throw "QEMU exited before opening its serial TCP endpoint."
-    }
-    $candidate = [Net.Sockets.TcpClient]::new()
-    try {
-      $candidate.Connect("127.0.0.1", $Port)
-      $candidate.NoDelay = $true
-      $client = $candidate
-    } catch {
-      $candidate.Dispose()
-      Start-Sleep -Milliseconds 100
-    }
-  }
-  if (-not $client) {
-    throw "Timed out connecting to QEMU serial TCP port $Port."
-  }
-
+  $client = Connect-QemuEndpoint $Port $connectDeadline $proc
   $stream = $client.GetStream()
   $stream.WriteTimeout = 2000
+  $qmpClient = Connect-QemuEndpoint $qmpPort $connectDeadline $proc
+  $qmpStream = $qmpClient.GetStream()
+  $qmpStream.ReadTimeout = 5000
+  $qmpStream.WriteTimeout = 2000
+  $qmpReader = [IO.StreamReader]::new($qmpStream, [Text.Encoding]::UTF8)
+  $qmpWriter = [IO.StreamWriter]::new($qmpStream, [Text.Encoding]::ASCII)
+  $qmpWriter.AutoFlush = $true
+  $greeting = $qmpReader.ReadLine() | ConvertFrom-Json
+  if (-not $greeting.PSObject.Properties['QMP']) {
+    throw "Unexpected QMP greeting."
+  }
+  Invoke-QmpCommand $qmpReader $qmpWriter 'qmp_capabilities' 1 | Out-Null
+  # Capture the entire boot, independent of Windows TCP chardev startup timing.
+  Invoke-QmpCommand $qmpReader $qmpWriter 'cont' 2 | Out-Null
+  $status = Invoke-QmpCommand $qmpReader $qmpWriter 'query-status' 3
+  if (-not $status.running) {
+    throw "QEMU did not resume after connecting UART and QMP."
+  }
   $deadline = [DateTime]::UtcNow.AddSeconds($Seconds)
   while ([DateTime]::UtcNow -lt $deadline) {
     while ($stream.DataAvailable) {
@@ -621,8 +686,9 @@ try {
 
     if ($text.Contains("panic(cpu ") -or
         $text.Contains("panic: We are hanging here...") -or
-        $text.Contains("[linux] fatal user signal=")) {
-      throw "Guest panic or fatal user signal detected during interactive test."
+        $text.Contains("[linux] fatal user signal=") -or
+        [regex]::IsMatch($text, '\[smp-gate-[a-f]\][^\r\n]* FAIL')) {
+      throw "Guest panic, fatal user signal or SMP gate failure during interactive test."
     }
 
     $promptCount = Get-OccurrenceCount -Text $text -Needle $prompt
@@ -741,12 +807,34 @@ try {
   }
 } catch {
   $failure = $_.Exception
+  if ($qmpReader -and $qmpWriter) {
+    try {
+      Invoke-QmpCommand $qmpReader $qmpWriter 'stop' 4 | Out-Null
+      $registers = Invoke-QmpCommand $qmpReader $qmpWriter `
+        'human-monitor-command' 5 @{'command-line' = 'info registers -a'}
+      [IO.File]::WriteAllText((Join-Path $buildDir 'qemu-registers.txt'),
+        [string]$registers, [Text.Encoding]::ASCII)
+    } catch {
+      [IO.File]::WriteAllText((Join-Path $buildDir 'qemu-registers.txt'),
+        "Register snapshot unavailable: $($_.Exception.Message)",
+        [Text.Encoding]::ASCII)
+    }
+  }
 } finally {
   if ($serialWriter) {
     $serialWriter.Dispose()
   }
   if ($client) {
     $client.Dispose()
+  }
+  if ($qmpWriter) {
+    $qmpWriter.Dispose()
+  }
+  if ($qmpReader) {
+    $qmpReader.Dispose()
+  }
+  if ($qmpClient) {
+    $qmpClient.Dispose()
   }
   if (Get-Process -Id $proc.Id -ErrorAction SilentlyContinue) {
     Stop-Process -Id $proc.Id -ErrorAction SilentlyContinue
@@ -1188,7 +1276,8 @@ if ($Gate -eq 11) {
   }
   $privatePages = [uint64]$bound[0].Groups[4].Value
   $expectedPmaps = [uint64](2 * ($StressRounds - 1))
-  $expectedBacking = [uint64]($StressRounds - 1) * $privatePages
+  # gate14_worker.S creates one ownership-backed private mmap page after exec.
+  $expectedBacking = [uint64]($StressRounds - 1) * ($privatePages + 1)
   if ([uint64]$resource[0].Groups[1].Value -ne $expectedPmaps -or
       [uint64]$resource[0].Groups[2].Value -ne $expectedPmaps -or
       [uint64]$resource[0].Groups[3].Value -ne $expectedBacking -or

@@ -13,6 +13,9 @@
 | Mbed TLS | [3.6.5](https://github.com/Mbed-TLS/mbedtls/tree/v3.6.5), `e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df` | Apache-2.0 OR GPL-2.0-or-later; Apache option used | SHA-256 only, original CaribeOS zeroization adapter | None to upstream sources | Any new CBX binary must include Apache-2.0 and applicable upstream notices |
 | Python cryptography | [43.0.3 reference host environment](https://cryptography.io/) | Apache-2.0 OR BSD-3-Clause and bundled dependency notices | Host-only developer Ed25519 signing | None | Not shipped in firmware, repository, or preview |
 | LLVM/Clang/lld | Local LLVM 22.1.4 | Apache-2.0 with LLVM exceptions | SecureSBI RV32 PIE build on Windows | None | Toolchain not redistributed |
+| Syllable AppServer | [SyllableOS source](https://github.com/SyllableOS/Syllable/tree/579e480a005321cc320e7e355e8dff398b689be8) | LGPL-2.0-only for the four selected decorator files | Real software-rendered window decorator | Bounded title and max helper; Layer adapter | Future binaries require exact sources, changes, full license, and application objects/relink instructions |
+| font8x8 | [Pinned source](https://github.com/dhepper/font8x8/tree/8e279d2d864e79128e96188a6b9526cfa3fbfef9) | Public domain, upstream notices preserved | Temporary bitmap font, not Syllable's full font engine | None | Preserve upstream attribution |
+| Pillow | Host Python library | HPND and upstream component notices | QEMU screenshot verification only | None | Not bundled |
 
 Original CaribeOS build wrappers, configuration headers, and integration
 scripts that mention or invoke Bash, musl, OpenSBI, QEMU, or the toolchain are

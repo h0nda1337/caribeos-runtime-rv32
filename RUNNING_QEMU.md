@@ -1,5 +1,9 @@
 # Running QEMU
 
+Experimental native graphics and the authentic Syllable AppServer decorator
+component are available on the separate graphics development branch. See
+[Graphics v0.1](docs/GRAPHICS_V0_1.md) for the live QEMU runner and visual gates.
+
 ## Supported Invocation
 
 The runner and Makefile own the complete device command line. The essential

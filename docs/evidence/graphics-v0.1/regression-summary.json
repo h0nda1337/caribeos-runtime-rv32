@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-12",
+  "kernelSha256": "1b6b12a5b297a5a8b9a26fcf7eb89e8b2c0b9a0a8f1e18f2a85a0d0d0b0a54ac",
+  "architecture": {
+    "noFdHGraphicsCase": "opensbi-smp2-imacsu",
+    "minimalExtensionCpuClaim": false,
+    "elfClass": "ELF32",
+    "flags": "RVC, soft-float ABI",
+    "machine": "RISC-V"
+  },
+  "graphics": {
+    "forkExecIsolationCyclesPerCase": 32,
+    "distinctAutomatedCases": 5,
+    "gatesPerCase": 5,
+    "zeroingRecycleCyclesPerCase": 256,
+    "result": "PASS"
+  },
+  "processSuite": {
+    "evidence": "process-gates.txt",
+    "gates": 15,
+    "result": "PASS"
+  },
+  "processGate15Smp": {
+    "result": "PASS",
+    "evidence": "process-gate15-smp.txt"
+  },
+  "cpu1Stress": [
+    {
+      "evidence": "stress-opensbi.txt",
+      "firmware": "OpenSBI",
+      "cycles": 10000,
+      "result": "PASS"
+    },
+    {
+      "evidence": "stress-securesbi.txt",
+      "firmware": "SecureSBI",
+      "cycles": 10000,
+      "result": "PASS"
+    }
+  ],
+  "security": {
+    "hardwareTrustRoot": "UNAVAILABLE",
+    "hostUnitTests": 14,
+    "qemuCases": 17,
+    "greenState": "NOT_TESTED",
+    "result": "PASS",
+    "evidence": "security-results.json"
+  },
+  "rebuild": {
+    "matchingArtifacts": 7,
+    "evidence": "reproducible-artifacts.json",
+    "scope": "Forced incremental rebuild of changed kernel, library and application objects; not a clean toolchain bootstrap",
+    "result": "PASS"
+  },
+  "livePreview": {
+    "automatedInputGates": false,
+    "durationSeconds": 3,
+    "evidence": "live-preview.json",
+    "result": "LIVE_CLOSED"
+  },
+  "limitations": [
+    "Not a complete AppServer or Syllable Desktop",
+    "Wayland and X11 are not operational",
+    "No shared graphics buffers, modesetting or acceleration"
+  ]
+}

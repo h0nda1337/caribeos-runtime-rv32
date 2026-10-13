@@ -1,0 +1,15 @@
+QEMU smoke test OK: boot_stage1
+QEMU smoke test OK: boot_stage1_process_gate_2
+QEMU smoke test OK: boot_stage1_process_gate_3
+QEMU smoke test OK: boot_stage1_process_gate_4
+QEMU smoke test OK: boot_stage1_process_gate_5
+QEMU smoke test OK: boot_stage1_process_gate_6
+QEMU smoke test OK: boot_stage1_process_gate_7_only
+QEMU smoke test OK: boot_stage1_process_gate_8_only
+QEMU smoke test OK: boot_stage1_process_gate_9_only
+QEMU smoke test OK: boot_stage1_process_gate_10_only
+QEMU smoke test OK: boot_stage1_process_gate_11
+QEMU smoke test OK: boot_stage1_process_gate_12
+QEMU smoke test OK: boot_stage1_process_gate_13
+QEMU smoke test OK: boot_stage1_process_gate_14
+QEMU smoke test OK: boot_stage1_process_gate_15

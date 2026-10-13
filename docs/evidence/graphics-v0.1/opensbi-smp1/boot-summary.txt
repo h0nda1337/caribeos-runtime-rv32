@@ -1,0 +1,39 @@
+[CaribeBootX-RV32] S-mode up. hart=0
+[CaribeSecurity] ORANGE: firmware root unverified; trusted attestation unavailable
+[CaribeSecurity] policy=PERMISSIVE
+[CaribeSecurity] unsigned image measured: kernel.elf
+[CaribeSecurity] unsigned image measured: initrd.img
+[ELF] metadata snapshotted before overlapping LOADs
+[ELF] LOAD vaddr=0x80410000 filesz=762856 memsz=762856
+[ELF] LOAD vaddr=0x804ca3e8 filesz=1928 memsz=34466868
+[CaribeSecurity] handoff magic=0x31534543 verified=0x00000000
+[ELF] saltando entry=0x80476d92 hart=0 dtb=0x8fe00000 args=0x8020e800 mmap=9
+[XNU-CaribeOS] riscv32_kernel_entry
+[boot-report] chain OpenSBI -> CaribeBootX -> XNU-CaribeOS -> /sbin/init
+[boot-report] firmware OpenSBI spec=0x03000000 impl=0x00000001:0x00010007 ext=0x0000007f
+[boot-report] bootloader CaribeBootX v=2 flags=0x00000000 ack=0x584e5541
+[boot-report] CaribeSecurity ORANGE root-unverified cssbi=0x00000000 reported-verified-images=0x00000000 required-policy=0
+[boot-report] cpu hart=0 harts=1 isa=rv32imafdch_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zmmul_za64rs_zaamo_zalrsc_zawrs_zfa_zca_zcf_zcd_zba_zbb_zbc_zbs_sdtrig_shcounterenw_shgatpa_shtvala_shvsatpa_shvstvala_shvstvecd_sscc mmu=riscv,sv32
+[boot-report] memory active=0x80000000+0x10000000 banks=1 usable_pages=55420
+[boot-report] image kernel=0x80410000+0x0219901c initrd=0x84000000+0x003cc0ec dtb=0x8fe00000+0x000017f1
+[boot-report] fdt model=riscv-virtio,qemu compatible=riscv-virtio nodes=34 reserved=0
+[boot-report] devices uart=0x10000000 irq=10 plic=0x0c000000 aclint=0x02000000 virtio=8
+[XNU-CaribeOS] PE_init_platform
+[XNU-CaribeOS] PE_init_platform stage0 shim
+[XNU-CaribeOS] kernel_early_bootstrap
+[XNU-CaribeOS] kernel_bootstrap
+[XNU-CaribeOS] startup: kernel_thread_create
+[XNU-CaribeOS] startup: load_context
+[XNU-CaribeOS] machine_load_context
+[XNU-CaribeOS] machine_load_context: switch
+[XNU-CaribeOS] kernel_bootstrap_thread
+[XNU-CaribeOS] PE_init_iokit
+[XNU-CaribeOS] bsd_init: real Linux PID1 bootstrap
+[XNU-CaribeOS] bsd_init: PID1 handed to XNU scheduler
+[session] wayland: blocked: AF_UNIX/SCM_RIGHTS/shared VM/epoll; config=read-only-initrd; pid=37
+[session] x11: blocked: Wayland compositor and Xwayland port; config=read-only-initrd; pid=38
+[session] syllable: AppServer decorator component only; config=read-only-initrd; pid=40
+[session] syllable: AppServer decorator component only; config=read-only-initrd; pid=41
+GRAPHICS_RETURN_TO_BASH_PASS
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS
+[process-gate-11] Gate 11 persistent interactive Bash PASS

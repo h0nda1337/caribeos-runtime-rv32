@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "platform": "QEMU virt RV32",
+  "smp": 2,
+  "cpu": "QEMU default",
+  "baseIsa": "rv32imafdch",
+  "bios": "default",
+  "gates": [
+    "A-video",
+    "B-negative-ABI",
+    "C-userspace-Syllable-component",
+    "D-keyboard-mouse-drag",
+    "E-event-integrity-exit-Bash"
+  ],
+  "resolution": [
+    800,
+    600
+  ],
+  "sessionRestarts": 1,
+  "blockedSessionStatuses": {
+    "wayland": 3,
+    "x11": 3,
+    "unknown": 2
+  },
+  "privateVm": {
+    "forkExecIsolationCycles": 32,
+    "zeroingRecycleCycles": 256
+  },
+  "kernelSha256": "1b6b12a5b297a5a8b9a26fcf7eb89e8b2c0b9a0a8f1e18f2a85a0d0d0b0a54ac",
+  "artifactSha256": {
+    "xnu": "1b6b12a5b297a5a8b9a26fcf7eb89e8b2c0b9a0a8f1e18f2a85a0d0d0b0a54ac",
+    "cbx": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+    "initrd": "7ec5c95f586a3bade3c2ff9208233fd56aa1996fc897f805267ff2971d034ab7",
+    "syllableComponent": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+    "syllableLibrary": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+    "sessionManager": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+    "privateVmProbe": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938"
+  },
+  "screenshots": {
+    "01-syllable.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82",
+    "02-keyboard-focus.png": "6e0a8ad1d96c6880c44cec6ef657013b4d2f56ad1bc759c7993dba3ce557f4d7",
+    "03-mouse-drag.png": "74f0727e220fea4c2fda85c7a3ba3b5eb21d9c3c2fb4e883c16db8eef59c1886",
+    "04-input-verified.png": "f4231c518fc303794389b163d0d56426255663b01b85553bf0ee4aeebff85305",
+    "05-session-restart.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82"
+  }
+}
