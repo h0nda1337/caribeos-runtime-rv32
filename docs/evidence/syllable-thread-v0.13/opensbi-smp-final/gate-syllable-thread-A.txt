@@ -1,0 +1,1 @@
+[syllable-thread-gate-A] original os::Thread and C lifecycle; suspended/resume/join status=0x12345678; 64-bit native clock; unsupported errors PASS

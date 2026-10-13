@@ -13,6 +13,9 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <time.h>
+#ifdef CARIBE_SYNC_NATIVE_CLOCK
+#include <atheos/time.h>
+#endif
 #include <unistd.h>
 
 #ifndef CARIBE_SYNC_RAW_TCB
@@ -60,9 +63,15 @@ status_t delete_semaphore(sem_id id)
 }
 static int now_us(uint64_t *result)
 {
+#ifdef CARIBE_SYNC_NATIVE_CLOCK
+    bigtime_t now=get_system_time();
+    if (now<0) return -1;
+    *result=(uint64_t)now;
+#else
     struct timespec now;
     if (clock_gettime(CLOCK_MONOTONIC, &now)) return -1;
     *result = (uint64_t)now.tv_sec * 1000000U + (uint64_t)now.tv_nsec / 1000U;
+#endif
     return 0;
 }
 status_t lock_semaphore_x(sem_id id, int count, uint32 flags, bigtime_t timeout)

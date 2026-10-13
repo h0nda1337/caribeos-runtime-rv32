@@ -115,6 +115,18 @@ BSD-2-Clause integration code. They include unmodified musl 1.2.5 ABI headers
 and link its genuine MIT-licensed libc; they do not relicense musl. This
 dependency checkpoint is not a complete pthread or thread-safe libc port.
 
+The optional Thread profile additionally builds the original libsyllable
+`util/thread.cpp` and unchanged `util/thread.h`, `util/exceptions.h`, and
+`atheos/time.h` at the pinned Syllable revision. The public Thread header
+credits Henrik Isaksson (2002) and LGPL version 2; thread.cpp has no per-file
+banner, so its component/header license basis is explicit in sources.json.
+Original notices and the complete component COPYING.LIB are retained.
+`thread-rv32.patch` remains LGPL-2.0-only, not runtime BSD: it replaces Linux
+process kill with actual native thread cancellation/join and propagates errors.
+The independently written lifecycle/clock/TCB integration and tests are
+BSD-2-Clause. This does not relicense original Syllable, musl, GNU C++ or XNU.
+No complete Looper/AppServer or threaded libc is claimed.
+
 The optional Locker profile uses the genuine LGPL-2.0-only Syllable
 `util/locker.h` and unchanged native thread interface at the pinned Syllable
 revision. Its narrow LGPL patch initializes the owner and removes an unused

@@ -1,0 +1,16 @@
+PASS 15 actual runner targets, fresh for this kernel
+OK: boot_stage1
+OK: boot_stage1_process_gate_2
+OK: boot_stage1_process_gate_3
+OK: boot_stage1_process_gate_4
+OK: boot_stage1_process_gate_5
+OK: boot_stage1_process_gate_6
+OK: boot_stage1_process_gate_7_only
+OK: boot_stage1_process_gate_8_only
+OK: boot_stage1_process_gate_9_only
+OK: boot_stage1_process_gate_10_only
+OK: boot_stage1_process_gate_11
+OK: boot_stage1_process_gate_12
+OK: boot_stage1_process_gate_13
+OK: boot_stage1_process_gate_14
+OK: boot_stage1_process_gate_15

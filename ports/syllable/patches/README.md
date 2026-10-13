@@ -42,3 +42,15 @@ unchanged thread interface and full COPYING.LIB are retained in
 build/syllable-locker. The independently written RV32A atomic and XNU
 identity/semaphore adapters are separate original BSD code. This is not
 a Syllable Gate, Looper, Handler or AppServer port.
+
+`thread-rv32.patch` adapts genuine libsyllable `util/thread.cpp` at the same
+revision. The corresponding public Thread/exceptions/time headers stay
+unchanged. The cpp has no original per-file license banner; its public
+Thread header explicitly credits Henrik Isaksson (2002) and LGPL version 2.
+The component COPYING.LIB and sourceLicenseBasis in sources.json document
+that basis; neither the patch nor upstream source is original BSD code.
+Virtual Run/_Entry survive. Native cancellation/join replaces Linux process
+kill, member IDs retire after real reaping, and unsupported control/info
+operations propagate errors. Prepared original/adapted sources, application
+objects and separate archive remain local for exact relinking materials.
+See [Thread scope](../../../docs/SYLLABLE_NATIVE_THREAD_API.md).

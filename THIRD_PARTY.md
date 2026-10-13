@@ -135,6 +135,19 @@ retains APSL 2.0. Future binary distribution requires exact source, notices,
 application objects and relink material; no new binary Release is published.
 See [Locker scope](docs/SYLLABLE_NATIVE_LOCKER.md).
 
+The Thread profile builds genuine `system/sys/appserver/libsyllable/util/thread.cpp`
+and unmodified public Thread/exceptions/time headers from the same pinned
+Syllable revision. Each normalized source is SHA-256 checked. The cpp has no
+individual license banner: the matching Thread header credits Henrik Isaksson
+(2002) and LGPL version 2, and the original component COPYING.LIB is retained.
+That license basis is recorded explicitly, not treated as original BSD code.
+The auditable `thread-rv32.patch` is LGPL-2.0-only and replaces process signals
+with native cancellation/join, retirement after reaping, and error propagation.
+Only independently written adapters/probes/tooling receive the runtime BSD license.
+Original Syllable headers, musl TCB implementation and GNU C++ libraries keep
+their own licenses. No new binary release is distributed by these gates.
+See [Thread lifecycle and limits](docs/SYLLABLE_NATIVE_THREAD_API.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

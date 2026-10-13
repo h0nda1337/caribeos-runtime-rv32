@@ -15,6 +15,14 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-syllable-thread.py",
+                              "scripts/test-syllable-thread-rebuild.ps1",
+                              "scripts/test-syllable-thread-matrix.ps1",
+                              "tools/collect-syllable-thread-evidence.py",
+                              "ports/syllable/native/thread_runtime.c",
+                              "ports/syllable/native/thread_runtime.h",
+                              "userland/syllable_thread_probe.cpp",
+                              "tests/test_syllable_thread_guards.py",
                               "tests/test_native_locker_guards.py",
                               "scripts/test-native-locker-rebuild.ps1",
                               "scripts/test-native-locker-matrix.ps1",
@@ -256,6 +264,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-thread-v0.13/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original Thread/native clock gates, scanouts, source pins, fresh process regression and rebuild data are evidence, not original runtime code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-locker-v0.12/*",
                                           "classification": "GENERATED_EVIDENCE",

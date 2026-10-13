@@ -1,0 +1,70 @@
+--- a/thread.cpp
++++ b/thread.cpp
+@@ -1,5 +1,12 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original libsyllable Thread implementation, licensed with its corresponding
++ * thread.h (Copyright (C) 2002 Henrik Isaksson) and component COPYING.LIB.
++ * Use native thread cancellation/join, not Linux process signals; propagate
++ * unsupported operations and retire the ID only after actual XNU reaping.
++ */
+ //#include <sys/time.h>
+-#include <atheos/kernel.h>
+-#include <signal.h>
++#include <atheos/time.h>
++#include "thread_runtime.h"
+ #include <errno.h>
+ 
+@@ -47,7 +54,8 @@
+ 	if( m_iThread < 0 )
+ 		throw ThreadException ( "Invalid thread ID", EINVALIDTHREAD );
+ 
+-	suspend_thread( m_iThread );
++	if( suspend_thread( m_iThread ) < 0 )
++		throw ThreadException ( "suspend_thread() failed", errno );
+ }
+@@ -68,7 +76,8 @@
+ 	if( m_iThread < 0 )
+ 		throw ThreadException ( "Invalid thread ID", EINVALIDTHREAD );
+ 
+-	resume_thread( m_iThread );
++	if( resume_thread( m_iThread ) < 0 )
++		throw ThreadException ( "resume_thread() failed", errno );
+ }
+@@ -84,7 +93,10 @@
+ 	if( m_iThread >= 0 )
+ 	{
+-		wait_for_thread( m_iThread );
++		int status;
++		if( caribe_syllable_thread_join( m_iThread, &status ) < 0 )
++			throw ThreadException ( "native join failed", errno );
++		m_iThread = -1;
+ 	}
+ }
+@@ -107,7 +119,8 @@
+ 	if( m_iThread < 0 )
+ 		return;
+ 
+-	kill( m_iThread, SIGKILL );	//SIGABRT SIGSTOP SIGKILL SIGTERM
++	if( caribe_syllable_thread_terminate( m_iThread ) < 0 )
++		throw ThreadException ( "native terminate failed", errno );
+ 
+ 	m_iThread = -1;
+ }
+@@ -164,7 +177,8 @@
+ 	if( m_iThread < 0 )
+ 		throw ThreadException ( "Invalid thread ID", EINVALIDTHREAD );
+ 
+-	set_thread_priority( m_iThread, nPriority );
++	if( set_thread_priority( m_iThread, nPriority ) < 0 )
++		throw ThreadException ( "set_thread_priority() failed", errno );
+ }
+@@ -179,7 +193,8 @@
+ 	thread_info sTI;
+ 
+-	get_thread_info( m_iThread, &sTI );
++	if( get_thread_info( m_iThread, &sTI ) < 0 )
++		throw ThreadException ( "get_thread_info() failed", errno );
+ 
+ 	return sTI.ti_priority;
+ }

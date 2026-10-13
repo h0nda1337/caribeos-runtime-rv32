@@ -1,0 +1,30 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/thread.cpp",
+      "sha256": "048bfc2c8faec1e900799e90c41a51ea9a5437bb23d415992544f25632a591e5",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/thread.h",
+      "sha256": "6e6660e056b6f4ef0b395b9691a9f6ddd66ffb17e9199d4c3b681a01d9173666",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/exceptions.h",
+      "sha256": "fc8c95376c9d555cd919aa37567f6b47b3b59b0fb6adbfc46a10bd4f529f0f92",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/atheos/time.h",
+      "sha256": "ad29a1c042d77b4ca3880acd2431fc512c09319566a5d642aa26d836e3c934fe",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "patchSha256": "cb84ab2075dbecdc242f73aec4cd75c31cba95134dfa25920894f95feb59f79a",
+  "adaptedThreadSha256": "c952df0d6b476e6d38a94dabf45d21ea543b339744f799b37f1b7c72b4486adb",
+  "license": "LGPL-2.0-only",
+  "sourceLicenseBasis": "thread.cpp has no per-file banner; matching public thread.h names Henrik Isaksson and LGPL version 2; original component COPYING.LIB retained",
+  "scope": "genuine Thread source and headers; controller-owned native lifecycle, not full libsyllable/Looper/AppServer"
+}

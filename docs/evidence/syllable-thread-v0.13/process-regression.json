@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "kernelBefore": "db186002f199bbf72ec7568dc7ecb3b276ea455edaec1363c04b47d74089fadc",
+  "kernelAfter": "db186002f199bbf72ec7568dc7ecb3b276ea455edaec1363c04b47d74089fadc",
+  "completedTargets": [
+    "boot_stage1",
+    "boot_stage1_process_gate_2",
+    "boot_stage1_process_gate_3",
+    "boot_stage1_process_gate_4",
+    "boot_stage1_process_gate_5",
+    "boot_stage1_process_gate_6",
+    "boot_stage1_process_gate_7_only",
+    "boot_stage1_process_gate_8_only",
+    "boot_stage1_process_gate_9_only",
+    "boot_stage1_process_gate_10_only",
+    "boot_stage1_process_gate_11",
+    "boot_stage1_process_gate_12",
+    "boot_stage1_process_gate_13",
+    "boot_stage1_process_gate_14",
+    "boot_stage1_process_gate_15"
+  ],
+  "logSha256": "5386f2518d3fc013a1b36cffa747ee6ea18892bdd262bca924e9ec14ff3301d9"
+}

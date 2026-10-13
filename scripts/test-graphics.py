@@ -22,7 +22,7 @@ RUN_RESULT_PATH = None
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
@@ -104,6 +104,33 @@ def validate_locker_log(text, gate):
     count = 80 if gate >= "C" else 16 if gate >= "B" else 0
     if f"[native-locker] created=reaped={count} live=0 semaphores=0 all slots retired PASS" not in text:
         raise RuntimeError("missing Locker final reaper resources")
+    return checked
+
+
+def validate_syllable_thread_log(text, gate):
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        lines = [line for line in text.splitlines() if f"[syllable-thread-gate-{letter}]" in line]
+        if not lines or not all("PASS" in line for line in lines):
+            raise RuntimeError(f"missing actual Syllable Thread gate {letter}")
+        checked[f"gate-syllable-thread-{letter}.txt"] = "\n".join(lines)+"\n"
+    if (guest_failure(text) or
+            f"gates A-{gate} PASS; genuine Syllable Thread/native clock, not Looper/AppServer or threaded libc" not in text):
+        raise RuntimeError("incomplete or failed Syllable Thread profile")
+    if "original os::Thread and C lifecycle; suspended/resume/join status=0x12345678; 64-bit native clock; unsupported errors PASS" not in text:
+        raise RuntimeError("missing genuine Thread lifecycle/clock proof")
+    if gate >= "B":
+        match = re.search(r"\[syllable-thread-gate-B\] workers=16 rounds=160000 recursive acquisitions=320000 overlaps=0 cpu=0 sleeps=640 timer-waits=([0-9]+) scheduler-waits=([0-9]+) PASS", text)
+        if not match or int(match[1]) < 640 or int(match[2]) == 0:
+            raise RuntimeError("missing actual Thread contention/timer waits")
+    if gate >= "C":
+        match = re.search(r"\[syllable-thread-gate-C\] finite timeout cycles=64 elapsed>=2000us native-timeouts=([0-9]+); sleep cancellation cycles=64; original Initialize/Terminate and generic reaping PASS", text)
+        if not match or int(match[1]) < 64:
+            raise RuntimeError("missing actual Thread finite timeout/cancel proof")
+    count = 146 if gate >= "C" else 18 if gate >= "B" else 2
+    cancelled = 64 if gate >= "C" else 0
+    if f"[syllable-thread] created=reaped={count} cancelled={cancelled} live=0 semaphores=0 pool released PASS" not in text:
+        raise RuntimeError("missing Thread final resource/reaper proof")
     return checked
 
 
@@ -219,11 +246,16 @@ def main():
     parser.add_argument("--tcb-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--native-locker", action="store_true", help="Original Syllable Locker with native XNU threads; not Looper/AppServer")
     parser.add_argument("--locker-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--syllable-thread", action="store_true", help="Original Syllable Thread lifecycle and native clock, not complete threaded libc")
+    parser.add_argument("--syllable-thread-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    if args.syllable_thread and (args.native_futex_disabled or args.native_threads_disabled):
+        parser.error("Syllable Thread gates require enabled native threads and private futex")
+    args.native_locker = args.native_locker or args.syllable_thread
     if args.native_locker and (args.native_futex_disabled or args.native_threads_disabled):
         parser.error("Locker gates require enabled native threads and private futex")
     args.native_tcb = args.native_tcb or args.native_locker
@@ -254,6 +286,8 @@ def main():
         name += f"-tcb-{args.tcb_gate.lower()}"
     if args.native_locker:
         name += f"-locker-{args.locker_gate.lower()}"
+    if args.syllable_thread:
+        name += f"-threadapi-{args.syllable_thread_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -303,6 +337,20 @@ def main():
                 raise RuntimeError(f"missing original Locker native dependency {symbol}")
         if "pthread_create" in symbols or "__emutls" in symbols:
             raise RuntimeError("Locker profile must not claim pthread lifecycle or GNU emutls")
+    if args.syllable_thread:
+        verify_tcb_elf(ROOT / "build/syllable-thread-probe.elf")
+        for key, filename in (("initrd", "build/initrd-threadapi.img"),
+                              ("syllableThreadProbe", "build/syllable-thread-probe.elf"),
+                              ("syllableThreadLibrary", "build/libcaribe-syllable-thread.a"),
+                              ("syllableThreadSources", "build/syllable-thread/sources.json")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", "-C", str(ROOT / "build/syllable-thread-probe.elf")], text=True)
+        for symbol in ("os::Thread::_Entry(void*)", "os::Thread::Start()", "os::Thread::WaitFor()", "os::Thread::Terminate()",
+                       "__copy_tls", "caribe_syllable_thread_join", "get_system_time", "snooze"):
+            if symbol not in symbols:
+                raise RuntimeError(f"missing original Thread/native dependency {symbol}")
+        if "pthread_create" in symbols or re.search(r"\s[kK]ill$", symbols, re.M):
+            raise RuntimeError("Thread lifecycle must use native cancellation, not pthread or process kill")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -576,6 +624,15 @@ def main():
                 wait("bash-5.3$ ", after=start)
                 for filename, contents in validate_locker_log(pump()[start:], args.locker_gate).items():
                     (out / filename).write_text(contents)
+            if args.syllable_thread:
+                start = len(serial)
+                uart.sendall(f"/bin/syllable-thread-probe --gate {args.syllable_thread_gate}; echo SYLLABLE_THREAD_STATUS=$?\n".encode())
+                wait(f"[syllable-thread] gates A-{args.syllable_thread_gate} PASS; genuine Syllable Thread/native clock, not Looper/AppServer or threaded libc",
+                     timeout=240, after=start)
+                wait("\nSYLLABLE_THREAD_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_syllable_thread_log(pump()[start:], args.syllable_thread_gate).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -770,6 +827,14 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "syllableThread": {"gates": list("ABC"[:ord(args.syllable_thread_gate)-ord("A")+1]),
+                                        "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/thread.cpp",
+                                        "cpu": 0, "nativeClock": True,
+                                        "createdReaped": 146 if args.syllable_thread_gate >= "C" else 18 if args.syllable_thread_gate >= "B" else 2,
+                                        "cancelled": 64 if args.syllable_thread_gate >= "C" else 0,
+                                        "timerSleeps": 640 if args.syllable_thread_gate >= "B" else 0,
+                                        "finiteTimeoutCycles": 64 if args.syllable_thread_gate >= "C" else 0,
+                                        "appServerBuilt": False, "threadedLibcImplemented": False} if args.syllable_thread else None,
                       "nativeLocker": {"gates": list("ABC"[:ord(args.locker_gate)-ord("A")+1]),
                                        "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/locker.h",
                                        "workers": 16 if args.locker_gate >= "B" else 0, "cpu": 0,

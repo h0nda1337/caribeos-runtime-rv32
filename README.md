@@ -30,6 +30,10 @@ The [raw shared-task thread checkpoint](docs/SYLLABLE_NATIVE_THREADS.md) now
 adds genuine CPU0 user threads, join/reaper, timer and same-task semaphore gates.
 The optional [private futex backend](docs/SYLLABLE_PRIVATE_FUTEX.md) adds actual
 scheduler WAIT/WAKE and cancellation gates without enabling pthread.
+The original [Syllable Thread lifecycle](docs/SYLLABLE_NATIVE_THREAD_API.md)
+now has a separate opt-in profile with native monotonic clock, worker sleep,
+finite Locker timeouts and real cancellation/join. Its tests do not enable
+worker allocation/stdio, GNU thread exceptions or a complete Looper.
 Threaded libc/GNU TLS and full AppServer/Desktop are still required; passing
 these dependency gates does not mark the desktop complete.
 
