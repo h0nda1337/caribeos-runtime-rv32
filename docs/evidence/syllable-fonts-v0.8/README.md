@@ -21,3 +21,4 @@ disk image, private key or new Release asset is committed here.
 The earlier v0.7 process regression remains separate because the exact kernel
 is unchanged. Host unit tests/collector fixtures are explicitly host-only.
 See [scope, commands and remaining dependencies](../../SYLLABLE_FONT_DEPENDENCY.md).
+Fresh GitHub clones also passed [source restoration and all 48 host tests](github-restore.md).
