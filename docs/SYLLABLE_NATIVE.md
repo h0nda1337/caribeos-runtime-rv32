@@ -121,7 +121,8 @@ does not claim to be the complete AppServer.
 
 The genuine Message implementation has been obtained and audited,
 not compiled: it needs geometry, String/Variant, Handler/Looper/Messenger,
-and C++ exception/runtime support. Its historical unchecked Unflatten input
+and integration with the now tested [GNU RV32-musl C++ runtime](CXX_RV32_MUSL.md).
+Its historical unchecked Unflatten input
 must be hardened before accepting untrusted client messages.
 
 AppServer itself still needs semaphores/thread APIs, FreeType,
@@ -133,3 +134,10 @@ remain optional future sessions without becoming prerequisites for Syllable.
 The historical Bitmap client requests AREA_FULL_ACCESS for a data buffer;
 porting it must explicitly remove EXEC from that request, not silently grant
 executable shared memory or pretend the current adapter supports all flags.
+
+The optional `-NativeCxx` graphics profile now verifies actual GNU containers,
+streams, RTTI, 10,000 exceptions/unwind destructors, global exit destructors
+and 16 independent fork/exec cycles before the native IPC/area/visual gates.
+This removes the basic single-thread C++ runtime obstacle, not native threads:
+the installed GCC uses emulated TLS and a single-thread model. Appropriate
+native Syllable thread/Looper/semaphore integration is still required.

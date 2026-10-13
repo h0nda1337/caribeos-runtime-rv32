@@ -8,6 +8,7 @@
 | musl | [1.2.5](https://musl.libc.org/) | MIT-style terms in `COPYRIGHT` | RV32 libc and static userland | Build configuration/wrappers | License text included; corresponding source asset required for the public preview |
 | GNU Bash | [5.3 plus official patches 1-5](https://www.gnu.org/software/bash/) | GPL-3.0-or-later | Interactive shell | RV32 static build configuration | License text included; same-place corresponding source required |
 | GNU GCC/binutils/make | Local cross toolchain | GPL and exceptions | Build tools | None | Toolchain not redistributed |
+| GNU libstdc++/libsupc++ | [GCC 15.1.0 source](https://gcc.gnu.org/pub/gcc/releases/gcc-15.1.0/) | GPL-3.0-or-later with GCC Runtime Library Exception 3.1 where stated by file | Optional real RV32-musl C++ runtime | No upstream source changes; generic locale and single-thread static configuration | Not published as a new binary asset; future packages need exact sources and applicable notices |
 | SecureSBI | OpenSBI v1.9, `cbf9f6734dd85a982c63e3cb5db7ffe09da839ca` | OpenSBI file licenses, primarily BSD-2-Clause | Optional modified M-mode firmware | CaribeSSBI discovery, guest denial, Windows LLVM build fix | Separate source tree; not bundled in the Tranche 201 assets |
 | Monocypher | [4.0.2](https://github.com/LoupVaillant/Monocypher/tree/4.0.2), `0d85f98c9d9b0227e42cf795cb527dff372b40a4` | BSD-2-Clause OR CC0-1.0; BSD option used | Standard Ed25519 verifier including optional Ed25519 module | None | Any new CBX binary must retain the upstream BSD notice |
 | Mbed TLS | [3.6.5](https://github.com/Mbed-TLS/mbedtls/tree/v3.6.5), `e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df` | Apache-2.0 OR GPL-2.0-or-later; Apache option used | SHA-256 only, original CaribeOS zeroization adapter | None to upstream sources | Any new CBX binary must include Apache-2.0 and applicable upstream notices |
@@ -40,6 +41,16 @@ XNU port/area adapters are independently written CaribeOS code, not copies of th
 AtheOS kernel. The complete LGPL text remains in `ports/syllable/COPYING.LIB`.
 Any later binary package must carry the exact new dependency sources, notices
 and applicable relink material; the old Tranche 201 source asset is insufficient.
+
+The C++ preparer pins GNU's published SHA-512, retains the full GCC source
+archive locally and extracts only runtime/build inputs, preserving COPYING3,
+COPYING.RUNTIME and per-file notices. Compiler headers, CRT and libgcc are
+from the installed matching GCC 15.1.0 toolchain, not copied into Git. The
+libstdc++ build does not use the installed newlib library or newlib FILE/errno
+structures. The runtime is currently single-threaded; GCC's --disable-tls
+configuration uses its emulated TLS support rather than an ELF PT_TLS segment.
+This is not a claim of POSIX/native GUI thread support or full library syscall
+coverage. No GNU/third-party input is added to the CaribeOS BSD allowlist.
 
 The public-preview Release includes the same-place asset
 `caribeos-tranche-201-corresponding-source.zip`. It contains the exact Bash 5.3

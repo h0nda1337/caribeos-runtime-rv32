@@ -50,6 +50,14 @@ APSL 2.0 terms and file notices remain unchanged. Neither X11 nor Wayland is
 a dependency of this native path. A complete AppServer/Desktop is not yet
 claimed by the message-port or shared-area gates.
 
+The optional native C++ development profile builds GNU libstdc++ 15.1.0
+against RV32-musl from pinned unmodified GNU sources. GNU runtime files keep
+their GPL terms and the GCC Runtime Library Exception 3.1 where applicable;
+neither the library nor compiler headers/CRT/libgcc are relicensed BSD.
+Original CaribeOS build controls and its independent test application remain
+BSD-2-Clause. This profile publishes source/build controls, not a new binary
+Release. Current single-thread/emulated-TLS limits are documented explicitly.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

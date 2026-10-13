@@ -91,6 +91,10 @@
                               "scripts/build-bash-rv32.ps1",
                               "scripts/build-hfs-payload-zig.ps1",
                               "scripts/build-musl-rv32.ps1",
+                              "scripts/build-cxx-rv32.ps1",
+                              "scripts/build-cxx-rv32.sh",
+                              "scripts/prepare-cxx-deps.py",
+                              "scripts/riscv32-musl-cxx.sh",
                               "scripts/configure-security.py",
                               "scripts/dump-dtb.sh",
                               "scripts/elf32-set-type.py",
@@ -123,6 +127,7 @@
                               "sv32_map_identity_256mb.c",
                               "testproject.ps1",
                               "tests/test_catkey.py",
+                              "tests/test_graphics_profile.py",
                               "tools/backup-caribeos.ps1",
                               "tools/catkey.py",
                               "tools/CREATE_PRIVATE_RELEASE.ps1",
@@ -150,6 +155,7 @@
                               "userland/private_vm_probe.c",
                               "userland/native_ipc_probe.c",
                               "userland/native_area_probe.c",
+                              "userland/cxx_runtime_probe.cpp",
                               "ports/syllable/native/areas.c",
                               "ports/syllable/native/msgport.c",
                               "ports/syllable/native/atheos/types.h",
@@ -227,6 +233,11 @@
                                           "path": "docs/evidence/syllable-areas-v0.3/*",
                                           "classification": "GENERATED_EVIDENCE",
                                           "reason": "Shared-area scanouts, hashes and recorded regression results are data, not BSD-licensed source code."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-cxx-v0.4/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "GNU runtime hashes, QEMU scanouts and recorded test results are evidence data, not BSD-licensed source code."
                                       },
                                       {
                                           "path":  "userland/stage1/etc/*",

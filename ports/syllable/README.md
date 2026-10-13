@@ -48,7 +48,9 @@ semantics beyond the now verified native ports and bounded shared areas,
 semaphores, thread APIs, file attributes,
 dynamic libraries/decorators and FreeType. The default VESA/PCI video path
 cannot run on QEMU RV32; it needs a native adapter to the existing XNU graphics
-device. Full C++ ABI/exception support is also unresolved.
+device. A real single-thread GNU C++ ABI/exception runtime is now verified
+against RV32-musl; native GUI threads and a suitable TLS/thread model remain
+unresolved. See [C++ profile](../../docs/CXX_RV32_MUSL.md).
 See [native foundations](../../docs/SYLLABLE_NATIVE.md) for the separately
 tested XNU ports/shared areas and their explicit limits.
 

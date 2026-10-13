@@ -12,6 +12,7 @@ param(
   [switch]$KeepHistory,
   [switch]$NativeIpc,
   [switch]$NativeAreas,
+  [switch]$NativeCxx,
   [switch]$NegativeVersionChecks
 )
 
@@ -1810,7 +1811,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx
   exit $LASTEXITCODE
 }
 

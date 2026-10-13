@@ -1,0 +1,1 @@
+[native-cxx-gate-B] DWARF unwind exceptions=10000 destructors=10000 out_of_range PASS

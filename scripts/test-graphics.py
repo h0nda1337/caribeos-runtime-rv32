@@ -10,18 +10,20 @@ import re
 from pathlib import Path
 import socket
 import subprocess
+import struct
 import time
 from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE = ROOT.parent.parent
 IMACSU_CPU = "rv32,f=false,d=false,h=false,zfa=false"
+RUN_RESULT_PATH = None
 
-def build_hashes():
+def build_hashes(native_cxx=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / "build/initrd.img",
+        "initrd": ROOT / ("build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
         "syllableComponent": ROOT / "build/syllable-component.elf",
         "syllableLibrary": ROOT / "build/libcaribe-syllable-decorator.a",
         "sessionManager": ROOT / "build/caribe-session.elf",
@@ -70,22 +72,75 @@ class Qmp:
         self.socket.close()
 
 def main():
+    global RUN_RESULT_PATH
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--smp", type=int, choices=(1, 2), default=1)
     parser.add_argument("--bios", default="default")
     parser.add_argument("--cpu", default="", help="Optional QEMU CPU configuration")
     parser.add_argument("--native-ipc", action="store_true", help="Run native Syllable port gates before graphics")
     parser.add_argument("--native-areas", action="store_true", help="Run real shared-area gates and native IPC before graphics")
+    parser.add_argument("--native-cxx", action="store_true", help="Run GNU C++/musl gates plus native areas and IPC")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.native_areas = args.native_areas or args.native_cxx
     args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
         parser.error("--live-seconds requires --live and a nonnegative duration")
+    name = ("opensbi" if args.bios == "default" else "securesbi") + f"-smp{args.smp}"
+    if args.cpu:
+        name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
+    if args.live:
+        name += "-live"
+    if args.native_cxx:
+        name += "-native-cxx"
+    elif args.native_areas:
+        name += "-native-areas"
+    elif args.native_ipc:
+        name += "-native-ipc"
+    out = ROOT / "build/graphics-tests" / name
+    out.mkdir(parents=True, exist_ok=True)
+    result_path = out / "result.json"
+    RUN_RESULT_PATH = result_path
+    result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
+                          "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes()
+    artifacts = build_hashes(args.native_cxx)
+    if args.native_cxx:
+        for name, path in (("nativeCxxProbe", "build/cxx-runtime-probe.elf"),
+                           ("gnuLibstdcxx", "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a")):
+            artifacts[name] = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        elf = (ROOT / "build/cxx-runtime-probe.elf").read_bytes()
+        if (elf[:7] != b"\x7fELF\x01\x01\x01" or struct.unpack_from("<HH", elf, 16) != (2, 243)
+                or struct.unpack_from("<I", elf, 36)[0] & 6):
+            raise RuntimeError("GNU C++ probe is not static RV32 ELF/soft-float")
+        phoff = struct.unpack_from("<I", elf, 28)[0]
+        phsize, phcount = struct.unpack_from("<HH", elf, 42)
+        if phsize != 32 or phoff + phsize * phcount > len(elf):
+            raise RuntimeError("invalid GNU C++ ELF program headers")
+        segments = [struct.unpack_from("<I", elf, phoff + i * phsize)[0] for i in range(phcount)]
+        if 3 in segments:
+            raise RuntimeError("GNU C++ probe must be static without an interpreter")
+        if 7 not in segments:
+            symbols = subprocess.check_output(["riscv64-unknown-elf-nm", "--defined-only",
+                                               str(ROOT / "build/cxx-runtime-probe.elf")], text=True)
+            if "__emutls_get_address" not in symbols:
+                raise RuntimeError("C++ probe has neither native TLS nor the GNU emulated-TLS runtime")
+        tls_model = "native ELF TLS" if 7 in segments else "GNU emulated TLS, single-thread model"
+        compiler = "riscv64-unknown-elf-g++"
+        version = subprocess.check_output([compiler, "-dumpfullversion"], text=True).strip()
+        if version != "15.1.0":
+            raise RuntimeError(f"GNU C++ source/compiler mismatch: {version}")
+        for name, filename in (("gnuCrtBegin", "crtbegin.o"), ("gnuCrtEnd", "crtend.o"),
+                               ("gnuLibgccUnwind", "libgcc.a")):
+            path = Path(subprocess.check_output([compiler, "-march=rv32imac_zicsr_zifencei", "-mabi=ilp32",
+                         f"-print-file-name={filename}"], text=True).strip())
+            artifacts[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+        config = (ROOT / "build/cxx-rv32-sysroot/usr/include/c++/15.1.0/riscv32-unknown-linux-musl/bits/c++config.h").read_text()
+        if re.search(r"^#define\s+_GLIBCXX_HAS_GTHREADS", config, re.MULTILINE):
+            raise RuntimeError("unexpected GNU native-thread configuration; rerun native thread gates first")
     if args.native_ipc:
         for name, filename in (("nativeIpcProbe", "native-ipc-probe.elf"),
                                ("nativeIpcLibrary", "libcaribe-syllable-native.a")):
@@ -104,20 +159,6 @@ def main():
             return path.read_text().split("#ifndef CARIBE_NATIVE_AREA_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
         if area_declarations(kernel) != area_declarations(user):
             raise RuntimeError("native shared-area kernel/userspace ABI mismatch")
-    name = ("opensbi" if args.bios == "default" else "securesbi") + f"-smp{args.smp}"
-    if args.cpu:
-        name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
-    if args.live:
-        name += "-live"
-    if args.native_areas:
-        name += "-native-areas"
-    elif args.native_ipc:
-        name += "-native-ipc"
-    out = ROOT / "build/graphics-tests" / name
-    out.mkdir(parents=True, exist_ok=True)
-    result_path = out / "result.json"
-    result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
-                          "bios": args.bios, "live": args.live}, indent=2) + "\n")
     qmp_port, uart_port = free_port(), free_port()
     cmd = ["qemu-system-riscv32", "-M", "virt", "-m", "256", "-smp", str(args.smp),
            "-bios", args.bios, "-kernel", str(ROOT / "build/caribe_rv32.elf"),
@@ -150,6 +191,7 @@ def main():
             if ("panic" in text.lower() or "unexpected trap" in text.lower() or "fatal user signal" in text
                     or "[native-ipc] FAIL" in text
                     or "[native-area] FAIL" in text
+                    or "[native-cxx] FAIL" in text
                     or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
                 raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
@@ -202,6 +244,20 @@ def main():
             qmp = Qmp(qmp_port)
             qmp.call("cont")
             wait("bash-5.3$ ")
+            if args.native_cxx:
+                start = len(serial)
+                uart.sendall(b"/bin/cxx-runtime-probe; echo NATIVE_CXX_STATUS=$?\n")
+                wait("[native-cxx-gate-D] CRT global constructor destructor fork-exec reinitialization PASS", timeout=120, after=start)
+                wait("\nNATIVE_CXX_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                cxx_text = pump()[start:]
+                for gate in "ABCD":
+                    lines = [line for line in cxx_text.splitlines() if f"[native-cxx-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing GNU C++ gate {gate}")
+                    (out / f"gate-native-cxx-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "exceptions=10000 destructors=10000" not in cxx_text:
+                    raise RuntimeError("GNU exception/unwind stress evidence missing")
             if args.native_ipc:
                 start = len(serial)
                 uart.sendall(b"/bin/native-ipc-probe; echo NATIVE_IPC_STATUS=$?\n")
@@ -353,6 +409,11 @@ def main():
                                       "objects": 32, "views": 64, "poolPages": 1024,
                                       "recycleCycles": 256, "sharedFramebuffer": [800, 600],
                                       "verifiedPixels": 5} if args.native_areas else None,
+                      "nativeCxx": {"gates": ["A", "B", "C", "D"], "exceptions": 10000,
+                                    "unwindDestructors": 10000, "forkExecCycles": 16,
+                                    "libc": "musl 1.2.5", "libstdcxx": "GNU 15.1.0",
+                                    "tlsModel": tls_model, "softFloatAbi": True,
+                                    "threadModel": "single"} if args.native_cxx else None,
                       "kernelSha256": artifacts["xnu"],
                       "artifactSha256": artifacts,
                       "screenshots": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in captures}}
@@ -374,5 +435,15 @@ def main():
             except subprocess.TimeoutExpired:
                 proc.kill(); proc.wait(timeout=5)
 
+def run():
+    try:
+        main()
+    except Exception as failure:
+        if RUN_RESULT_PATH is not None:
+            record = json.loads(RUN_RESULT_PATH.read_text())
+            record.update(result="FAIL", error=str(failure))
+            RUN_RESULT_PATH.write_text(json.dumps(record, indent=2) + "\n")
+        raise
+
 if __name__ == "__main__":
-    main()
+    run()

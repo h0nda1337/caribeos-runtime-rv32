@@ -634,6 +634,23 @@ build/native-area-probe.elf: build/native_area_probe.o build/libcaribe-syllable-
 
 build/initrd.img: build/native-area-probe.elf
 
+CXX_SYSROOT = build/cxx-rv32-sysroot/usr
+CXX_LIBRARY = $(CXX_SYSROOT)/lib/rv32imac/ilp32/libstdc++.a
+CXX_RUNTIME_FLAGS = -O2 -std=gnu++17 -D_GNU_SOURCE -ffunction-sections -fdata-sections \
+  -I$(CXX_SYSROOT)/include/c++/15.1.0 -I$(CXX_SYSROOT)/include/c++/15.1.0/riscv32-unknown-linux-musl
+
+$(CXX_LIBRARY): scripts/prepare-cxx-deps.py scripts/build-cxx-rv32.sh scripts/build-cxx-rv32.ps1 scripts/riscv32-musl-cxx.sh
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-cxx-rv32.ps1
+
+build/cxx_runtime_probe.o: userland/cxx_runtime_probe.cpp $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(CXX_RUNTIME_FLAGS) -c $< -o $@
+
+build/cxx-runtime-probe.elf: build/cxx_runtime_probe.o $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(CXX_RUNTIME_FLAGS) -Wl,--gc-sections \
+	  $< -L$(CXX_SYSROOT)/lib/rv32imac/ilp32 -lstdc++ -o $@
+
+build/initrd-cxx.img: build/initrd.img build/cxx-runtime-probe.elf
+
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include \
@@ -790,7 +807,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -804,6 +821,7 @@ build/initrd.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) 
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
+	  $(if $(filter build/initrd-cxx.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \
