@@ -6,6 +6,7 @@ param(
     [string]$PythonPath = "",
     [switch]$Live,
     [switch]$SkipKernelBuild,
+    [switch]$NativeIpc,
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
@@ -45,6 +46,7 @@ try {
     if (-not $PythonPath) { throw "Python with Pillow required; specify -PythonPath." }
     $arguments = @((Join-Path $root "scripts\test-graphics.py"), "--smp", $Smp, "--bios", $Bios)
     if ($Cpu) { $arguments += @("--cpu", $Cpu) }
+    if ($NativeIpc) { $arguments += "--native-ipc" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

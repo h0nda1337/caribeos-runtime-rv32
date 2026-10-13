@@ -596,6 +596,29 @@ build/private-vm-probe.elf: build/private_vm_probe.o $(MUSL_SYSROOT)/usr/lib/lib
 
 build/initrd.img: build/syllable-component.elf build/caribe-session.elf build/private-vm-probe.elf
 
+build/syllable-native/sources.json: scripts/prepare-syllable-native.py ports/syllable/COPYING.LIB
+	$(PYTHON) scripts/prepare-syllable-native.py
+
+NATIVE_IPC_FLAGS = $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include -Iinclude -Iports/syllable/native -Ibuild/syllable-native/include
+
+build/syllable_msgport.o: ports/syllable/native/msgport.c ports/syllable/native/atheos/types.h include/uapi/caribe_ipc.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
+
+build/libcaribe-syllable-native.a: build/syllable_msgport.o
+	$(GRAPHICS_AR) rcsD $@ $^
+
+build/native_ipc_probe.o: userland/native_ipc_probe.c include/uapi/caribe_ipc.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
+
+build/native-ipc-probe.elf: build/native_ipc_probe.o build/libcaribe-syllable-native.a $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  build/native_ipc_probe.o build/libcaribe-syllable-native.a -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd.img: build/native-ipc-probe.elf
+
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include \
@@ -764,6 +787,7 @@ build/initrd.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) 
 	  bin/syllable-component=build/syllable-component.elf \
 	  bin/caribe-session=build/caribe-session.elf \
 	  bin/private-vm-probe=build/private-vm-probe.elf \
+	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \

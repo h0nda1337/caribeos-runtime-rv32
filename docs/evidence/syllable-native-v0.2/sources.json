@@ -1,0 +1,30 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/include/atheos/msgport.h",
+      "sha256": "d6f2dc81ec504e780debb17c69d22e0d3a0ca964e5cfcf04be0aea18b735cb9d",
+      "license": "LGPL-2.0-only",
+      "compiled": true
+    },
+    {
+      "path": "system/sys/include/atheos/areas.h",
+      "sha256": "2d86daf76aae206e5ad9924e83663d9ba38c39796d368565c40664c19b8f4187",
+      "license": "LGPL-2.0-only",
+      "compiled": false
+    },
+    {
+      "path": "system/sys/include/util/message.h",
+      "sha256": "4052416bbeba977470c890cddcc0c0e45a0d444ea1c3c1e4a20deb38beeb63b6",
+      "license": "LGPL-2.0-only",
+      "compiled": false
+    },
+    {
+      "path": "system/sys/appserver/libsyllable/util/message.cpp",
+      "sha256": "b84c471b023ecaf17463a6a7dd5ffb376b49b43ea0ada0364c0d5a0d485faa38",
+      "license": "LGPL-2.0-only",
+      "compiled": false
+    }
+  ],
+  "note": "Only msgport.h is consumed by this first native IPC adapter; Message is audited, not yet compiled."
+}

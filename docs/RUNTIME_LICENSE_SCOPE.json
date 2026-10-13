@@ -48,6 +48,7 @@
                               "include/uapi/bootargs.h",
                               "include/uapi/caribe_hypervisor.h",
                               "include/uapi/caribe_graphics.h",
+                              "include/uapi/caribe_ipc.h",
                               "include/uapi/caribe_ssbi.h",
                               "include/uapi/mmu.h",
                               "include/uapi/regs_riscv.h",
@@ -96,6 +97,7 @@
                               "scripts/make-newc-initrd.py",
                               "scripts/prepare-security-deps.py",
                               "scripts/prepare-graphics-deps.py",
+                              "scripts/prepare-syllable-native.py",
                               "scripts/test-graphics.py",
                               "scripts/qemu-rv32-graphics.ps1",
                               "scripts/qemu-monitor-query.ps1",
@@ -145,6 +147,9 @@
                               "userland/interactive_init.c",
                               "userland/caribe_session.c",
                               "userland/private_vm_probe.c",
+                              "userland/native_ipc_probe.c",
+                              "ports/syllable/native/msgport.c",
+                              "ports/syllable/native/atheos/types.h",
                               "userland/syllable_component.cpp",
                               "userland/caribe_surface.cpp",
                               "userland/interp_probe.S",
@@ -209,6 +214,11 @@
                                           "path": "docs/evidence/graphics-v0.1/*",
                                           "classification": "GENERATED_EVIDENCE",
                                           "reason": "QEMU captures, recorded test output and hashes are evidence data, not BSD-licensed source code."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-native-v0.2/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Native IPC QEMU results and scanouts are evidence data, not original runtime source code."
                                       },
                                       {
                                           "path":  "userland/stage1/etc/*",

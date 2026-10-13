@@ -31,6 +31,15 @@ The BSD-2-Clause license in this repository applies only to original CaribeOS
 runtime code. It does not relicense XNU, GNU Bash, musl, OpenSBI, QEMU, the
 toolchain, generated data, or any other external component.
 
+Native Syllable IPC uses the unchanged LGPL-2.0-only `atheos/msgport.h` from
+commit `579e480a005321cc320e7e355e8dff398b689be8`. The native dependency
+preparer verifies SHA-256, preserves exact upstream copies and records audited
+Message and areas sources separately from compiled inputs. Its musl type and
+XNU port adapters are independently written CaribeOS code, not copies of the
+AtheOS kernel. The complete LGPL text remains in `ports/syllable/COPYING.LIB`.
+Any later binary package must carry the exact new dependency sources, notices
+and applicable relink material; the old Tranche 201 source asset is insufficient.
+
 The public-preview Release includes the same-place asset
 `caribeos-tranche-201-corresponding-source.zip`. It contains the exact Bash 5.3
 archive, official patches 1-5, musl 1.2.5 archive, maintained build-control

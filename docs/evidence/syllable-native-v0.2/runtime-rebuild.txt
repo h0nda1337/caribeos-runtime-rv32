@@ -1,0 +1,95 @@
+/ucrt64/bin/riscv64-unknown-elf-gcc  -I. -march=rv32imac_zicsr_zifencei -mabi=ilp32 -ffreestanding -nostdlib -O2 -Wall -Wextra -ffunction-sections -fdata-sections -fno-builtin -Ithird_party/monocypher-4.0.2/src -Ithird_party/monocypher-4.0.2/src/optional -Ithird_party/mbedtls-3.6.5/include -Ithird_party/mbedtls-3.6.5/library -DMBEDTLS_CONFIG_FILE='"security/mbedtls_config.h"' -DCARIBE_FREESTANDING -nostdinc -Ibuild/musl-rv32-sysroot/usr/include -Iinclude -Iports/syllable/native -Ibuild/syllable-native/include -c userland/native_ipc_probe.c -o build/native_ipc_probe.o
+In file included from build/musl-rv32-sysroot/usr/include/sys/types.h:70,
+                 from ports/syllable/native/atheos/types.h:9,
+                 from build/syllable-native/include/atheos/msgport.h:27,
+                 from userland/native_ipc_probe.c:5:
+build/musl-rv32-sysroot/usr/include/endian.h: In function '__bswap32':
+build/musl-rv32-sysroot/usr/include/endian.h:26:32: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+   26 |         return __x>>24 | __x>>8&0xff00 | __x<<8&0xff0000 | __x<<24;
+      |                          ~~~~~~^~~~~~~
+build/musl-rv32-sysroot/usr/include/endian.h:26:48: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+   26 |         return __x>>24 | __x>>8&0xff00 | __x<<8&0xff0000 | __x<<24;
+      |                                          ~~~~~~^~~~~~~~~
+build/musl-rv32-sysroot/usr/include/endian.h: In function '__bswap64':
+build/musl-rv32-sysroot/usr/include/endian.h:31:30: warning: suggest parentheses around '+' inside '<<' [-Wparentheses]
+   31 |         return __bswap32(__x)+0ULL<<32 | __bswap32(__x>>32);
+      |                ~~~~~~~~~~~~~~^~~~~
+/ucrt64/bin/riscv64-unknown-elf-gcc  -I. -march=rv32imac_zicsr_zifencei -mabi=ilp32 -ffreestanding -nostdlib -O2 -Wall -Wextra -ffunction-sections -fdata-sections -fno-builtin -Ithird_party/monocypher-4.0.2/src -Ithird_party/monocypher-4.0.2/src/optional -Ithird_party/mbedtls-3.6.5/include -Ithird_party/mbedtls-3.6.5/library -DMBEDTLS_CONFIG_FILE='"security/mbedtls_config.h"' -DCARIBE_FREESTANDING -nostdinc -Ibuild/musl-rv32-sysroot/usr/include -Iinclude -Iports/syllable/native -Ibuild/syllable-native/include -c ports/syllable/native/msgport.c -o build/syllable_msgport.o
+In file included from build/musl-rv32-sysroot/usr/include/sys/types.h:70,
+                 from ports/syllable/native/atheos/types.h:9,
+                 from build/syllable-native/include/atheos/msgport.h:27,
+                 from ports/syllable/native/msgport.c:5:
+build/musl-rv32-sysroot/usr/include/endian.h: In function '__bswap32':
+build/musl-rv32-sysroot/usr/include/endian.h:26:32: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+   26 |         return __x>>24 | __x>>8&0xff00 | __x<<8&0xff0000 | __x<<24;
+      |                          ~~~~~~^~~~~~~
+build/musl-rv32-sysroot/usr/include/endian.h:26:48: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+   26 |         return __x>>24 | __x>>8&0xff00 | __x<<8&0xff0000 | __x<<24;
+      |                                          ~~~~~~^~~~~~~~~
+build/musl-rv32-sysroot/usr/include/endian.h: In function '__bswap64':
+build/musl-rv32-sysroot/usr/include/endian.h:31:30: warning: suggest parentheses around '+' inside '<<' [-Wparentheses]
+   31 |         return __bswap32(__x)+0ULL<<32 | __bswap32(__x>>32);
+      |                ~~~~~~~~~~~~~~^~~~~
+/ucrt64/bin/riscv64-unknown-elf-ar rcsD build/libcaribe-syllable-native.a build/syllable_msgport.o
+/ucrt64/bin/riscv64-unknown-elf-gcc -march=rv32imac_zicsr_zifencei -mabi=ilp32 -nostdlib -static \
+  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+  build/musl-rv32-sysroot/usr/lib/crt1.o build/musl-rv32-sysroot/usr/lib/crti.o \
+  build/native_ipc_probe.o build/libcaribe-syllable-native.a -Lbuild/musl-rv32-sysroot/usr/lib -lc -lgcc \
+  build/musl-rv32-sysroot/usr/lib/crtn.o -o build/native-ipc-probe.elf
+python scripts/make-newc-initrd.py build/initrd.img \
+  init=build/init_stage1.elf \
+  sbin/init=build/caribed.elf \
+  sbin/caribed=build/caribed.elf \
+  sbin/interactive-init=build/interactive_init.elf \
+  bin/caribectl=build/caribectl.elf \
+  bin/musl-probe=build/musl_probe.elf \
+  bin/syllable-component=build/syllable-component.elf \
+  bin/caribe-session=build/caribe-session.elf \
+  bin/private-vm-probe=build/private-vm-probe.elf \
+  bin/native-ipc-probe=build/native-ipc-probe.elf \
+  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
+  bin/pipeline-producer=build/pipeline_producer.elf \
+  bin/pipeline-consumer=build/pipeline_consumer.elf \
+  bin/pipeline-sigpipe=build/pipeline_sigpipe.elf \
+  bin/jobctl-wait=build/jobctl_wait.elf \
+  bin/cpu1-probe=build/cpu1_probe.elf \
+  bin/gate14-stress=build/gate14_stress.elf \
+  bin/gate14-worker=build/gate14_worker.elf \
+  bin/gate15-process=build/gate15_process_stress.elf \
+  bin/gate15-worker=build/gate15_worker.elf \
+  bin/gate15-pipes=build/gate15_pipe_stress.elf \
+  bin/gate15-signals=build/gate15_signal_stress.elf \
+  bin/gate15-pipelines=build/gate15_pipeline_stress.elf \
+  bin/gate15-batches=build/gate15_batch_stress.elf \
+  bin/gate15-tty=build/gate15_tty_stress.elf \
+  bin/process-exit7=build/process_exit7.elf \
+  bin/process-two-task=build/process_two_task.elf \
+  bin/process-fork-vm=build/process_fork_vm.elf \
+  bin/process-fd-parent=build/process_fd_parent.elf \
+  bin/process-fd-exec=build/process_fd_exec.elf \
+  bin/process-exec-parent=build/process_exec_parent.elf \
+  bin/process-exec-child=build/process_exec_child.elf \
+  bin/process-exec-badinterp=build/process_exec_badinterp.elf \
+  bin/process-wait-parent=build/process_wait_parent.elf \
+  bin/process-signal-parent=build/process_signal_parent.elf \
+  bin/process-signal-self=build/process_signal_self.elf \
+  bin/process-tty-input=build/process_tty_input.elf \
+  bin/bash=build/bash-rv32/bash \
+  bin/interp-probe=build/interp_probe.elf \
+  bin/dynamic-probe=build/dynamic_probe.elf \
+  bin/dynamic-bias-probe=build/dynamic_bias_probe.elf \
+  lib/ld-caribe-rv32.so.1=build/ld-caribe-rv32.so.1 \
+  lib/libcaribe-probe.so.1=build/libcaribe-probe.so.1 \
+  lib/libcaribe-extra.so.1=build/libcaribe-extra.so.1 \
+  lib/libcaribe-chain.so.1=build/libcaribe-chain.so.1 \
+  lib/libcaribe-buckets.so.1=build/libcaribe-buckets.so.1 \
+  etc/os-release=userland/stage1/etc/os-release \
+  etc/caribe-release=userland/stage1/etc/caribe-release \
+  etc/passwd=userland/stage1/etc/passwd \
+  etc/group=userland/stage1/etc/group \
+  caribe/stage1.manifest=userland/stage1/caribe/stage1.manifest \
+  usr/lib/caribe.note=userland/stage1/usr/lib/caribe.note \
+  usr/lib/process-fd-fixture=userland/stage1/usr/lib/process-fd-fixture \
+  usr/lib/bash-smoke.sh=userland/stage1/usr/lib/bash-smoke.sh \
+  usr/bin/dynamic-script=userland/stage1/usr/bin/dynamic-script
+wrote build\initrd.img: 4167148 bytes

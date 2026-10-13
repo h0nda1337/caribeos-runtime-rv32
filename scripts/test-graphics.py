@@ -74,6 +74,7 @@ def main():
     parser.add_argument("--smp", type=int, choices=(1, 2), default=1)
     parser.add_argument("--bios", default="default")
     parser.add_argument("--cpu", default="", help="Optional QEMU CPU configuration")
+    parser.add_argument("--native-ipc", action="store_true", help="Run native Syllable port gates before graphics")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
@@ -83,11 +84,23 @@ def main():
         parser.error("--live-seconds requires --live and a nonnegative duration")
     verify_abi()
     artifacts = build_hashes()
+    if args.native_ipc:
+        for name, filename in (("nativeIpcProbe", "native-ipc-probe.elf"),
+                               ("nativeIpcLibrary", "libcaribe-syllable-native.a")):
+            artifacts[name] = hashlib.sha256((ROOT / "build" / filename).read_bytes()).hexdigest()
+        kernel = WORKSPACE / "xnu-2050.48.11/osfmk/riscv32/native_ipc.h"
+        user = ROOT / "include/uapi/caribe_ipc.h"
+        def ipc_declarations(path):
+            return path.read_text().split("#ifndef CARIBE_NATIVE_IPC_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
+        if ipc_declarations(kernel) != ipc_declarations(user):
+            raise RuntimeError("native IPC kernel/userspace ABI mismatch")
     name = ("opensbi" if args.bios == "default" else "securesbi") + f"-smp{args.smp}"
     if args.cpu:
         name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
     if args.live:
         name += "-live"
+    if args.native_ipc:
+        name += "-native-ipc"
     out = ROOT / "build/graphics-tests" / name
     out.mkdir(parents=True, exist_ok=True)
     result_path = out / "result.json"
@@ -123,6 +136,7 @@ def main():
                     pass
             text = serial.decode(errors="replace")
             if ("panic" in text.lower() or "unexpected trap" in text.lower() or "fatal user signal" in text
+                    or "[native-ipc] FAIL" in text
                     or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
                 raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
@@ -175,6 +189,20 @@ def main():
             qmp = Qmp(qmp_port)
             qmp.call("cont")
             wait("bash-5.3$ ")
+            if args.native_ipc:
+                start = len(serial)
+                uart.sendall(b"/bin/native-ipc-probe; echo NATIVE_IPC_STATUS=$?\n")
+                wait("[native-ipc] gates A-D PASS; native XNU ports, no Wayland/X11", timeout=240, after=start)
+                wait("\nNATIVE_IPC_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                native_text = pump()[start:]
+                for gate in "ABCD":
+                    lines = [line for line in native_text.splitlines() if f"[native-ipc-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing native IPC gate {gate}")
+                    (out / f"gate-native-ipc-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "independent exec ping-pong=10000 max-payload=8192 scheduler-waits=" not in native_text:
+                    raise RuntimeError("native IPC stress evidence missing")
             isa_match = re.search(r"\[boot-report\] cpu hart=\d+ harts=\d+ isa=(rv32[a-z]+)(?:_| )", pump())
             base_isa = isa_match.group(1) if isa_match else None
             if args.cpu == IMACSU_CPU and base_isa != "rv32imac":
@@ -288,6 +316,8 @@ def main():
                       "sessionRestarts": 1,
                       "blockedSessionStatuses": {"wayland": 3, "x11": 3, "unknown": 2},
                       "privateVm": {"forkExecIsolationCycles": 32, "zeroingRecycleCycles": 256},
+                      "nativeIpc": {"gates": ["A", "B", "C", "D"], "pingPongRounds": 10000,
+                                    "maxPayload": 8192} if args.native_ipc else None,
                       "kernelSha256": artifacts["xnu"],
                       "artifactSha256": artifacts,
                       "screenshots": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in captures}}
