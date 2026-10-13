@@ -11,6 +11,7 @@ param(
   [int]$StressRounds = 10000,
   [switch]$KeepHistory,
   [switch]$NativeIpc,
+  [switch]$NativeAreas,
   [switch]$NegativeVersionChecks
 )
 
@@ -1809,7 +1810,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas
   exit $LASTEXITCODE
 }
 

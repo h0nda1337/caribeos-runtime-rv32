@@ -31,8 +31,8 @@ for path, expected in FILES.items():
         include.parent.mkdir(parents=True, exist_ok=True)
         include.write_bytes(data)
     records.append({"path": path, "sha256": expected, "license": "LGPL-2.0-only",
-                    "compiled": path.endswith("/msgport.h")})
+                    "compiled": path.endswith(("/msgport.h", "/areas.h"))})
 (OUT / "COPYING.LIB").write_bytes((ROOT / "ports/syllable/COPYING.LIB").read_bytes())
 (OUT / "sources.json").write_text(json.dumps({"commit": REV, "files": records,
-    "note": "Only msgport.h is consumed by this first native IPC adapter; Message is audited, not yet compiled."}, indent=2) + "\n")
+    "note": "msgport.h and areas.h are consumed by native XNU adapters; Message is audited, not yet compiled."}, indent=2) + "\n")
 print("PASS pinned Syllable native APIs and Message sources; LGPL notices unchanged")

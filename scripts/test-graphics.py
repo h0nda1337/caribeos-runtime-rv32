@@ -75,11 +75,13 @@ def main():
     parser.add_argument("--bios", default="default")
     parser.add_argument("--cpu", default="", help="Optional QEMU CPU configuration")
     parser.add_argument("--native-ipc", action="store_true", help="Run native Syllable port gates before graphics")
+    parser.add_argument("--native-areas", action="store_true", help="Run real shared-area gates and native IPC before graphics")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
         parser.error("--live-seconds requires --live and a nonnegative duration")
     verify_abi()
@@ -94,12 +96,22 @@ def main():
             return path.read_text().split("#ifndef CARIBE_NATIVE_IPC_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
         if ipc_declarations(kernel) != ipc_declarations(user):
             raise RuntimeError("native IPC kernel/userspace ABI mismatch")
+    if args.native_areas:
+        artifacts["nativeAreaProbe"] = hashlib.sha256((ROOT / "build/native-area-probe.elf").read_bytes()).hexdigest()
+        kernel = WORKSPACE / "xnu-2050.48.11/osfmk/riscv32/native_area.h"
+        user = ROOT / "include/uapi/caribe_area.h"
+        def area_declarations(path):
+            return path.read_text().split("#ifndef CARIBE_NATIVE_AREA_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
+        if area_declarations(kernel) != area_declarations(user):
+            raise RuntimeError("native shared-area kernel/userspace ABI mismatch")
     name = ("opensbi" if args.bios == "default" else "securesbi") + f"-smp{args.smp}"
     if args.cpu:
         name += "-imacsu" if args.cpu == IMACSU_CPU else "-custom-cpu"
     if args.live:
         name += "-live"
-    if args.native_ipc:
+    if args.native_areas:
+        name += "-native-areas"
+    elif args.native_ipc:
         name += "-native-ipc"
     out = ROOT / "build/graphics-tests" / name
     out.mkdir(parents=True, exist_ok=True)
@@ -137,6 +149,7 @@ def main():
             text = serial.decode(errors="replace")
             if ("panic" in text.lower() or "unexpected trap" in text.lower() or "fatal user signal" in text
                     or "[native-ipc] FAIL" in text
+                    or "[native-area] FAIL" in text
                     or re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)):
                 raise RuntimeError(f"kernel regression: {out / 'serial.txt'}")
             if proc.poll() is not None:
@@ -203,6 +216,24 @@ def main():
                     (out / f"gate-native-ipc-{gate}.txt").write_text("\n".join(lines) + "\n")
                 if "independent exec ping-pong=10000 max-payload=8192 scheduler-waits=" not in native_text:
                     raise RuntimeError("native IPC stress evidence missing")
+            if args.native_areas:
+                start = len(serial)
+                uart.sendall(b"/bin/native-area-probe; echo NATIVE_AREA_STATUS=$?\n")
+                wait("[native-area] gates A-E PASS; real shared Sv32 pages, no Wayland/X11", timeout=240, after=start)
+                wait("\nNATIVE_AREA_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                area_text = pump()[start:]
+                for gate in "ABCDE":
+                    lines = [line for line in area_text.splitlines() if f"[native-area-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing native shared-area gate {gate}")
+                    (out / f"gate-native-area-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "independent-exec shared-memory rounds=10000" not in area_text:
+                    raise RuntimeError("shared-area stress evidence missing")
+                shared = capture("00-shared-area")
+                for x, y in ((0, 0), (127, 81), (255, 255), (480, 310), (799, 599)):
+                    if shared.getpixel((x, y)) != (x & 255, y & 255, (x ^ y) & 255):
+                        raise RuntimeError(f"shared framebuffer wrong pixel at {x},{y}")
             isa_match = re.search(r"\[boot-report\] cpu hart=\d+ harts=\d+ isa=(rv32[a-z]+)(?:_| )", pump())
             base_isa = isa_match.group(1) if isa_match else None
             if args.cpu == IMACSU_CPU and base_isa != "rv32imac":
@@ -318,6 +349,10 @@ def main():
                       "privateVm": {"forkExecIsolationCycles": 32, "zeroingRecycleCycles": 256},
                       "nativeIpc": {"gates": ["A", "B", "C", "D"], "pingPongRounds": 10000,
                                     "maxPayload": 8192} if args.native_ipc else None,
+                      "nativeAreas": {"gates": ["A", "B", "C", "D", "E"], "sharedMemoryRounds": 10000,
+                                      "objects": 32, "views": 64, "poolPages": 1024,
+                                      "recycleCycles": 256, "sharedFramebuffer": [800, 600],
+                                      "verifiedPixels": 5} if args.native_areas else None,
                       "kernelSha256": artifacts["xnu"],
                       "artifactSha256": artifacts,
                       "screenshots": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in captures}}

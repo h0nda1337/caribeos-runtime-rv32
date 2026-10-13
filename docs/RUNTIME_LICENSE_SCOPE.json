@@ -49,6 +49,7 @@
                               "include/uapi/caribe_hypervisor.h",
                               "include/uapi/caribe_graphics.h",
                               "include/uapi/caribe_ipc.h",
+                              "include/uapi/caribe_area.h",
                               "include/uapi/caribe_ssbi.h",
                               "include/uapi/mmu.h",
                               "include/uapi/regs_riscv.h",
@@ -148,6 +149,8 @@
                               "userland/caribe_session.c",
                               "userland/private_vm_probe.c",
                               "userland/native_ipc_probe.c",
+                              "userland/native_area_probe.c",
+                              "ports/syllable/native/areas.c",
                               "ports/syllable/native/msgport.c",
                               "ports/syllable/native/atheos/types.h",
                               "userland/syllable_component.cpp",
@@ -219,6 +222,11 @@
                                           "path": "docs/evidence/syllable-native-v0.2/*",
                                           "classification": "GENERATED_EVIDENCE",
                                           "reason": "Native IPC QEMU results and scanouts are evidence data, not original runtime source code."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-areas-v0.3/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Shared-area scanouts, hashes and recorded regression results are data, not BSD-licensed source code."
                                       },
                                       {
                                           "path":  "userland/stage1/etc/*",

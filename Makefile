@@ -604,7 +604,10 @@ NATIVE_IPC_FLAGS = $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include -Iinclude
 build/syllable_msgport.o: ports/syllable/native/msgport.c ports/syllable/native/atheos/types.h include/uapi/caribe_ipc.h build/syllable-native/sources.json
 	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
 
-build/libcaribe-syllable-native.a: build/syllable_msgport.o
+build/syllable_areas.o: ports/syllable/native/areas.c ports/syllable/native/atheos/types.h include/uapi/caribe_area.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
+
+build/libcaribe-syllable-native.a: build/syllable_msgport.o build/syllable_areas.o
 	$(GRAPHICS_AR) rcsD $@ $^
 
 build/native_ipc_probe.o: userland/native_ipc_probe.c include/uapi/caribe_ipc.h build/syllable-native/sources.json
@@ -618,6 +621,18 @@ build/native-ipc-probe.elf: build/native_ipc_probe.o build/libcaribe-syllable-na
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
 build/initrd.img: build/native-ipc-probe.elf
+
+build/native_area_probe.o: userland/native_area_probe.c include/uapi/caribe_area.h include/uapi/caribe_graphics.h build/syllable-native/sources.json
+	$(CC32) $(NATIVE_IPC_FLAGS) -c $< -o $@
+
+build/native-area-probe.elf: build/native_area_probe.o build/libcaribe-syllable-native.a $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  build/native_area_probe.o build/libcaribe-syllable-native.a -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd.img: build/native-area-probe.elf
 
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
@@ -788,6 +803,7 @@ build/initrd.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) 
 	  bin/caribe-session=build/caribe-session.elf \
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
+	  bin/native-area-probe=build/native-area-probe.elf \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \

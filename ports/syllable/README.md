@@ -44,11 +44,13 @@ This branch publishes source/build controls only; no new Release binaries.
 ## Next Authentic Components
 
 AppServer still requires libsyllable's Message/Looper/Application interfaces,
-AtheOS ports (`create_port`, `send_msg`, `get_msg`), shared areas
-(`create_area`, `clone_area`), semaphores, thread APIs, file attributes,
+semantics beyond the now verified native ports and bounded shared areas,
+semaphores, thread APIs, file attributes,
 dynamic libraries/decorators and FreeType. The default VESA/PCI video path
 cannot run on QEMU RV32; it needs a native adapter to the existing XNU graphics
 device. Full C++ ABI/exception support is also unresolved.
+See [native foundations](../../docs/SYLLABLE_NATIVE.md) for the separately
+tested XNU ports/shared areas and their explicit limits.
 
 Desktop, Dock and FileBrowser have **not** been compiled or started.
 Their inspected entry files carry LGPL version 2 notices, but every additional

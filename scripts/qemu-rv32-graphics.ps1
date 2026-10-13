@@ -7,6 +7,7 @@ param(
     [switch]$Live,
     [switch]$SkipKernelBuild,
     [switch]$NativeIpc,
+    [switch]$NativeAreas,
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
@@ -47,6 +48,7 @@ try {
     $arguments = @((Join-Path $root "scripts\test-graphics.py"), "--smp", $Smp, "--bios", $Bios)
     if ($Cpu) { $arguments += @("--cpu", $Cpu) }
     if ($NativeIpc) { $arguments += "--native-ipc" }
+    if ($NativeAreas) { $arguments += "--native-areas" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

@@ -67,17 +67,69 @@ separate from v0.1 under `build/graphics-tests/*-native-ipc/`.
 Both participants in these graphics/session tests remain on CPU0. SMP kernel
 gates A-F run with two harts, but this is not yet a cross-hart IPC stress claim.
 
+## Native Shared Areas
+
+The unchanged pinned Syllable `atheos/areas.h` now binds create/clone/delete/info
+to XNU objects with real shared physical backing, not copied private mmap pages.
+Each process has independently protected Sv32 views. Fork preserves the area
+ID, address, protection and backing; ordinary private pages still use eager
+private cloning. Successful exec and exit remove only that process's views.
+Failed exec leaves them intact. Last-view deletion invalidates translations
+through pmap before zeroing and recycling pages. Failed create copyout removes
+all new translations and backing. Fork resource exhaustion rolls back instead
+of silently omitting views.
+
+This is a bounded, wired prototype: 32 objects, 64 views, 1024 backing pages
+(4 MiB total), at most 512 pages (2 MiB) per object. The fixed 128-byte versioned
+AREA ioctl uses the same native device. A reserved `0x68000000..0x70000000` user
+VA band prevents Linux mmap/munmap/mprotect/mremap from bypassing area ownership
+or changing a view's protection. ANY and EXACT address policies are supported.
+READ and READ|WRITE are supported; clone cannot escalate source protection.
+Physical remap is denied. EXEC, kernel mappings, contiguous allocation, other
+address policies and unbounded/demand-paged areas are explicitly unsupported.
+NO/LAZY lock requests currently receive stronger FULL wired backing, reported
+honestly by get_area_info. Known IDs permit cloning; these are experimental
+local sharing handles, not a production multi-user capability boundary.
+
+```powershell
+.\testproject.ps1 -Mode graphics -Smp 2 -NativeAreas
+```
+
+This includes native IPC gates, the following shared-area gates, existing
+private VM isolation, authentic Syllable decorator input/restart and Bash:
+
+- A: shared writes, read-only copyout enforcement, no protection escalation,
+  exact-address collision, reserved-VA guards, stale IDs, zeroing and full
+  EFAULT create rollback.
+- B: all 32 objects/64 views/1024 pages, explicit exhaustion, failed fork
+  rollback, 256 zeroed reuse cycles and no live resources.
+- C: inherited same-ID/same-VA shared writes, failed exec preservation and
+  successful exec revocation without deleting the parent's live view.
+- D: independently exec'd peer, 10,000 shared-memory exchanges synchronized
+  with native ports and acquire/release barriers, creator deletion, live-view
+  retention and leaked child-view exit cleanup.
+- E: a forked child renders 800x600 pixels into shared backing; the parent
+  presents it through the actual native GPU, then reclaims the last view.
+  The host checks five deterministic scanout pixels, not just a UART marker.
+
+Logs/captures use separate `build/graphics-tests/*-native-areas/` directories.
+These are two CPU0 processes with SMP kernel work online in the two-hart cases,
+not yet multi-threaded/cross-hart GUI processes. The shared framebuffer test
+does not claim to be the complete AppServer.
+
 ## Remaining Work
 
-Native shared areas with fork/exec/exit lifecycle and protection enforcement
-are next. The genuine Message implementation has been obtained and audited,
+The genuine Message implementation has been obtained and audited,
 not compiled: it needs geometry, String/Variant, Handler/Looper/Messenger,
 and C++ exception/runtime support. Its historical unchecked Unflatten input
 must be hardened before accepting untrusted client messages.
 
-AppServer itself still needs native areas, semaphores/thread APIs, FreeType,
+AppServer itself still needs semaphores/thread APIs, FreeType,
 font/bitmap/video adapters, configuration and loader support. Desktop, Dock
 and FileBrowser remain unbuilt, including filesystem attribute dependencies.
 The port must continue toward those actual upstream components, not replace
 them with a visually similar bespoke desktop. X11/Wayland compatibility can
 remain optional future sessions without becoming prerequisites for Syllable.
+The historical Bitmap client requests AREA_FULL_ACCESS for a data buffer;
+porting it must explicitly remove EXEC from that request, not silently grant
+executable shared memory or pretend the current adapter supports all flags.

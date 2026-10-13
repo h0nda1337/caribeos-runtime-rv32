@@ -1,0 +1,1 @@
+[native-ipc-gate-C] independent exec ping-pong=10000 max-payload=8192 scheduler-waits=20001 wakeups=20001 PASS

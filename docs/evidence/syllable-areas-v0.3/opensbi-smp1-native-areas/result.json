@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "platform": "QEMU virt RV32",
+  "smp": 1,
+  "cpu": "QEMU default",
+  "baseIsa": "rv32imafdch",
+  "bios": "default",
+  "gates": [
+    "A-video",
+    "B-negative-ABI",
+    "C-userspace-Syllable-component",
+    "D-keyboard-mouse-drag",
+    "E-event-integrity-exit-Bash"
+  ],
+  "resolution": [
+    800,
+    600
+  ],
+  "sessionRestarts": 1,
+  "blockedSessionStatuses": {
+    "wayland": 3,
+    "x11": 3,
+    "unknown": 2
+  },
+  "privateVm": {
+    "forkExecIsolationCycles": 32,
+    "zeroingRecycleCycles": 256
+  },
+  "nativeIpc": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "pingPongRounds": 10000,
+    "maxPayload": 8192
+  },
+  "nativeAreas": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "sharedMemoryRounds": 10000,
+    "objects": 32,
+    "views": 64,
+    "poolPages": 1024,
+    "recycleCycles": 256,
+    "sharedFramebuffer": [
+      800,
+      600
+    ],
+    "verifiedPixels": 5
+  },
+  "kernelSha256": "bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f",
+  "artifactSha256": {
+    "xnu": "bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f",
+    "cbx": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+    "initrd": "9bbdfb4cf2fc9d58554fd6242bb0d50704cdf458cbecaf7a585a6afa4baa2b69",
+    "syllableComponent": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+    "syllableLibrary": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+    "sessionManager": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+    "privateVmProbe": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938",
+    "nativeIpcProbe": "82f2f626523bbd78fe3ca152c0cf7ed5cb3a43098ac5fa05f1d11948f0c3b441",
+    "nativeIpcLibrary": "ad7fff5c293d2414a899941edd731f234a3a616039ccf118584f0a8f012ffac6",
+    "nativeAreaProbe": "9fe4c3abf0bc89bddfe6edc163ede1bd3879159305c9b4cffe5d3400a53c3e30"
+  },
+  "screenshots": {
+    "00-shared-area.png": "048598c6381df95fb106ee8754b3a27700e1da27493da35f6fcd704f8e0eddd7",
+    "01-syllable.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82",
+    "02-keyboard-focus.png": "6e0a8ad1d96c6880c44cec6ef657013b4d2f56ad1bc759c7993dba3ce557f4d7",
+    "03-mouse-drag.png": "74f0727e220fea4c2fda85c7a3ba3b5eb21d9c3c2fb4e883c16db8eef59c1886",
+    "04-input-verified.png": "f4231c518fc303794389b163d0d56426255663b01b85553bf0ee4aeebff85305",
+    "05-session-restart.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82"
+  }
+}

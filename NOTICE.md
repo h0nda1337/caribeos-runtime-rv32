@@ -41,13 +41,14 @@ See [Syllable port](ports/syllable/README.md) and its complete COPYING.LIB.
 The public-domain font8x8 retains Daniel Hepper/Marcel Sondaar/IBM notices.
 This source update does not publish new binaries or alter Tranche 201 assets.
 
-The native Syllable message-port adapter and fixed-width IPC ABI are original
+The native Syllable message-port/shared-area adapters and fixed-width IPC/area
+ABIs are original
 CaribeOS integration code under BSD-2-Clause. The pinned Syllable `msgport.h`
-and audited Message/areas sources keep their original LGPL-2.0-only notices;
+and `areas.h` plus audited Message sources keep their original LGPL-2.0-only notices;
 they are not relicensed by this adapter. Native ports run inside XNU, whose
 APSL 2.0 terms and file notices remain unchanged. Neither X11 nor Wayland is
 a dependency of this native path. A complete AppServer/Desktop is not yet
-claimed by the message-port gates.
+claimed by the message-port or shared-area gates.
 
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the

@@ -1,0 +1,32 @@
+==> make boot_stage1 QEMU_SMOKE_SECONDS=45
+QEMU smoke test OK: boot_stage1
+==> make boot_stage1_process_gate_2 QEMU_SMOKE_SECONDS=45
+QEMU smoke test OK: boot_stage1_process_gate_2
+==> make boot_stage1_process_gate_3 QEMU_SMOKE_SECONDS=45
+QEMU smoke test OK: boot_stage1_process_gate_3
+==> make boot_stage1_process_gate_4 QEMU_SMOKE_SECONDS=120
+QEMU smoke test OK: boot_stage1_process_gate_4
+==> make boot_stage1_process_gate_5 QEMU_SMOKE_SECONDS=120
+QEMU smoke test OK: boot_stage1_process_gate_5
+==> make boot_stage1_process_gate_6 QEMU_SMOKE_SECONDS=300
+QEMU smoke test OK: boot_stage1_process_gate_6
+[process-gate-6] failed exec returned ENOENT with registers/data/fd intact PASS
+==> make boot_stage1_process_gate_7_only QEMU_SMOKE_SECONDS=90
+QEMU smoke test OK: boot_stage1_process_gate_7_only
+==> make boot_stage1_process_gate_8_only QEMU_SMOKE_SECONDS=90
+QEMU smoke test OK: boot_stage1_process_gate_8_only
+==> make boot_stage1_process_gate_9_only QEMU_SMOKE_SECONDS=100
+QEMU smoke test OK: boot_stage1_process_gate_9_only
+==> make boot_stage1_process_gate_10_only QEMU_SMOKE_SECONDS=120
+QEMU smoke test OK: boot_stage1_process_gate_10_only
+==> make boot_stage1_process_gate_11 QEMU_SMOKE_SECONDS=120
+QEMU smoke test OK: boot_stage1_process_gate_11
+==> make boot_stage1_process_gate_12 QEMU_SMOKE_SECONDS=180
+QEMU smoke test OK: boot_stage1_process_gate_12
+==> make boot_stage1_process_gate_13 QEMU_SMOKE_SECONDS=180
+QEMU smoke test OK: boot_stage1_process_gate_13
+==> make boot_stage1_process_gate_14 QEMU_SMOKE_SECONDS=240
+QEMU smoke test OK: boot_stage1_process_gate_14
+==> make boot_stage1_process_gate_15 QEMU_SMOKE_SECONDS=90 GATE15_SECONDS=90
+QEMU smoke test OK: boot_stage1_process_gate_15
+testproject.ps1 completed.

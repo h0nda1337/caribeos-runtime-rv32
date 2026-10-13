@@ -1,0 +1,17 @@
+{
+  "kernelSha256": "bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f",
+  "before": {
+    "build/libcaribe-syllable-native.a": "ad7fff5c293d2414a899941edd731f234a3a616039ccf118584f0a8f012ffac6",
+    "build/native-ipc-probe.elf": "82f2f626523bbd78fe3ca152c0cf7ed5cb3a43098ac5fa05f1d11948f0c3b441",
+    "build/initrd.img": "9bbdfb4cf2fc9d58554fd6242bb0d50704cdf458cbecaf7a585a6afa4baa2b69",
+    "build/native-area-probe.elf": "9fe4c3abf0bc89bddfe6edc163ede1bd3879159305c9b4cffe5d3400a53c3e30"
+  },
+  "result": "PASS",
+  "type": "incremental forced recompile",
+  "after": {
+    "build/libcaribe-syllable-native.a": "ad7fff5c293d2414a899941edd731f234a3a616039ccf118584f0a8f012ffac6",
+    "build/native-ipc-probe.elf": "82f2f626523bbd78fe3ca152c0cf7ed5cb3a43098ac5fa05f1d11948f0c3b441",
+    "build/initrd.img": "9bbdfb4cf2fc9d58554fd6242bb0d50704cdf458cbecaf7a585a6afa4baa2b69",
+    "build/native-area-probe.elf": "9fe4c3abf0bc89bddfe6edc163ede1bd3879159305c9b4cffe5d3400a53c3e30"
+  }
+}
