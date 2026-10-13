@@ -1,0 +1,89 @@
+{
+    "result":  "PASS",
+    "compiledFreeTypeUnits":  43,
+    "recipe":  "CMake clean-first (generated build only), forced C probe recompile, font initrd repack",
+    "before":  [
+                   {
+                       "path":  "build/caribe_rv32.elf",
+                       "sha256":  "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea"
+                   },
+                   {
+                       "path":  "build/initrd.img",
+                       "sha256":  "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+                   },
+                   {
+                       "path":  "build/initrd-fonts.img",
+                       "sha256":  "832a8c00b047953c9bd5b4d72b1da703a8a5e881c7e250e8cbd983e408382dfe"
+                   },
+                   {
+                       "path":  "build/freetype-probe.elf",
+                       "sha256":  "e9c325528c6a0410fc60d60ce0414f13a9b6147cb817f024b257ad2e3c4a76f4"
+                   },
+                   {
+                       "path":  "build/freetype-rv32-sysroot/usr/lib/libfreetype.a",
+                       "sha256":  "aa0087f268383543cc09a0cc708b5bf52b448779bdcec3a7e150ded759e1d676"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-native.a",
+                       "sha256":  "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-string.a",
+                       "sha256":  "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-message.a",
+                       "sha256":  "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+                   },
+                   {
+                       "path":  "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a",
+                       "sha256":  "058d0a82fbd3132b59d7e5d57eb2291f80ad490ba15468d02f1603119621ef03"
+                   },
+                   {
+                       "path":  "build/font-sources.json",
+                       "sha256":  "9665167c9991832872fb87ae20a54b63a90bd5859ea2e75964a8b21954851159"
+                   }
+               ],
+    "after":  [
+                  {
+                      "path":  "build/caribe_rv32.elf",
+                      "sha256":  "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea"
+                  },
+                  {
+                      "path":  "build/initrd.img",
+                      "sha256":  "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+                  },
+                  {
+                      "path":  "build/initrd-fonts.img",
+                      "sha256":  "832a8c00b047953c9bd5b4d72b1da703a8a5e881c7e250e8cbd983e408382dfe"
+                  },
+                  {
+                      "path":  "build/freetype-probe.elf",
+                      "sha256":  "e9c325528c6a0410fc60d60ce0414f13a9b6147cb817f024b257ad2e3c4a76f4"
+                  },
+                  {
+                      "path":  "build/freetype-rv32-sysroot/usr/lib/libfreetype.a",
+                      "sha256":  "aa0087f268383543cc09a0cc708b5bf52b448779bdcec3a7e150ded759e1d676"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-native.a",
+                      "sha256":  "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-string.a",
+                      "sha256":  "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-message.a",
+                      "sha256":  "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+                  },
+                  {
+                      "path":  "build/cxx-rv32-sysroot/usr/lib/rv32imac/ilp32/libstdc++.a",
+                      "sha256":  "058d0a82fbd3132b59d7e5d57eb2291f80ad490ba15468d02f1603119621ef03"
+                  },
+                  {
+                      "path":  "build/font-sources.json",
+                      "sha256":  "9665167c9991832872fb87ae20a54b63a90bd5859ea2e75964a8b21954851159"
+                  }
+              ]
+}

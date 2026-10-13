@@ -17,6 +17,8 @@
 | Syllable AppServer | [SyllableOS source](https://github.com/SyllableOS/Syllable/tree/579e480a005321cc320e7e355e8dff398b689be8) | LGPL-2.0-only for the four selected decorator files | Real software-rendered window decorator | Bounded title and max helper; Layer adapter | Future binaries require exact sources, changes, full license, and application objects/relink instructions |
 | font8x8 | [Pinned source](https://github.com/dhepper/font8x8/tree/8e279d2d864e79128e96188a6b9526cfa3fbfef9) | Public domain, upstream notices preserved | Temporary bitmap font, not Syllable's full font engine | None | Preserve upstream attribution |
 | Pillow | Host Python library | HPND and upstream component notices | QEMU screenshot verification only | None | Not bundled |
+| FreeType | [2.15.0 official mirror](https://github.com/freetype/freetype/tree/37515cf56ba3349656049edbed89ffc6f6466f2d) | FTL chosen; upstream per-file BDF/PCF, zlib and embedded HarfBuzz exceptions preserved | Static RV32-musl font rasterization dependency | None | Complete upstream notices and FreeType Team acknowledgment required; no new binary Release |
+| Bitstream Vera | [1.10 GNOME distribution](https://download.gnome.org/sources/ttf-bitstream-vera/1.10/) | Bitstream Vera font terms, not BSD | Three unmodified TrueType font test inputs | None | Complete COPYRIGHT.TXT bundled; fonts not sold alone; modified fonts must be renamed |
 
 Original CaribeOS build wrappers, configuration headers, and integration
 scripts that mention or invoke Bash, musl, OpenSBI, QEMU, or the toolchain are
@@ -27,6 +29,16 @@ not change any upstream license.
 The source archives and extracted trees under `third_party/` are local build
 inputs and are not committed. `scripts/build-musl-rv32.ps1` and
 `scripts/build-bash-rv32.ps1` record upstream URLs and expected hashes.
+
+The font preparer verifies the official FreeType tag/commit and every original
+Git blob (allowing only checkout CRLF normalization). It does not claim GPG
+verification. Vera's archive is pinned to the GNOME publisher's SHA-256
+`3a84126ce11ef404d1453438e35450b9e0838220d262059e56cd8496ac6f5d15`.
+Complete notices are retained in local sources and bundled with the optional
+font initrd, including [the acknowledgment](ports/freetype/NOTICE.md).
+The source trees and font binaries are not committed or relicensed BSD.
+No proprietary host fonts are used. This dependency is not a replacement
+implementation of Syllable Font or a claim of completed AppServer/Desktop.
 
 The BSD-2-Clause license in this repository applies only to original CaribeOS
 runtime code. It does not relicense XNU, GNU Bash, musl, OpenSBI, QEMU, the

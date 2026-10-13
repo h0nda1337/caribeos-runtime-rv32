@@ -12,10 +12,24 @@ param(
     [switch]$SyllableString,
     [switch]$SyllableMessage,
     [switch]$NativeSync,
+    [switch]$FreeType,
+    [ValidateSet("A", "B", "C", "D")][string]$FontGate = "D",
     [ValidateSet("A", "B", "C", "D", "E")][string]$SyncGate = "E",
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
+function Invoke-LoggedBuild {
+    param([string]$Program, [string[]]$Parameters, [string]$Log)
+    $previous = $ErrorActionPreference
+    try {
+        # Windows PowerShell otherwise turns harmless native compiler stderr into a terminating error.
+        $ErrorActionPreference = "Continue"
+        $global:LASTEXITCODE = $null
+        & $Program @Parameters *> $Log
+        if ($null -eq $global:LASTEXITCODE) { return -1 }
+        return $global:LASTEXITCODE
+    } finally { $ErrorActionPreference = $previous }
+}
 $root = Split-Path -Parent $PSScriptRoot
 $workspace = Split-Path -Parent (Split-Path -Parent $root)
 foreach ($path in @("msys64\ucrt64\bin", "msys64\usr\bin")) {
@@ -25,18 +39,23 @@ foreach ($path in @("msys64\ucrt64\bin", "msys64\usr\bin")) {
 $build = Join-Path $root "build"
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 if (-not $SkipKernelBuild) {
-    & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $workspace "xnu-2050.48.11\tools\riscv32-link-full-stage0.ps1") *> (Join-Path $build "graphics-kernel-build.txt")
-    if ($LASTEXITCODE -ne 0) { throw "Kernel build failed: build/graphics-kernel-build.txt" }
+    $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $workspace "xnu-2050.48.11\tools\riscv32-link-full-stage0.ps1")) -Log (Join-Path $build "graphics-kernel-build.txt")
+    if ($code -ne 0) { throw "Kernel build failed: build/graphics-kernel-build.txt" }
 }
 Push-Location $root
 try {
     $makeArguments = @("all", "hfs_kernel", "hfs_initrd")
-    if ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
+    if ($FreeType) {
+        $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
+        if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
+        $makeArguments += "INITRD_IMG=build/initrd-fonts.img"
+    }
+    elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
     elseif ($SyllableString) { $makeArguments += "INITRD_IMG=build/initrd-syllable.img" }
     elseif ($NativeCxx) { $makeArguments += "INITRD_IMG=build/initrd-cxx.img" }
-    & make @makeArguments *> (Join-Path $build "graphics-runtime-build.txt")
-    if ($LASTEXITCODE -ne 0) { throw "Runtime build failed: build/graphics-runtime-build.txt" }
+    $code = Invoke-LoggedBuild -Program "make" -Parameters $makeArguments -Log (Join-Path $build "graphics-runtime-build.txt")
+    if ($code -ne 0) { throw "Runtime build failed: build/graphics-runtime-build.txt" }
     if (-not $PythonPath) {
         $candidates = @(
             (Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"),
@@ -63,6 +82,7 @@ try {
     if ($SyllableString) { $arguments += "--syllable-string" }
     if ($SyllableMessage) { $arguments += "--syllable-message" }
     if ($NativeSync) { $arguments += @("--native-sync", "--sync-gate", $SyncGate.ToUpperInvariant()) }
+    if ($FreeType) { $arguments += @("--freetype", "--font-gate", $FontGate.ToUpperInvariant()) }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

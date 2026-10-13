@@ -82,6 +82,15 @@ APSL 2.0; the runtime license does not relicense either external interface or
 kernel. Counting semantics do not imply native GUI threads, recursive kernel
 mutexes, reader/writer locks or a complete libsyllable/AppServer library.
 
+The optional font dependency profile uses authentic unmodified FreeType
+2.15.0 under the FreeType License, with upstream per-file exceptions intact.
+This software is based in part on the work of the FreeType Team.
+Bitstream Vera 1.10 font data retains its own complete Bitstream notices and
+redistribution conditions. Neither FreeType nor the fonts is relicensed BSD.
+Only the original build/preparer controls and independent probe are BSD-2-Clause.
+See [font notices](ports/freetype/NOTICE.md). This is a dependency gate, not
+the complete Syllable Font/SFont/AppServer implementation or a new binary Release.
+
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2

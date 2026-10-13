@@ -1,0 +1,55 @@
+test_all_modified_signature_bytes (test_catkey.CatKeyTests.test_all_modified_signature_bytes) ... ok
+test_all_modified_signed_body_bytes (test_catkey.CatKeyTests.test_all_modified_signed_body_bytes) ... ok
+test_ed25519_rfc8032_empty_message (test_catkey.CatKeyTests.test_ed25519_rfc8032_empty_message) ... ok
+test_image_and_length_tampering (test_catkey.CatKeyTests.test_image_and_length_tampering) ... ok
+test_image_subject_binding (test_catkey.CatKeyTests.test_image_subject_binding) ... ok
+test_independent_signer_and_determinism (test_catkey.CatKeyTests.test_independent_signer_and_determinism) ... ok
+test_invalid_pointer_inputs (test_catkey.CatKeyTests.test_invalid_pointer_inputs) ... ok
+test_role_comes_from_enrollment (test_catkey.CatKeyTests.test_role_comes_from_enrollment) ... ok
+test_rollback_requires_trusted_storage (test_catkey.CatKeyTests.test_rollback_requires_trusted_storage) ... ok
+test_self_signed_unenrolled_key (test_catkey.CatKeyTests.test_self_signed_unenrolled_key) ... ok
+test_sha256_known_answers (test_catkey.CatKeyTests.test_sha256_known_answers) ... ok
+test_size_boundary (test_catkey.CatKeyTests.test_size_boundary) ... ok
+test_token_permissions_identity_nonce (test_catkey.CatKeyTests.test_token_permissions_identity_nonce) ... ok
+test_zero_key_is_no_enrollment (test_catkey.CatKeyTests.test_zero_key_is_no_enrollment) ... ok
+test_archive_traversal_is_rejected (test_font_dependencies.FontGuards.test_archive_traversal_is_rejected) ... ok
+test_cached_font_archive_mismatch_is_rejected (test_font_dependencies.FontGuards.test_cached_font_archive_mismatch_is_rejected) ... ok
+test_clean_git_status_does_not_bypass_content_verification (test_font_dependencies.FontGuards.test_clean_git_status_does_not_bypass_content_verification) ... ok
+test_corrupt_git_blob_is_rejected (test_font_dependencies.FontGuards.test_corrupt_git_blob_is_rejected) ... ok
+test_logged_build_retains_diagnostics_and_failure_exit_codes (test_font_dependencies.FontGuards.test_logged_build_retains_diagnostics_and_failure_exit_codes) ... ok
+test_modified_font_is_not_overwritten (test_font_dependencies.FontGuards.test_modified_font_is_not_overwritten) ... ok
+test_only_checkout_crlf_is_normalized (test_font_dependencies.FontGuards.test_only_checkout_crlf_is_normalized) ... ok
+test_scanout_hash_uses_guest_xrgb_word_order (test_font_dependencies.FontGuards.test_scanout_hash_uses_guest_xrgb_word_order) ... ok
+test_source_commit_and_untracked_files_are_rejected (test_font_dependencies.FontGuards.test_source_commit_and_untracked_files_are_rejected) ... ok
+test_static_soft_float_elf_guards (test_font_dependencies.FontGuards.test_static_soft_float_elf_guards) ... ok
+test_changed_kernel_cannot_reuse_prior_process_regression (test_font_evidence.EvidenceGuards.test_changed_kernel_cannot_reuse_prior_process_regression) ... ok
+test_changed_library_cannot_reuse_old_pass (test_font_evidence.EvidenceGuards.test_changed_library_cannot_reuse_old_pass) ... ok
+test_consistent_host_fixture_validates_collector_only (test_font_evidence.EvidenceGuards.test_consistent_host_fixture_validates_collector_only) ... ok
+test_missing_gate_cannot_overwrite_prior_evidence (test_font_evidence.EvidenceGuards.test_missing_gate_cannot_overwrite_prior_evidence) ... ok
+test_guest_sync_failure_is_detected_without_waiting_for_timeout (test_graphics_profile.ProfileGuards.test_guest_sync_failure_is_detected_without_waiting_for_timeout) ... ok
+test_hard_float_profile_is_rejected_before_qemu (test_graphics_profile.ProfileGuards.test_hard_float_profile_is_rejected_before_qemu) ... ok
+test_missing_tls_runtime_is_not_claimed_as_tls (test_graphics_profile.ProfileGuards.test_missing_tls_runtime_is_not_claimed_as_tls) ... ok
+test_semaphore_abi_mismatch_is_rejected_before_qemu (test_graphics_profile.ProfileGuards.test_semaphore_abi_mismatch_is_rejected_before_qemu) ... ok
+test_unported_message_delivery_is_not_claimed_as_available (test_graphics_profile.ProfileGuards.test_unported_message_delivery_is_not_claimed_as_available) ... ok
+test_wrong_elf_does_not_leave_previous_pass (test_graphics_profile.ProfileGuards.test_wrong_elf_does_not_leave_previous_pass) ... ok
+test_cached_build_keeps_identical_outputs (test_syllable_message_sources.SourceGuards.test_cached_build_keeps_identical_outputs) ... ok
+test_license_and_excluded_profile_are_explicit (test_syllable_message_sources.SourceGuards.test_license_and_excluded_profile_are_explicit) ... ok
+test_modified_upstream_is_rejected (test_syllable_message_sources.SourceGuards.test_modified_upstream_is_rejected) ... ok
+test_modified_semaphore_header_is_rejected (test_syllable_native_sources.SourceGuards.test_modified_semaphore_header_is_rejected) ... ok
+test_original_license_and_header_are_unchanged (test_syllable_native_sources.SourceGuards.test_original_license_and_header_are_unchanged) ... ok
+test_unchanged_outputs_preserve_timestamps (test_syllable_native_sources.SourceGuards.test_unchanged_outputs_preserve_timestamps) ... ok
+test_invalid_patch_does_not_generate_success_manifest (test_syllable_string_sources.SourceGuards.test_invalid_patch_does_not_generate_success_manifest) ... error: No valid patches in input (allow with "--allow-empty")
+ok
+test_modified_cached_source_is_rejected (test_syllable_string_sources.SourceGuards.test_modified_cached_source_is_rejected) ... ok
+test_original_notices_and_unmodified_public_header_survive (test_syllable_string_sources.SourceGuards.test_original_notices_and_unmodified_public_header_survive) ... ok
+test_repeat_preserves_output_and_timestamps (test_syllable_string_sources.SourceGuards.test_repeat_preserves_output_and_timestamps) ... ok
+test_consistent_host_fixtures_are_retained (test_sync_evidence_guards.EvidenceGuards.test_consistent_host_fixtures_are_retained) ... ok
+test_missing_process_completion_keeps_last_snapshot (test_sync_evidence_guards.EvidenceGuards.test_missing_process_completion_keeps_last_snapshot) ... ok
+test_nonidentical_rebuild_keeps_last_snapshot (test_sync_evidence_guards.EvidenceGuards.test_nonidentical_rebuild_keeps_last_snapshot) ... ok
+test_stale_artifact_is_rejected_before_changing_saved_evidence (test_sync_evidence_guards.EvidenceGuards.test_stale_artifact_is_rejected_before_changing_saved_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 5.416s
+
+OK
+PASS retained strict-ISA FreeType matrix, scanouts, pins and exact rebuild evidence

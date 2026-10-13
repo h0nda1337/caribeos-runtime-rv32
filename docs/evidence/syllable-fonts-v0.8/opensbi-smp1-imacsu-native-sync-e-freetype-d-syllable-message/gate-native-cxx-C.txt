@@ -1,0 +1,1 @@
+[native-cxx-gate-C] independent static C++ exec cycles=16 parent heap TLS isolated and reset PASS

@@ -711,6 +711,27 @@ build/native-sync-probe.elf: build/native_sync_probe.o build/libcaribe-syllable-
 
 build/initrd-sync.img: build/initrd-message.img build/native-sync-probe.elf
 
+FREETYPE_LIBRARY = build/freetype-rv32-sysroot/usr/lib/libfreetype.a
+FREETYPE_FLAGS = $(NATIVE_IPC_FLAGS) -Ibuild/freetype-rv32-sysroot/usr/include/freetype2
+
+$(FREETYPE_LIBRARY): scripts/prepare-font-deps.py scripts/build-freetype-rv32.ps1
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-freetype-rv32.ps1
+
+build/font-sources.json: scripts/prepare-font-deps.py
+	$(PYTHON) $<
+
+build/freetype_probe.o: userland/freetype_probe.c $(FREETYPE_LIBRARY) build/syllable-native/sources.json
+	$(CC32) $(FREETYPE_FLAGS) -Wall -Wextra -c $< -o $@
+
+build/freetype-probe.elf: build/freetype_probe.o $(FREETYPE_LIBRARY) build/libcaribe-syllable-native.a $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  $< $(FREETYPE_LIBRARY) build/libcaribe-syllable-native.a -L$(MUSL_SYSROOT)/usr/lib \
+	  -Wl,--start-group -lc -lm -lgcc -Wl,--end-group $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd-fonts.img: build/initrd-sync.img build/freetype-probe.elf build/font-sources.json ports/freetype/NOTICE.md
+
 build/interactive_init.o: userland/interactive_init.c $(MUSL_SYSROOT)/usr/lib/libc.a
 	@mkdir -p $(dir $@)
 	$(CC32) $(CFLAGS32) -nostdinc -I$(MUSL_SYSROOT)/usr/include \
@@ -867,7 +888,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -881,10 +902,22 @@ build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-mes
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
-	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
-	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
-	  $(if $(filter build/initrd-message.img build/initrd-sync.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
-	  $(if $(filter build/initrd-sync.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
+	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
+	  $(if $(filter build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
+	  $(if $(filter build/initrd-sync.img build/initrd-fonts.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
+	  $(if $(filter build/initrd-fonts.img,$@),bin/freetype-probe=build/freetype-probe.elf \
+	    usr/share/fonts/vera/Vera.ttf=third_party/ttf-bitstream-vera-1.10/Vera.ttf \
+	    usr/share/fonts/vera/VeraBd.ttf=third_party/ttf-bitstream-vera-1.10/VeraBd.ttf \
+	    usr/share/fonts/vera/VeraMono.ttf=third_party/ttf-bitstream-vera-1.10/VeraMono.ttf \
+	    usr/share/fonts/vera/COPYRIGHT.TXT=third_party/ttf-bitstream-vera-1.10/COPYRIGHT.TXT \
+	    usr/share/licenses/freetype/LICENSE.TXT=third_party/freetype-2.15.0/LICENSE.TXT \
+	    usr/share/licenses/freetype/FTL.TXT=third_party/freetype-2.15.0/docs/FTL.TXT \
+	    usr/share/licenses/freetype/NOTICE.md=ports/freetype/NOTICE.md \
+	    usr/share/licenses/freetype/BDF.txt=third_party/freetype-2.15.0/src/bdf/README \
+	    usr/share/licenses/freetype/PCF.txt=third_party/freetype-2.15.0/src/pcf/README \
+	    usr/share/licenses/freetype/zlib.h=third_party/freetype-2.15.0/src/gzip/zlib.h \
+	    usr/share/licenses/freetype/hb-script-list.h=third_party/freetype-2.15.0/src/autofit/hb-script-list.h) \
 	  etc/caribe/session.conf=userland/stage1/etc/caribe/session.conf \
 	  bin/pipeline-producer=$(PIPELINE_PRODUCER_ELF) \
 	  bin/pipeline-consumer=$(PIPELINE_CONSUMER_ELF) \

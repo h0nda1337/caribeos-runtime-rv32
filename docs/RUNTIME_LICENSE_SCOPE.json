@@ -94,6 +94,14 @@
                               "scripts/build-cxx-rv32.ps1",
                               "scripts/build-cxx-rv32.sh",
                               "scripts/prepare-cxx-deps.py",
+                              "scripts/prepare-font-deps.py",
+                              "scripts/build-freetype-rv32.ps1",
+                              "scripts/test-font-rebuild.ps1",
+                              "userland/freetype_probe.c",
+                              "tests/test_font_dependencies.py",
+                              "tests/test_font_evidence.py",
+                              "tests/test_logged_graphics_build.ps1",
+                              "tools/collect-font-evidence.py",
                               "scripts/riscv32-musl-cxx.sh",
                               "scripts/configure-security.py",
                               "scripts/dump-dtb.sh",
@@ -219,6 +227,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-fonts-v0.8/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Genuine FreeType QEMU gates, scanouts, immutable source pins and rebuild records are evidence data, not original runtime code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-sync-v0.7/*",
                                           "classification": "GENERATED_EVIDENCE",

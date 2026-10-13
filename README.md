@@ -23,6 +23,12 @@ an authentic Syllable AppServer decorator running in userspace. See
 [graphics commands and boundaries](docs/GRAPHICS_V0_1.md). This is not yet a
 complete Syllable Desktop; Wayland and X11 remain unavailable.
 
+`develop/syllable-native-v0.2` additionally verifies native IPC/shared areas,
+genuine GNU C++ and Syllable String/Message data cores, counting semaphores,
+and the [authentic FreeType RV32-musl dependency](docs/SYLLABLE_FONT_DEPENDENCY.md).
+Shared-task user threads, per-thread TLS and full AppServer/Desktop are still
+required; passing these dependency gates does not mark the desktop complete.
+
 ## Required Boot Chain
 
 ```text

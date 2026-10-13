@@ -22,16 +22,40 @@ RUN_RESULT_PATH = None
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL")
+               "[native-sync] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
 
-def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False, native_sync=False):
+def scanout_fnv(image):
+    value = 2166136261
+    data = image.convert("RGB").tobytes()
+    for offset in range(0, len(data), 3):
+        red, green, blue = data[offset:offset + 3]
+        value = ((value ^ ((red << 16) | (green << 8) | blue)) * 16777619) & 0xffffffff
+    return value
+
+
+def verify_font_elf(path):
+    data = path.read_bytes()
+    if (len(data) < 52 or data[:7] != b"\x7fELF\x01\x01\x01"
+            or struct.unpack_from("<HH", data, 16) != (2, 243)
+            or struct.unpack_from("<I", data, 36)[0] & 6):
+        raise RuntimeError("FreeType probe must be static RV32 ELF/soft-float")
+    offset = struct.unpack_from("<I", data, 28)[0]
+    size, count = struct.unpack_from("<HH", data, 42)
+    if not count or size != 32 or offset + size * count > len(data):
+        raise RuntimeError("invalid FreeType ELF program headers")
+    if any(struct.unpack_from("<I", data, offset + i * size)[0] in (2, 3) for i in range(count)):
+        raise RuntimeError("FreeType probe cannot depend on a dynamic loader")
+
+
+def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False, native_sync=False, freetype=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / ("build/initrd-sync.img" if native_sync else
+        "initrd": ROOT / ("build/initrd-fonts.img" if freetype else
+                          "build/initrd-sync.img" if native_sync else
                           "build/initrd-message.img" if syllable_message else
                           "build/initrd-syllable.img" if syllable_string else
                           "build/initrd-cxx.img" if native_cxx else "build/initrd.img"),
@@ -95,6 +119,8 @@ def main():
     parser.add_argument("--syllable-message", action="store_true", help="Run genuine bounded Message data core plus String/C++/IPC/area gates")
     parser.add_argument("--native-sync", action="store_true", help="Run native XNU counting semaphore gates progressively")
     parser.add_argument("--sync-gate", choices=tuple("ABCDE"), default="E", help="Last semaphore gate to run")
+    parser.add_argument("--freetype", action="store_true", help="Run genuine FreeType RV32-musl font gates")
+    parser.add_argument("--font-gate", choices=tuple("ABCD"), default="D", help="Last font gate to run")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
@@ -102,7 +128,7 @@ def main():
     args = parser.parse_args()
     args.syllable_string = args.syllable_string or args.syllable_message
     args.native_cxx = args.native_cxx or args.syllable_string
-    args.native_areas = args.native_areas or args.native_cxx or args.native_sync
+    args.native_areas = args.native_areas or args.native_cxx or args.native_sync or args.freetype
     args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
         parser.error("--live-seconds requires --live and a nonnegative duration")
@@ -113,6 +139,8 @@ def main():
         name += "-live"
     if args.native_sync:
         name += f"-native-sync-{args.sync_gate.lower()}"
+    if args.freetype:
+        name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
         name += "-syllable-message"
     elif args.syllable_string:
@@ -130,7 +158,13 @@ def main():
     result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync)
+    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync, args.freetype)
+    if args.freetype:
+        verify_font_elf(ROOT / "build/freetype-probe.elf")
+        for name, filename in (("freetypeProbe", "build/freetype-probe.elf"),
+                               ("freetypeLibrary", "build/freetype-rv32-sysroot/usr/lib/libfreetype.a"),
+                               ("fontSources", "build/font-sources.json")):
+            artifacts[name] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
     if args.native_sync:
         artifacts["nativeSyncProbe"] = hashlib.sha256((ROOT / "build/native-sync-probe.elf").read_bytes()).hexdigest()
         kernel = WORKSPACE / "xnu-2050.48.11/osfmk/riscv32/native_sync.h"
@@ -380,6 +414,30 @@ def main():
                     if shared.getpixel((x, y)) != (x & 255, y & 255, (x ^ y) & 255):
                         raise RuntimeError(f"shared framebuffer wrong pixel at {x},{y}")
             isa_match = re.search(r"\[boot-report\] cpu hart=\d+ harts=\d+ isa=(rv32[a-z]+)(?:_| )", pump())
+            if args.freetype:
+                start = len(serial)
+                uart.sendall(f"/bin/freetype-probe --gate {args.font_gate}; echo FREETYPE_STATUS=$?\n".encode())
+                wait(f"[freetype] gates A-{args.font_gate} PASS; authentic font engine, not Syllable AppServer; no Wayland/X11",
+                     timeout=180, after=start)
+                wait("\nFREETYPE_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                font_text = pump()[start:]
+                for gate in "ABCD"[:ord(args.font_gate) - ord("A") + 1]:
+                    lines = [line for line in font_text.splitlines() if f"[freetype-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing genuine FreeType gate {gate}")
+                    (out / f"gate-freetype-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if "engine=2.15.0 TrueType" not in font_text:
+                    raise RuntimeError("FreeType engine version/type mismatch")
+                if args.font_gate >= "B" and "raster-rounds=10000" not in font_text:
+                    raise RuntimeError("FreeType raster stress evidence missing")
+                if args.font_gate >= "C" and "truncations=256 guard-page invalid-signatures=1024 allocation-fault-cases=32 zero-leak" not in font_text:
+                    raise RuntimeError("FreeType bounds/allocator evidence missing")
+                if args.font_gate == "D":
+                    fonts = capture("00-freetype-fonts")
+                    match = re.search(r"frame-fnv32=([0-9a-f]{8}) GPU-present zero-area-leak PASS", font_text)
+                    if not match or scanout_fnv(fonts) != int(match.group(1), 16):
+                        raise RuntimeError("GPU font scanout differs from shared Sv32 frame")
             base_isa = isa_match.group(1) if isa_match else None
             if args.cpu == IMACSU_CPU and base_isa != "rv32imac":
                 raise RuntimeError(f"no-F/D/H test reported unexpected base ISA: {base_isa}")
@@ -499,6 +557,14 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": False} if args.native_sync else None,
+                      "freetype": {"gates": list("ABCD"[:ord(args.font_gate) - ord("A") + 1]),
+                                   "engine": "2.15.0", "fonts": "Bitstream Vera 1.10",
+                                   "rasterRounds": 10000 if args.font_gate >= "B" else 0,
+                                   "truncations": 256 if args.font_gate >= "C" else 0,
+                                   "invalidSignatures": 1024 if args.font_gate >= "C" else 0,
+                                   "allocationFailureCases": 32 if args.font_gate >= "C" else 0,
+                                   "scanoutFnv32": match.group(1) if args.font_gate == "D" else None,
+                                   "appServerBuilt": False} if args.freetype else None,
                       "nativeAreas": {"gates": ["A", "B", "C", "D", "E"], "sharedMemoryRounds": 10000,
                                       "objects": 32, "views": 64, "poolPages": 1024,
                                       "recycleCycles": 256, "sharedFramebuffer": [800, 600],
