@@ -50,11 +50,12 @@ def verify_font_elf(path):
         raise RuntimeError("FreeType probe cannot depend on a dynamic loader")
 
 
-def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False, native_sync=False, freetype=False):
+def build_hashes(native_cxx=False, syllable_string=False, syllable_message=False, native_sync=False, freetype=False, native_threads=False):
     files = {
         "xnu": WORKSPACE / "xnu-2050.48.11/BUILD/obj/RELEASE_RISCV32/osfmk/RELEASE/xnu-caribeos-rv32-full-stage0.elf",
         "cbx": ROOT / "build/caribe_rv32.elf",
-        "initrd": ROOT / ("build/initrd-fonts.img" if freetype else
+        "initrd": ROOT / ("build/initrd-threads.img" if native_threads else
+                          "build/initrd-fonts.img" if freetype else
                           "build/initrd-sync.img" if native_sync else
                           "build/initrd-message.img" if syllable_message else
                           "build/initrd-syllable.img" if syllable_string else
@@ -121,14 +122,18 @@ def main():
     parser.add_argument("--sync-gate", choices=tuple("ABCDE"), default="E", help="Last semaphore gate to run")
     parser.add_argument("--freetype", action="store_true", help="Run genuine FreeType RV32-musl font gates")
     parser.add_argument("--font-gate", choices=tuple("ABCD"), default="D", help="Last font gate to run")
+    parser.add_argument("--native-threads", action="store_true", help="Run genuine shared-task raw RV32 thread gates, not pthread/GNU TLS")
+    parser.add_argument("--thread-gate", choices=tuple("ABCD"), default="D")
+    parser.add_argument("--native-threads-disabled", action="store_true", help="Verify default-off raw-thread creation rejects without boot opt-in")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.native_threads = args.native_threads or args.native_threads_disabled
     args.syllable_string = args.syllable_string or args.syllable_message
     args.native_cxx = args.native_cxx or args.syllable_string
-    args.native_areas = args.native_areas or args.native_cxx or args.native_sync or args.freetype
+    args.native_areas = args.native_areas or args.native_cxx or args.native_sync or args.freetype or args.native_threads
     args.native_ipc = args.native_ipc or args.native_areas
     if args.live_seconds < 0 or (args.live_seconds and not args.live):
         parser.error("--live-seconds requires --live and a nonnegative duration")
@@ -139,6 +144,8 @@ def main():
         name += "-live"
     if args.native_sync:
         name += f"-native-sync-{args.sync_gate.lower()}"
+    if args.native_threads:
+        name += "-native-threads-disabled" if args.native_threads_disabled else f"-native-threads-{args.thread_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -158,7 +165,16 @@ def main():
     result_path.write_text(json.dumps({"result": "RUNNING", "smp": args.smp,
                           "bios": args.bios, "live": args.live}, indent=2) + "\n")
     verify_abi()
-    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync, args.freetype)
+    artifacts = build_hashes(args.native_cxx, args.syllable_string, args.syllable_message, args.native_sync, args.freetype, args.native_threads)
+    if args.native_threads:
+        verify_font_elf(ROOT / "build/native-thread-probe.elf")
+        artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
+        kernel = WORKSPACE / "xnu-2050.48.11/osfmk/riscv32/native_thread.h"
+        user = ROOT / "include/uapi/caribe_thread.h"
+        def thread_declarations(path):
+            return path.read_text().split("#ifndef CARIBE_NATIVE_THREAD_H", 1)[1].split("#ifdef KERNEL", 1)[0].strip().removesuffix("#endif").strip()
+        if thread_declarations(kernel) != thread_declarations(user):
+            raise RuntimeError("native raw-thread kernel/userspace ABI mismatch")
     if args.freetype:
         verify_font_elf(ROOT / "build/freetype-probe.elf")
         for name, filename in (("freetypeProbe", "build/freetype-probe.elf"),
@@ -249,7 +265,8 @@ def main():
            "-monitor", "none", "-qmp", f"tcp:127.0.0.1:{qmp_port},server=on,wait=off",
            "-serial", f"tcp:127.0.0.1:{uart_port},server=on,wait=off",
            "-snapshot", "-no-reboot", "-S",
-           "-append", ("smp-start smp-gate-f " if args.smp == 2 else "") + "process-gate-11"]
+           "-append", ("smp-start smp-gate-f " if args.smp == 2 else "") +
+           ("native-threads " if args.native_threads and not args.native_threads_disabled else "") + "process-gate-11"]
     if args.cpu:
         cmd += ["-cpu", args.cpu]
     serial = bytearray()
@@ -363,6 +380,33 @@ def main():
                     (out / f"gate-syllable-message-{gate}.txt").write_text("\n".join(lines) + "\n")
                 if "malformed=10000 all-truncations guard-page" not in message_text or "real Post/Read rounds=10000" not in message_text:
                     raise RuntimeError("Message malformed/transport stress evidence missing")
+            if args.native_threads_disabled:
+                start = len(serial)
+                uart.sendall(b"/bin/native-thread-probe --profile-off; echo NATIVE_THREAD_STATUS=$?\n")
+                wait("[native-thread] disabled-profile create=ENOTSUP no threads created PASS", timeout=60, after=start)
+                wait("\nNATIVE_THREAD_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                (out / "gate-native-thread-disabled.txt").write_text("\n".join(
+                    line for line in pump()[start:].splitlines() if "[native-thread] disabled-profile" in line) + "\n")
+            elif args.native_threads:
+                start = len(serial)
+                uart.sendall(f"/bin/native-thread-probe --gate {args.thread_gate}; echo NATIVE_THREAD_STATUS=$?\n".encode())
+                wait(f"[native-thread] gates A-{args.thread_gate} PASS; real shared-task raw RV32 threads cpu=0; pthread/GNU TLS not yet implemented",
+                     timeout=240, after=start)
+                wait("\nNATIVE_THREAD_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                thread_text = pump()[start:]
+                for gate in "ABCD"[:ord(args.thread_gate) - ord("A") + 1]:
+                    lines = [line for line in thread_text.splitlines() if f"[native-thread-gate-{gate}]" in line]
+                    if not lines or not all("PASS" in line for line in lines):
+                        raise RuntimeError(f"missing genuine native raw-thread gate {gate}")
+                    (out / f"gate-native-thread-{gate}.txt").write_text("\n".join(lines) + "\n")
+                if args.thread_gate >= "C" and "same-pmap semaphore rounds=10000 acquisitions=20000 releases=20000 scheduler-waits=" not in thread_text:
+                    raise RuntimeError("shared-task semaphore stress evidence missing")
+                if args.thread_gate >= "D" and "owner-exit cycles=16; created=reaped=35 preemptions=" not in thread_text:
+                    raise RuntimeError("native raw-thread lifecycle/preemption evidence missing")
+                if args.thread_gate >= "D" and "foreign process START/CANCEL/INFO/JOIN denied=64 owner unchanged PASS" not in thread_text:
+                    raise RuntimeError("native raw-thread process ownership evidence missing")
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -556,7 +600,14 @@ def main():
                                      "objects": 64, "recycleCycles": 256 if args.sync_gate >= "B" else 0,
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
-                                     "userThreadsImplemented": False} if args.native_sync else None,
+                                     "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "nativeThreads": {"gates": ["off"] if args.native_threads_disabled else list("ABCD"[:ord(args.thread_gate) - ord("A") + 1]),
+                                        "enabled": not args.native_threads_disabled,
+                                        "profile": "raw RV32 U-mode threads sharing an XNU task/pmap, CPU0 only",
+                                        "libcThreading": False, "gnuThreadTls": False,
+                                        "recycleCycles": 256 if not args.native_threads_disabled and args.thread_gate >= "B" else 0,
+                                        "semaphoreRounds": 10000 if not args.native_threads_disabled and args.thread_gate >= "C" else 0,
+                                        "ownerExitCycles": 16 if not args.native_threads_disabled and args.thread_gate >= "D" else 0} if args.native_threads else None,
                       "freetype": {"gates": list("ABCD"[:ord(args.font_gate) - ord("A") + 1]),
                                    "engine": "2.15.0", "fonts": "Bitstream Vera 1.10",
                                    "rasterRounds": 10000 if args.font_gate >= "B" else 0,

@@ -1,0 +1,1 @@
+[freetype-gate-A] engine=2.15.0 TrueType glyphs=268 UPEM=2048 Unicode metrics PASS

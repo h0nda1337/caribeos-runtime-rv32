@@ -16,6 +16,9 @@ param(
   [switch]$SyllableString,
   [switch]$SyllableMessage,
   [switch]$FreeType,
+  [switch]$NativeThreads,
+  [switch]$DisableNativeThreads,
+  [ValidateSet("A", "B", "C", "D")][string]$ThreadGate = "D",
   [ValidateSet("A", "B", "C", "D")][string]$FontGate = "D",
   [switch]$NativeSync,
   [ValidateSet("A", "B", "C", "D", "E")][string]$SyncGate = "E",
@@ -1817,7 +1820,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads
   exit $LASTEXITCODE
 }
 

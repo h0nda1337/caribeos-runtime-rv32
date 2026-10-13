@@ -15,6 +15,13 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "include/uapi/caribe_thread.h",
+                              "userland/native_thread_probe.c",
+                              "scripts/test-native-thread-rebuild.ps1",
+                              "scripts/test-native-thread-process-regression.ps1",
+                              "tools/collect-native-thread-evidence.py",
+                              "tests/test_native_thread_guards.py",
+                              "tests/test_kernel_build_arguments.ps1",
                               ".github/workflows/documentation-checks.yml",
                               ".github/workflows/static-checks.yml",
                               "_start.S",
@@ -227,6 +234,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-threads-v0.9/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual shared-task user-thread, default-off, scheduler, reaper, process regression and rebuild records are evidence data, not original source code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-fonts-v0.8/*",
                                           "classification": "GENERATED_EVIDENCE",

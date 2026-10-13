@@ -1,0 +1,85 @@
+[boot-report] chain OpenSBI -> CaribeBootX -> XNU-CaribeOS -> /sbin/init
+[boot-report] firmware OpenSBI spec=0x03000000 impl=0x00000001:0x00010007 ext=0x0000007f
+[boot-report] bootloader CaribeBootX v=2 flags=0x00000000 ack=0x584e5541
+[boot-report] CaribeSecurity ORANGE root-unverified cssbi=0x00000000 reported-verified-images=0x00000000 required-policy=0
+[boot-report] cpu hart=0 harts=1 isa=rv32imac_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zmmul_za64rs_zaamo_zalrsc_zawrs_zca_zba_zbb_zbc_zbs_sdtrig_shcounterenw_shgatpa_shtvala_shvsatpa_shvstvala_shvstvecd_ssccptr_sscounteren mmu=riscv,sv32
+[boot-report] memory active=0x80000000+0x10000000 banks=1 usable_pages=53381
+[boot-report] image kernel=0x80410000+0x0263319c initrd=0x84000000+0x007292bc dtb=0x8fe00000+0x000017cd
+[boot-report] fdt model=riscv-virtio,qemu compatible=riscv-virtio nodes=34 reserved=0
+[boot-report] devices uart=0x10000000 irq=10 plic=0x0c000000 aclint=0x02000000 virtio=8
+[process-gate-11] PID1 interactive argv/env stack PASS
+[process-gate-11] PID 1 interactive init started tty=1 pgid=1 sid=1 PASS
+[process-gate-11] Bash child pid=2 affinity=cpu0 PASS
+[process-gate-11] pselect6 woke for TTY readiness PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=3 PASS
+[process-gate-11] waitid job-control options=0x0000000e accepted PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=4 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=4 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=7 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=4 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=12 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=45 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=46 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=47 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=48 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=49 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=50 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS
+[process-gate-11] Gate 11 persistent interactive Bash PASS

@@ -104,6 +104,12 @@ are BSD-2-Clause, not copied Syllable semaphore kernel code. The backend is
 native XNU/APSL 2.0. No third-party header enters the BSD source allowlist,
 and no new binary package is published. See [counting profile](docs/SYLLABLE_NATIVE_SYNC.md).
 
+The native raw-thread UAPI/probe and evidence tooling are original CaribeOS
+BSD-2-Clause code. Their XNU backend retains APSL 2.0. The raw worker profile
+does not modify or relicense musl, GNU emutls, Syllable or any other external
+component, and is not a threaded libc/GNU compatibility claim. See
+[thread boundary and gates](docs/SYLLABLE_NATIVE_THREADS.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

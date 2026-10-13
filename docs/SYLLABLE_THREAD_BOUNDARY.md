@@ -2,6 +2,10 @@
 
 Audited 2026-10-13 after the genuine String/Message data-core checkpoints.
 This is a dependency audit, not a claim that the missing interfaces work.
+The subsequent [raw shared-task thread checkpoint](SYLLABLE_NATIVE_THREADS.md)
+now executes genuine additional XNU user threads with join/reaper, timer and
+same-task semaphore gates. It deliberately does not solve the libc/GNU TLS
+requirements below or expose Syllable spawn_thread as production-ready.
 The String/Message checkpoint used kernel
 `bef8795f430f4a27cb6e76052b2c8e703690d4d089ea384f195422bcd53aac1f`.
 The next counting-semaphore profile is tracked separately in

@@ -13,11 +13,15 @@ param(
     [switch]$SyllableMessage,
     [switch]$NativeSync,
     [switch]$FreeType,
+    [switch]$NativeThreads,
+    [switch]$DisableNativeThreads,
+    [ValidateSet("A", "B", "C", "D")][string]$ThreadGate = "D",
     [ValidateSet("A", "B", "C", "D")][string]$FontGate = "D",
     [ValidateSet("A", "B", "C", "D", "E")][string]$SyncGate = "E",
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
+$NativeThreads = $NativeThreads -or $DisableNativeThreads
 function Invoke-LoggedBuild {
     param([string]$Program, [string[]]$Parameters, [string]$Log)
     $previous = $ErrorActionPreference
@@ -45,10 +49,10 @@ if (-not $SkipKernelBuild) {
 Push-Location $root
 try {
     $makeArguments = @("all", "hfs_kernel", "hfs_initrd")
-    if ($FreeType) {
+    if ($FreeType -or $NativeThreads) {
         $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
         if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
-        $makeArguments += "INITRD_IMG=build/initrd-fonts.img"
+        $makeArguments += $(if ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
     }
     elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
@@ -83,6 +87,8 @@ try {
     if ($SyllableMessage) { $arguments += "--syllable-message" }
     if ($NativeSync) { $arguments += @("--native-sync", "--sync-gate", $SyncGate.ToUpperInvariant()) }
     if ($FreeType) { $arguments += @("--freetype", "--font-gate", $FontGate.ToUpperInvariant()) }
+    if ($NativeThreads) { $arguments += @("--native-threads", "--thread-gate", $ThreadGate.ToUpperInvariant()) }
+    if ($DisableNativeThreads) { $arguments += "--native-threads-disabled" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments
     if ($LASTEXITCODE -ne 0) { throw "QEMU graphics gate failed; see build/graphics-tests." }

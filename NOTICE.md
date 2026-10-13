@@ -92,6 +92,7 @@ See [font notices](ports/freetype/NOTICE.md). This is a dependency gate, not
 the complete Syllable Font/SFont/AppServer implementation or a new binary Release.
 
 CaribeSecurity, CatKey tools, protocol headers, and security build/test wrappers
+and the independently written raw-thread UAPI/probe/evidence tools
 are original CaribeOS integration code under BSD-2-Clause when listed in the
 runtime scope manifest. Ed25519 verification uses unmodified Monocypher 4.0.2
 (BSD-2-Clause OR CC0-1.0); SHA-256 uses unmodified Mbed TLS 3.6.5 (the

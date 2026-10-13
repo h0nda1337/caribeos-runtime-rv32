@@ -26,8 +26,10 @@ complete Syllable Desktop; Wayland and X11 remain unavailable.
 `develop/syllable-native-v0.2` additionally verifies native IPC/shared areas,
 genuine GNU C++ and Syllable String/Message data cores, counting semaphores,
 and the [authentic FreeType RV32-musl dependency](docs/SYLLABLE_FONT_DEPENDENCY.md).
-Shared-task user threads, per-thread TLS and full AppServer/Desktop are still
-required; passing these dependency gates does not mark the desktop complete.
+The [raw shared-task thread checkpoint](docs/SYLLABLE_NATIVE_THREADS.md) now
+adds genuine CPU0 user threads, join/reaper, timer and same-task semaphore gates.
+Threaded libc/GNU TLS and full AppServer/Desktop are still required; passing
+these dependency gates does not mark the desktop complete.
 
 ## Required Boot Chain
 
