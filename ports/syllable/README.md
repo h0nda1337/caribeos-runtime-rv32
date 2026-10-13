@@ -68,6 +68,12 @@ real Message Post/Read transport and adversarial guest guard-page tests.
 Looper/Handler/Variant delivery is excluded, not stubbed. See
 [Message core limits and gates](../../docs/SYLLABLE_MESSAGE_CORE.md).
 
+The further `-NativeTcb` dependency profile now verifies genuine musl
+TCB/DTV, independent `errno` and native RV32 ELF TLS on CPU0-bound XNU user
+threads. It is not a complete pthread lifecycle or threaded GNU/libc port;
+the native Syllable thread adapter and original Locker/Looper remain next.
+See [TCB/TLS gates and boundaries](../../docs/SYLLABLE_MUSL_TCB.md).
+
 Desktop, Dock and FileBrowser have **not** been compiled or started.
 Their inspected entry files carry LGPL version 2 notices, but every additional
 file must still be reviewed individually. Their shared libsyllable/AppServer

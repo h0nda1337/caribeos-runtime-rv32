@@ -735,6 +735,26 @@ build/native-futex-probe.elf: build/native_futex_probe.o $(MUSL_SYSROOT)/usr/lib
 
 build/initrd-futex.img: build/initrd-threads.img build/native-futex-probe.elf
 
+MUSL_INTERNAL_FLAGS = -Ithird_party/musl-1.2.5/arch/riscv32 -Ithird_party/musl-1.2.5/arch/generic -Ithird_party/musl-1.2.5/src/internal -include third_party/musl-1.2.5/src/include/features.h
+.PHONY: verify-musl-tcb-sources
+verify-musl-tcb-sources:
+	$(PYTHON) tools/verify-musl-tcb-source.py > build/musl-tcb-sources.json
+
+build/native_tcb_probe.o: userland/native_tcb_probe.c include/uapi/caribe_thread.h $(MUSL_SYSROOT)/usr/lib/libc.a | verify-musl-tcb-sources
+	$(CC32) $(NATIVE_IPC_FLAGS) $(MUSL_INTERNAL_FLAGS) -msmall-data-limit=0 -Wall -Wextra -c $< -o $@
+
+build/native_tcb_tls.o: userland/native_tcb_tls.S
+	$(CC32) $(CFLAGS32) -c $< -o $@
+
+build/native-tcb-probe.elf: build/native_tcb_probe.o build/native_tcb_tls.o $(MUSL_SYSROOT)/usr/lib/libc.a
+	$(CC32) -march=$(ARCH32) -mabi=ilp32 -nostdlib -static \
+	  -Wl,--gc-sections -Wl,--no-relax -Wl,-e,_start \
+	  $(MUSL_SYSROOT)/usr/lib/crt1.o $(MUSL_SYSROOT)/usr/lib/crti.o \
+	  build/native_tcb_probe.o build/native_tcb_tls.o -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
+	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
+
+build/initrd-tcb.img: build/initrd-futex.img build/native-tcb-probe.elf
+
 FREETYPE_LIBRARY = build/freetype-rv32-sysroot/usr/lib/libfreetype.a
 FREETYPE_FLAGS = $(NATIVE_IPC_FLAGS) -Ibuild/freetype-rv32-sysroot/usr/include/freetype2
 
@@ -912,7 +932,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(MUSL_SYSROOT)/usr/lib/libc.a $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(MUSL_SYSROOT)/usr/lib/libc.a $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -926,13 +946,14 @@ build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-mes
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
-	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
-	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
-	  $(if $(filter build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
-	  $(if $(filter build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
-	  $(if $(filter build/initrd-threads.img build/initrd-futex.img,$@),bin/native-thread-probe=build/native-thread-probe.elf) \
-	  $(if $(filter build/initrd-futex.img,$@),bin/native-futex-probe=build/native-futex-probe.elf) \
-	  $(if $(filter build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img,$@),bin/freetype-probe=build/freetype-probe.elf \
+	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
+	  $(if $(filter build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
+	  $(if $(filter build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
+	  $(if $(filter build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/native-thread-probe=build/native-thread-probe.elf) \
+	  $(if $(filter build/initrd-futex.img build/initrd-tcb.img,$@),bin/native-futex-probe=build/native-futex-probe.elf) \
+	  $(if $(filter build/initrd-tcb.img,$@),bin/native-tcb-probe=build/native-tcb-probe.elf) \
+	  $(if $(filter build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img,$@),bin/freetype-probe=build/freetype-probe.elf \
 	    usr/share/fonts/vera/Vera.ttf=third_party/ttf-bitstream-vera-1.10/Vera.ttf \
 	    usr/share/fonts/vera/VeraBd.ttf=third_party/ttf-bitstream-vera-1.10/VeraBd.ttf \
 	    usr/share/fonts/vera/VeraMono.ttf=third_party/ttf-bitstream-vera-1.10/VeraMono.ttf \

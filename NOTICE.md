@@ -109,3 +109,8 @@ The independently written private-futex probe and runner/host guards retain
 the runtime's BSD-2-Clause terms. The corresponding native XNU scheduler
 backend retains APSL-2.0. It adds no external Linux kernel code and does not
 relicense musl, GNU or Syllable or claim pthread compatibility.
+
+The original TCB/TLS probe, assembly fixture and evidence tooling are runtime
+BSD-2-Clause integration code. They include unmodified musl 1.2.5 ABI headers
+and link its genuine MIT-licensed libc; they do not relicense musl. This
+dependency checkpoint is not a complete pthread or thread-safe libc port.

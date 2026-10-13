@@ -1,0 +1,1 @@
+[graphics-gate-A] XNU virtio-gpu 800x600 XRGB8888 ready inputs=2 PASS

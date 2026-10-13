@@ -116,6 +116,13 @@ backend remains APSL-2.0. No upstream libc, Linux kernel futex implementation
 or Syllable code is copied or relicensed by this dependency checkpoint.
 See [private-only contract](docs/SYLLABLE_PRIVATE_FUTEX.md).
 
+The musl TCB/TLS dependency probe uses the original musl 1.2.5 internal
+headers and static library, including `__copy_tls`, `pthread_self` and
+`__errno_location`. They remain unmodified under musl's MIT-style terms.
+Its independently written probe/assembly/runner tooling is BSD-2-Clause;
+it neither copies nor relicenses musl or implements pthread lifecycle.
+See [TCB/TLS boundary](docs/SYLLABLE_MUSL_TCB.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

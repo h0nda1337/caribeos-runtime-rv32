@@ -15,6 +15,13 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "userland/native_tcb_probe.c",
+                              "userland/native_tcb_tls.S",
+                              "tests/test_native_tcb_guards.py",
+                              "scripts/test-native-tcb-rebuild.ps1",
+                              "scripts/test-native-tcb-matrix.ps1",
+                              "tools/collect-native-tcb-evidence.py",
+                              "tools/verify-musl-tcb-source.py",
                               "include/uapi/caribe_thread.h",
                               "userland/native_thread_probe.c",
                               "userland/native_futex_probe.c",

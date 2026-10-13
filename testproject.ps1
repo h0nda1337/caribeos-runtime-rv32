@@ -18,6 +18,8 @@ param(
   [switch]$SyllableMessage,
   [switch]$FreeType,
   [switch]$NativeThreads,
+  [switch]$NativeTcb,
+  [ValidateSet("A", "B", "C")][string]$TcbGate = "C",
   [switch]$NativeFutex,
   [switch]$DisableNativeFutex,
   [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
@@ -30,6 +32,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if (($NativeTcb -or $PSBoundParameters.ContainsKey('TcbGate')) -and $Mode -notin @('graphics', 'graphics-live')) {
+  throw "TCB gates are supported for graphics runners only."
+}
+if ($NativeTcb -and ($DisableNativeThreads -or $DisableNativeFutex)) {
+  throw "TCB gates require enabled native threads and private futex"
+}
 if ($Cpu -and $Mode -notin @("graphics", "graphics-live")) {
   throw "Explicit CPU selection is currently supported for graphics runners only."
 }
@@ -1827,7 +1835,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex -NativeTcb:$NativeTcb -TcbGate $TcbGate
   exit $LASTEXITCODE
 }
 

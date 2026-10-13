@@ -14,6 +14,8 @@ param(
     [switch]$NativeSync,
     [switch]$FreeType,
     [switch]$NativeThreads,
+    [switch]$NativeTcb,
+    [ValidateSet("A", "B", "C")][string]$TcbGate = "C",
     [switch]$NativeFutex,
     [switch]$DisableNativeFutex,
     [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
@@ -24,6 +26,8 @@ param(
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
+if ($NativeTcb -and ($DisableNativeFutex -or $DisableNativeThreads)) { throw "TCB gates require enabled native threads and private futex" }
+$NativeFutex = $NativeFutex -or $NativeTcb
 $NativeFutex = $NativeFutex -or $DisableNativeFutex
 if ($NativeFutex -and $DisableNativeThreads) { throw "Futex gates require enabled native threads" }
 $NativeThreads = $NativeThreads -or $DisableNativeThreads -or $NativeFutex
@@ -68,7 +72,7 @@ try {
     if ($FreeType -or $NativeThreads) {
         $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
         if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
-        $makeArguments += $(if ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
+        $makeArguments += $(if ($NativeTcb) { "INITRD_IMG=build/initrd-tcb.img" } elseif ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
     }
     elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
@@ -106,6 +110,7 @@ try {
     if ($NativeThreads) { $arguments += @("--native-threads", "--thread-gate", $ThreadGate.ToUpperInvariant()) }
     if ($DisableNativeThreads) { $arguments += "--native-threads-disabled" }
     if ($NativeFutex) { $arguments += @("--native-futex", "--futex-gate", $FutexGate.ToUpperInvariant()) }
+    if ($NativeTcb) { $arguments += @("--native-tcb", "--tcb-gate", $TcbGate.ToUpperInvariant()) }
     if ($DisableNativeFutex) { $arguments += "--native-futex-disabled" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments

@@ -22,7 +22,7 @@ RUN_RESULT_PATH = None
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
@@ -60,6 +60,43 @@ def validate_futex_log(text, gate, disabled=False):
     if f"created=reaped={count} live=0 all slots retired PASS" not in text:
         raise RuntimeError("missing futex final reaper resources")
     return checked
+
+
+def validate_tcb_log(text, gate):
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        lines = [line for line in text.splitlines() if f"[native-tcb-gate-{letter}]" in line]
+        if not lines or not all("PASS" in line for line in lines):
+            raise RuntimeError(f"missing actual musl TCB gate {letter}")
+        checked[f"gate-native-tcb-{letter}.txt"] = "\n".join(lines)+"\n"
+    if (guest_failure(text) or
+            f"gates A-{gate} PASS; musl TCB/native ELF TLS only, not pthread lifecycle or threaded libc" not in text):
+        raise RuntimeError("incomplete or failed TCB profile")
+    if "genuine musl __copy_tls TCB/DTV=16; native PT_TLS initialized/zero image; main pthread_self/errno PASS" not in text:
+        raise RuntimeError("missing genuine musl TCB/TLS image proof")
+    if gate >= "B" and "workers=16 checks=160000; private pthread_self/errno/native TLS; futex resumes=16 cpu=0 PASS" not in text:
+        raise RuntimeError("missing independent TCB worker stress")
+    if gate >= "C" and "reuse cycles=64 cancellation requests=16; fresh TLS/errno; main unchanged; zero waiter leaks PASS" not in text:
+        raise RuntimeError("missing TCB reuse/cancellation proof")
+    count = 96 if gate >= "C" else 16 if gate >= "B" else 0
+    if f"created=reaped={count} live=0 all slots retired PASS" not in text:
+        raise RuntimeError("missing TCB final reaper resources")
+    return checked
+
+
+def verify_tcb_elf(path):
+    verify_font_elf(path)
+    data = path.read_bytes()
+    offset = struct.unpack_from("<I", data, 28)[0]
+    size, count = struct.unpack_from("<HH", data, 42)
+    headers = [struct.unpack_from("<8I", data, offset+i*size) for i in range(count)]
+    tls = [h for h in headers if h[0] == 7]
+    if len(tls) != 1:
+        raise RuntimeError("TCB probe requires exactly one native PT_TLS module")
+    _, image, _, _, filesz, memsz, _, align = tls[0]
+    if (filesz != 4 or memsz <= filesz or memsz > 4096 or align != 16 or image+filesz > len(data)
+            or data[image:image+4] != struct.pack("<I", 0x13579bdf)):
+        raise RuntimeError("TCB probe native initialized/zero TLS image differs")
 
 
 def verify_font_elf(path):
@@ -155,12 +192,16 @@ def main():
     parser.add_argument("--native-futex-disabled", action="store_true")
     parser.add_argument("--futex-gate", choices=tuple("ABCD"), default="D")
     parser.add_argument("--futex-timeout", type=float, default=240, help="Bounded diagnostic wait for the futex guest command")
+    parser.add_argument("--native-tcb", action="store_true", help="Real musl TCB/errno/native ELF TLS dependency gates, not pthread lifecycle")
+    parser.add_argument("--tcb-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
-    args.native_futex = args.native_futex or args.native_futex_disabled
+    if args.native_tcb and (args.native_futex_disabled or args.native_threads_disabled):
+        parser.error("TCB gates require enabled native threads and private futex")
+    args.native_futex = args.native_futex or args.native_futex_disabled or args.native_tcb
     if args.native_futex and args.native_threads_disabled:
         parser.error("futex gates require enabled native threads")
     args.native_threads = args.native_threads or args.native_threads_disabled or args.native_futex
@@ -181,6 +222,8 @@ def main():
         name += "-native-threads-disabled" if args.native_threads_disabled else f"-native-threads-{args.thread_gate.lower()}"
     if args.native_futex:
         name += "-futex-disabled" if args.native_futex_disabled else f"-futex-{args.futex_gate.lower()}"
+    if args.native_tcb:
+        name += f"-tcb-{args.tcb_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -205,6 +248,18 @@ def main():
         verify_font_elf(ROOT / "build/native-futex-probe.elf")
         artifacts["initrd"] = hashlib.sha256((ROOT / "build/initrd-futex.img").read_bytes()).hexdigest()
         artifacts["nativeFutexProbe"] = hashlib.sha256((ROOT / "build/native-futex-probe.elf").read_bytes()).hexdigest()
+    if args.native_tcb:
+        verify_tcb_elf(ROOT / "build/native-tcb-probe.elf")
+        for key, filename in (("initrd", "build/initrd-tcb.img"),
+                              ("nativeTcbProbe", "build/native-tcb-probe.elf"),
+                              ("muslLibrary", "build/musl-rv32-sysroot/usr/lib/libc.a")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", str(ROOT / "build/native-tcb-probe.elf")], text=True)
+        for symbol in ("__copy_tls", "pthread_self", "__errno_location", "caribe_tcb_initialized_address", "caribe_tcb_zero_address"):
+            if not re.search(rf"^\w+\s+\w\s+{symbol}$", symbols, re.M):
+                raise RuntimeError(f"missing genuine TCB dependency {symbol}")
+        if "pthread_create" in symbols or "__emutls" in symbols:
+            raise RuntimeError("TCB-only profile must not claim pthread lifecycle or GNU emutls")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -460,6 +515,15 @@ def main():
                 futex_text = pump()[start:]
                 for filename, contents in validate_futex_log(futex_text, args.futex_gate, args.native_futex_disabled).items():
                     (out / filename).write_text(contents)
+            if args.native_tcb:
+                start = len(serial)
+                uart.sendall(f"/bin/native-tcb-probe --gate {args.tcb_gate}; echo NATIVE_TCB_STATUS=$?\n".encode())
+                wait(f"[native-tcb] gates A-{args.tcb_gate} PASS; musl TCB/native ELF TLS only, not pthread lifecycle or threaded libc",
+                     timeout=240, after=start)
+                wait("\nNATIVE_TCB_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_tcb_log(pump()[start:], args.tcb_gate).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -654,6 +718,14 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "nativeTcb": {"gates": list("ABC"[:ord(args.tcb_gate)-ord("A")+1]),
+                                    "muslVersion": "1.2.5", "nativeElfTls": True,
+                                    "pthreadLifecycleImplemented": False, "threadedLibcImplemented": False,
+                                    "cpu": 0, "workers": 16 if args.tcb_gate >= "B" else 0,
+                                    "stressChecks": 160000 if args.tcb_gate >= "B" else 0,
+                                    "reuseCycles": 64 if args.tcb_gate >= "C" else 0,
+                                    "cancellationRequests": 16 if args.tcb_gate >= "C" else 0,
+                                    "createdReaped": 96 if args.tcb_gate >= "C" else 16 if args.tcb_gate >= "B" else 0} if args.native_tcb else None,
                       "nativeFutex": {"gates": ["off"] if args.native_futex_disabled else list("ABCD"[:ord(args.futex_gate)-ord("A")+1]),
                                       "enabled": not args.native_futex_disabled, "privateOnly": True,
                                       "pthreadImplemented": False,

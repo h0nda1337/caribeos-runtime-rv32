@@ -1,0 +1,85 @@
+{
+  "result": "PASS",
+  "version": "1.2.5",
+  "archiveSha256": "a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4",
+  "license": "musl MIT-style COPYRIGHT unchanged",
+  "inputs": [
+    {
+      "path": "src/internal/pthread_impl.h",
+      "sha256": "31d6608bb8325e2acd8311d54f6c9ba4217bb2fe9e468532f96a8aaf9273958b"
+    },
+    {
+      "path": "src/internal/libc.h",
+      "sha256": "28c2656a8b7e8ef827113c0daeb55a270f77542291a2e3518064b57ac6e54f52"
+    },
+    {
+      "path": "src/internal/syscall.h",
+      "sha256": "2719e9deac186faab6faaa305fb09df7da2c8e16e6c3354a61ab2309bd5041b0"
+    },
+    {
+      "path": "src/internal/futex.h",
+      "sha256": "d61eaf8e17b481214fd24f0dc93b67abfded7e7e2774fb1d84d1757666a399db"
+    },
+    {
+      "path": "src/internal/atomic.h",
+      "sha256": "6d780523ff80c51479c7f848447abb28f3283e1b319f2ebe62b0ace9031d1c36"
+    },
+    {
+      "path": "src/include/features.h",
+      "sha256": "9b199f92f5949f23a224995e0e1578b2f1be0e95879fbc1c4abfa2784658490c"
+    },
+    {
+      "path": "arch/riscv32/pthread_arch.h",
+      "sha256": "fb734eed5e92d1c79624e8e9bdff04c86564d3084669a69a78bb7d1ac6b8ab6e"
+    },
+    {
+      "path": "arch/riscv32/atomic_arch.h",
+      "sha256": "980cd360a91606ec751d7db67d19a474d3c2317ae80c99eeae728c18ee6b5302"
+    },
+    {
+      "path": "arch/riscv32/syscall_arch.h",
+      "sha256": "56f4c9037b90d4b428662c404b60da8490ed186b9183130bc4ea00e027071f8d"
+    },
+    {
+      "path": "include/features.h",
+      "sha256": "6d228e77b88b69f70f9157548b6ec673ffc6b998ce6035fbbee0caddb8442903"
+    },
+    {
+      "path": "include/pthread.h",
+      "sha256": "85ecd05b6e9845851bf5444b480326281fb1484d3e4646742a50aaea612c4ef3"
+    },
+    {
+      "path": "include/errno.h",
+      "sha256": "a461912e4058202de8ec414cbd67e04a84965bbff9aff61523bd3baf090b217d"
+    },
+    {
+      "path": "include/unistd.h",
+      "sha256": "d6365cc93a99349c2b5ef3eb9211659497c1390d0ad302454fabfaef78c98711"
+    },
+    {
+      "path": "src/env/__init_tls.c",
+      "sha256": "6cb2c2f1ce53b87b9c7f2452010925ddf3356c4ae40d5e8a77f7bee3960febd6"
+    },
+    {
+      "path": "src/thread/pthread_self.c",
+      "sha256": "aaaa2602892e93074240ed6017c4c7c1a3fdb65aa69fa975e6e89818ea2fc1f6"
+    },
+    {
+      "path": "src/errno/__errno_location.c",
+      "sha256": "8ad0eaf7dc502eabbd68a6e1fb4303293f92d656b6ef9950278fb5d267ff4b60"
+    },
+    {
+      "path": "src/unistd/close.c",
+      "sha256": "0a287fdef55394bdedfafc924efcec2d27e584a252cd2c71553fae0bb8ec9672"
+    },
+    {
+      "path": "src/thread/__syscall_cp.c",
+      "sha256": "9bf39f2e3d932dcee04e145bc7fce93f2f6908d08f3a0512a20d642450c437c2"
+    },
+    {
+      "path": "COPYRIGHT",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    }
+  ],
+  "scope": "original TCB ABI headers and corresponding libc sources; not a new full libc rebuild"
+}
