@@ -1,10 +1,18 @@
 # Copyright (c) 2026 h0nda1337
 # SPDX-License-Identifier: BSD-2-Clause
 # Exercise the actual build parameter declaration only, without compiling or QEMU.
+param([string]$XnuRoot = "")
+
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $workspace = (Resolve-Path (Join-Path $root "../..")).Path
-$source = Join-Path $workspace "xnu-2050.48.11/tools/riscv32-make-osfmk.ps1"
+if (-not $XnuRoot) {
+  $XnuRoot = Join-Path $workspace "xnu-2050.48.11"
+  if (-not (Test-Path -LiteralPath $XnuRoot)) {
+    $XnuRoot = Join-Path $root "../xnu"
+  }
+}
+$source = (Resolve-Path -LiteralPath (Join-Path $XnuRoot "tools/riscv32-make-osfmk.ps1")).Path
 $tokens = $null; $errors = $null
 $ast = [System.Management.Automation.Language.Parser]::ParseFile($source, [ref]$tokens, [ref]$errors)
 if ($errors.Count) { throw "Kernel build parameter parse error" }
