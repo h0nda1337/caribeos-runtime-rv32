@@ -1,0 +1,230 @@
+Actual testproject.ps1 -Mode process-gates exit code 0; 15 targets and 15 explicit OK completions.
+Full local log SHA256: 729e91e3494922dfb16ae9c3640f9b4e4646c938449aad5dd0b9637986c45720
+==> make boot_stage1 QEMU_SMOKE_SECONDS=45
+==> make boot_stage1_process_gate_2 QEMU_SMOKE_SECONDS=45
+==> make boot_stage1_process_gate_3 QEMU_SMOKE_SECONDS=45
+==> make boot_stage1_process_gate_4 QEMU_SMOKE_SECONDS=120
+==> make boot_stage1_process_gate_5 QEMU_SMOKE_SECONDS=120
+==> make boot_stage1_process_gate_6 QEMU_SMOKE_SECONDS=300
+==> make boot_stage1_process_gate_7_only QEMU_SMOKE_SECONDS=90
+==> make boot_stage1_process_gate_8_only QEMU_SMOKE_SECONDS=90
+==> make boot_stage1_process_gate_9_only QEMU_SMOKE_SECONDS=100
+==> make boot_stage1_process_gate_10_only QEMU_SMOKE_SECONDS=120
+==> make boot_stage1_process_gate_11 QEMU_SMOKE_SECONDS=120
+==> make boot_stage1_process_gate_12 QEMU_SMOKE_SECONDS=180
+==> make boot_stage1_process_gate_13 QEMU_SMOKE_SECONDS=180
+==> make boot_stage1_process_gate_14 QEMU_SMOKE_SECONDS=240
+==> make boot_stage1_process_gate_15 QEMU_SMOKE_SECONDS=90 GATE15_SECONDS=90
+OK: boot_stage1
+OK: boot_stage1_process_gate_2
+OK: boot_stage1_process_gate_3
+OK: boot_stage1_process_gate_4
+OK: boot_stage1_process_gate_5
+OK: boot_stage1_process_gate_6
+OK: boot_stage1_process_gate_7_only
+OK: boot_stage1_process_gate_8_only
+OK: boot_stage1_process_gate_9_only
+OK: boot_stage1_process_gate_10_only
+OK: boot_stage1_process_gate_11
+OK: boot_stage1_process_gate_12
+OK: boot_stage1_process_gate_13
+OK: boot_stage1_process_gate_14
+OK: boot_stage1_process_gate_15
+[process-gate-1] PID1 XNU task/thread/pmap created; runnable PASS
+[process-gate-1] PID1 real XNU task/thread entered U-mode PASS
+[process-gate-2] child real XNU task/thread entered U-mode PASS
+[process-gate-2] child exit(7) -> ZOMBIE; SIGCHLD pending PASS
+[process-gate-2] XNU task/thread released tasks=2 threads=8; Sv32 pages returned=3 arena-in-use=12 PASS
+[process-gate-2] zombie reaped; process table baseline restored PASS
+[process-gate-2] Gate 2 real exit/zombie/reap PASS
+[process-gate-3] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-3] pid=2 real XNU task/thread entered U-mode cpu=0 PASS
+[process-gate-3] clone copied registers pc=0x0001a042 sp=0x7ffeff00 and stack-pages=32 PASS
+[process-gate-3] simultaneous real processes parent=2 child=3 child-task=0x90420490 child-thread=0x90432958 child-pmap=0x9041bcc0 affinity=cpu0 PASS
+[process-gate-3] pid=3 real XNU task/thread entered U-mode cpu=0 PASS
+[process-gate-3] parent resumed after child status=9 and continues PASS
+[process-gate-3] child exit(9) woke blocked parent; real wait4 reaped PASS
+[process-gate-3] two tasks/threads released; Sv32 pages returned=6 backing-slots=0 zombies=1 PASS
+[process-gate-3] Gate 3 two real processes and blocking wait PASS
+[process-gate-4] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-4] parent entered U-mode cpu=0 PASS
+[process-gate-4] parent retained private value=10 status=12 PASS
+[process-gate-4] user loop completed forks=1000 value=10 status=12 PASS
+[process-gate-4] kernel verified forks=1000 private-pages-per-fork=35 user-page-copies=35000 PASS
+[process-gate-4] task/thread/pmap/fd/backing/zombie counters baseline PASS
+[process-gate-4] Gate 4 eager private VM fork x1000 PASS
+[process-gate-5] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-5] parent entered U-mode cpu=0 PASS
+[process-gate-5] parent opened fd3 CLOEXEC and read ABCD offset=4 PASS
+[process-gate-5] fork child=1004 private-pages=35 shared-ofd-table affinity=cpu0 PASS
+[process-gate-5] child pid=1004 entered U-mode cpu=0 PASS
+[process-gate-5] child read EFGH through shared OFD and closed fd5 PASS
+[process-gate-5] exec kept process identity and removed CLOEXEC fd3 PASS
+[process-gate-5] exec image read PIPE from inherited fd4 PASS
+[process-gate-5] parent observed shared offset and read IJKL after status=21 PASS
+[process-gate-5] parent close remained independent; user fd scenario PASS
+[process-gate-5] shared offset, independent close, CLOEXEC and inherited pipe PASS
+[process-gate-5] OFD alloc=6 retain=6 release=12 free=6; all baselines restored PASS
+[process-gate-5] per-process exec arena isolated child image from PID1 PASS
+[process-gate-5] Gate 5 per-process fd/OFD semantics PASS
+[process-gate-6] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-6] parent entered U-mode cpu=0 PASS
+[process-gate-6] rejected exec stage=interpreter-lookup errno=2 preserved old pmap/register image PASS
+[process-gate-6] failed exec returned ENOENT with registers/data/fd intact PASS
+[process-gate-6] exec image verified identity/argv/env/cwd/umask/credentials/signals/CLOEXEC PASS
+[process-gate-6] reaped exec child iteration=1 pid=1005 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=100 pid=1104 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=200 pid=1204 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=300 pid=1304 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=400 pid=1404 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=500 pid=1504 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=600 pid=1604 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=700 pid=1704 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=800 pid=1804 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=900 pid=1904 status=23 resources released PASS
+[process-gate-6] reaped exec child iteration=1000 pid=2004 status=23 resources released PASS
+[process-gate-6] userspace parent observed status=23 x1000 and continued PASS
+[process-gate-6] transactional commits=1000 rollback=1 old translations=0 PASS
+[process-gate-6] cloned user pages=35000 pmap-create/destroy=2002 page-tables-returned=6005 PASS
+[process-gate-6] PID/parent/cwd/umask/credentials/pgid/sid preserved; signal reset semantics PASS
+[process-gate-6] Gate 6 real fork-exec-exit-wait x1000 PASS
+[process-gate-7] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-7] parent entered U-mode cpu=0 PASS
+[process-gate-7] released child index=1 pid=3 status=31 backing returned PASS
+[process-gate-7] parent waited before child exit; SIGCHLD wakeup PASS
+[process-gate-7] child exited before wait; waitid WNOWAIT preserved zombie PASS
+[process-gate-7] WNOHANG returned 0 for live matching child PASS
+[process-gate-7] released child index=13 pid=6 status=40 backing returned PASS
+[process-gate-7] ten children exited/reaped in reverse order with no duplicates PASS
+[process-gate-7] wait4/waitid report ECHILD after final reap PASS
+[process-gate-7] exiting parent reparented live child to PID1 PASS
+[process-gate-7] released child index=14 pid=16 status=55 backing returned PASS
+[process-gate-7] wait-before-exit and exit-before-wait races PASS
+[process-gate-7] wait4 PID/ANY/WNOHANG and waitid PID/ALL/WNOWAIT PASS
+[process-gate-7] ten simultaneous children reaped out-of-order exactly once PASS
+[process-gate-7] XNU wait-channel blocks/resumes=21/21 no polling PASS
+[process-gate-7] cloned user pages=490 peak-backing=350 pmap-create/destroy=15 page-tables-returned=45 PASS
+[process-gate-7] zombies=0 process/task/thread/pmap/fd baselines restored PASS
+[process-gate-7] Gate 7 real wait and zombie lifecycle PASS
+[process-gate-8] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-8] parent entered U-mode cpu=0 PASS
+[process-gate-8] eager fork child=3 private-pages=35 affinity=cpu0 PASS
+[process-gate-8] child pid=3 entered inherited U-mode cpu=0 PASS
+[process-gate-8] blocked SIGCHLD visible through rt_sigpending PASS
+[process-gate-8] SIGCHLD handler entered with siginfo/ucontext PASS
+[process-gate-8] rt_sigreturn restored PC/SP/registers/mask PASS
+[process-gate-8] child resources and private pages returned PASS
+[process-gate-8] child wait status=42 after handler PASS
+[process-gate-8] kernel observed one frame delivery and one rt_sigreturn PASS
+[process-gate-8] cloned user pages=35 pmap-create/destroy=2 page-tables-returned=6 PASS
+[process-gate-8] process/task/thread/pmap/fd/signal baselines restored PASS
+[process-gate-8] Gate 8 real Linux RV32 signal frame PASS
+[process-gate-9] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-9] parent entered U-mode cpu=0 PASS
+[process-gate-9] kill(self) delivered handler after syscall PASS
+[process-gate-9] eager fork index=1 child=3 private-pages=36 affinity=cpu0 PASS
+[process-gate-9] child pid=3 entered inherited U-mode cpu=0 PASS
+[process-gate-9] SIGUSR1 interrupted XNU deadline sleep with EINTR PASS
+[process-gate-9] released sender child index=1 status=51 private pages returned PASS
+[process-gate-9] eager fork index=2 child=4 private-pages=36 affinity=cpu0 PASS
+[process-gate-9] child pid=4 entered inherited U-mode cpu=0 PASS
+[process-gate-9] SIGUSR1 woke blocked wait4 with EINTR PASS
+[process-gate-9] released sender child index=2 status=52 private pages returned PASS
+[process-gate-9] wait4 retry reaped real sender child status=52 PASS
+[process-gate-9] altstack/siginfo/ucontext/handler-mask restored x3 PASS
+[process-gate-9] kernel queued=3 wakeups=2 frames/returns=3/3 PASS
+[process-gate-9] cloned user pages=72 pmap-create/destroy=3 page-tables-returned=9 PASS
+[process-gate-9] process/task/thread/pmap/fd/signal baselines restored PASS
+[process-gate-9] Gate 9 directed signals and EINTR PASS
+[process-gate-10] parent pid=2 task=0x90420760 thread=0x90432d70 pmap=0x9041bd00 affinity=cpu0 runnable PASS
+[process-gate-10] parent entered U-mode cpu=0 PASS
+[process-gate-10] empty O_NONBLOCK read returned EAGAIN PASS
+[process-gate-10] canonical echo/backspace partial reads FIONREAD PASS
+[process-gate-10] raw VMIN=2: [process-gate-10] noncanonical VMIN=2 read returned XY PASS
+[process-gate-10] noncanonical VMIN=0 VTIME=1 timeout returned 0 PASS
+[process-gate-10] signal child index=1 pid=3 private-pages=36 affinity=cpu0 PASS
+[process-gate-10] child pid=3 entered inherited U-mode cpu=0 PASS
+[process-gate-10] signal child status=61 resources returned PASS
+[process-gate-10] SIGUSR1 interrupted blocking read with EINTR PASS
+[process-gate-10] userspace UART/TTY scenario complete PASS
+[process-gate-10] UART irq=9 rx-bytes=11 lines=1 echo=12 overruns=0 PASS
+[process-gate-10] TTY read blocks/wakeups=4/4 EAGAIN=1 EINTR=1 VTIME=1 PASS
+[process-gate-10] cloned user pages=36 pmap-create/destroy=2 page-tables-returned=6 PASS
+[process-gate-10] process/task/thread/pmap/fd/tty/signal baselines restored PASS
+[process-gate-10] Gate 10 real blocking UART TTY PASS
+[process-gate-11] PID1 interactive argv/env stack PASS
+[process-gate-11] PID 1 interactive init started tty=1 pgid=1 sid=1 PASS
+bash-5.3$ [process-gate-11] pselect6 blocking on TTY without polling PASS
+[process-gate-11] Bash child pid=2 affinity=cpu0 PASS
+[process-gate-11] pselect6 woke for TTY readiness PASS
+[process-gate-11] fork child-first rendezvous armed PASS
+[process-gate-11] child U-mode rendezvous pid=3 PASS
+[process-gate-11] waitid job-control options=0x0000000e accepted PASS
+[process-gate-11] exec argv/env collected argc=1 envc=12 PASS
+[process-gate-11] child U-mode rendezvous pid=5 PASS
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS
+[process-gate-11] Gate 11 persistent interactive Bash PASS
+[process-gate-12] pipe id=1 read-fd=3 write-fd=4 capacity=4096 created PASS
+[process-gate-12] pipe id=2 read-fd=5 write-fd=6 capacity=4096 created PASS
+[process-gate-12] pipe reader pid=3 blocking on empty pipe without polling PASS
+[process-gate-11] exec argv/env collected argc=1 envc=11 PASS
+[process-gate-11] child U-mode rendezvous pid=4 PASS
+[process-gate-12] pipe reader pid=3 observed EOF after final writer close PASS
+[process-gate-12] pipe id=2 released readers/writers=0/0 bytes=0/0 blocks/wakeups=1/1+0/0 PASS
+[process-gate-12] pipe writer pid=3 blocking on full pipe without polling PASS
+[process-gate-12] pipe id=1 released readers/writers=0/0 bytes=12288/12288 blocks/wakeups=3/3+2/2 PASS
+[process-gate-12] blocking pipeline lifecycle index=1 transfer=12288 EOF=1 no-lost-wakeup=1 resources=0 PASS
+[process-gate-12] pipe id=1 released readers/writers=0/0 bytes=0/0 blocks/wakeups=1/1+0/0 PASS
+[process-gate-11] child U-mode rendezvous pid=7 PASS
+[process-gate-11] exec argv/env collected argc=2 envc=11 PASS
+[process-gate-11] child U-mode rendezvous pid=8 PASS
+[process-gate-11] child U-mode rendezvous pid=9 PASS
+[process-gate-12] SIGPIPE queued pid=9 after final reader close PASS
+[process-gate-12] default SIGPIPE terminating pid=9 at syscall return PASS
+[process-gate-12] pipe id=1 released readers/writers=0/0 bytes=0/0 blocks/wakeups=0/0+0/0 PASS
+[process-gate-11] child U-mode rendezvous pid=10 PASS
+[process-gate-11] child U-mode rendezvous pid=11 PASS
+[process-gate-12] blocking pipeline lifecycle index=2 transfer=12288 EOF=1 no-lost-wakeup=1 resources=0 PASS
+[process-gate-13] TTY VSUSP -> SIGTSTP foreground-pgid=3 targets=1 PASS
+[process-gate-13] default SIGTSTP stopped pid=3 pgid=3 signal=20 PASS
+[process-gate-13] waitid observed child=3 code=CLD_STOPPED status=20 PASS
+[process-gate-13] SIGCONT resumed pid=3 pgid=3 PASS
+[process-gate-13] kill process-group pgid=3 signal=18 targets=1 PASS
+[process-gate-13] waitid observed child=3 code=CLD_CONTINUED status=18 PASS
+[process-gate-13] TTY VINTR -> SIGINT foreground-pgid=3 targets=1 PASS
+[process-gate-13] default SIGINT terminating pid=3 at syscall return PASS
+[process-gate-13] TTY VQUIT -> SIGQUIT foreground-pgid=4 targets=1 PASS
+[process-gate-13] default SIGQUIT terminating pid=4 at syscall return PASS
+[process-gate-14] child pid=3 parent=2 bound-cpu=1 processor=0x80543000 private-pages=321 PASS
+[process-gate-14] child pid=3 entered U-mode cpu=1 active-pmap-mask=0x00000002 trap-stack=per-hart PASS
+[process-gate-14] exec pid=3 cpu=1 new-pmap-mask=0x00000002 old-pmap-mask=0x00000000 switch-coherent PASS
+[process-gate-14] getcpu pid=3 cpu=1 node=0 affinity=1 PASS
+[process-gate-14] child pid=3 exit cpu=1 active-pmap-mask=0x00000002 status=0 PASS
+[process-gate-14] Bash pid=2 cpu=0 woke/reaped child=3 child-last-cpu=1 pmap-release=1 status=0 PASS
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[process-gate-15] fork-only-exit-wait rounds=4 PASS
+[process-gate-11] exec argv/env collected argc=1 envc=0 PASS
+[process-gate-15] fork-exec-exit-wait rounds=4 PASS
+[process-gate-11] child U-mode rendezvous pid=13 PASS
+[process-gate-15] pipes=10 bytes=640 alloc-close/read-write verified PASS
+[process-gate-11] child U-mode rendezvous pid=14 PASS
+[process-gate-15] signals=10 handlers=10 siginfo=10 altstack=10 PASS
+[process-gate-11] child U-mode rendezvous pid=15 PASS
+[process-gate-15] pipelines=1 processes=2 transfer-bytes=12288 PASS
+[process-gate-11] child U-mode rendezvous pid=18 PASS
+[process-gate-15] child-batches=1 batch-width=10 fork-exit-wait=10 zombies=0 PASS
+[process-gate-11] child U-mode rendezvous pid=29 PASS
+[process-gate-15] fork-only-exit-wait rounds=1000 PASS
+[process-gate-11] child U-mode rendezvous pid=1030 PASS
+[process-gate-15] fork-exec-exit-wait rounds=1000 PASS
+[process-gate-11] child U-mode rendezvous pid=2031 PASS
+[process-gate-15] pipes=1000 bytes=64000 alloc-close/read-write verified PASS
+[process-gate-11] child U-mode rendezvous pid=2032 PASS
+[process-gate-15] signals=1000 handlers=1000 siginfo=1000 altstack=1000 PASS
+[process-gate-11] child U-mode rendezvous pid=2033 PASS
+[process-gate-15] pipelines=100 processes=200 transfer-bytes=1228800 PASS
+[process-gate-11] child U-mode rendezvous pid=2234 PASS
+[process-gate-15] child-batches=10 batch-width=10 fork-exit-wait=100 zombies=0 PASS
+[process-gate-11] child U-mode rendezvous pid=2335 PASS
+[process-gate-15] tty-lines=1000 content=validated canonical-blocking PASS
+testproject.ps1 completed.
