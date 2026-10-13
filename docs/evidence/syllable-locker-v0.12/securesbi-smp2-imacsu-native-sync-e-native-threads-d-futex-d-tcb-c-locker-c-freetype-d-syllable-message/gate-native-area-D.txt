@@ -1,0 +1,1 @@
+[native-area-gate-D] independent-exec shared-memory rounds=10000 creator-delete live-view-retained exit-cleanup PASS

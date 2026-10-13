@@ -5,6 +5,9 @@
  */
 #include <atheos/semaphore.h>
 #include <uapi/caribe_sync.h>
+#ifdef CARIBE_SYNC_RAW_TCB
+#include <uapi/caribe_thread.h>
+#endif
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
@@ -12,7 +15,9 @@
 #include <time.h>
 #include <unistd.h>
 
+#ifndef CARIBE_SYNC_RAW_TCB
 static int sync_fd = -1;
+#endif
 static struct caribe_sync_request request(uint32_t operation, sem_id id)
 {
     struct caribe_sync_request arg;
@@ -24,8 +29,16 @@ static struct caribe_sync_request request(uint32_t operation, sem_id id)
 }
 static int call(struct caribe_sync_request *arg)
 {
+#ifdef CARIBE_SYNC_RAW_TCB
+    register uintptr_t a0 __asm__("a0")=(uintptr_t)arg;
+    register uintptr_t a7 __asm__("a7")=CARIBE_THREAD_SYNC_ECALL;
+    __asm__ volatile("ecall" : "+r"(a0) : "r"(a7) : "a1", "memory");
+    if ((int32_t)a0<0) { errno=-(int32_t)a0; return -1; }
+    return 0;
+#else
     if (sync_fd < 0) sync_fd = open("/dev/caribe-ipc", O_RDWR | O_CLOEXEC);
     return sync_fd < 0 ? -1 : ioctl(sync_fd, CARIBE_SYNC_CALL, arg);
+#endif
 }
 static int unsupported(void) { errno = ENOTSUP; return -1; }
 sem_id create_semaphore(const char *name, int count, uint32 flags)

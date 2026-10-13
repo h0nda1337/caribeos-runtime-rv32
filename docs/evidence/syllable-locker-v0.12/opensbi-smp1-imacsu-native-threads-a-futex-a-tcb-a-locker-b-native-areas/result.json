@@ -1,0 +1,145 @@
+{
+  "result": "PASS",
+  "platform": "QEMU virt RV32",
+  "smp": 1,
+  "cpu": "rv32,f=false,d=false,h=false,zfa=false",
+  "baseIsa": "rv32imac",
+  "bios": "default",
+  "gates": [
+    "A-video",
+    "B-negative-ABI",
+    "C-userspace-Syllable-component",
+    "D-keyboard-mouse-drag",
+    "E-event-integrity-exit-Bash"
+  ],
+  "resolution": [
+    800,
+    600
+  ],
+  "sessionRestarts": 1,
+  "blockedSessionStatuses": {
+    "wayland": 3,
+    "x11": 3,
+    "unknown": 2
+  },
+  "privateVm": {
+    "forkExecIsolationCycles": 32,
+    "zeroingRecycleCycles": 256
+  },
+  "nativeIpc": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "pingPongRounds": 10000,
+    "maxPayload": 8192
+  },
+  "nativeSync": null,
+  "nativeLocker": {
+    "gates": [
+      "A",
+      "B"
+    ],
+    "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/locker.h",
+    "workers": 16,
+    "cpu": 0,
+    "protectedIncrements": 160000,
+    "recursiveAcquisitions": 320000,
+    "tryLockCycles": 0,
+    "createdReaped": 16,
+    "appServerBuilt": false,
+    "pthreadLifecycleImplemented": false
+  },
+  "nativeTcb": {
+    "gates": [
+      "A"
+    ],
+    "muslVersion": "1.2.5",
+    "nativeElfTls": true,
+    "pthreadLifecycleImplemented": false,
+    "threadedLibcImplemented": false,
+    "cpu": 0,
+    "workers": 0,
+    "stressChecks": 0,
+    "reuseCycles": 0,
+    "cancellationRequests": 0,
+    "createdReaped": 0
+  },
+  "nativeFutex": {
+    "gates": [
+      "A"
+    ],
+    "enabled": true,
+    "privateOnly": true,
+    "pthreadImplemented": false,
+    "createdReaped": 0,
+    "actualWakes": 0,
+    "blockedCancellations": 0,
+    "ownerExitCycles": 0
+  },
+  "nativeThreads": {
+    "gates": [
+      "A"
+    ],
+    "enabled": true,
+    "profile": "raw RV32 U-mode threads sharing an XNU task/pmap, CPU0 only",
+    "libcThreading": false,
+    "gnuThreadTls": false,
+    "recycleCycles": 0,
+    "semaphoreRounds": 0,
+    "ownerExitCycles": 0
+  },
+  "freetype": null,
+  "nativeAreas": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "sharedMemoryRounds": 10000,
+    "objects": 32,
+    "views": 64,
+    "poolPages": 1024,
+    "recycleCycles": 256,
+    "sharedFramebuffer": [
+      800,
+      600
+    ],
+    "verifiedPixels": 5
+  },
+  "nativeCxx": null,
+  "kernelSha256": "f71b4c1ce917e110a10aa5324f3addab099e3ce63481f87eaa44d2a819da7476",
+  "syllableMessage": null,
+  "syllableString": null,
+  "artifactSha256": {
+    "xnu": "f71b4c1ce917e110a10aa5324f3addab099e3ce63481f87eaa44d2a819da7476",
+    "cbx": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+    "initrd": "89a0096c86370f1f77be4f05aa43d480b41dcf3fdac5300a51a83ed044b0adf3",
+    "syllableComponent": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+    "syllableLibrary": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+    "sessionManager": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+    "privateVmProbe": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938",
+    "nativeFutexProbe": "a79bd9ff5c9646e6f1eb3dbe84976b3f26880262d1027a75c6c1f56d5e00d7c2",
+    "nativeTcbProbe": "bf309a6066d4153580462ad0097ffd6a0389e00db3b1d9c63e37dab0abb36009",
+    "muslLibrary": "073d9144bfdab8b2501caed65f3ceea48a1f633ec8fa3f5ceb357d4b3700b14f",
+    "nativeLockerProbe": "e7ca5ad52a632a60a28352cf552df5a16f05b0276ee69deb1754f5d2b63d14f0",
+    "syllableLockerLibrary": "c33d7853fd81bf30356867d84da6d4de1b8720bda359b717697172c00f561592",
+    "syllableLockerSources": "76fe898a59d0ef9486e4348a9b916299bc848733771c4a0aa9e7911e9b7554f2",
+    "nativeThreadProbe": "3fcbfa0abdacc70337cd3ecc963e7d797e7e697f1146134b3848a13060b15545",
+    "nativeIpcProbe": "b95ef8d9c460e9ff2d318538e8b77aed91c13d19bf76cb1b64158ef48025fdf4",
+    "nativeIpcLibrary": "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d",
+    "nativeAreaProbe": "236e3e9e0863296a4defed4aed94f860f4de827e0fa881ff879dcbf83cc86744"
+  },
+  "screenshots": {
+    "00-shared-area.png": "048598c6381df95fb106ee8754b3a27700e1da27493da35f6fcd704f8e0eddd7",
+    "01-syllable.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82",
+    "02-keyboard-focus.png": "6e0a8ad1d96c6880c44cec6ef657013b4d2f56ad1bc759c7993dba3ce557f4d7",
+    "03-mouse-drag.png": "74f0727e220fea4c2fda85c7a3ba3b5eb21d9c3c2fb4e883c16db8eef59c1886",
+    "04-input-verified.png": "f4231c518fc303794389b163d0d56426255663b01b85553bf0ee4aeebff85305",
+    "05-session-restart.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82"
+  }
+}

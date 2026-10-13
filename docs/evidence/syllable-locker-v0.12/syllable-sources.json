@@ -1,0 +1,19 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/include/util/locker.h",
+      "sha256": "55743b5932e41f4b2041359229185961bb8b2691c0cc2bec29c0d549c243a74e",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/atheos/threads.h",
+      "sha256": "4d0cf6a5ecf996208dd85d002ea25238acd12bc38057ac62758623931c2d9988",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "patchSha256": "e10b4bdb6765b8ae57d41c504522b8bfed21774ffccc3ec4e3573bd8d2cc549b",
+  "adaptedLockerSha256": "a098f35bacc8af950117c7faa69d3e1fcff9376cc5d748272c81c452fb3dd0d4",
+  "license": "LGPL-2.0-only",
+  "scope": "genuine Locker header and native thread interface, not Looper/AppServer or pthread"
+}

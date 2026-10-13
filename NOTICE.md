@@ -114,3 +114,11 @@ The original TCB/TLS probe, assembly fixture and evidence tooling are runtime
 BSD-2-Clause integration code. They include unmodified musl 1.2.5 ABI headers
 and link its genuine MIT-licensed libc; they do not relicense musl. This
 dependency checkpoint is not a complete pthread or thread-safe libc port.
+
+The optional Locker profile uses the genuine LGPL-2.0-only Syllable
+`util/locker.h` and unchanged native thread interface at the pinned Syllable
+revision. Its narrow LGPL patch initializes the owner and removes an unused
+obsolete debug include, preserving all original notices and locking algorithms.
+The independently written RV32A atomic, native-thread identity and raw-TCB
+semaphore/TCB adapters are BSD-2-Clause, not copies of upstream kernel code.
+They do not relicense Syllable, musl or XNU, or implement Looper/AppServer.

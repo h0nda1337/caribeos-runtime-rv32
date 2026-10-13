@@ -1,0 +1,1 @@
+[native-thread-gate-C] same-pmap semaphore rounds=10000 acquisitions=20000 releases=20000 scheduler-waits=19999; distinct holder TID PASS

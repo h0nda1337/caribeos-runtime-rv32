@@ -1,0 +1,28 @@
+--- a/locker.h
++++ b/locker.h
+@@ -1,3 +1,9 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * Initialize Locker's owner before its first read; remove an unused obsolete
++ * debug header. Locking/recursion/wakeup algorithms remain original Syllable.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libatheos.so - the highlevel API library for AtheOS
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *
+@@ -23,7 +29,6 @@
+ #include <stdio.h>
+ #include <errno.h>
+-#include <sys/debug.h>
+ #include <atheos/types.h>
+ #include <atheos/semaphore.h>
+ #include <atheos/threads.h>
+ #include <atheos/atomic.h>
+@@ -51,6 +56,7 @@
+ 	m_hSema = create_semaphore( pzName, 0, /*(bRecursive) ? SEM_RECURSIVE :*/ 0 );
+ 	atomic_set( &m_nLock, 0 );
+ 	m_nNestCount = 0;
++	m_nOwner = -1;
+ 	  // FIXME: Check for errors.
+ 	m_bInterruptible = bInterruptible;
+     }

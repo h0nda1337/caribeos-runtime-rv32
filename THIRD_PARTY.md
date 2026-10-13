@@ -123,6 +123,18 @@ Its independently written probe/assembly/runner tooling is BSD-2-Clause;
 it neither copies nor relicenses musl or implements pthread lifecycle.
 See [TCB/TLS boundary](docs/SYLLABLE_MUSL_TCB.md).
 
+The Locker profile additionally uses authentic `util/locker.h` and
+`atheos/threads.h` at Syllable commit
+`579e480a005321cc320e7e355e8dff398b689be8`, under their original
+LGPL-2.0-only notices. Their normalized hashes and exact upstream/adapted
+copies are retained by `scripts/prepare-syllable-locker.py`.
+`locker-rv32.patch` is LGPL, not BSD; it preserves the original algorithm.
+The independent RV32A atomic/identity/semaphore/TCB integration and probes
+are BSD-2-Clause. Unmodified musl still retains MIT-style terms and XNU
+retains APSL 2.0. Future binary distribution requires exact source, notices,
+application objects and relink material; no new binary Release is published.
+See [Locker scope](docs/SYLLABLE_NATIVE_LOCKER.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

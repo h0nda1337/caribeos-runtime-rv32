@@ -32,3 +32,13 @@ Its bounded parser, alignment and lifetime changes are described in
 [Message core](../../../docs/SYLLABLE_MESSAGE_CORE.md). The unsupported methods
 are absent rather than implemented as success-returning stubs. Exact upstream
 and adapted sources plus the full license remain in build/syllable-message.
+
+`locker-rv32.patch` adapts the genuine inline `util/locker.h` at that same
+revision under LGPL-2.0-only. It initializes the previously uninitialized
+owner to -1 and removes an unused obsolete `sys/debug.h` include.
+Original recursive ownership, atomic count and semaphore wakeup algorithms
+and Kurt Skauen's full notice remain unchanged. Original/adapted headers,
+unchanged thread interface and full COPYING.LIB are retained in
+build/syllable-locker. The independently written RV32A atomic and XNU
+identity/semaphore adapters are separate original BSD code. This is not
+a Syllable Gate, Looper, Handler or AppServer port.

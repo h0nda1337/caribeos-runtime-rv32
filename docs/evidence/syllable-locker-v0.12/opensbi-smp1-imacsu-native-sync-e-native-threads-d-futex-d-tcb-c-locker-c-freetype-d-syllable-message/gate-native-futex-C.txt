@@ -1,0 +1,1 @@
+[native-futex-gate-C] sixteen simultaneous waiters; zero/one/fifteen bounded wakes and separate address key PASS

@@ -15,6 +15,16 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "tests/test_native_locker_guards.py",
+                              "scripts/test-native-locker-rebuild.ps1",
+                              "scripts/test-native-locker-matrix.ps1",
+                              "tools/collect-native-locker-evidence.py",
+                              "ports/syllable/native/atheos/atomic.h",
+                              "scripts/prepare-syllable-locker.py",
+                              "ports/syllable/native/tcb_bootstrap.h",
+                              "ports/syllable/native/tcb_bootstrap.c",
+                              "ports/syllable/native/thread_identity.c",
+                              "userland/native_locker_probe.cpp",
                               "userland/native_tcb_probe.c",
                               "userland/native_tcb_tls.S",
                               "tests/test_native_tcb_guards.py",
@@ -246,6 +256,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-locker-v0.12/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Real original Locker gate logs, scanouts, hashes and rebuild records are evidence data, not original runtime source code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-threads-v0.9/*",
                                           "classification": "GENERATED_EVIDENCE",

@@ -22,7 +22,7 @@ RUN_RESULT_PATH = None
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
@@ -81,6 +81,29 @@ def validate_tcb_log(text, gate):
     count = 96 if gate >= "C" else 16 if gate >= "B" else 0
     if f"created=reaped={count} live=0 all slots retired PASS" not in text:
         raise RuntimeError("missing TCB final reaper resources")
+    return checked
+
+
+def validate_locker_log(text, gate):
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        lines = [line for line in text.splitlines() if f"[native-locker-gate-{letter}]" in line]
+        if not lines or not all("PASS" in line for line in lines):
+            raise RuntimeError(f"missing actual Syllable Locker gate {letter}")
+        checked[f"gate-native-locker-{letter}.txt"] = "\n".join(lines)+"\n"
+    if (guest_failure(text) or
+            f"gates A-{gate} PASS; genuine Syllable Locker with native XNU threads, not Looper/AppServer or pthread lifecycle" not in text):
+        raise RuntimeError("incomplete or failed Locker profile")
+    if "genuine os::Locker owner/recursion; RV32A old-value/CAS/exchange contract PASS" not in text:
+        raise RuntimeError("missing original Locker and RV32A proof")
+    if gate >= "B" and not re.search(
+            r"\[native-locker-gate-B\] workers=16 rounds=160000 recursive acquisitions=320000 overlaps=0 cpu=0 scheduler-waits=[1-9][0-9]* PASS", text):
+        raise RuntimeError("missing actual contention/recursive Locker stress")
+    if gate >= "C" and "immediate timeout EAGAIN cycles=64; genuine errno isolation; owner preserved; generic reaping PASS" not in text:
+        raise RuntimeError("missing Locker immediate timeout/reuse proof")
+    count = 80 if gate >= "C" else 16 if gate >= "B" else 0
+    if f"[native-locker] created=reaped={count} live=0 semaphores=0 all slots retired PASS" not in text:
+        raise RuntimeError("missing Locker final reaper resources")
     return checked
 
 
@@ -194,11 +217,16 @@ def main():
     parser.add_argument("--futex-timeout", type=float, default=240, help="Bounded diagnostic wait for the futex guest command")
     parser.add_argument("--native-tcb", action="store_true", help="Real musl TCB/errno/native ELF TLS dependency gates, not pthread lifecycle")
     parser.add_argument("--tcb-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--native-locker", action="store_true", help="Original Syllable Locker with native XNU threads; not Looper/AppServer")
+    parser.add_argument("--locker-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    if args.native_locker and (args.native_futex_disabled or args.native_threads_disabled):
+        parser.error("Locker gates require enabled native threads and private futex")
+    args.native_tcb = args.native_tcb or args.native_locker
     if args.native_tcb and (args.native_futex_disabled or args.native_threads_disabled):
         parser.error("TCB gates require enabled native threads and private futex")
     args.native_futex = args.native_futex or args.native_futex_disabled or args.native_tcb
@@ -224,6 +252,8 @@ def main():
         name += "-futex-disabled" if args.native_futex_disabled else f"-futex-{args.futex_gate.lower()}"
     if args.native_tcb:
         name += f"-tcb-{args.tcb_gate.lower()}"
+    if args.native_locker:
+        name += f"-locker-{args.locker_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -260,6 +290,19 @@ def main():
                 raise RuntimeError(f"missing genuine TCB dependency {symbol}")
         if "pthread_create" in symbols or "__emutls" in symbols:
             raise RuntimeError("TCB-only profile must not claim pthread lifecycle or GNU emutls")
+    if args.native_locker:
+        verify_tcb_elf(ROOT / "build/native-locker-probe.elf")
+        for key, filename in (("initrd", "build/initrd-locker.img"),
+                              ("nativeLockerProbe", "build/native-locker-probe.elf"),
+                              ("syllableLockerLibrary", "build/libcaribe-syllable-locker.a"),
+                              ("syllableLockerSources", "build/syllable-locker/sources.json")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", str(ROOT / "build/native-locker-probe.elf")], text=True)
+        for symbol in ("__copy_tls", "pthread_self", "__errno_location", "get_thread_id", "caribe_musl_raw_tcb_prepare"):
+            if not re.search(rf"^\w+\s+\w\s+{symbol}$", symbols, re.M):
+                raise RuntimeError(f"missing original Locker native dependency {symbol}")
+        if "pthread_create" in symbols or "__emutls" in symbols:
+            raise RuntimeError("Locker profile must not claim pthread lifecycle or GNU emutls")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -524,6 +567,15 @@ def main():
                 wait("bash-5.3$ ", after=start)
                 for filename, contents in validate_tcb_log(pump()[start:], args.tcb_gate).items():
                     (out / filename).write_text(contents)
+            if args.native_locker:
+                start = len(serial)
+                uart.sendall(f"/bin/native-locker-probe --gate {args.locker_gate}; echo NATIVE_LOCKER_STATUS=$?\n".encode())
+                wait(f"[native-locker] gates A-{args.locker_gate} PASS; genuine Syllable Locker with native XNU threads, not Looper/AppServer or pthread lifecycle",
+                     timeout=240, after=start)
+                wait("\nNATIVE_LOCKER_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_locker_log(pump()[start:], args.locker_gate).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -718,6 +770,14 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "nativeLocker": {"gates": list("ABC"[:ord(args.locker_gate)-ord("A")+1]),
+                                       "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/locker.h",
+                                       "workers": 16 if args.locker_gate >= "B" else 0, "cpu": 0,
+                                       "protectedIncrements": 160000 if args.locker_gate >= "B" else 0,
+                                       "recursiveAcquisitions": 320000 if args.locker_gate >= "B" else 0,
+                                       "tryLockCycles": 64 if args.locker_gate >= "C" else 0,
+                                       "createdReaped": 80 if args.locker_gate >= "C" else 16 if args.locker_gate >= "B" else 0,
+                                       "appServerBuilt": False, "pthreadLifecycleImplemented": False} if args.native_locker else None,
                       "nativeTcb": {"gates": list("ABC"[:ord(args.tcb_gate)-ord("A")+1]),
                                     "muslVersion": "1.2.5", "nativeElfTls": True,
                                     "pthreadLifecycleImplemented": False, "threadedLibcImplemented": False,
