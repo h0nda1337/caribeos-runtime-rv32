@@ -1,0 +1,11 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\handler.cpp:29:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\handler.cpp:145:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+  145 | const uint32 Handler::GetToken()
+      | ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\handler.cpp: In member function 'virtual void os::Handler::TimerTick(int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\handler.cpp:239:30: warning: unused parameter 'nID' [-Wunused-parameter]
+  239 | void Handler::TimerTick( int nID )
+      |                          ~~~~^~~

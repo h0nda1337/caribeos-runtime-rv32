@@ -151,3 +151,10 @@ obsolete debug include, preserving all original notices and locking algorithms.
 The independently written RV32A atomic, native-thread identity and raw-TCB
 semaphore/TCB adapters are BSD-2-Clause, not copies of upstream kernel code.
 They do not relicense Syllable, musl or XNU, or implement Looper/AppServer.
+
+The event-dispatch compilation bring-up retains ten pinned original
+Handler/MessageFilter/Looper and platform-header inputs under LGPL-2.0-only.
+Both native compilation patches retain LGPL and complete original notices.
+Only the independently written source-preparation/audit/host tools are BSD.
+Successful standalone compilation is not a linked/running Looper, AppServer,
+node-monitor backend or complete desktop; no external component is relicensed.

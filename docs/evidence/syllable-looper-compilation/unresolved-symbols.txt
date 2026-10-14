@@ -1,0 +1,101 @@
+
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\handler.o:
+         U __gxx_personality_v0
+         U operator delete(void*, unsigned int)
+         U os::Looper::PostMessage(os::Message*, os::Handler*, os::Handler*)
+         U os::Looper::RemoveHandler(os::Handler*)
+         U os::Looper::RemoveCommonFilter(os::MessageFilter*)
+         U os::String::operator=(os::String const&)
+         U os::String::String(os::String const&)
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U std::__detail::_List_node_base::_M_unhook()
+         U operator new(unsigned int)
+         U vtable for __cxxabiv1::__class_type_info
+         U caribe_syllable_debug
+
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\messagefilter.o:
+         U operator delete(void*, unsigned int)
+         U operator new(unsigned int)
+         U vtable for __cxxabiv1::__class_type_info
+
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\looper.o:
+         U __assert_fail
+         U __cxa_allocate_exception
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __cxa_throw
+         U __dso_handle
+         U __errno_location
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U os::MessageQueue::AddMessage(os::Message*)
+         U os::MessageQueue::NextMessage()
+         U os::MessageQueue::Lock()
+         U os::MessageQueue::Unlock()
+         U os::MessageQueue::MessageQueue()
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(char const*, int)
+         U os::String::String(os::String const&)
+         U os::Handler::RemoveFilter(os::MessageFilter*)
+         U os::Handler::HandleMessage(os::Message*)
+         U os::Handler::__HA_reserved1__()
+         U os::Handler::__HA_reserved2__()
+         U os::Handler::__HA_reserved3__()
+         U os::Handler::__HA_reserved4__()
+         U os::Handler::__HA_reserved5__()
+         U os::Handler::TimerTick(int)
+         U os::Handler::Handler(os::String const&)
+         U os::Handler::~Handler()
+         U os::Message::_Post(int, unsigned int, int, int, int)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddString(char const*, os::String const&)
+         U os::Message::Message(int)
+         U os::Message::Message(void const*)
+         U os::Message::~Message()
+         U operator new[](unsigned int)
+         U os::String::c_str() const
+         U os::String::operator==(os::String const&) const
+         U os::String::operator+(os::String const&) const
+         U os::Handler::GetLooper() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U std::__detail::_List_node_base::_M_unhook()
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U typeinfo for os::Handler
+         U typeinfo for char const*
+         U typeinfo for std::exception
+         U vtable for __cxxabiv1::__si_class_type_info
+         U caribe_syllable_debug
+         U create_port
+         U create_semaphore
+         U delete_port
+         U delete_semaphore
+         U exit_thread
+         U free
+         U get_msg_x
+         U get_port_info
+         U get_system_time
+         U get_thread_id
+         U get_thread_proc
+         U lock_semaphore
+         U lock_semaphore_x
+         U make_port_private
+         U make_port_public
+         U malloc
+         U rename_thread
+         U resume_thread
+         U signal
+         U snooze
+         U spawn_thread
+         U strerror
+         U unlock_semaphore
+         U wait_for_thread

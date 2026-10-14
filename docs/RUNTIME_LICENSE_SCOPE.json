@@ -15,6 +15,9 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-syllable-looper.py",
+                              "scripts/audit-syllable-looper-compile.py",
+                              "tests/test_syllable_looper_inputs.py",
                               "scripts/prepare-musl-heap.py",
                               "scripts/build-musl-heap-rv32.ps1",
                               "scripts/build-musl-heap-rv32.sh",
@@ -292,6 +295,11 @@
                                           "path": "ports/musl/COPYRIGHT",
                                           "classification": "THIRD_PARTY_NOTICE",
                                           "reason": "Byte-identical original musl 1.2.5 COPYRIGHT and contributor/component notices; not relicensed."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-looper-compilation/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original event-dispatch source pins, compilation receipts, logs and unresolved symbols are evidence, not runtime source or boot proof."
                                       },
                                       {
                                           "path": "docs/evidence/syllable-heap-v0.15/*",

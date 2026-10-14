@@ -178,3 +178,13 @@ trees include their complete license texts. This change publishes source and
 wrappers only, not a new binary Release. The preserved Tranche 201 source
 asset does not cover these new dependencies; future binary packaging must
 include the exact new sources and notices rather than reusing that old asset.
+
+The complete original Handler, MessageFilter and Looper sources and seven
+public/platform headers are separately pinned at Syllable revision
+`579e480a005321cc320e7e355e8dff398b689be8`. Their notices and unchanged public
+class headers are preserved. `handler-rv32.patch` and
+`looper-platform-rv32.patch` retain LGPL-2.0-only, not runtime BSD; the latter
+adapts header includes, not filesystem/node-monitor backends. The historical
+messages-header alias copies the exact original header and notices.
+Source preparation and compiler/input guards alone are original BSD tools.
+See [event-dispatch compilation boundaries](docs/SYLLABLE_LOOPER_BRINGUP.md).
