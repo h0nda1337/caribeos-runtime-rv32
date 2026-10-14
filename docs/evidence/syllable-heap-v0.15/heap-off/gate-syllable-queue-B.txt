@@ -1,0 +1,1 @@
+[syllable-queue-gate-B] workers=16 original Queue/typed Message cycles=160000 overlaps=0 cpu=0 independent TCBs; controller-only allocation PASS

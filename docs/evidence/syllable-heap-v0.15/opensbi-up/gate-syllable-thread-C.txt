@@ -1,0 +1,1 @@
+[syllable-thread-gate-C] finite timeout cycles=64 elapsed>=2000us native-timeouts=64; sleep cancellation cycles=64; original Initialize/Terminate and generic reaping PASS

@@ -1,0 +1,1 @@
+[native-tcb-gate-B] workers=16 checks=160000; private pthread_self/errno/native TLS; futex resumes=16 cpu=0 PASS

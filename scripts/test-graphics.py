@@ -19,10 +19,15 @@ WORKSPACE = ROOT.parent.parent
 IMACSU_CPU = "rv32,f=false,d=false,h=false,zfa=false"
 RUN_RESULT_PATH = None
 
+def qmp_capture_path(case, label):
+    if Path(label).name != label or not re.fullmatch(r"[A-Za-z0-9_-]+", label):
+        raise ValueError("unsafe QMP capture label")
+    return ROOT / "build" / f"qmp-{hashlib.sha256(case.encode()).hexdigest()[:12]}-{label}.ppm"
+
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[native-heap] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
@@ -158,6 +163,33 @@ def validate_queue_log(text, gate):
     return checked
 
 
+def validate_heap_log(text, gate, disabled=False):
+    if disabled:
+        marker = "[native-heap] disabled profile VM=ENOTSUP allocator activation denied; default musl and worker boundary unchanged PASS"
+        if marker not in text or guest_failure(text):
+            raise RuntimeError("failed default-off native heap profile")
+        return {"gate-native-heap-off.txt": marker+"\n"}
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        lines = [line for line in text.splitlines() if f"[native-heap-gate-{letter}]" in line]
+        if not lines or not all("PASS" in line for line in lines):
+            raise RuntimeError(f"missing actual heap gate {letter}")
+        checked[f"gate-native-heap-{letter}.txt"] = "\n".join(lines)+"\n"
+    if guest_failure(text) or f"gates A-{gate} PASS; genuine musl allocator and worker Message, not pthread/GNU exceptions or Looper/AppServer" not in text:
+        raise RuntimeError("incomplete or failed native heap profile")
+    if "genuine musl VM; anonymous RW only; execute/file/PROT_NONE/mremap unsupported; stacks/TCB protected; Linux worker VM/FD denied PASS" not in text:
+        raise RuntimeError("missing native heap VM boundary")
+    if gate >= "B" and "workers=16 calloc/realloc/aligned/free cycles=160000 genuine worker Message decode/Queue cycles=10000 independent TCBs cpu=0 PASS" not in text:
+        raise RuntimeError("missing genuine worker allocator and Message stress")
+    if gate >= "C" and "genuine worker ReadPort typed messages=10000; actual allocator futex cancellations=64 unreturned results freed=64; critical faults=8 owner exits=8 whole-process cleanup PASS" not in text:
+        raise RuntimeError("missing actual ReadPort/deferred cancellation/owner cleanup")
+    count = 163 if gate >= "C" else 18 if gate >= "B" else 2
+    cancel, faults, aborted = (72,8,16) if gate >= "C" else (0,0,0)
+    if f"[native-heap] created=reaped={count} cancelled={cancel} expected-faults={faults} aborted-scopes={aborted} active=0 waiters=0 pool released PASS" not in text:
+        raise RuntimeError("missing exact heap reaping/fault/scope resources")
+    return checked
+
+
 def verify_tcb_elf(path):
     verify_font_elf(path)
     data = path.read_bytes()
@@ -274,11 +306,19 @@ def main():
     parser.add_argument("--syllable-thread-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--syllable-queue", action="store_true", help="Original MessageQueue and native worker IPC, not Looper/AppServer")
     parser.add_argument("--queue-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--native-heap", action="store_true", help="Genuine musl allocator/worker Message, not full threaded libc or AppServer")
+    parser.add_argument("--native-heap-disabled", action="store_true")
+    parser.add_argument("--heap-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    if args.native_heap and (args.native_heap_disabled or args.native_threads_disabled or args.native_futex_disabled):
+        parser.error("heap gates require enabled heap, native threads and private futex")
+    if args.native_heap_disabled and (args.native_threads_disabled or args.native_futex_disabled):
+        parser.error("heap default-off profile requires native threads and private futex")
+    args.syllable_queue = args.syllable_queue or args.native_heap or args.native_heap_disabled
     if args.syllable_queue and (args.native_futex_disabled or args.native_threads_disabled):
         parser.error("MessageQueue gates require enabled native threads and private futex")
     args.syllable_thread = args.syllable_thread or args.syllable_queue
@@ -320,6 +360,8 @@ def main():
         name += f"-threadapi-{args.syllable_thread_gate.lower()}"
     if args.syllable_queue:
         name += f"-queue-{args.queue_gate.lower()}"
+    if args.native_heap or args.native_heap_disabled:
+        name += "-heap-disabled" if args.native_heap_disabled else f"-heap-{args.heap_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
     if args.syllable_message:
@@ -397,6 +439,20 @@ def main():
                 raise RuntimeError(f"missing original MessageQueue/native dependency {symbol}")
         if "pthread_create" in symbols or re.search(r"\s[kK]ill$", symbols, re.M):
             raise RuntimeError("Queue workers must use native lifecycle, not pthread or process kill")
+    if args.native_heap or args.native_heap_disabled:
+        verify_tcb_elf(ROOT / "build/native-heap-probe.elf")
+        for key, filename in (("initrd", "build/initrd-heap.img"),
+                              ("nativeHeapProbe", "build/native-heap-probe.elf"),
+                              ("nativeHeapMusl", "build/musl-heap-rv32-sysroot/usr/lib/libc.a"),
+                              ("nativeHeapSources", "build/musl-heap-source/sources.json")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", "-C", str(ROOT / "build/native-heap-probe.elf")], text=True)
+        for symbol in ("__malloc_context", "__malloc_lock", "__lock", "__wrap_malloc", "__wrap_calloc", "__wrap_free",
+                       "os::Message::_ReadPort", "os::MessageQueue::AddMessage", "os::Thread::_Entry", "__copy_tls"):
+            if symbol not in symbols:
+                raise RuntimeError(f"missing genuine heap dependency {symbol}")
+        if "pthread_create" in symbols:
+            raise RuntimeError("heap profile does not implement pthread lifecycle")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -498,7 +554,8 @@ def main():
            "-snapshot", "-no-reboot", "-S",
            "-append", ("smp-start smp-gate-f " if args.smp == 2 else "") +
            ("native-threads " if args.native_threads and not args.native_threads_disabled else "") +
-           ("native-futex " if args.native_futex and not args.native_futex_disabled else "") + "process-gate-11"]
+           ("native-futex " if args.native_futex and not args.native_futex_disabled else "") +
+           ("native-heap " if args.native_heap else "") + "process-gate-11"]
     if args.cpu:
         cmd += ["-cpu", args.cpu]
     serial = bytearray()
@@ -534,12 +591,15 @@ def main():
                 pump(); time.sleep(0.01)
         def capture(label):
             settle()
-            ppm = out / f"{label}.ppm"
+            # QEMU's Windows file API still rejects long screendump paths.
+            ppm = qmp_capture_path(name, label)
             qmp.call("screendump", filename=str(ppm))
-            img = Image.open(ppm).convert("RGB")
+            with Image.open(ppm) as source:
+                img = source.convert("RGB")
             if img.size != (800, 600) or len(img.getcolors(480000) or []) < 10:
                 raise RuntimeError(f"blank/incorrect scanout: {ppm}")
             img.save(out / f"{label}.png")
+            ppm.unlink()
             captures.append(out / f"{label}.png")
             return img
         def input_events(*events):
@@ -687,6 +747,17 @@ def main():
                 wait("\nSYLLABLE_QUEUE_STATUS=0\r", after=start)
                 wait("bash-5.3$ ", after=start)
                 for filename, contents in validate_queue_log(pump()[start:], args.queue_gate).items():
+                    (out / filename).write_text(contents)
+            if args.native_heap or args.native_heap_disabled:
+                start = len(serial)
+                option = "--disabled" if args.native_heap_disabled else f"--gate {args.heap_gate}"
+                uart.sendall(f"/bin/native-heap-probe {option}; echo NATIVE_HEAP_STATUS=$?\n".encode())
+                marker = ("[native-heap] disabled profile VM=ENOTSUP allocator activation denied; default musl and worker boundary unchanged PASS" if args.native_heap_disabled else
+                          f"[native-heap] gates A-{args.heap_gate} PASS; genuine musl allocator and worker Message, not pthread/GNU exceptions or Looper/AppServer")
+                wait(marker, timeout=300, after=start)
+                wait("\nNATIVE_HEAP_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_heap_log(pump()[start:], args.heap_gate, args.native_heap_disabled).items():
                     (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
@@ -882,6 +953,10 @@ def main():
                                      "sharedMemoryRounds": 10000 if args.sync_gate >= "D" else 0,
                                      "profile": "native counting semaphores, creator-owned lifecycle",
                                      "userThreadsImplemented": args.native_threads and not args.native_threads_disabled} if args.native_sync else None,
+                      "nativeHeap": {"gates": ["off"] if args.native_heap_disabled else list("ABC"[:ord(args.heap_gate)-ord("A")+1]),
+                                     "enabled": args.native_heap, "muslVersion": "1.2.5", "cpu": 0,
+                                     "allocatorReplaced": False, "stdioEnabled": False, "pthreadImplemented": False,
+                                     "appServerBuilt": False} if args.native_heap or args.native_heap_disabled else None,
                       "syllableQueue": {"gates": list("ABC"[:ord(args.queue_gate)-ord("A")+1]),
                                        "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/messagequeue.cpp",
                                        "cpu": 0, "queueCycles": 160000 if args.queue_gate >= "B" else 0,

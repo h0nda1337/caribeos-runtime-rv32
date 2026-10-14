@@ -1,0 +1,1 @@
+[native-tcb-gate-C] reuse cycles=64 cancellation requests=16; fresh TLS/errno; main unchanged; zero waiter leaks PASS

@@ -37,8 +37,11 @@ worker allocation/stdio, GNU thread exceptions or a complete Looper.
 The optional [original MessageQueue/native worker ports](docs/SYLLABLE_NATIVE_QUEUE.md)
 profile adds the genuine intrusive queue, CPU0 typed-message contention and
 actual port waits, finite deadlines, generation reuse and blocked cancellation.
-Workers still do not allocate or decode Message objects; Looper is not replaced.
-Worker-safe libc/GNU runtime and full AppServer/Desktop are still required; passing
+That Queue profile still uses controller-only allocation; Looper is not replaced.
+The separate [genuine musl worker heap](docs/SYLLABLE_NATIVE_HEAP.md) profile now
+verifies concurrent mallocng, worker Message construction/decode/ReadPort and
+protected allocator cancellation with real native VM and futex waits.
+Worker-safe stdio, GNU thread exceptions and full AppServer/Desktop are still required; passing
 these dependency gates does not mark the desktop complete.
 
 ## Required Boot Chain

@@ -1,0 +1,1 @@
+[native-thread-gate-B] suspended capacity=16, cancel-before-entry=16, real entry/join/reaper cycles=256, stale IDs rejected PASS

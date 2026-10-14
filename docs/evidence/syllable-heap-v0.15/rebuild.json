@@ -1,0 +1,330 @@
+{
+    "result":  "PASS",
+    "before":  [
+                   {
+                       "path":  "xnu",
+                       "sha256":  "2f6df12958747994e625dd648bd24b013fae2e400025bf59f5eedcd2321e9304"
+                   },
+                   {
+                       "path":  "build/caribe_rv32.elf",
+                       "sha256":  "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea"
+                   },
+                   {
+                       "path":  "build/initrd.img",
+                       "sha256":  "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+                   },
+                   {
+                       "path":  "build/initrd-threads.img",
+                       "sha256":  "c833ce5e4cd4c802b331bd6385f2edff099189cc37ed84d2f307abc28c2288c3"
+                   },
+                   {
+                       "path":  "build/initrd-futex.img",
+                       "sha256":  "ad7b0bec7bf4c761c9ce803a943bbd2a5a5a447eb97e8327abd0b523767e93be"
+                   },
+                   {
+                       "path":  "build/initrd-tcb.img",
+                       "sha256":  "ece23091fa9d2e586c801823a9282ade1f9517442e481fa4c8ac1cf827cdf015"
+                   },
+                   {
+                       "path":  "build/initrd-locker.img",
+                       "sha256":  "89a0096c86370f1f77be4f05aa43d480b41dcf3fdac5300a51a83ed044b0adf3"
+                   },
+                   {
+                       "path":  "build/initrd-threadapi.img",
+                       "sha256":  "d064a7dd9dde8e3560957dafcda6d77147ac4a2d7bd1a3ffde73a5cd0cc208de"
+                   },
+                   {
+                       "path":  "build/native-thread-probe.elf",
+                       "sha256":  "3fcbfa0abdacc70337cd3ecc963e7d797e7e697f1146134b3848a13060b15545"
+                   },
+                   {
+                       "path":  "build/native-futex-probe.elf",
+                       "sha256":  "a79bd9ff5c9646e6f1eb3dbe84976b3f26880262d1027a75c6c1f56d5e00d7c2"
+                   },
+                   {
+                       "path":  "build/native-tcb-probe.elf",
+                       "sha256":  "bf309a6066d4153580462ad0097ffd6a0389e00db3b1d9c63e37dab0abb36009"
+                   },
+                   {
+                       "path":  "build/native-locker-probe.elf",
+                       "sha256":  "e7ca5ad52a632a60a28352cf552df5a16f05b0276ee69deb1754f5d2b63d14f0"
+                   },
+                   {
+                       "path":  "build/syllable-thread-probe.elf",
+                       "sha256":  "02d65c7413f53647ef24fb9ac4d0b5b5cf49786012a24d2930ad5583c5bb9452"
+                   },
+                   {
+                       "path":  "build/musl-rv32-sysroot/usr/lib/libc.a",
+                       "sha256":  "073d9144bfdab8b2501caed65f3ceea48a1f633ec8fa3f5ceb357d4b3700b14f"
+                   },
+                   {
+                       "path":  "build/freetype-probe.elf",
+                       "sha256":  "e9c325528c6a0410fc60d60ce0414f13a9b6147cb817f024b257ad2e3c4a76f4"
+                   },
+                   {
+                       "path":  "build/freetype-rv32-sysroot/usr/lib/libfreetype.a",
+                       "sha256":  "aa0087f268383543cc09a0cc708b5bf52b448779bdcec3a7e150ded759e1d676"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-native.a",
+                       "sha256":  "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-string.a",
+                       "sha256":  "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-message.a",
+                       "sha256":  "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-locker.a",
+                       "sha256":  "c33d7853fd81bf30356867d84da6d4de1b8720bda359b717697172c00f561592"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-thread.a",
+                       "sha256":  "7997660ff08a0c2ddc08e81a57e538fb43007b96ffadc9a35fe9906fad9f5a73"
+                   },
+                   {
+                       "path":  "build/font-sources.json",
+                       "sha256":  "9665167c9991832872fb87ae20a54b63a90bd5859ea2e75964a8b21954851159"
+                   },
+                   {
+                       "path":  "build/syllable-locker/sources.json",
+                       "sha256":  "76fe898a59d0ef9486e4348a9b916299bc848733771c4a0aa9e7911e9b7554f2"
+                   },
+                   {
+                       "path":  "build/syllable-thread/sources.json",
+                       "sha256":  "cd0910628cbfa2f6126f1765b0a61720e1a476aa68c6177ad8d25ac808ba52ba"
+                   },
+                   {
+                       "path":  "build/syllable_queue.o",
+                       "sha256":  "e343861936c845b4937062dbeb4cd3791efc415c6333f9cfa90455144917ab25"
+                   },
+                   {
+                       "path":  "build/syllable_raw_msgport.o",
+                       "sha256":  "81d3e624a5af4ed05428b36d60a74cf31e5f98b1a40c370f1f9ae7eca7458d6d"
+                   },
+                   {
+                       "path":  "build/syllable_msgport.o",
+                       "sha256":  "82744eec838542a84836665ddaae69704696e417d7e125885549f66e5a9c3966"
+                   },
+                   {
+                       "path":  "build/syllable-queue-probe.elf",
+                       "sha256":  "d33ef04287340a94bad1bd08a58767e2566554a9bec8d8621f5e29b9ecea6f8f"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-queue.a",
+                       "sha256":  "5c0989be57c8923bf4833b4eac16b6e25febf68e3d9017b3dd30c30427e57f29"
+                   },
+                   {
+                       "path":  "build/initrd-queue.img",
+                       "sha256":  "03105302f194b8ea34b9fac0beed1b55a80992668e702f497f9b6b8cfdcec880"
+                   },
+                   {
+                       "path":  "build/syllable-queue/sources.json",
+                       "sha256":  "928fd8206a146e14f2503283b3151a1b6cd05004aa45a42ed2e20630306986cf"
+                   },
+                   {
+                       "path":  "build/native-heap-probe.elf",
+                       "sha256":  "da45b1b92c09d572a7c21d6df3c8d2a220297d3c43912bd1797bf6708eb061d3"
+                   },
+                   {
+                       "path":  "build/initrd-heap.img",
+                       "sha256":  "e7884d306b9e077cab0b88b3fee0780811749df3dcd44ef3e9dd59c6f0cdc9d2"
+                   },
+                   {
+                       "path":  "build/musl-heap-rv32-sysroot/usr/lib/libc.a",
+                       "sha256":  "9ae999d7f0b1534287aaac7c7cf0fc1805a7f96db767a45d78e2f4d5e52ac19d"
+                   },
+                   {
+                       "path":  "build/musl-heap-source/sources.json",
+                       "sha256":  "0362e912fe7f3c12fcedb196de08aa38ea450d5c535dd1aa34409168ba2eb418"
+                   },
+                   {
+                       "path":  "build/syllable_heap_runtime.o",
+                       "sha256":  "24d02ead349f07351acff61ecef44217ea7cf2f99ee95b28aa9a7d371229309e"
+                   },
+                   {
+                       "path":  "build/native_heap_lock_probe.o",
+                       "sha256":  "4f8a46d0c579ac048e29302fd2325007e69839865a7d53ab231bb418bae2ddba"
+                   },
+                   {
+                       "path":  "build/native_heap_probe.o",
+                       "sha256":  "c4d954c97a2a238efbcfff462b6b6a6d7469ebf13211d26d5083e2cd713c77fb"
+                   }
+               ],
+    "after":  [
+                  {
+                      "path":  "xnu",
+                      "sha256":  "2f6df12958747994e625dd648bd24b013fae2e400025bf59f5eedcd2321e9304"
+                  },
+                  {
+                      "path":  "build/caribe_rv32.elf",
+                      "sha256":  "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea"
+                  },
+                  {
+                      "path":  "build/initrd.img",
+                      "sha256":  "032626b1d2e826c07b1696efc297db52059a18a3cfa15cff6584385a3f7a137e"
+                  },
+                  {
+                      "path":  "build/initrd-threads.img",
+                      "sha256":  "c833ce5e4cd4c802b331bd6385f2edff099189cc37ed84d2f307abc28c2288c3"
+                  },
+                  {
+                      "path":  "build/initrd-futex.img",
+                      "sha256":  "ad7b0bec7bf4c761c9ce803a943bbd2a5a5a447eb97e8327abd0b523767e93be"
+                  },
+                  {
+                      "path":  "build/initrd-tcb.img",
+                      "sha256":  "ece23091fa9d2e586c801823a9282ade1f9517442e481fa4c8ac1cf827cdf015"
+                  },
+                  {
+                      "path":  "build/initrd-locker.img",
+                      "sha256":  "89a0096c86370f1f77be4f05aa43d480b41dcf3fdac5300a51a83ed044b0adf3"
+                  },
+                  {
+                      "path":  "build/initrd-threadapi.img",
+                      "sha256":  "d064a7dd9dde8e3560957dafcda6d77147ac4a2d7bd1a3ffde73a5cd0cc208de"
+                  },
+                  {
+                      "path":  "build/native-thread-probe.elf",
+                      "sha256":  "3fcbfa0abdacc70337cd3ecc963e7d797e7e697f1146134b3848a13060b15545"
+                  },
+                  {
+                      "path":  "build/native-futex-probe.elf",
+                      "sha256":  "a79bd9ff5c9646e6f1eb3dbe84976b3f26880262d1027a75c6c1f56d5e00d7c2"
+                  },
+                  {
+                      "path":  "build/native-tcb-probe.elf",
+                      "sha256":  "bf309a6066d4153580462ad0097ffd6a0389e00db3b1d9c63e37dab0abb36009"
+                  },
+                  {
+                      "path":  "build/native-locker-probe.elf",
+                      "sha256":  "e7ca5ad52a632a60a28352cf552df5a16f05b0276ee69deb1754f5d2b63d14f0"
+                  },
+                  {
+                      "path":  "build/syllable-thread-probe.elf",
+                      "sha256":  "02d65c7413f53647ef24fb9ac4d0b5b5cf49786012a24d2930ad5583c5bb9452"
+                  },
+                  {
+                      "path":  "build/musl-rv32-sysroot/usr/lib/libc.a",
+                      "sha256":  "073d9144bfdab8b2501caed65f3ceea48a1f633ec8fa3f5ceb357d4b3700b14f"
+                  },
+                  {
+                      "path":  "build/freetype-probe.elf",
+                      "sha256":  "e9c325528c6a0410fc60d60ce0414f13a9b6147cb817f024b257ad2e3c4a76f4"
+                  },
+                  {
+                      "path":  "build/freetype-rv32-sysroot/usr/lib/libfreetype.a",
+                      "sha256":  "aa0087f268383543cc09a0cc708b5bf52b448779bdcec3a7e150ded759e1d676"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-native.a",
+                      "sha256":  "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-string.a",
+                      "sha256":  "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-message.a",
+                      "sha256":  "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-locker.a",
+                      "sha256":  "c33d7853fd81bf30356867d84da6d4de1b8720bda359b717697172c00f561592"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-thread.a",
+                      "sha256":  "7997660ff08a0c2ddc08e81a57e538fb43007b96ffadc9a35fe9906fad9f5a73"
+                  },
+                  {
+                      "path":  "build/font-sources.json",
+                      "sha256":  "9665167c9991832872fb87ae20a54b63a90bd5859ea2e75964a8b21954851159"
+                  },
+                  {
+                      "path":  "build/syllable-locker/sources.json",
+                      "sha256":  "76fe898a59d0ef9486e4348a9b916299bc848733771c4a0aa9e7911e9b7554f2"
+                  },
+                  {
+                      "path":  "build/syllable-thread/sources.json",
+                      "sha256":  "cd0910628cbfa2f6126f1765b0a61720e1a476aa68c6177ad8d25ac808ba52ba"
+                  },
+                  {
+                      "path":  "build/syllable_queue.o",
+                      "sha256":  "e343861936c845b4937062dbeb4cd3791efc415c6333f9cfa90455144917ab25"
+                  },
+                  {
+                      "path":  "build/syllable_raw_msgport.o",
+                      "sha256":  "81d3e624a5af4ed05428b36d60a74cf31e5f98b1a40c370f1f9ae7eca7458d6d"
+                  },
+                  {
+                      "path":  "build/syllable_msgport.o",
+                      "sha256":  "82744eec838542a84836665ddaae69704696e417d7e125885549f66e5a9c3966"
+                  },
+                  {
+                      "path":  "build/syllable-queue-probe.elf",
+                      "sha256":  "d33ef04287340a94bad1bd08a58767e2566554a9bec8d8621f5e29b9ecea6f8f"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-queue.a",
+                      "sha256":  "5c0989be57c8923bf4833b4eac16b6e25febf68e3d9017b3dd30c30427e57f29"
+                  },
+                  {
+                      "path":  "build/initrd-queue.img",
+                      "sha256":  "03105302f194b8ea34b9fac0beed1b55a80992668e702f497f9b6b8cfdcec880"
+                  },
+                  {
+                      "path":  "build/syllable-queue/sources.json",
+                      "sha256":  "928fd8206a146e14f2503283b3151a1b6cd05004aa45a42ed2e20630306986cf"
+                  },
+                  {
+                      "path":  "build/native-heap-probe.elf",
+                      "sha256":  "da45b1b92c09d572a7c21d6df3c8d2a220297d3c43912bd1797bf6708eb061d3"
+                  },
+                  {
+                      "path":  "build/initrd-heap.img",
+                      "sha256":  "e7884d306b9e077cab0b88b3fee0780811749df3dcd44ef3e9dd59c6f0cdc9d2"
+                  },
+                  {
+                      "path":  "build/musl-heap-rv32-sysroot/usr/lib/libc.a",
+                      "sha256":  "9ae999d7f0b1534287aaac7c7cf0fc1805a7f96db767a45d78e2f4d5e52ac19d"
+                  },
+                  {
+                      "path":  "build/musl-heap-source/sources.json",
+                      "sha256":  "0362e912fe7f3c12fcedb196de08aa38ea450d5c535dd1aa34409168ba2eb418"
+                  },
+                  {
+                      "path":  "build/syllable_heap_runtime.o",
+                      "sha256":  "24d02ead349f07351acff61ecef44217ea7cf2f99ee95b28aa9a7d371229309e"
+                  },
+                  {
+                      "path":  "build/native_heap_lock_probe.o",
+                      "sha256":  "4f8a46d0c579ac048e29302fd2325007e69839865a7d53ab231bb418bae2ddba"
+                  },
+                  {
+                      "path":  "build/native_heap_probe.o",
+                      "sha256":  "c4d954c97a2a238efbcfff462b6b6a6d7469ebf13211d26d5083e2cd713c77fb"
+                  }
+              ],
+    "forcedKernelUnits":  [
+                              "native_thread",
+                              "linux_syscall",
+                              "syscall"
+                          ],
+    "forcedMuslUnits":  [
+                            "malloc/mallocng/malloc.c",
+                            "malloc/mallocng/free.c",
+                            "malloc/mallocng/realloc.c",
+                            "thread/__lock.c",
+                            "mman/mmap.c",
+                            "mman/munmap.c"
+                        ],
+    "forcedUserUnits":  [
+                            "native_heap_probe.cpp",
+                            "native_heap_lock_probe.c",
+                            "heap_runtime.c"
+                        ],
+    "priorQueueArtifactsUnchangedExceptKernel":  true
+}

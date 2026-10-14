@@ -1,0 +1,14 @@
+[graphics-gate-D] keyboard code=15 count=1 PASS
+[graphics-gate-D] mouse button focus=0 hit=6 PASS
+[graphics-gate-D] keyboard code=15 count=2 PASS
+[graphics-gate-D] keyboard code=15 count=3 PASS
+[graphics-gate-D] keyboard code=15 count=4 PASS
+[graphics-gate-D] keyboard code=15 count=5 PASS
+[graphics-gate-D] keyboard code=15 count=6 PASS
+[graphics-gate-D] keyboard code=15 count=7 PASS
+[graphics-gate-D] keyboard code=15 count=8 PASS
+[graphics-gate-D] keyboard code=15 count=9 PASS
+[graphics-gate-D] keyboard code=15 count=10 PASS
+[graphics-gate-D] keyboard code=15 count=11 PASS
+[graphics-gate-D] keyboard code=1 count=12 PASS
+[graphics-gate-D] keyboard code=1 count=1 PASS

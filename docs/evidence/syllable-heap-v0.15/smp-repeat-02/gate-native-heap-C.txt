@@ -1,0 +1,1 @@
+[native-heap-gate-C] genuine worker ReadPort typed messages=10000; actual allocator futex cancellations=64 unreturned results freed=64; critical faults=8 owner exits=8 whole-process cleanup PASS

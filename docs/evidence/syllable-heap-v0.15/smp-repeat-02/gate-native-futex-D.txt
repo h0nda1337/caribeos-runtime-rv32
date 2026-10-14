@@ -1,0 +1,1 @@
+[native-futex-gate-D] blocked cancellations=64 owner-exit cycles=8; same-VA distinct-pmap isolation; zero waiter leaks PASS

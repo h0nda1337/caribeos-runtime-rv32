@@ -159,6 +159,18 @@ Future binary distribution needs exact source/notices/relink material;
 this checkpoint does not create a new binary Release or complete AppServer.
 See [MessageQueue and worker IPC limits](docs/SYLLABLE_NATIVE_QUEUE.md).
 
+The native heap profile prepares a separate musl 1.2.5 source/sysroot from
+the same verified official archive. All 2697 original regular-file inputs
+are checked; mallocng, locks and public headers are unmodified. Only a
+narrow RV32 syscall-header routing patch is applied under original MIT
+terms, retaining byte-identical [musl COPYRIGHT](ports/musl/COPYRIGHT) and
+its complete author/component notices. It is not relicensed runtime BSD.
+Independent scope integration/probes/build/evidence tooling are BSD code;
+XNU VM/cancellation changes remain APSL. Original Syllable/GNU licenses
+remain unchanged. Exact prepared sources/static archive/relink material
+stay local; no new binary Release or complete pthread runtime is published.
+See [genuine allocator and worker Message scope](docs/SYLLABLE_NATIVE_HEAP.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

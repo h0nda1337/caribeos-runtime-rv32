@@ -1,0 +1,1 @@
+[freetype-gate-B] gray=76 solid=61 mono embolden kerning transform raster-rounds=10000 PASS

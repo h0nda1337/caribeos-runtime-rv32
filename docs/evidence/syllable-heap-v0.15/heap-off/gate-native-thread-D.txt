@@ -1,0 +1,2 @@
+[native-thread-gate-D] busy-loop timer preemption/cancel, blocked/suspended cleanup, fault isolation, owner-exit cycles=16; created=reaped=35 preemptions=66 PASS
+[native-thread-gate-D] foreign process START/CANCEL/INFO/JOIN denied=64 owner unchanged PASS

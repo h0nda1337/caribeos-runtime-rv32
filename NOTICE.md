@@ -136,6 +136,14 @@ relicensing Syllable, GNU C++, musl, OpenSBI/SecureSBI or APSL XNU.
 Workers do not allocate/decode Message objects or use threaded stdio here;
 Looper/AppServer and the authentic complete desktop remain required.
 
+The optional heap profile uses a separately built genuine musl 1.2.5
+allocator with unchanged mallocng/futex-lock sources and full original
+COPYRIGHT. Its narrow RV32 VM-routing patch remains MIT, not runtime BSD;
+see ports/musl. Independently written scope/VM integration and probes keep
+their original BSD/APSL ownership boundaries. Syllable Message/Queue/Thread
+stay LGPL and GNU libraries retain their own terms. This does not relicense
+any external component or implement complete pthread/stdio/GNU threading.
+
 The optional Locker profile uses the genuine LGPL-2.0-only Syllable
 `util/locker.h` and unchanged native thread interface at the pinned Syllable
 revision. Its narrow LGPL patch initializes the owner and removes an unused

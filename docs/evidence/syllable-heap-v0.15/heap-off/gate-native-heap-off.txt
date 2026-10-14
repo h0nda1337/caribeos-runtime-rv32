@@ -1,0 +1,1 @@
+[native-heap] disabled profile VM=ENOTSUP allocator activation denied; default musl and worker boundary unchanged PASS

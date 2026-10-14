@@ -1,0 +1,1 @@
+[native-futex-gate-B] rounds=10000 actual waiters woken=10000 acknowledgements=10000 zero lost events PASS

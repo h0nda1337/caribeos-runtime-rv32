@@ -15,6 +15,18 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-musl-heap.py",
+                              "scripts/build-musl-heap-rv32.ps1",
+                              "scripts/build-musl-heap-rv32.sh",
+                              "scripts/test-native-heap-matrix.ps1",
+                              "scripts/test-native-heap-rebuild.ps1",
+                              "scripts/test-musl-heap-force.sh",
+                              "tools/collect-native-heap-evidence.py",
+                              "ports/syllable/native/heap_runtime.c",
+                              "ports/syllable/native/heap_runtime.h",
+                              "userland/native_heap_probe.cpp",
+                              "userland/native_heap_lock_probe.c",
+                              "tests/test_native_heap_guards.py",
                               "scripts/prepare-syllable-queue.py",
                               "scripts/test-syllable-queue-rebuild.ps1",
                               "scripts/test-syllable-queue-matrix.ps1",
@@ -270,6 +282,22 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "ports/musl/patches/*.patch",
+                                          "classification": "DERIVED_SOURCE_PATCH",
+                                          "spdxLicenseIdentifier": "MIT",
+                                          "reason": "The narrow musl RV32 syscall-routing patch retains original MIT terms; it is not original runtime BSD code."
+                                      },
+                                      {
+                                          "path": "ports/musl/COPYRIGHT",
+                                          "classification": "THIRD_PARTY_NOTICE",
+                                          "reason": "Byte-identical original musl 1.2.5 COPYRIGHT and contributor/component notices; not relicensed."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-heap-v0.15/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Genuine allocator/worker Message, native VM/cancellation, scanout, source, rebuild and process receipts are evidence data, not original code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-queue-v0.14/*",
                                           "classification": "GENERATED_EVIDENCE",
