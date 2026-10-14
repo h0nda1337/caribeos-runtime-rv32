@@ -1,0 +1,279 @@
+{
+  "result": "PASS",
+  "platform": "QEMU virt RV32",
+  "smp": 1,
+  "cpu": "rv32,f=false,d=false,h=false,zfa=false",
+  "baseIsa": "rv32imac",
+  "bios": "default",
+  "gates": [
+    "A-video",
+    "B-negative-ABI",
+    "C-userspace-Syllable-component",
+    "D-keyboard-mouse-drag",
+    "E-event-integrity-exit-Bash"
+  ],
+  "resolution": [
+    800,
+    600
+  ],
+  "sessionRestarts": 1,
+  "blockedSessionStatuses": {
+    "wayland": 3,
+    "x11": 3,
+    "unknown": 2
+  },
+  "privateVm": {
+    "forkExecIsolationCycles": 32,
+    "zeroingRecycleCycles": 256
+  },
+  "nativeIpc": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "pingPongRounds": 10000,
+    "maxPayload": 8192
+  },
+  "nativeSync": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "objects": 64,
+    "recycleCycles": 256,
+    "sharedMemoryRounds": 10000,
+    "profile": "native counting semaphores, creator-owned lifecycle",
+    "userThreadsImplemented": true
+  },
+  "syllableQueue": {
+    "gates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/messagequeue.cpp",
+    "cpu": 0,
+    "queueCycles": 160000,
+    "pingPongRounds": 10000,
+    "createdReaped": 161,
+    "cancelled": 64,
+    "workerAllocations": false,
+    "workerMessageDecode": false,
+    "appServerBuilt": false,
+    "threadedLibcImplemented": false
+  },
+  "syllableThread": {
+    "gates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/thread.cpp",
+    "cpu": 0,
+    "nativeClock": true,
+    "createdReaped": 146,
+    "cancelled": 64,
+    "timerSleeps": 640,
+    "finiteTimeoutCycles": 64,
+    "appServerBuilt": false,
+    "threadedLibcImplemented": false
+  },
+  "nativeLocker": {
+    "gates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/locker.h",
+    "workers": 16,
+    "cpu": 0,
+    "protectedIncrements": 160000,
+    "recursiveAcquisitions": 320000,
+    "tryLockCycles": 64,
+    "createdReaped": 80,
+    "appServerBuilt": false,
+    "pthreadLifecycleImplemented": false
+  },
+  "nativeTcb": {
+    "gates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "muslVersion": "1.2.5",
+    "nativeElfTls": true,
+    "pthreadLifecycleImplemented": false,
+    "threadedLibcImplemented": false,
+    "cpu": 0,
+    "workers": 16,
+    "stressChecks": 160000,
+    "reuseCycles": 64,
+    "cancellationRequests": 16,
+    "createdReaped": 96
+  },
+  "nativeFutex": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "enabled": true,
+    "privateOnly": true,
+    "pthreadImplemented": false,
+    "createdReaped": 89,
+    "actualWakes": 10000,
+    "blockedCancellations": 64,
+    "ownerExitCycles": 8
+  },
+  "nativeThreads": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "enabled": true,
+    "profile": "raw RV32 U-mode threads sharing an XNU task/pmap, CPU0 only",
+    "libcThreading": false,
+    "gnuThreadTls": false,
+    "recycleCycles": 256,
+    "semaphoreRounds": 10000,
+    "ownerExitCycles": 16
+  },
+  "freetype": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "engine": "2.15.0",
+    "fonts": "Bitstream Vera 1.10",
+    "rasterRounds": 10000,
+    "truncations": 256,
+    "invalidSignatures": 1024,
+    "allocationFailureCases": 32,
+    "scanoutFnv32": "94e1ac1d",
+    "appServerBuilt": false
+  },
+  "nativeAreas": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "sharedMemoryRounds": 10000,
+    "objects": 32,
+    "views": 64,
+    "poolPages": 1024,
+    "recycleCycles": 256,
+    "sharedFramebuffer": [
+      800,
+      600
+    ],
+    "verifiedPixels": 5
+  },
+  "nativeCxx": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "exceptions": 10000,
+    "unwindDestructors": 10000,
+    "forkExecCycles": 16,
+    "libc": "musl 1.2.5",
+    "libstdcxx": "GNU 15.1.0",
+    "tlsModel": "GNU emulated TLS, single-thread model",
+    "softFloatAbi": true,
+    "threadModel": "single"
+  },
+  "kernelSha256": "3ce43707797289b77771df757d1e09a2da48e55b4f09f35187467115d67393e2",
+  "syllableMessage": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "malformedInputs": 10000,
+    "transportRounds": 10000,
+    "forkExecCycles": 16,
+    "maxWireBytes": 8192,
+    "nestedDepthLimit": 16,
+    "profile": "genuine data core, Looper/Variant delivery excluded",
+    "legacyUnflatten": "trusted complete buffers only",
+    "appServerBuilt": false
+  },
+  "syllableString": {
+    "gates": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "trimRounds": 10000,
+    "ipcRounds": 10000,
+    "forkExecCycles": 16,
+    "component": "genuine libsyllable os::String",
+    "appServerBuilt": false
+  },
+  "artifactSha256": {
+    "xnu": "3ce43707797289b77771df757d1e09a2da48e55b4f09f35187467115d67393e2",
+    "cbx": "b8d7cca7bc52c172947bee825f235f0438959db4a53bb2dc30021e2ccf0908ea",
+    "initrd": "03105302f194b8ea34b9fac0beed1b55a80992668e702f497f9b6b8cfdcec880",
+    "syllableComponent": "d3883eed28c884365b0cf25ace1cbd97da3b5439003f094c124b716e28bd5bf7",
+    "syllableLibrary": "995e26c6f3f1563d404099c7751820175dde3a6f089be7ec2eb52c7e077edc87",
+    "sessionManager": "e656b7fd32c8adc9791ca5dbac70ecf068650ca3f85435c264947cb9cbad4f04",
+    "privateVmProbe": "b5e7a9da07e253bffb237c01c6fe9b68a86b3aa5f52d7fc2a3e0dbe5c2b11938",
+    "nativeFutexProbe": "a79bd9ff5c9646e6f1eb3dbe84976b3f26880262d1027a75c6c1f56d5e00d7c2",
+    "nativeTcbProbe": "bf309a6066d4153580462ad0097ffd6a0389e00db3b1d9c63e37dab0abb36009",
+    "muslLibrary": "073d9144bfdab8b2501caed65f3ceea48a1f633ec8fa3f5ceb357d4b3700b14f",
+    "nativeLockerProbe": "e7ca5ad52a632a60a28352cf552df5a16f05b0276ee69deb1754f5d2b63d14f0",
+    "syllableLockerLibrary": "c33d7853fd81bf30356867d84da6d4de1b8720bda359b717697172c00f561592",
+    "syllableLockerSources": "76fe898a59d0ef9486e4348a9b916299bc848733771c4a0aa9e7911e9b7554f2",
+    "syllableThreadProbe": "02d65c7413f53647ef24fb9ac4d0b5b5cf49786012a24d2930ad5583c5bb9452",
+    "syllableThreadLibrary": "7997660ff08a0c2ddc08e81a57e538fb43007b96ffadc9a35fe9906fad9f5a73",
+    "syllableThreadSources": "cd0910628cbfa2f6126f1765b0a61720e1a476aa68c6177ad8d25ac808ba52ba",
+    "syllableQueueProbe": "d33ef04287340a94bad1bd08a58767e2566554a9bec8d8621f5e29b9ecea6f8f",
+    "syllableQueueLibrary": "5c0989be57c8923bf4833b4eac16b6e25febf68e3d9017b3dd30c30427e57f29",
+    "syllableQueueSources": "928fd8206a146e14f2503283b3151a1b6cd05004aa45a42ed2e20630306986cf",
+    "nativeThreadProbe": "3fcbfa0abdacc70337cd3ecc963e7d797e7e697f1146134b3848a13060b15545",
+    "freetypeProbe": "e9c325528c6a0410fc60d60ce0414f13a9b6147cb817f024b257ad2e3c4a76f4",
+    "freetypeLibrary": "aa0087f268383543cc09a0cc708b5bf52b448779bdcec3a7e150ded759e1d676",
+    "fontSources": "9665167c9991832872fb87ae20a54b63a90bd5859ea2e75964a8b21954851159",
+    "nativeSyncProbe": "c0488d00ef21907374a98b35255c48d77678462d9daf839228aa2bc58aa9c9cc",
+    "syllableMessageProbe": "42e4570e37f73f39796cfc57f93d42f8acace0b1890cd593755dc62c5e6aab2d",
+    "syllableMessageLibrary": "827594554cd0483eab6c5383152b51add90b156a5913e66d5ac9b8c6eb2e0dc6",
+    "syllableMessageSources": "17a97a146424532b67d2e8490c18fd0299b77cafc7bc9416f358e01bcf061ba3",
+    "syllableStringProbe": "4f65d8419e52f157a2c1dd77bfe36cf0ee4076b9dd9a86671f390b020e7ca2e8",
+    "syllableStringLibrary": "874c14a861cc8d8109200e7d90d08a493a4832175de376ebebae61f30745eaa0",
+    "syllableStringSources": "30a23aacb5073e64f0d648431f67ef56d2a629c27fe5e472356ebe893f9e6afe",
+    "nativeCxxProbe": "00e02537e8443e98684048b6fd5fa9f4c9899e9010ae88a1bd71319d1792dcb4",
+    "gnuLibstdcxx": "058d0a82fbd3132b59d7e5d57eb2291f80ad490ba15468d02f1603119621ef03",
+    "gnuCrtBegin": "90518ffbf948fd1bd224190ca61aeeb0e2d5cad6180e94a24ab57aeae900b053",
+    "gnuCrtEnd": "3d7f3b8954857f2b773357e145b8bdfff64f247aa6111e734c5c40bb79b93fd7",
+    "gnuLibgccUnwind": "3b18d0bb7029d69af02a9b8182612e78b3a05000b4770687605beefbab019347",
+    "nativeIpcProbe": "b95ef8d9c460e9ff2d318538e8b77aed91c13d19bf76cb1b64158ef48025fdf4",
+    "nativeIpcLibrary": "3c2247c9e71adbb4345d869f571987371d4a908a308873f181ecb8318e06bf6d",
+    "nativeAreaProbe": "236e3e9e0863296a4defed4aed94f860f4de827e0fa881ff879dcbf83cc86744"
+  },
+  "screenshots": {
+    "00-shared-area.png": "048598c6381df95fb106ee8754b3a27700e1da27493da35f6fcd704f8e0eddd7",
+    "00-freetype-fonts.png": "2ad2ffa7b8fc20d8fafbd5090276d98e8a21b4cbcde35e5460a39b439f8bd936",
+    "01-syllable.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82",
+    "02-keyboard-focus.png": "6e0a8ad1d96c6880c44cec6ef657013b4d2f56ad1bc759c7993dba3ce557f4d7",
+    "03-mouse-drag.png": "74f0727e220fea4c2fda85c7a3ba3b5eb21d9c3c2fb4e883c16db8eef59c1886",
+    "04-input-verified.png": "f4231c518fc303794389b163d0d56426255663b01b85553bf0ee4aeebff85305",
+    "05-session-restart.png": "525629063bb26cbab4bd6b39d01b7d4eb8c75d50d8eb11b8c41df62174384d82"
+  }
+}

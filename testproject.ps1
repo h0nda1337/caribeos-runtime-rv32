@@ -24,6 +24,8 @@ param(
   [ValidateSet("A", "B", "C")][string]$LockerGate = "C",
   [switch]$SyllableThread,
   [ValidateSet("A", "B", "C")][string]$SyllableThreadGate = "C",
+  [switch]$SyllableQueue,
+  [ValidateSet("A", "B", "C")][string]$QueueGate = "C",
   [switch]$NativeFutex,
   [switch]$DisableNativeFutex,
   [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
@@ -36,6 +38,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if (($SyllableQueue -or $PSBoundParameters.ContainsKey('QueueGate')) -and $Mode -notin @('graphics', 'graphics-live')) {
+  throw "MessageQueue gates are supported for graphics runners only."
+}
+if ($SyllableQueue -and ($DisableNativeThreads -or $DisableNativeFutex)) {
+  throw "MessageQueue gates require enabled native threads and private futex"
+}
 if (($SyllableThread -or $PSBoundParameters.ContainsKey('SyllableThreadGate')) -and $Mode -notin @('graphics', 'graphics-live')) {
   throw "Syllable Thread gates are supported for graphics runners only."
 }
@@ -1851,7 +1859,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex -NativeTcb:$NativeTcb -TcbGate $TcbGate -NativeLocker:$NativeLocker -LockerGate $LockerGate -SyllableThread:$SyllableThread -SyllableThreadGate $SyllableThreadGate
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex -NativeTcb:$NativeTcb -TcbGate $TcbGate -NativeLocker:$NativeLocker -LockerGate $LockerGate -SyllableThread:$SyllableThread -SyllableThreadGate $SyllableThreadGate -SyllableQueue:$SyllableQueue -QueueGate $QueueGate
   exit $LASTEXITCODE
 }
 

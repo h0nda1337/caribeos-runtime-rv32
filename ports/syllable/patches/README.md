@@ -54,3 +54,14 @@ kill, member IDs retire after real reaping, and unsupported control/info
 operations propagate errors. Prepared original/adapted sources, application
 objects and separate archive remain local for exact relinking materials.
 See [Thread scope](../../../docs/SYLLABLE_NATIVE_THREAD_API.md).
+
+`messagequeue-rv32.patch` modifies the genuine LGPL-2.0-only intrusive
+MessageQueue at the same pinned revision, preserving its unchanged public
+header and Kurt Skauen's complete notices. It corrects tail ownership when
+removing the last message, detaches popped links, propagates Locker failures,
+and removes an unused obsolete kernel include. No replacement Queue or
+Looper/Handler success stubs are supplied. Exact original/adapted sources,
+COPYING.LIB, application objects and the separate archive remain local for
+future relinking material. The independent raw-native port adapter/probe
+are BSD integration code, not copies of the Syllable kernel implementation.
+See [Queue and worker IPC scope](../../../docs/SYLLABLE_NATIVE_QUEUE.md).

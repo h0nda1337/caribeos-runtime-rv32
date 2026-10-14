@@ -1,0 +1,1 @@
+[native-sync-gate-B] capacity=64 recycling=256 EFAULT transactions without credit/object loss PASS

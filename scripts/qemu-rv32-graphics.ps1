@@ -20,6 +20,8 @@ param(
     [ValidateSet("A", "B", "C")][string]$LockerGate = "C",
     [switch]$SyllableThread,
     [ValidateSet("A", "B", "C")][string]$SyllableThreadGate = "C",
+    [switch]$SyllableQueue,
+    [ValidateSet("A", "B", "C")][string]$QueueGate = "C",
     [switch]$NativeFutex,
     [switch]$DisableNativeFutex,
     [ValidateSet("A", "B", "C", "D")][string]$FutexGate = "D",
@@ -30,6 +32,9 @@ param(
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
+if ($SyllableQueue -and ($DisableNativeFutex -or $DisableNativeThreads)) { throw "MessageQueue gates require enabled native threads and private futex" }
+$SyllableThread = $SyllableThread -or $SyllableQueue
+$SyllableMessage = $SyllableMessage -or $SyllableQueue
 if ($SyllableThread -and ($DisableNativeFutex -or $DisableNativeThreads)) { throw "Syllable Thread gates require enabled native threads and private futex" }
 $NativeLocker = $NativeLocker -or $SyllableThread
 if ($NativeLocker -and ($DisableNativeFutex -or $DisableNativeThreads)) { throw "Locker gates require enabled native threads and private futex" }
@@ -80,7 +85,7 @@ try {
     if ($FreeType -or $NativeThreads) {
         $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
         if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
-        $makeArguments += $(if ($SyllableThread) { "INITRD_IMG=build/initrd-threadapi.img" } elseif ($NativeLocker) { "INITRD_IMG=build/initrd-locker.img" } elseif ($NativeTcb) { "INITRD_IMG=build/initrd-tcb.img" } elseif ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
+        $makeArguments += $(if ($SyllableQueue) { "INITRD_IMG=build/initrd-queue.img" } elseif ($SyllableThread) { "INITRD_IMG=build/initrd-threadapi.img" } elseif ($NativeLocker) { "INITRD_IMG=build/initrd-locker.img" } elseif ($NativeTcb) { "INITRD_IMG=build/initrd-tcb.img" } elseif ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
     }
     elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
@@ -121,6 +126,7 @@ try {
     if ($NativeTcb) { $arguments += @("--native-tcb", "--tcb-gate", $TcbGate.ToUpperInvariant()) }
     if ($NativeLocker) { $arguments += @("--native-locker", "--locker-gate", $LockerGate.ToUpperInvariant()) }
     if ($SyllableThread) { $arguments += @("--syllable-thread", "--syllable-thread-gate", $SyllableThreadGate.ToUpperInvariant()) }
+    if ($SyllableQueue) { $arguments += @("--syllable-queue", "--queue-gate", $QueueGate.ToUpperInvariant()) }
     if ($DisableNativeFutex) { $arguments += "--native-futex-disabled" }
     if ($Live) { $arguments += "--live" }
     & $PythonPath @arguments

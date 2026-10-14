@@ -1,0 +1,1 @@
+[freetype-gate-D] independent-exec shared-Sv32 bytes=1920000 frame-fnv32=94e1ac1d GPU-present zero-area-leak PASS

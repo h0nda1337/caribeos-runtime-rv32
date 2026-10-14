@@ -1,0 +1,1 @@
+[syllable-thread-gate-B] workers=16 rounds=160000 recursive acquisitions=320000 overlaps=0 cpu=0 sleeps=640 timer-waits=640 scheduler-waits=69361 PASS

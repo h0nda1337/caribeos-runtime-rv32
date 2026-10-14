@@ -12,7 +12,12 @@
 #include <time.h>
 #include <unistd.h>
 
+#ifdef CARIBE_IPC_RAW_THREAD
+#include <uapi/caribe_thread.h>
+#include <atheos/time.h>
+#else
 static int ipc_fd = -1;
+#endif
 static struct caribe_ipc_request request(uint32_t op, port_id id)
 {
     struct caribe_ipc_request arg;
@@ -24,8 +29,16 @@ static struct caribe_ipc_request request(uint32_t op, port_id id)
 }
 static int call(struct caribe_ipc_request *arg)
 {
+#ifdef CARIBE_IPC_RAW_THREAD
+    register uintptr_t a0 __asm__("a0") = (uintptr_t)arg;
+    register uintptr_t a7 __asm__("a7") = CARIBE_THREAD_IPC_ECALL;
+    __asm__ volatile("ecall" : "+r"(a0) : "r"(a7) : "a1", "memory");
+    if ((int32_t)a0 < 0) { errno = -(int32_t)a0; return -1; }
+    return 0;
+#else
     if (ipc_fd < 0) ipc_fd = open("/dev/caribe-ipc", O_RDWR | O_CLOEXEC);
     return ipc_fd < 0 ? -1 : ioctl(ipc_fd, CARIBE_IPC_CALL, arg);
+#endif
 }
 static int set_name(struct caribe_ipc_request *arg, const char *name)
 {
@@ -53,7 +66,11 @@ static int transfer(port_id id, uint32_t code, void *buffer, int size,
 {
     struct caribe_ipc_request arg;
     int result;
+#ifdef CARIBE_IPC_RAW_THREAD
+    bigtime_t now;
+#else
     struct timespec now;
+#endif
     uint64_t start = 0, elapsed = 0;
     int infinite = timeout == -1 || timeout == INFINITE_TIMEOUT;
     if (size < 0 || timeout < -1) { errno = EINVAL; return -1; }
@@ -61,8 +78,14 @@ static int transfer(port_id id, uint32_t code, void *buffer, int size,
         errno = EINVAL; return -1;
     }
     if (timeout > 0 && !infinite) {
+#ifdef CARIBE_IPC_RAW_THREAD
+        now = get_system_time();
+        if (now < 0) return -1;
+        start = (uint64_t)now;
+#else
         if (clock_gettime(CLOCK_MONOTONIC, &now)) return -1;
         start = (uint64_t)now.tv_sec * 1000000U + (uint64_t)now.tv_nsec / 1000U;
+#endif
     }
     do {
         arg = request(sending ? CARIBE_IPC_SEND : CARIBE_IPC_RECEIVE, id);
@@ -77,8 +100,14 @@ static int transfer(port_id id, uint32_t code, void *buffer, int size,
         }
         result = call(&arg);
         if (result < 0 && errno == ETIMEDOUT && timeout > 0 && !infinite) {
+#ifdef CARIBE_IPC_RAW_THREAD
+            now = get_system_time();
+            if (now < 0) return -1;
+            elapsed = (uint64_t)now - start;
+#else
             if (clock_gettime(CLOCK_MONOTONIC, &now)) return -1;
             elapsed = (uint64_t)now.tv_sec * 1000000U + (uint64_t)now.tv_nsec / 1000U - start;
+#endif
         }
     } while (result < 0 && errno == ETIMEDOUT && (infinite || elapsed < (uint64_t)timeout));
     if (!result && !sending && received_code) *received_code = arg.code;

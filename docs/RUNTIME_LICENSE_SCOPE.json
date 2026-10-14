@@ -15,6 +15,12 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-syllable-queue.py",
+                              "scripts/test-syllable-queue-rebuild.ps1",
+                              "scripts/test-syllable-queue-matrix.ps1",
+                              "tools/collect-syllable-queue-evidence.py",
+                              "userland/syllable_queue_probe.cpp",
+                              "tests/test_syllable_queue_guards.py",
                               "scripts/prepare-syllable-thread.py",
                               "scripts/test-syllable-thread-rebuild.ps1",
                               "scripts/test-syllable-thread-matrix.ps1",
@@ -264,6 +270,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-queue-v0.14/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original MessageQueue/native worker IPC gates, scanouts, source pins, fresh processes and rebuild records are evidence, not original source code."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-thread-v0.13/*",
                                           "classification": "GENERATED_EVIDENCE",

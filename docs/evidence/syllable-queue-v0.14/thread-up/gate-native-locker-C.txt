@@ -1,0 +1,1 @@
+[native-locker-gate-C] immediate timeout EAGAIN cycles=64; genuine errno isolation; owner preserved; generic reaping PASS

@@ -148,6 +148,17 @@ Original Syllable headers, musl TCB implementation and GNU C++ libraries keep
 their own licenses. No new binary release is distributed by these gates.
 See [Thread lifecycle and limits](docs/SYLLABLE_NATIVE_THREAD_API.md).
 
+The Queue profile builds genuine `system/sys/appserver/libsyllable/util/messagequeue.cpp`
+and unchanged `util/messagequeue.h` from the same Syllable revision, with
+SHA-256 checked inputs and Kurt Skauen's complete LGPL-2.0-only notices.
+The auditable `messagequeue-rv32.patch` retains LGPL and fixes ownership of
+the intrusive tail after deletion; it is not original BSD code.
+Independent native port integration/probes/tooling retain BSD-2-Clause.
+XNU remains APSL, musl MIT-style, and GNU C++ keeps its own terms.
+Future binary distribution needs exact source/notices/relink material;
+this checkpoint does not create a new binary Release or complete AppServer.
+See [MessageQueue and worker IPC limits](docs/SYLLABLE_NATIVE_QUEUE.md).
+
 Security sources are pinned by [security/dependencies.json](security/dependencies.json)
 and obtained by `scripts/prepare-security-deps.py`. They remain unmodified,
 ignored build inputs under `third_party/`. Monocypher and Mbed TLS upstream

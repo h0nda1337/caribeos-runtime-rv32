@@ -127,6 +127,15 @@ The independently written lifecycle/clock/TCB integration and tests are
 BSD-2-Clause. This does not relicense original Syllable, musl, GNU C++ or XNU.
 No complete Looper/AppServer or threaded libc is claimed.
 
+The optional Queue profile builds the original LGPL-2.0-only Syllable
+`util/messagequeue.cpp` and unchanged public `util/messagequeue.h` at the
+same pinned revision, retaining Kurt Skauen's copyright and full notices.
+Its narrow tail/lifecycle patch remains LGPL, not runtime BSD. The
+independent adapter routes ports through XNU native worker IPC without
+relicensing Syllable, GNU C++, musl, OpenSBI/SecureSBI or APSL XNU.
+Workers do not allocate/decode Message objects or use threaded stdio here;
+Looper/AppServer and the authentic complete desktop remain required.
+
 The optional Locker profile uses the genuine LGPL-2.0-only Syllable
 `util/locker.h` and unchanged native thread interface at the pinned Syllable
 revision. Its narrow LGPL patch initializes the owner and removes an unused

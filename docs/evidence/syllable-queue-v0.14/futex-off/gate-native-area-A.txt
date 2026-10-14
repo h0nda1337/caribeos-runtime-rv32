@@ -1,0 +1,1 @@
+[native-area-gate-A] shared backing permissions no-escalation reserved-VA copyout-rollback zeroing PASS

@@ -1,0 +1,46 @@
+--- a/messagequeue.cpp
++++ b/messagequeue.cpp
+@@ -1,4 +1,10 @@
+ 
++/* CaribeOS modification notice: h0nda1337, 2026-10-13.
++ * Correct tail ownership on removal, detach popped links and propagate lock
++ * failures; remove an unused obsolete kernel include. Original queue retained.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libatheos.so - the highlevel API library for AtheOS
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *
+@@ -22,7 +28,6 @@
+ #include <util/message.h>
+ 
+-#include <atheos/kernel.h>
+ #include <atheos/semaphore.h>
+@@ -69,8 +74,7 @@
+ bool MessageQueue::Lock( void )
+ {
+-	m_cMutex.Lock();
+-	return ( true );
++	return ( m_cMutex.Lock() >= 0 );
+ }
+@@ -122,6 +126,7 @@
+ 			m_pcLastMessage = NULL;
+ 		}
++		pcMsg->m_pcNext = NULL;
+ 		m_nMsgCount--;
+@@ -139,9 +144,11 @@
+ {
+ 	Message **ppcPtr;
++	Message *pcPrevious = NULL;
+ 
+-	for( ppcPtr = &m_pcFirstMessage; NULL != *ppcPtr; ppcPtr = &( ( *ppcPtr )->m_pcNext ) )
++	for( ppcPtr = &m_pcFirstMessage; NULL != *ppcPtr;
++	     pcPrevious = *ppcPtr, ppcPtr = &( ( *ppcPtr )->m_pcNext ) )
+ 	{
+ 		if( *ppcPtr == pcMsg )
+@@ -148,7 +155,7 @@
+ 			if( pcMsg == m_pcLastMessage )
+ 			{
+-				m_pcLastMessage = *ppcPtr;
++				m_pcLastMessage = pcPrevious;
+ 			}

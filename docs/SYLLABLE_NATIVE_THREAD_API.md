@@ -88,7 +88,8 @@ Local binary snapshots are not new published binary Releases.
 
 ## Next integration barrier
 
-Looper needs native port operations from workers, Handler/MessageQueue,
-safe worker allocation/stdio and the GNU thread runtime. Those remain real
-requirements before original AppServer/Desktop integration; dependency
-gates do not shrink the final desktop objective.
+The next optional [Queue profile](SYLLABLE_NATIVE_QUEUE.md) compiles genuine
+MessageQueue and adds native port operations from workers, preserving this
+checkpoint's artifacts. Genuine Handler/Looper, safe worker allocation/stdio
+and the GNU thread runtime remain requirements before original AppServer/
+Desktop integration; dependency gates do not shrink the desktop objective.

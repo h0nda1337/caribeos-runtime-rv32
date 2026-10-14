@@ -1,0 +1,19 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/messagequeue.cpp",
+      "sha256": "c17acce2749301f9821477972a9761f37603e56997a12f076fc75cd11dedd562",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/messagequeue.h",
+      "sha256": "4b21fba59c97129984aab7668b68efd1736b9536ebb2a7ba8f1caea898af3c33",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "patchSha256": "53286f3074006f3f51f52c11ae2e5e2e907c1182a502df1c9f0c43548fb86875",
+  "adaptedQueueSha256": "d513a1533462a571caf61ea1197654971c9903b8f7f0744013d47500e350329d",
+  "license": "LGPL-2.0-only",
+  "scope": "genuine intrusive MessageQueue and original public header; not Looper/AppServer or threaded libc"
+}

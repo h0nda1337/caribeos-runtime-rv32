@@ -1,0 +1,1 @@
+[native-locker-gate-A] genuine os::Locker owner/recursion; RV32A old-value/CAS/exchange contract PASS

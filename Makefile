@@ -807,6 +807,29 @@ build/syllable-thread-probe.elf: build/syllable_thread_probe.o build/native_tcb_
 
 build/initrd-threadapi.img: build/initrd-locker.img build/syllable-thread-probe.elf
 
+build/syllable-queue/sources.json: scripts/prepare-syllable-queue.py ports/syllable/patches/messagequeue-rv32.patch ports/syllable/COPYING.LIB
+	$(PYTHON) scripts/prepare-syllable-queue.py
+
+SYLLABLE_QUEUE_FLAGS = $(SYLLABLE_THREAD_FLAGS) -Ibuild/syllable-queue/include -Ibuild/syllable-message/include -DCARIBE_SYLLABLE_MESSAGE_CORE
+build/syllable_queue.o: build/syllable-queue/sources.json build/syllable-message/sources.json build/syllable-locker/sources.json $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_QUEUE_FLAGS) -Wall -Wextra -c build/syllable-queue/messagequeue.cpp -o $@
+
+build/syllable_raw_msgport.o: ports/syllable/native/msgport.c ports/syllable/native/message_io.h build/syllable-thread/sources.json build/syllable-native/sources.json include/uapi/caribe_thread.h include/uapi/caribe_ipc.h
+	$(CC32) $(NATIVE_IPC_FLAGS) -Ibuild/syllable-thread/include -DCARIBE_IPC_RAW_THREAD -msmall-data-limit=0 -Wall -Wextra -c $< -o $@
+
+build/libcaribe-syllable-queue.a: build/syllable_queue.o build/syllable_raw_msgport.o
+	$(GRAPHICS_AR) rcsD $@ $^
+
+build/syllable_queue_probe.o: userland/syllable_queue_probe.cpp build/syllable-queue/sources.json build/syllable-thread/sources.json build/syllable-message/sources.json build/syllable-locker/sources.json ports/syllable/native/thread_runtime.h $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_QUEUE_FLAGS) -Wall -Wextra -c $< -o $@
+
+build/syllable-queue-probe.elf: build/syllable_queue_probe.o build/native_tcb_tls.o build/libcaribe-syllable-queue.a build/libcaribe-syllable-thread.a build/libcaribe-syllable-message.a build/libcaribe-syllable-string.a $(CXX_LIBRARY)
+	bash scripts/riscv32-musl-cxx.sh $(SYLLABLE_QUEUE_FLAGS) -Wl,--gc-sections \
+	  build/syllable_queue_probe.o build/native_tcb_tls.o build/libcaribe-syllable-queue.a build/libcaribe-syllable-thread.a \
+	  build/libcaribe-syllable-message.a build/libcaribe-syllable-string.a -L$(CXX_SYSROOT)/lib/rv32imac/ilp32 -lstdc++ -o $@
+
+build/initrd-queue.img: build/initrd-threadapi.img build/syllable-queue-probe.elf
+
 FREETYPE_LIBRARY = build/freetype-rv32-sysroot/usr/lib/libfreetype.a
 FREETYPE_FLAGS = $(NATIVE_IPC_FLAGS) -Ibuild/freetype-rv32-sysroot/usr/include/freetype2
 
@@ -984,7 +1007,7 @@ build/gate15_tty_stress.elf: build/gate15_tty_stress.o $(MUSL_SYSROOT)/usr/lib/l
 	  $< -L$(MUSL_SYSROOT)/usr/lib -lc -lgcc \
 	  $(MUSL_SYSROOT)/usr/lib/crtn.o -o $@
 
-build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(MUSL_SYSROOT)/usr/lib/libc.a $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
+build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img: $(INIT_ELF) $(CARIBED_ELF) $(CARIBECTL_ELF) $(MUSL_PROBE_ELF) $(INTERACTIVE_INIT_ELF) $(PIPELINE_PRODUCER_ELF) $(PIPELINE_CONSUMER_ELF) $(PIPELINE_SIGPIPE_ELF) $(JOBCTL_WAIT_ELF) $(CPU1_PROBE_ELF) $(GATE14_STRESS_ELF) $(GATE14_WORKER_ELF) $(GATE15_PROCESS_STRESS_ELF) $(GATE15_WORKER_ELF) $(GATE15_PIPE_STRESS_ELF) $(GATE15_SIGNAL_STRESS_ELF) $(GATE15_PIPELINE_STRESS_ELF) $(GATE15_BATCH_STRESS_ELF) $(GATE15_TTY_STRESS_ELF) $(PROCESS_EXIT7_ELF) $(PROCESS_TWO_TASK_ELF) $(PROCESS_FORK_VM_ELF) $(PROCESS_FD_PARENT_ELF) $(PROCESS_FD_EXEC_ELF) $(PROCESS_EXEC_PARENT_ELF) $(PROCESS_EXEC_CHILD_ELF) $(PROCESS_EXEC_BADINTERP_ELF) $(PROCESS_WAIT_PARENT_ELF) $(PROCESS_SIGNAL_PARENT_ELF) $(PROCESS_SIGNAL_SELF_ELF) $(PROCESS_TTY_INPUT_ELF) $(MUSL_SYSROOT)/usr/lib/libc.a $(BASH_ELF) $(INTERP_PROBE_ELF) $(DYNAMIC_PROBE_ELF) $(DYNAMIC_BIAS_PROBE_ELF) $(LD_CARIBE_ELF) $(LIBCARIBE_PROBE_ELF) $(LIBCARIBE_EXTRA_ELF) $(LIBCARIBE_CHAIN_ELF) $(LIBCARIBE_BUCKETS_ELF) scripts/make-newc-initrd.py $(STAGE1_FILES)
 	@mkdir -p $(dir $@)
 	$(PYTHON) scripts/make-newc-initrd.py $@ \
 	  init=$(INIT_ELF) \
@@ -998,16 +1021,17 @@ build/initrd.img build/initrd-cxx.img build/initrd-syllable.img build/initrd-mes
 	  bin/private-vm-probe=build/private-vm-probe.elf \
 	  bin/native-ipc-probe=build/native-ipc-probe.elf \
 	  bin/native-area-probe=build/native-area-probe.elf \
-	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
-	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
-	  $(if $(filter build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
-	  $(if $(filter build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
-	  $(if $(filter build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/native-thread-probe=build/native-thread-probe.elf) \
-	  $(if $(filter build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/native-futex-probe=build/native-futex-probe.elf) \
-	  $(if $(filter build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/native-tcb-probe=build/native-tcb-probe.elf) \
-	  $(if $(filter build/initrd-locker.img build/initrd-threadapi.img,$@),bin/native-locker-probe=build/native-locker-probe.elf) \
-	  $(if $(filter build/initrd-threadapi.img,$@),bin/syllable-thread-probe=build/syllable-thread-probe.elf) \
-	  $(if $(filter build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img,$@),bin/freetype-probe=build/freetype-probe.elf \
+	  $(if $(filter build/initrd-cxx.img build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/cxx-runtime-probe=build/cxx-runtime-probe.elf) \
+	  $(if $(filter build/initrd-syllable.img build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/syllable-string-probe=build/syllable-string-probe.elf) \
+	  $(if $(filter build/initrd-message.img build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/syllable-message-probe=build/syllable-message-probe.elf) \
+	  $(if $(filter build/initrd-sync.img build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/native-sync-probe=build/native-sync-probe.elf) \
+	  $(if $(filter build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/native-thread-probe=build/native-thread-probe.elf) \
+	  $(if $(filter build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/native-futex-probe=build/native-futex-probe.elf) \
+	  $(if $(filter build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/native-tcb-probe=build/native-tcb-probe.elf) \
+	  $(if $(filter build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/native-locker-probe=build/native-locker-probe.elf) \
+	  $(if $(filter build/initrd-threadapi.img build/initrd-queue.img,$@),bin/syllable-thread-probe=build/syllable-thread-probe.elf) \
+	  $(if $(filter build/initrd-queue.img,$@),bin/syllable-queue-probe=build/syllable-queue-probe.elf) \
+	  $(if $(filter build/initrd-fonts.img build/initrd-threads.img build/initrd-futex.img build/initrd-tcb.img build/initrd-locker.img build/initrd-threadapi.img build/initrd-queue.img,$@),bin/freetype-probe=build/freetype-probe.elf \
 	    usr/share/fonts/vera/Vera.ttf=third_party/ttf-bitstream-vera-1.10/Vera.ttf \
 	    usr/share/fonts/vera/VeraBd.ttf=third_party/ttf-bitstream-vera-1.10/VeraBd.ttf \
 	    usr/share/fonts/vera/VeraMono.ttf=third_party/ttf-bitstream-vera-1.10/VeraMono.ttf \

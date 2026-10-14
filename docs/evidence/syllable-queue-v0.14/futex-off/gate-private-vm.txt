@@ -1,0 +1,1 @@
+[graphics-vm] private heap/mmap fork-exec isolation=32 recycling=256 PASS

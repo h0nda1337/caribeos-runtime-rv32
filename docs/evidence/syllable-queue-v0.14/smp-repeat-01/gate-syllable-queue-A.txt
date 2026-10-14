@@ -1,0 +1,1 @@
+[syllable-queue-gate-A] original MessageQueue FIFO/search/remove/destructor; tail reuse cycles=100; native IPC guards PASS

@@ -1,0 +1,1 @@
+[freetype-gate-C] truncations=256 guard-page invalid-signatures=1024 allocation-fault-cases=32 zero-leak PASS

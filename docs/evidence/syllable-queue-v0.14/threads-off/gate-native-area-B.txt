@@ -1,0 +1,1 @@
+[native-area-gate-B] objects=32 views=64 pages=1024 exhaustion fork-rollback recycling=256 zero-leak PASS

@@ -34,7 +34,11 @@ The original [Syllable Thread lifecycle](docs/SYLLABLE_NATIVE_THREAD_API.md)
 now has a separate opt-in profile with native monotonic clock, worker sleep,
 finite Locker timeouts and real cancellation/join. Its tests do not enable
 worker allocation/stdio, GNU thread exceptions or a complete Looper.
-Threaded libc/GNU TLS and full AppServer/Desktop are still required; passing
+The optional [original MessageQueue/native worker ports](docs/SYLLABLE_NATIVE_QUEUE.md)
+profile adds the genuine intrusive queue, CPU0 typed-message contention and
+actual port waits, finite deadlines, generation reuse and blocked cancellation.
+Workers still do not allocate or decode Message objects; Looper is not replaced.
+Worker-safe libc/GNU runtime and full AppServer/Desktop are still required; passing
 these dependency gates does not mark the desktop complete.
 
 ## Required Boot Chain
