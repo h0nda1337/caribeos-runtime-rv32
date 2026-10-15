@@ -16,6 +16,13 @@ runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
 
 class ProfileGuards(unittest.TestCase):
+    def test_looper_terminal_failure_is_detected_without_waiting_for_timeout(self):
+        for status in (1, 2, 127, 139):
+            self.assertTrue(runner.guest_failure(f"\r\nSYLLABLE_LOOPER_STATUS={status}\r\n"))
+        self.assertFalse(runner.guest_failure("\r\nSYLLABLE_LOOPER_STATUS=0\r\n"))
+        self.assertFalse(runner.guest_failure("echo SYLLABLE_LOOPER_STATUS=$?\r\n"))
+        self.assertFalse(runner.guest_failure("expected child exit status=139\r\n"))
+
     def test_guest_sync_failure_is_detected_without_waiting_for_timeout(self):
         self.assertTrue(runner.guest_failure("[native-sync] FAIL line=1 errno=14"))
         self.assertFalse(runner.guest_failure("[native-sync-gate-E] sleep EINTR/remainder=3 PASS"))

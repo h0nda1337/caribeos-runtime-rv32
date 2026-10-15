@@ -41,8 +41,17 @@ That Queue profile still uses controller-only allocation; Looper is not replaced
 The separate [genuine musl worker heap](docs/SYLLABLE_NATIVE_HEAP.md) profile now
 verifies concurrent mallocng, worker Message construction/decode/ReadPort and
 protected allocator cancellation with real native VM and futex waits.
-Worker-safe stdio, GNU thread exceptions and full AppServer/Desktop are still required; passing
-these dependency gates does not mark the desktop complete.
+That heap profile alone does not enable worker-safe stdio, GNU thread
+exceptions or full AppServer/Desktop; these dependency gates do not mark
+the desktop complete.
+
+The further experimental [original Looper](docs/SYLLABLE_NATIVE_LOOPER.md)
+profile runs Handler/filter/timer dispatch with genuine native GNU exception
+TLS. The separate [original Messenger delivery](docs/SYLLABLE_NATIVE_MESSENGER.md)
+profile adds synchronous/asynchronous replies and an independent fork/exec
+service using native XNU ports. They do not implement complete GNU threading,
+Variant, Application/AppServer or the desktop and do not replace the stable
+v0.15 default profile.
 
 ## Required Boot Chain
 

@@ -1,0 +1,1 @@
+[syllable-looper-gate-B] original loops=16 targeted typed messages=160000 Handler dispatch and graceful native reaping; non-owned handlers detached PASS

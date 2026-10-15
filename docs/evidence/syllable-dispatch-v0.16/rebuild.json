@@ -1,0 +1,187 @@
+{
+    "result":  "PASS",
+    "before":  [
+                   {
+                       "path":  "build/native-cxx-context/eh_globals.o",
+                       "sha256":  "e1d6b86b4ab655d5ddc77a53443b4bef842dac5a57fc34b76f01f01d192a469d"
+                   },
+                   {
+                       "path":  "build/native-cxx-context/eh_alloc.o",
+                       "sha256":  "3bcb93fe0218ce089cc363c1836c274e9875b0bdb46f1847b1ddb30cefca070b"
+                   },
+                   {
+                       "path":  "build/native-cxx-context/sources.json",
+                       "sha256":  "ccf0264ea68ea6b3d9efe0191e5bf1dd156fdbc2ac7ab6674b7a877c9d96e6c4"
+                   },
+                   {
+                       "path":  "build/syllable_cxx_context.o",
+                       "sha256":  "bd5cbfcf58a854cac0f8da19853572eb5148f17177a75318a087876353ee1aec"
+                   },
+                   {
+                       "path":  "build/syllable_runtime_looper.o",
+                       "sha256":  "8ddd0b471121d5100a6077d80d65ccd62b9d476cb5938779f60e94d13a20d472"
+                   },
+                   {
+                       "path":  "build/syllable_runtime_handler.o",
+                       "sha256":  "3eb565e357a3c9fbcec8412d4d285203a7e6f7091356dabd47d82d5be34d35f9"
+                   },
+                   {
+                       "path":  "build/syllable_runtime_filter.o",
+                       "sha256":  "c9dff9971e5dfd445bd2fa0aea547d6c29aab901a0cd8d178965b037a0e9772f"
+                   },
+                   {
+                       "path":  "build/syllable_looper_runtime.o",
+                       "sha256":  "27df4033bfdfeab4b71ade6b52ebc6c8c858485e6dffd3c9bc5300ab28072e2b"
+                   },
+                   {
+                       "path":  "build/syllable_looper_probe.o",
+                       "sha256":  "b6593bbb6e54742fedeffa67b209d7f538f12fa41053ce5c9011896b4417a8a7"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-looper.a",
+                       "sha256":  "ab6e0dcb677940302c9d3b94f2a15d19e0dc39a888aea5acfc50dc5ba7c5f2cd"
+                   },
+                   {
+                       "path":  "build/syllable-looper-runtime/sources.json",
+                       "sha256":  "2f0c1faee6bf20ad6456ee3fcb8707bb2f5e4710234b4206247bd7af0011b243"
+                   },
+                   {
+                       "path":  "build/syllable-looper-probe.elf",
+                       "sha256":  "3d2843cd189b93ee44d2272445cac36b055361ca446227b33e26c4157a6bb110"
+                   },
+                   {
+                       "path":  "build/initrd-looper.img",
+                       "sha256":  "12726d4bc7df289e8d3032e5a9847e16276de281b10374bdb02bbc72e8b6d59c"
+                   },
+                   {
+                       "path":  "build/syllable_messenger.o",
+                       "sha256":  "27f3d856f3a95ffa89dc32e49cc83a04d333ae5b6387c0d71c381a9fe2720e4d"
+                   },
+                   {
+                       "path":  "build/syllable_delivery_message.o",
+                       "sha256":  "52e0197dc01ec4d8ca0fbab6ad0e769b3d83ae4637e806ef139df1a9ad6c67c0"
+                   },
+                   {
+                       "path":  "build/syllable_messenger_probe.o",
+                       "sha256":  "b58aeea7dd441b60eea39093c82be22c294a3d0680cf00d2f49bd05043f1855c"
+                   },
+                   {
+                       "path":  "build/libcaribe-syllable-messenger.a",
+                       "sha256":  "1f6de61e3682ad7ac41bec4749860f09abce3030fc5b7896e590287ac9f6f218"
+                   },
+                   {
+                       "path":  "build/syllable-messenger/sources.json",
+                       "sha256":  "7fbd5d0467b384e4804dd6e7aef08217acfc95900e29b853f472352709b47194"
+                   },
+                   {
+                       "path":  "build/syllable-messenger-probe.elf",
+                       "sha256":  "a9861ab50c21ddee4a01160dda04b7694e8899a31c2a4a1fab2565801d3fcaf7"
+                   },
+                   {
+                       "path":  "build/initrd-messenger.img",
+                       "sha256":  "2cf5f6280eb0dcf84578dbee841eee21f08304dbb8809e54deac982803427f2e"
+                   }
+               ],
+    "after":  [
+                  {
+                      "path":  "build/native-cxx-context/eh_globals.o",
+                      "sha256":  "e1d6b86b4ab655d5ddc77a53443b4bef842dac5a57fc34b76f01f01d192a469d"
+                  },
+                  {
+                      "path":  "build/native-cxx-context/eh_alloc.o",
+                      "sha256":  "3bcb93fe0218ce089cc363c1836c274e9875b0bdb46f1847b1ddb30cefca070b"
+                  },
+                  {
+                      "path":  "build/native-cxx-context/sources.json",
+                      "sha256":  "ccf0264ea68ea6b3d9efe0191e5bf1dd156fdbc2ac7ab6674b7a877c9d96e6c4"
+                  },
+                  {
+                      "path":  "build/syllable_cxx_context.o",
+                      "sha256":  "bd5cbfcf58a854cac0f8da19853572eb5148f17177a75318a087876353ee1aec"
+                  },
+                  {
+                      "path":  "build/syllable_runtime_looper.o",
+                      "sha256":  "8ddd0b471121d5100a6077d80d65ccd62b9d476cb5938779f60e94d13a20d472"
+                  },
+                  {
+                      "path":  "build/syllable_runtime_handler.o",
+                      "sha256":  "3eb565e357a3c9fbcec8412d4d285203a7e6f7091356dabd47d82d5be34d35f9"
+                  },
+                  {
+                      "path":  "build/syllable_runtime_filter.o",
+                      "sha256":  "c9dff9971e5dfd445bd2fa0aea547d6c29aab901a0cd8d178965b037a0e9772f"
+                  },
+                  {
+                      "path":  "build/syllable_looper_runtime.o",
+                      "sha256":  "27df4033bfdfeab4b71ade6b52ebc6c8c858485e6dffd3c9bc5300ab28072e2b"
+                  },
+                  {
+                      "path":  "build/syllable_looper_probe.o",
+                      "sha256":  "b6593bbb6e54742fedeffa67b209d7f538f12fa41053ce5c9011896b4417a8a7"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-looper.a",
+                      "sha256":  "ab6e0dcb677940302c9d3b94f2a15d19e0dc39a888aea5acfc50dc5ba7c5f2cd"
+                  },
+                  {
+                      "path":  "build/syllable-looper-runtime/sources.json",
+                      "sha256":  "2f0c1faee6bf20ad6456ee3fcb8707bb2f5e4710234b4206247bd7af0011b243"
+                  },
+                  {
+                      "path":  "build/syllable-looper-probe.elf",
+                      "sha256":  "3d2843cd189b93ee44d2272445cac36b055361ca446227b33e26c4157a6bb110"
+                  },
+                  {
+                      "path":  "build/initrd-looper.img",
+                      "sha256":  "12726d4bc7df289e8d3032e5a9847e16276de281b10374bdb02bbc72e8b6d59c"
+                  },
+                  {
+                      "path":  "build/syllable_messenger.o",
+                      "sha256":  "27f3d856f3a95ffa89dc32e49cc83a04d333ae5b6387c0d71c381a9fe2720e4d"
+                  },
+                  {
+                      "path":  "build/syllable_delivery_message.o",
+                      "sha256":  "52e0197dc01ec4d8ca0fbab6ad0e769b3d83ae4637e806ef139df1a9ad6c67c0"
+                  },
+                  {
+                      "path":  "build/syllable_messenger_probe.o",
+                      "sha256":  "b58aeea7dd441b60eea39093c82be22c294a3d0680cf00d2f49bd05043f1855c"
+                  },
+                  {
+                      "path":  "build/libcaribe-syllable-messenger.a",
+                      "sha256":  "1f6de61e3682ad7ac41bec4749860f09abce3030fc5b7896e590287ac9f6f218"
+                  },
+                  {
+                      "path":  "build/syllable-messenger/sources.json",
+                      "sha256":  "7fbd5d0467b384e4804dd6e7aef08217acfc95900e29b853f472352709b47194"
+                  },
+                  {
+                      "path":  "build/syllable-messenger-probe.elf",
+                      "sha256":  "a9861ab50c21ddee4a01160dda04b7694e8899a31c2a4a1fab2565801d3fcaf7"
+                  },
+                  {
+                      "path":  "build/initrd-messenger.img",
+                      "sha256":  "2cf5f6280eb0dcf84578dbee841eee21f08304dbb8809e54deac982803427f2e"
+                  }
+              ],
+    "preservedStableArtifacts":  38,
+    "kernelRecompiled":  false,
+    "forcedGnuUnits":  [
+                           "eh_globals.cc",
+                           "eh_alloc.cc"
+                       ],
+    "forcedRuntimeUnits":  [
+                               "looper.cpp",
+                               "handler.cpp",
+                               "messagefilter.cpp",
+                               "cxx_context.c",
+                               "looper_runtime.c",
+                               "syllable_looper_probe.cpp",
+                               "messenger.cpp",
+                               "message.cpp",
+                               "syllable_messenger_probe.cpp"
+                           ],
+    "includesMessenger":  true,
+    "fullMatrixVerified":  false,
+    "scope":  "Byte-identical experimental userland rebuild; not a desktop promotion"
+}

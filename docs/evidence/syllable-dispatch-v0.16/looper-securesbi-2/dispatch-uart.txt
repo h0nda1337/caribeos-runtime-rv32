@@ -1,0 +1,8 @@
+bash-5.3$ /bin/syllable-looper-probe --gate C; echo SYLLABLE_LOOPER_STATUS=$?
+[syllable-looper-gate-A] GNU native ELF exception TLS workers=16 throws=160000 unwind-destructors=160000 static-init=1 independent contexts cpu=0 PASS
+[syllable-looper-gate-B] original loops=16 targeted typed messages=160000 Handler dispatch and graceful native reaping; non-owned handlers detached PASS
+[syllable-looper-gate-C] live original timers=64 wake<250000us; malformed=64 node-unsupported=64; common/local discards=64/64; pending timer removal=64 recursive termination=64 filters deleted=128 PASS
+[syllable-looper] created=reaped=96 faults=0 cancelled=0 active-scopes=0 waiters=0 PASS
+[syllable-looper] gates A-C PASS; original event loop, not complete AppServer/Desktop
+SYLLABLE_LOOPER_STATUS=0
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS

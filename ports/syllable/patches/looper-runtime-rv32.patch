@@ -1,0 +1,221 @@
+diff --git a/looper.cpp b/looper.cpp
+--- a/looper.cpp
++++ b/looper.cpp
+@@ -1,3 +1,9 @@
++/* CaribeOS runtime modification notice: h0nda1337, 2026-10-14.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Preserve the original loop; adapt bounded native receives/timer wakes,
++ * lifecycle cleanup and filter synchronization. Native node watches absent.
++ * Original notices remain intact.
++ */
+ /* CaribeOS modification notice: h0nda1337, 2026-10-14.
+  * SPDX-License-Identifier: LGPL-2.0-only
+@@ -45,3 +51,5 @@
+ using namespace os;
++#include "message_io.h"
++#include "looper_runtime.h"
+ 
+ class Looper::Private
+@@ -159,6 +167,17 @@
+ 	_RemoveLooper( this );
+-	RemoveHandler( this );
++	Lock();
++	while( !m->m_cHandlerMap.empty() )
++		RemoveHandler( m->m_cHandlerMap.begin()->second );
++	while( !m->m_cCommonFilterList.empty() )
++	{
++		MessageFilter* pcFilter = m->m_cCommonFilterList.front();
++		RemoveCommonFilter( pcFilter );
++		delete pcFilter;
++	}
++	delete m->m_pcCurrentMessage;
++	m->m_pcCurrentMessage = NULL;
+ 	delete_port( m->m_hPort );
+ 
+ 	while( m->m_pcFirstTimer != NULL )
+@@ -177,4 +196,6 @@
+ 	assert( m->m_pcFirstRestartTimer == NULL );
+ 	delete( m->m_pcMsgQueue );
++	while( IsLocked() ) Unlock();
+ 	delete m;
+ }
+@@ -491,5 +512,5 @@
+-				if( errno == ETIME || errno == EINTR )
++				if( errno == ETIME || errno == ETIMEDOUT || errno == EINTR )
+ 				{
+ 					g_cLooperListMutex.Unlock();
+@@ -832,5 +853,5 @@
+-			FilterMessage( pcMsg, &pcHandler, &pcHandler->m_cFilterList );
+-			
+-			pcHandler->HandleMessage( pcMsg );
++			if( FilterMessage( pcMsg, &pcHandler, &pcHandler->m_cFilterList ) && pcHandler != NULL )
++				pcHandler->HandleMessage( pcMsg );
+ 		}
+ 	}
+@@ -925,6 +947,20 @@
+ 	else
+ 	{
++		TimerNode** lists[2] = { &m->m_pcFirstTimer, &m->m_pcFirstRestartTimer };
++		for( int nList = 0; nList < 2; ++nList )
++		{
++			for( TimerNode** pp = lists[nList]; *pp != NULL; )
++			{
++				TimerNode* pcTimer = *pp;
++				if( pcTimer->m_pcHandler == pcHandler )
++				{
++					*pp = pcTimer->m_pcNext; delete pcTimer;
++				}
++				else pp = &pcTimer->m_pcNext;
++			}
++		}
+ 		m->m_cHandlerMap.erase( i );
+ 		pcHandler->m_pcLooper = NULL;
+ 		return ( true );
+@@ -1170,3 +1191,5 @@
+ 	if( SafeLock() == 0 ) {
++		thread_id hThread = m->m_hThread;
++		port_id hPort = m->m_hPort;
+ 		if( get_thread_id( NULL ) == m->m_hThread )
+@@ -1179,10 +1202,10 @@
+ 				Message cMsg( M_TERMINATE );
+ 		
+-				PostMessage( &cMsg );
+-				
++				while( GetLockCount() > 1 ) Unlock();
+ 				Unlock();
++				cMsg._Post( hPort, ~0U );
+ 				
+-				while( wait_for_thread( m->m_hThread ) < 0 )
++				while( wait_for_thread( hThread ) < 0 )
+ 				{
+ 					if( errno != EINTR )
+@@ -1219,7 +1241,8 @@
+ 	uint32 nCode;
++	size_t nReceived;
+ 
+-	while( get_msg_x( m->m_hPort, &nCode, pBuffer, 8192, 0 ) >= 0 )
++	while( caribe_get_message( m->m_hPort, &nCode, pBuffer, 8192, 0, &nReceived ) >= 0 )
+ 	{
+-		_DecodeMessage( nCode, pBuffer );
++		_DecodeMessage( nCode, pBuffer, nReceived );
+ 	}
+ 	delete[]pBuffer;
+@@ -1253,4 +1276,5 @@
++	thread_id hThread = m->m_hThread;
+ 	Unlock();
+-	return ( m->m_hThread );
++	return ( hThread );
+ }
+@@ -1375,5 +1398,5 @@
+-	if( pcFilter->m_bGlobalFilter )
++	if( !pcFilter->m_bGlobalFilter )
+ 	{
+ 		dbprintf( "Error: Looper::RemoveCommonFilter() attempt to remove a local filter using RemoveCommonFilter()\n" );
+ 		return;
+ 	}
+@@ -1574,5 +1598,6 @@
+-	if( bWakeup )
++	if( bWakeup && m->m_hThread != -1 && get_thread_id( NULL ) != m->m_hThread )
+ 	{
+-		resume_thread( m->m_hThread );
++		caribe_looper_wake( m->m_hPort );
+ 	}
+ }
+@@ -1581,15 +1606,24 @@
+-void Looper::_DecodeMessage( uint32 nCode, const void *pData )
++void Looper::_DecodeMessage( uint32 nCode, const void *pData, size_t nReceived )
+ {
++	if( nCode == CARIBE_LOOPER_WAKE && nReceived == 0 ) return;
++	if( nCode == M_NODE_MONITOR ) { caribe_looper_reject( 1 ); errno = ENOTSUP; return; }
+ 	try
+ 	{
+ 		Message *pcMsg;
+ 
+ 		if( nCode != M_NODE_MONITOR )
+ 		{
+-			pcMsg = new Message( pData );
++			pcMsg = new Message();
++			if( pcMsg->Unflatten( static_cast<const uint8*>( pData ), nReceived ) < 0 )
++			{
++				delete pcMsg; caribe_looper_reject( 0 ); return;
++			}
+ 		}
+@@ -1692,3 +1726,4 @@
+ 		uint32 nCode;
++		size_t nReceived;
+ 
+-		if( get_msg_x( m->m_hPort, &nCode, pBuffer, 8192, nTimeOut ) >= 0 )
++		if( caribe_get_message( m->m_hPort, &nCode, pBuffer, 8192, nTimeOut, &nReceived ) >= 0 )
+ 		{
+-			_DecodeMessage( nCode, pBuffer );
++			_DecodeMessage( nCode, pBuffer, nReceived );
+ 		}
+@@ -1737,6 +1772,6 @@
+-		while( get_msg_x( m->m_hPort, &nCode, pBuffer, 8192, 0 ) >= 0 )
++		while( caribe_get_message( m->m_hPort, &nCode, pBuffer, 8192, 0, &nReceived ) >= 0 )
+ 		{
+-			_DecodeMessage( nCode, pBuffer );
++			_DecodeMessage( nCode, pBuffer, nReceived );
+ 		}
+ 
+ 		for( ;; )
+@@ -1753,3 +1788,5 @@
+ 			if( m->m_pcCurrentMessage == NULL )
+ 			{
+ 				break;
+ 			}
++			Lock();
+ 			if( m->m_pcCurrentMessage->GetCode() == M_TERMINATE )
+ 			{
++				Unlock();
+ 				free( pBuffer );
+ 				return;
+@@ -1768,4 +1805,5 @@
+ 				if( OkToQuit() )
+ 				{
++					Unlock();
+ 					free( pBuffer );
+ 					return;
+@@ -1775,3 +1813,6 @@
+ 				else
+ 				{
++					delete m->m_pcCurrentMessage;
++					m->m_pcCurrentMessage = NULL;
++					Unlock();
+ 					continue;
+@@ -1791,5 +1832,4 @@
+ 			if( FilterMessage( m->m_pcCurrentMessage, &pcTarget, &m->m_cCommonFilterList ) ) {
+-				Lock();
+ 				try
+@@ -1803,5 +1843,5 @@
+-				Unlock();
+ 			}
+ 
+ 			delete m->m_pcCurrentMessage;
+ 
+ 			m->m_pcCurrentMessage = NULL;
++			Unlock();
+ 		}
+@@ -1847,4 +1887,2 @@
+-	signal( SIGALRM, SIG_IGN );
+-	signal( SIGCHLD, SIG_IGN );
++	/* Process-wide signal dispositions remain owned by the controller. */
+ //      signal( SIGINT, SIG_IGN );
+ //      signal( SIGINT, SIG_IGN );
+diff --git a/include/util/looper.h b/include/util/looper.h
+--- a/include/util/looper.h
++++ b/include/util/looper.h
+@@ -1,3 +1,8 @@
++/* CaribeOS runtime modification notice: h0nda1337, 2026-10-14.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Private decoder receives the actual bounded native payload length.
++ * Original notices and public interfaces remain intact.
++ */
+ /*  libsyllable.so - the highlevel API library for Syllable
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+@@ -156,5 +161,5 @@
+-    void	  _DecodeMessage( uint32 nCode, const void* pData );
++    void	  _DecodeMessage( uint32 nCode, const void* pData, size_t nReceived );
+     Handler*	  _FindHandler( int nToken ) const;
+     void	  _Loop( void );
+     static uint32 _Entry( void* pData );

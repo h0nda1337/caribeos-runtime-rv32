@@ -1,0 +1,1 @@
+[syllable-string-gate-B] trim=10000 empty all-space signed-ctype va-copy large-format error-preservation PASS

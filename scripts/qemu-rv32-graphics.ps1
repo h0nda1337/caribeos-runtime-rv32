@@ -23,6 +23,10 @@ param(
     [switch]$SyllableQueue,
     [ValidateSet("A", "B", "C")][string]$QueueGate = "C",
     [switch]$SyllableHeap,
+    [switch]$SyllableLooper,
+    [ValidateSet("A", "B", "C")][string]$LooperGate = "C",
+    [switch]$SyllableMessenger,
+    [ValidateSet("A", "B", "C")][string]$MessengerGate = "C",
     [switch]$DisableNativeHeap,
     [ValidateSet("A", "B", "C")][string]$HeapGate = "C",
     [switch]$NativeFutex,
@@ -35,6 +39,9 @@ param(
     [string]$Cpu = ""
 )
 $ErrorActionPreference = "Stop"
+$SyllableLooper = $SyllableLooper -or $SyllableMessenger
+if ($SyllableLooper -and ($DisableNativeHeap -or $DisableNativeThreads -or $DisableNativeFutex)) { throw "Looper gates require heap, native threads and private futex" }
+$SyllableHeap = $SyllableHeap -or $SyllableLooper
 if ($SyllableHeap -and ($DisableNativeHeap -or $DisableNativeThreads -or $DisableNativeFutex)) { throw "Heap gates require enabled heap, native threads and private futex" }
 if ($DisableNativeHeap -and ($DisableNativeThreads -or $DisableNativeFutex)) { throw "Heap default-off profile requires native threads and private futex" }
 $SyllableQueue = $SyllableQueue -or $SyllableHeap -or $DisableNativeHeap
@@ -91,7 +98,7 @@ try {
     if ($FreeType -or $NativeThreads) {
         $code = Invoke-LoggedBuild -Program "powershell" -Parameters @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", (Join-Path $root "scripts/build-freetype-rv32.ps1")) -Log (Join-Path $build "freetype-build.txt")
         if ($code -ne 0) { throw "FreeType build/source verification failed: build/freetype-build.txt" }
-        $makeArguments += $(if ($SyllableHeap -or $DisableNativeHeap) { "INITRD_IMG=build/initrd-heap.img" } elseif ($SyllableQueue) { "INITRD_IMG=build/initrd-queue.img" } elseif ($SyllableThread) { "INITRD_IMG=build/initrd-threadapi.img" } elseif ($NativeLocker) { "INITRD_IMG=build/initrd-locker.img" } elseif ($NativeTcb) { "INITRD_IMG=build/initrd-tcb.img" } elseif ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
+        $makeArguments += $(if ($SyllableMessenger) { "INITRD_IMG=build/initrd-messenger.img" } elseif ($SyllableLooper) { "INITRD_IMG=build/initrd-looper.img" } elseif ($SyllableHeap -or $DisableNativeHeap) { "INITRD_IMG=build/initrd-heap.img" } elseif ($SyllableQueue) { "INITRD_IMG=build/initrd-queue.img" } elseif ($SyllableThread) { "INITRD_IMG=build/initrd-threadapi.img" } elseif ($NativeLocker) { "INITRD_IMG=build/initrd-locker.img" } elseif ($NativeTcb) { "INITRD_IMG=build/initrd-tcb.img" } elseif ($NativeFutex) { "INITRD_IMG=build/initrd-futex.img" } elseif ($NativeThreads) { "INITRD_IMG=build/initrd-threads.img" } else { "INITRD_IMG=build/initrd-fonts.img" })
     }
     elseif ($NativeSync) { $makeArguments += "INITRD_IMG=build/initrd-sync.img" }
     elseif ($SyllableMessage) { $makeArguments += "INITRD_IMG=build/initrd-message.img" }
@@ -134,6 +141,8 @@ try {
     if ($SyllableThread) { $arguments += @("--syllable-thread", "--syllable-thread-gate", $SyllableThreadGate.ToUpperInvariant()) }
     if ($SyllableQueue) { $arguments += @("--syllable-queue", "--queue-gate", $QueueGate.ToUpperInvariant()) }
     if ($SyllableHeap) { $arguments += @("--native-heap", "--heap-gate", $HeapGate.ToUpperInvariant()) }
+    if ($SyllableLooper) { $arguments += @("--syllable-looper", "--looper-gate", $LooperGate.ToUpperInvariant()) }
+    if ($SyllableMessenger) { $arguments += @("--syllable-messenger", "--messenger-gate", $MessengerGate.ToUpperInvariant()) }
     if ($DisableNativeHeap) { $arguments += "--native-heap-disabled" }
     if ($DisableNativeFutex) { $arguments += "--native-futex-disabled" }
     if ($Live) { $arguments += "--live" }

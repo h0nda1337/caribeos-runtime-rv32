@@ -1,0 +1,55 @@
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=82 scheduled cpu=0 active-pmap=0x9040bc40 saved-state=0x9041d900
+[linux-process] fork child pid=82 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=82 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a57 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80483e3a
+[linux-exec] execve path=/bin/native-tcb-probe transactional commit pid=82 generation=1 old-pmap=0x9040bc40 new-pmap=0x9040bc80 type=EXEC bias=0x00000000 entry=0x00010474 sp=0x7ffefe50 PASS
+[native-tcb-gate-A] genuine musl __copy_tls TCB/DTV=16; native PT_TLS initialized/zero image; main pthread_self/errno PASS
+[native-tcb-gate-B] workers=16 checks=160000; private pthread_self/errno/native TLS; futex resumes=16 cpu=0 PASS
+[native-tcb-gate-C] reuse cycles=64 cancellation requests=16; fresh TLS/errno; main unchanged; zero waiter leaks PASS
+[native-tcb] created=reaped=96 live=0 all slots retired PASS
+[native-tcb] gates A-C PASS; musl TCB/native ELF TLS only, not pthread lifecycle or threaded libc
+[linux] exit status=0
+[linux-process] pid=82 state=ZOMBIE closed-fds=3 mmap-pages=0 brk-pages=0 pmap-pages=4 backing-pages=0
+NATIVE_TCB_STATUS=0
+bash-5.3$ /bin/native-locker-probe --gate C; echo NATIVE_LOCKER_STATUS=$?
+[pmap] user root=0x00082a57 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80434ac8
+[linux-clone] real task/thread child pid=83 parent=2 affinity=cpu0
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=83 scheduled cpu=0 active-pmap=0x9040bc80 saved-state=0x9041d800
+[linux-process] fork child pid=83 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=83 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a64 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80483e3a
+[linux-exec] execve path=/bin/native-locker-probe transactional commit pid=83 generation=1 old-pmap=0x9040bc80 new-pmap=0x9040bc40 type=EXEC bias=0x00000000 entry=0x00010a5c sp=0x7ffefe40 PASS
+[native-locker-gate-A] genuine os::Locker owner/recursion; RV32A old-value/CAS/exchange contract PASS
+[native-locker-gate-B] workers=16 rounds=160000 recursive acquisitions=320000 overlaps=0 cpu=0 scheduler-waits=47830 PASS
+[native-locker-gate-C] immediate timeout EAGAIN cycles=64; genuine errno isolation; owner preserved; generic reaping PASS
+[native-locker] created=reaped=80 live=0 semaphores=0 all slots retired PASS
+[native-locker] gates A-C PASS; genuine Syllable Locker with native XNU threads, not Looper/AppServer or pthread lifecycle
+[linux] exit status=0
+[linux-process] pid=83 state=ZOMBIE closed-fds=3 mmap-pages=0 brk-pages=0 pmap-pages=4 backing-pages=0
+NATIVE_LOCKER_STATUS=0
+bash-5.3$ /bin/syllable-thread-probe --gate C; echo SYLLABLE_THREAD_STATUS=$?
+[pmap] user root=0x00082a64 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80434ac8
+[linux-clone] real task/thread child pid=84 parent=2 affinity=cpu0
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=84 scheduled cpu=0 active-pmap=0x9040bc40 saved-state=0x9041d900
+[linux-process] fork child pid=84 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=84 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a60 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80483e3a
+[linux-exec] execve path=/bin/syllable-thread-probe transactional commit pid=84 generation=1 old-pmap=0x9040bc40 new-pmap=0x9040bc80 type=EXEC bias=0x00000000 entry=0x000111aa sp=0x7ffefe40 PASS
+[syllable-thread-gate-A] original os::Thread and C lifecycle; suspended/resume/join status=0x12345678; 64-bit native clock; unsupported errors PASS
+[syllable-thread] FAIL real native timer and semaphore waits code=0 errno=123
+[linux] exit status=1
+[linux-process] pid=84 state=ZOMBIE closed-fds=3 mmap-pages=146 brk-pages=2 pmap

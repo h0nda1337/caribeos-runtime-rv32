@@ -80,3 +80,11 @@ file must still be reviewed individually. Their shared libsyllable/AppServer
 dependency is currently the primary blocker. FileBrowser additionally needs
 Syllable filesystem/mount/attribute semantics not present in our read-only
 initrd/HFS+ environment.
+
+The additional experimental [original Looper runtime](../../docs/SYLLABLE_NATIVE_LOOPER.md)
+now links and executes the complete original Handler/MessageFilter/Looper
+units. The separate [original Messenger profile](../../docs/SYLLABLE_NATIVE_MESSENGER.md)
+enables real Message replies, return addresses, native worker diagnostics and
+independent-process transport. These later opt-in profiles are separate from
+the historical data-core/TCB profiles described above; neither a full
+Application/AppServer nor the complete desktop is claimed.

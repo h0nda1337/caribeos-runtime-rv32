@@ -1,5 +1,9 @@
 # Authentic event-dispatch compilation bring-up
 
+This document records the published compilation-only checkpoint. The separate
+[experimental runtime](SYLLABLE_NATIVE_LOOPER.md) now has initial A-C guest
+checks; those do not retroactively change this checkpoint or complete the desktop.
+
 This prepares and actually compiles the complete original Handler,
 MessageFilter and Looper units for RV32IMAC with genuine musl/GNU headers.
 It does not yet link or execute Looper, implement an AppServer or complete

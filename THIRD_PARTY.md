@@ -188,3 +188,24 @@ adapts header includes, not filesystem/node-monitor backends. The historical
 messages-header alias copies the exact original header and notices.
 Source preparation and compiler/input guards alone are original BSD tools.
 See [event-dispatch compilation boundaries](docs/SYLLABLE_LOOPER_BRINGUP.md).
+
+The optional native Looper runtime uses a separate LGPL-2.0-only adaptation
+of those complete original units. It preserves the real event loop rather
+than replacing it. Its original BSD context/wake/diagnostic adapters do not
+relicense Syllable or the genuine GNU exception runtime. Two unmodified GNU
+15.1.0 libsupc++ units are compiled separately with native ELF TLS and a
+supported zero-emergency-pool configuration; COPYING3 and COPYING.RUNTIME
+remain with those prepared sources. The default single-thread GNU archive
+is not replaced. Complete pthread/GNU threading, shared stdio, filesystem
+node monitoring and the full AppServer/Desktop remain separate unfinished
+contracts. No new binary asset is published; any future distribution needs
+the exact corresponding sources, notices and relink materials.
+
+The additional complete original Messenger unit/public header are pinned to
+the same Syllable revision. A separate LGPL-2.0-only patch enables the original
+Message reply/return-address methods, preserves their wire validation and
+public class layouts, and adapts deadlines/diagnostics/temporary-port cleanup.
+Variant remains excluded. These sources and patch retain all original LGPL
+notices and COPYING.LIB; they are not relicensed runtime BSD. The independent
+source preparer and test/host tools alone retain BSD-2-Clause. This is toolkit
+transport integration, not a complete AppServer or a new binary distribution.

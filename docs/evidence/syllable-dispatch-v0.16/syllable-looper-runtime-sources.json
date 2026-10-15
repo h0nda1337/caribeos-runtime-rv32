@@ -1,0 +1,12 @@
+{
+  "baseSourceRecordSha256": "b32ce745ca378de983cfdbad3bf90e620d1289f57cf234ebbafb5df1f26b204f",
+  "patchSha256": "314f530c6d3bfbad282598e0396f08fc801b6fccf7c7fc315b4340e13d2fb7c1",
+  "adaptedFiles": {
+    "looper.cpp": "9efeccd3f7f7398e790d6cb2faacb957ecdfa62c629d71f7b9ccc95bd36a4a50",
+    "handler.cpp": "68929b6762b9646c931cea44b6568f7ad12d8301ee35b1d8d21d7637d4bf6165",
+    "messagefilter.cpp": "4c18b9eb7b16b2f88cbf2d648da4703462ef31651e587b92832e6025dc4d7997",
+    "include/util/looper.h": "02baf11d0e19278fbcbf8e4395129ebfe40fafc811cfc01c2f0587cb2569e6eb"
+  },
+  "license": "LGPL-2.0-only; original notices preserved",
+  "scope": "original Looper native runtime adaptation, not a replacement event loop or complete AppServer"
+}

@@ -1,0 +1,2 @@
+[graphics-gate-E] clean exit frames=17 blits=17 events=46 dropped=0 PASS
+[graphics-gate-E] clean exit frames=2 blits=2 events=3 dropped=0 PASS

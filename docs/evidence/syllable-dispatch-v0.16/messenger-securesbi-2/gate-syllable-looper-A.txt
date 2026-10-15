@@ -1,0 +1,1 @@
+[syllable-looper-gate-A] GNU native ELF exception TLS workers=16 throws=160000 unwind-destructors=160000 static-init=1 independent contexts cpu=0 PASS

@@ -9,9 +9,11 @@
 *.sh text eol=lf
 *.py text eol=lf
 # Unified-diff context intentionally prefixes original tabs/blank lines with a space.
-*.patch text eol=lf whitespace=-blank-at-eol,-space-before-tab
+*.patch text eol=lf whitespace=-blank-at-eol,-space-before-tab,-blank-at-eof
 *.md text eol=lf
 ports/musl/COPYRIGHT text eol=lf
 *.txt text eol=lf
+# Retained UART failure transcripts preserve original shell prompt spaces.
+docs/evidence/syllable-dispatch-v0.16/known-failed-attempts/*.txt whitespace=-blank-at-eol
 Makefile text eol=lf
 *.ps1 text eol=crlf

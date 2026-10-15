@@ -1,0 +1,1 @@
+[native-heap-gate-A] genuine musl VM; anonymous RW only; execute/file/PROT_NONE/mremap unsupported; stacks/TCB protected; Linux worker VM/FD denied PASS

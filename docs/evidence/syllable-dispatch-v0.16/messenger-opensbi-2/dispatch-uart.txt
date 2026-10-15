@@ -1,0 +1,17 @@
+bash-5.3$ /bin/syllable-looper-probe --gate C; echo SYLLABLE_LOOPER_STATUS=$?
+[syllable-looper-gate-A] GNU native ELF exception TLS workers=16 throws=160000 unwind-destructors=160000 static-init=1 independent contexts cpu=0 PASS
+[syllable-looper-gate-B] original loops=16 targeted typed messages=160000 Handler dispatch and graceful native reaping; non-owned handlers detached PASS
+[syllable-looper-gate-C] live original timers=64 wake<250000us; malformed=64 node-unsupported=64; common/local discards=64/64; pending timer removal=64 recursive termination=64 filters deleted=128 PASS
+[syllable-looper] created=reaped=96 faults=0 cancelled=0 active-scopes=0 waiters=0 PASS
+[syllable-looper] gates A-C PASS; original event loop, not complete AppServer/Desktop
+SYLLABLE_LOOPER_STATUS=0
+<r-probe --gate C; echo SYLLABLE_MESSENGER_STATUS=$?
+[syllable-messenger-peer] original Looper started owner=105 port=386
+[syllable-messenger-peer] actual first dispatch owner=105 native-thread=1073770497
+[syllable-messenger-peer] private reply receive correctly denied
+[syllable-messenger-gate-C] independent fork/exec original Looper service; remote typed request/reply=10000 private reply receive ownership; child exit(0) ports=0 messages=0 PASS
+[syllable-messenger-gate-A] original Messenger sync=10000 async Handler replies=10000 reply-to-reply=64; loops=5 created=reaped=5 faults=0 cpu=0 PASS
+[syllable-messenger-gate-B] ports exhausted=32 no request posted; send/reply deadlines=2 preserved errno; failed late reply retry state retained; ports=0 messages=0 PASS
+[syllable-messenger] gates A-C PASS; original toolkit transport, not complete AppServer/Desktop
+SYLLABLE_MESSENGER_STATUS=0
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS

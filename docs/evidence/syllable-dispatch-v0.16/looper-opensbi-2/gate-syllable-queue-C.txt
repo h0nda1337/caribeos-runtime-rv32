@@ -1,0 +1,1 @@
+[syllable-queue-gate-C] native worker ping-pong=10000 max-payload=8192; finite timeouts=64 elapsed>=2000us; stale waiters=16 cancelled readers/writers=64; waits=wakeups=20146 resources restored PASS

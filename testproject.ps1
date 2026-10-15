@@ -27,6 +27,10 @@ param(
   [switch]$SyllableQueue,
   [ValidateSet("A", "B", "C")][string]$QueueGate = "C",
   [switch]$SyllableHeap,
+  [switch]$SyllableLooper,
+  [ValidateSet("A", "B", "C")][string]$LooperGate = "C",
+  [switch]$SyllableMessenger,
+  [ValidateSet("A", "B", "C")][string]$MessengerGate = "C",
   [switch]$DisableNativeHeap,
   [ValidateSet("A", "B", "C")][string]$HeapGate = "C",
   [switch]$NativeFutex,
@@ -41,6 +45,10 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if (($SyllableMessenger -or $PSBoundParameters.ContainsKey('MessengerGate')) -and $Mode -notin @('graphics','graphics-live')) { throw "Messenger gates are supported for graphics runners only." }
+if ($SyllableMessenger -and ($DisableNativeHeap -or $DisableNativeThreads -or $DisableNativeFutex)) { throw "Messenger gates require heap, native threads and private futex" }
+if (($SyllableLooper -or $PSBoundParameters.ContainsKey('LooperGate')) -and $Mode -notin @('graphics','graphics-live')) { throw "Looper gates are supported for graphics runners only." }
+if ($SyllableLooper -and ($DisableNativeHeap -or $DisableNativeThreads -or $DisableNativeFutex)) { throw "Looper gates require heap, native threads and private futex" }
 if (($SyllableHeap -or $DisableNativeHeap -or $PSBoundParameters.ContainsKey('HeapGate')) -and $Mode -notin @('graphics', 'graphics-live')) {
   throw "Heap gates are supported for graphics runners only."
 }
@@ -1871,7 +1879,7 @@ if ($free) {
 Build-LatestXnuKernel -WorkspaceRoot $workspaceRoot -BuildDir $buildDir
 
 if ($Mode -in @("graphics", "graphics-live")) {
-  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex -NativeTcb:$NativeTcb -TcbGate $TcbGate -NativeLocker:$NativeLocker -LockerGate $LockerGate -SyllableThread:$SyllableThread -SyllableThreadGate $SyllableThreadGate -SyllableQueue:$SyllableQueue -QueueGate $QueueGate -SyllableHeap:$SyllableHeap -DisableNativeHeap:$DisableNativeHeap -HeapGate $HeapGate
+  & (Join-Path $root "scripts\qemu-rv32-graphics.ps1") -Smp $Smp -Cpu $Cpu -SkipKernelBuild -Live:($Mode -eq "graphics-live") -NativeIpc:$NativeIpc -NativeAreas:$NativeAreas -NativeCxx:$NativeCxx -SyllableString:$SyllableString -SyllableMessage:$SyllableMessage -NativeSync:$NativeSync -SyncGate $SyncGate -FreeType:$FreeType -FontGate $FontGate -NativeThreads:$NativeThreads -ThreadGate $ThreadGate -DisableNativeThreads:$DisableNativeThreads -NativeFutex:$NativeFutex -FutexGate $FutexGate -DisableNativeFutex:$DisableNativeFutex -NativeTcb:$NativeTcb -TcbGate $TcbGate -NativeLocker:$NativeLocker -LockerGate $LockerGate -SyllableThread:$SyllableThread -SyllableThreadGate $SyllableThreadGate -SyllableQueue:$SyllableQueue -QueueGate $QueueGate -SyllableHeap:$SyllableHeap -DisableNativeHeap:$DisableNativeHeap -HeapGate $HeapGate -SyllableLooper:$SyllableLooper -LooperGate $LooperGate -SyllableMessenger:$SyllableMessenger -MessengerGate $MessengerGate
   exit $LASTEXITCODE
 }
 

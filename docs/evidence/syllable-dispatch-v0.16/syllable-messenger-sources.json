@@ -1,0 +1,33 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/messenger.cpp",
+      "sha256": "1a84e4af331cc16674f2458a83005fb5419929b584ccaa3b01e12e9a88087b18",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/messenger.h",
+      "sha256": "5906a53ddf672497748ed66c10870698bef585da5af0331b79827e43001c9425",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "baseMessageSourceSha256": "17a97a146424532b67d2e8490c18fd0299b77cafc7bc9416f358e01bcf061ba3",
+  "patchSha256": "9caeb721f48a225696aaf6dfb8f1942f14b504d2d32e9ec390401ea13e2f44d9",
+  "adaptedSha256": {
+    "messenger.cpp": "b63b58276b4ef6189847eb9554820e37cf6bcf2d090a7369ff1cb13aec0c022d",
+    "message.cpp": "835043b6b5643608df6ccc91bae113cd1efdcfeda785416046e69a04dd86bdff",
+    "include/util/messenger.h": "5906a53ddf672497748ed66c10870698bef585da5af0331b79827e43001c9425",
+    "include/util/message.h": "70b969965f0f944a409ce158c80e58adf0725c411bce77a62c8351a63b4f190e",
+    "include/util/flattenable.h": "1e7008ac81d8a87b780a5b2d7ad189e11146ba702d990c985e06091bbfca7cce",
+    "include/util/typecodes.h": "34ef0392dfe16f31d636b64f616585cba5baa4e76f3b8dcc92bb11d7d38e64d2"
+  },
+  "license": "LGPL-2.0-only; complete original notices preserved",
+  "maxWireBytes": 8192,
+  "profile": "CARIBE_SYLLABLE_MESSAGE_CORE + CARIBE_SYLLABLE_MESSAGE_DELIVERY",
+  "excluded": [
+    "Variant methods",
+    "complete AppServer/Desktop"
+  ],
+  "scope": "Original Messenger and Message reply/return-address methods; default data-core library unchanged"
+}

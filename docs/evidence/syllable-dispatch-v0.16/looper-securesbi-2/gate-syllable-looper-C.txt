@@ -1,0 +1,1 @@
+[syllable-looper-gate-C] live original timers=64 wake<250000us; malformed=64 node-unsupported=64; common/local discards=64/64; pending timer removal=64 recursive termination=64 filters deleted=128 PASS

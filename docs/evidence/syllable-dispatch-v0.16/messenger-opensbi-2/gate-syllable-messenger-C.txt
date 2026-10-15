@@ -1,0 +1,1 @@
+[syllable-messenger-gate-C] independent fork/exec original Looper service; remote typed request/reply=10000 private reply receive ownership; child exit(0) ports=0 messages=0 PASS

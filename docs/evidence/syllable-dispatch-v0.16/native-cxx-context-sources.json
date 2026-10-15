@@ -1,0 +1,25 @@
+{
+  "gnuVersion": "15.1.0",
+  "archiveSha512": "ddd35ca6c653dffa88f7c7ef9ee4cd806e156e0f3b30f4d63e75a8363361285cd566ee73127734cde6a934611de815bee3e32e24bfd2e0ab9f7ff35c929821c1",
+  "files": [
+    {
+      "path": "libstdc++-v3/libsupc++/eh_globals.cc",
+      "sha256": "edbdf6fcf2826ae7dd92d33048ce9f401233a6d62992c7a0e58e080995841526"
+    },
+    {
+      "path": "libstdc++-v3/libsupc++/eh_alloc.cc",
+      "sha256": "9d0c43102ec96faaab6b4339966c3587fcd3af75647c10d90fcec93e823ae877"
+    },
+    {
+      "path": "COPYING3",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "COPYING.RUNTIME",
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+    }
+  ],
+  "license": "GPL-3.0-or-later WITH GCC-exception-3.1; original notices intact",
+  "sourcesModified": false,
+  "scope": "genuine exception globals in ELF TLS; genuine allocation with supported zero emergency pool configuration; not full GNU threading"
+}

@@ -15,6 +15,22 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-syllable-messenger.py",
+                              "tests/test_syllable_messenger.py",
+                              "userland/syllable_messenger_probe.cpp",
+                              "tools/collect-syllable-dispatch-evidence.py",
+                              "tests/test_dispatch_evidence.py",
+                              "scripts/test-syllable-dispatch-matrix.ps1",
+                              "ports/syllable/native/cxx_context.c",
+                              "ports/syllable/native/cxx_context.h",
+                              "ports/syllable/native/looper_runtime.c",
+                              "ports/syllable/native/looper_runtime.h",
+                              "scripts/build-native-cxx-context.ps1",
+                              "scripts/prepare-native-cxx-context.py",
+                              "scripts/prepare-syllable-looper-runtime.py",
+                              "scripts/test-syllable-looper-rebuild.ps1",
+                              "userland/syllable_looper_probe.cpp",
+                              "tests/test_syllable_looper_runtime.py",
                               "scripts/prepare-syllable-looper.py",
                               "scripts/audit-syllable-looper-compile.py",
                               "tests/test_syllable_looper_inputs.py",
@@ -285,6 +301,11 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-dispatch-v0.16/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original Looper/Messenger/GNU TLS guest gates, source pins, scanouts and rebuild receipts; not original source or proof of a complete desktop."
+                                      },
                                       {
                                           "path": "ports/musl/patches/*.patch",
                                           "classification": "DERIVED_SOURCE_PATCH",

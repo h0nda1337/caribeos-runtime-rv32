@@ -1,0 +1,55 @@
+[linux-exec] execve path=/bin/native-heap-probe transactional commit pid=62 generation=1 old-pmap=0x9040bc40 new-pmap=0x9040bc80 type=EXEC bias=0x00000000 entry=0x000110e6 sp=0x7ffefe40 PASS
+[native-heap-gate-A] genuine musl VM; anonymous RW only; execute/file/PROT_NONE/mremap unsupported; stacks/TCB protected; Linux worker VM/FD denied PASS
+[native-heap] created=reaped=2 cancelled=0 expected-faults=0 aborted-scopes=0 active=0 waiters=0 pool released PASS
+[native-heap] gates A-A PASS; genuine musl allocator and worker Message, not pthread/GNU exceptions or Looper/AppServer
+[linux] exit status=0
+[linux-process] pid=62 state=ZOMBIE closed-fds=3 mmap-pages=1 brk-pages=2 pmap-pages=5 backing-pages=3
+NATIVE_HEAP_STATUS=0
+bash-5.3$ /bin/syllable-looper-probe --gate A; echo SYLLABLE_LOOPER_STATUS=$?
+[pmap] user root=0x00082a64 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80434ac8
+[linux-clone] real task/thread child pid=63 parent=2 affinity=cpu0
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=63 scheduled cpu=0 active-pmap=0x9040bc80 saved-state=0x9041dd00
+[linux-process] fork child pid=63 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=63 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a54 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80483e3a
+[linux-exec] execve path=/bin/syllable-looper-probe transactional commit pid=63 generation=1 old-pmap=0x9040bc80 new-pmap=0x9040bc40 type=EXEC bias=0x00000000 entry=0x000110ca sp=0x7ffefe40 PASS
+[syllable-looper-gate-A] GNU native ELF exception TLS workers=16 throws=160000 unwind-destructors=160000 static-init=1 independent contexts cpu=0 PASS
+[syllable-looper] created=reaped=16 faults=0 cancelled=0 active-scopes=0 waiters=0 PASS
+[syllable-looper] gates A-A PASS; original event loop, not complete AppServer/Desktop
+[linux] exit status=0
+[linux-process] pid=63 state=ZOMBIE closed-fds=3 mmap-pages=0 brk-pages=2 pmap-pages=5 backing-pages=2
+SYLLABLE_LOOPER_STATUS=0
+bash-5.3$ /bin/syllable-mess
+<r-probe --gate C; echo SYLLABLE_MESSENGER_STATUS=$?
+[pmap] user root=0x00082a54 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80434ac8
+[linux-clone] real task/thread child pid=64 parent=2 affinity=cpu0
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=64 scheduled cpu=0 active-pmap=0x9040bc40 saved-state=0x9041de00
+[linux-process] fork child pid=64 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=64 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a61 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80483e3a
+[linux-exec] execve path=/bin/syllable-messenger-probe transactional commit pid=64 generation=1 old-pmap=0x9040bc40 new-pmap=0x9040bc80 type=EXEC bias=0x00000000 entry=0x0001066a sp=0x7ffefe40 PASS
+[pmap] user root=0x00082a54 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80434ac8
+[linux-clone] real task/thread child pid=65 parent=64 affinity=cpu0
+[linux-process] pid=65 scheduled cpu=0 active-pmap=0x9040bc40 saved-state=0x90428e00
+[linux-process] fork child pid=65 entered U-mode cpu=0
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a63 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002750 min=0x00000000 max=0x80000000 first_free=0x90002760 caller=0x80483e3a
+[linux-exec] execve path=/bin/syllable-messenger-probe transactional commit pid=65 generation=1 old-pmap=0x9040bc40 new-pmap=0x9040bd40 type=EXEC bias=0x00000000 entry=0x0001066a sp=0x7ffefe30 PASS
+Error: Messenger::SendMessage:1() failed to send message
+[syllable-messenger] FAIL cross-exec original request/reply worker=0 errno=110
+[linux] exit status=1
+[linux-process] pid=64 state=ZOMBIE closed-fds=3 mmap-pages=1 brk-pages=2 pmap-pages=5 backing-pages=3
+SYLLABLE_MESSENGER_STATUS=1
+bash-5.3$ 

@@ -1,0 +1,65 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/handler.cpp",
+      "sha256": "64d2c358bc4b2f2bda4577cb369c4526f7761cba265bc4d07de1fc3b587086db",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/appserver/libsyllable/util/looper.cpp",
+      "sha256": "b6a820e5c8b27e7ac5f1521e8fd3c8795077467defd315a43fea6780d6f31ec2",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/appserver/libsyllable/util/messagefilter.cpp",
+      "sha256": "4c18b9eb7b16b2f88cbf2d648da4703462ef31651e587b92832e6025dc4d7997",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/handler.h",
+      "sha256": "301ba2adf69f16594cb354830763af18f9fdcef2b0e6978c1f1eadd1c3712b5d",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/looper.h",
+      "sha256": "24179b1f0f4af4d556f48999c3076428fb3e1d560648b51bec3905e429b9d2a5",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/messagefilter.h",
+      "sha256": "21b5eac6118c88d5cb10ef2dd8df532b1c7fdd58a8ce64e8395589ff6b75ab48",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/gui/guidefines.h",
+      "sha256": "e9545385b311cf9a473a51eea44170d1367e51826c0d7b9ea737886609d89c57",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/atheos/filesystem.h",
+      "sha256": "c2a24439f475ea12f7195bd0f08652fe7f515993faa5d1114fa84ec407a6018e",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/atheos/fs_attribs.h",
+      "sha256": "e56af453d0552dc92ca77690e3658b2671d28c52c38747d6a09501884dd5c881",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/atheos/messages.h",
+      "sha256": "18b6d2bae97aecae214ce20d4dc8f97da42d59a23fa42f146c9dcd20089cda51",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "license": "LGPL-2.0-only",
+  "originalInputsUnchanged": true,
+  "runtimeVerified": false,
+  "handlerPatchSha256": "1549a6d7e32ca2a89db063c34dfd6f26be26275c2d69447f905fdb34c162de23",
+  "adaptedHandlerSha256": "68929b6762b9646c931cea44b6568f7ad12d8301ee35b1d8d21d7637d4bf6165",
+  "platformPatchSha256": "502a9e5da5b74ddbf975d9322b7d2aa504a9818ddf9b2db1fcc91f08ecc3fa77",
+  "adaptedLooperSha256": "149cf5383cc21a0d25adfe4c8d018b74139c70ef9d7b53fb3cd74ef64013ff5a",
+  "adaptedFilesystemHeaderSha256": "7728e26b2c678e78fcf33d4f3553c44bdf0017a9bc65eb1358c3b1e163996e60",
+  "nodeMonitorImplemented": false,
+  "scope": "complete original event-dispatch inputs and native compilation adaptations; not linked or running Looper/AppServer"
+}

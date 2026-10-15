@@ -27,10 +27,12 @@ def qmp_capture_path(case, label):
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[native-heap] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[native-heap] FAIL", "[syllable-looper] FAIL", "[syllable-messenger] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
-            or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text)))
+            or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text))
+            or any(int(value) != 0 for value in re.findall(
+                r"(?m)^SYLLABLE_(?:LOOPER|MESSENGER)_STATUS=([0-9]+)\r?$", text)))
 
 def scanout_fnv(image):
     value = 2166136261
@@ -190,6 +192,48 @@ def validate_heap_log(text, gate, disabled=False):
     return checked
 
 
+def validate_looper_log(text,gate):
+    markers = {
+      "A": "GNU native ELF exception TLS workers=16 throws=160000 unwind-destructors=160000 static-init=1 independent contexts cpu=0 PASS",
+      "B": "original loops=16 targeted typed messages=160000 Handler dispatch and graceful native reaping; non-owned handlers detached PASS",
+      "C": "live original timers=64 wake<250000us; malformed=64 node-unsupported=64; common/local discards=64/64; pending timer removal=64 recursive termination=64 filters deleted=128 PASS"}
+    checked={}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        marker=f"[syllable-looper-gate-{letter}] {markers[letter]}"
+        if marker not in text: raise RuntimeError("missing original Looper gate: "+letter)
+        checked[f"gate-syllable-looper-{letter}.txt"]=marker+"\n"
+    count=16 if gate=="A" else 32 if gate=="B" else 96
+    if (guest_failure(text) or
+        f"[syllable-looper] created=reaped={count} faults=0 cancelled=0 active-scopes=0 waiters=0 PASS" not in text or
+        f"[syllable-looper] gates A-{gate} PASS; original event loop, not complete AppServer/Desktop" not in text):
+        raise RuntimeError("failed or incomplete original Looper profile")
+    return checked
+
+
+def validate_messenger_log(text, gate):
+    markers = {
+        "A": "original Messenger sync=10000 async Handler replies=10000 reply-to-reply=64; loops=5 created=reaped=5 faults=0 cpu=0 PASS",
+        "B": "ports exhausted=32 no request posted; send/reply deadlines=2 preserved errno; failed late reply retry state retained; ports=0 messages=0 PASS",
+        "C": "independent fork/exec original Looper service; remote typed request/reply=10000 private reply receive ownership; child exit(0) ports=0 messages=0 PASS"}
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        marker = f"[syllable-messenger-gate-{letter}] {markers[letter]}"
+        if marker not in text:
+            raise RuntimeError("missing original Messenger gate: " + letter)
+        checked[f"gate-syllable-messenger-{letter}.txt"] = marker + "\n"
+    if guest_failure(text) or f"[syllable-messenger] gates A-{gate} PASS; original toolkit transport, not complete AppServer/Desktop" not in text:
+        raise RuntimeError("failed or incomplete original Messenger profile")
+    return checked
+
+
+def verify_looper_elf(path):
+    verify_font_elf(path)
+    data=path.read_bytes(); offset=struct.unpack_from("<I",data,28)[0]; size,count=struct.unpack_from("<HH",data,42)
+    tls=[struct.unpack_from("<8I",data,offset+i*size) for i in range(count) if struct.unpack_from("<I",data,offset+i*size)[0]==7]
+    if len(tls)!=1 or (tls[0][4],tls[0][5],tls[0][7])!=(0,8,4):
+        raise RuntimeError("Looper must contain the actual eight-byte native GNU exception TLS image")
+
+
 def verify_tcb_elf(path):
     verify_font_elf(path)
     data = path.read_bytes()
@@ -309,11 +353,19 @@ def main():
     parser.add_argument("--native-heap", action="store_true", help="Genuine musl allocator/worker Message, not full threaded libc or AppServer")
     parser.add_argument("--native-heap-disabled", action="store_true")
     parser.add_argument("--heap-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--syllable-looper", action="store_true", help="Execute original Looper and native GNU exception context, not AppServer/Desktop")
+    parser.add_argument("--looper-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--syllable-messenger", action="store_true", help="Original Messenger request/reply transport, not complete AppServer/Desktop")
+    parser.add_argument("--messenger-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.syllable_looper = args.syllable_looper or args.syllable_messenger
+    if args.syllable_looper and (args.native_heap_disabled or args.native_threads_disabled or args.native_futex_disabled):
+        parser.error("Looper gates require heap, native threads and private futex")
+    args.native_heap=args.native_heap or args.syllable_looper
     if args.native_heap and (args.native_heap_disabled or args.native_threads_disabled or args.native_futex_disabled):
         parser.error("heap gates require enabled heap, native threads and private futex")
     if args.native_heap_disabled and (args.native_threads_disabled or args.native_futex_disabled):
@@ -364,6 +416,10 @@ def main():
         name += "-heap-disabled" if args.native_heap_disabled else f"-heap-{args.heap_gate.lower()}"
     if args.freetype:
         name += f"-freetype-{args.font_gate.lower()}"
+    if args.syllable_looper:
+        name += f"-looper-{args.looper_gate.lower()}"
+    if args.syllable_messenger:
+        name += f"-messenger-{args.messenger_gate.lower()}"
     if args.syllable_message:
         name += "-syllable-message"
     elif args.syllable_string:
@@ -453,6 +509,27 @@ def main():
                 raise RuntimeError(f"missing genuine heap dependency {symbol}")
         if "pthread_create" in symbols:
             raise RuntimeError("heap profile does not implement pthread lifecycle")
+    if args.syllable_looper:
+        verify_looper_elf(ROOT/"build/syllable-looper-probe.elf")
+        for key,filename in (("initrd","build/initrd-looper.img"),("syllableLooperProbe","build/syllable-looper-probe.elf"),
+                             ("syllableLooperLibrary","build/libcaribe-syllable-looper.a"),("syllableLooperSources","build/syllable-looper-runtime/sources.json"),
+                             ("gnuNativeContextSources","build/native-cxx-context/sources.json")):
+            artifacts[key]=hashlib.sha256((ROOT/filename).read_bytes()).hexdigest()
+        symbols=subprocess.check_output(["riscv64-unknown-elf-nm","-C",str(ROOT/"build/syllable-looper-probe.elf")],text=True)
+        for symbol in ("os::Looper::_Loop()","os::Looper::_Entry","os::Handler::HandleMessage","__cxa_get_globals","__wrap__Unwind_Find_FDE"):
+            if symbol not in symbols: raise RuntimeError("missing genuine Looper/GNU context dependency: "+symbol)
+        if "__emutls_v." in symbols: raise RuntimeError("Looper exception globals must not use single-thread emutls")
+    if args.syllable_messenger:
+        verify_looper_elf(ROOT / "build/syllable-messenger-probe.elf")
+        for key, filename in (("initrd", "build/initrd-messenger.img"), ("syllableMessengerProbe", "build/syllable-messenger-probe.elf"),
+                              ("syllableMessengerLibrary", "build/libcaribe-syllable-messenger.a"), ("syllableMessengerSources", "build/syllable-messenger/sources.json")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", "-C", str(ROOT / "build/syllable-messenger-probe.elf")], text=True)
+        for symbol in ("os::Messenger::SendMessage", "os::Message::SendReply", "os::Message::ReturnAddress", "os::Looper::_Loop()", "__cxa_get_globals"):
+            if symbol not in symbols:
+                raise RuntimeError("missing genuine Messenger dependency: " + symbol)
+        if any(symbol in symbols for symbol in ("os::Message::AddVariant", "os::Message::FindVariant", "__emutls_v.", "pthread_create")):
+            raise RuntimeError("Messenger profile must not claim Variant, emulated TLS or pthread lifecycle")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -759,6 +836,20 @@ def main():
                 wait("bash-5.3$ ", after=start)
                 for filename, contents in validate_heap_log(pump()[start:], args.heap_gate, args.native_heap_disabled).items():
                     (out / filename).write_text(contents)
+            if args.syllable_looper:
+                start=len(serial)
+                uart.sendall(f"/bin/syllable-looper-probe --gate {args.looper_gate}; echo SYLLABLE_LOOPER_STATUS=$?\n".encode())
+                wait(f"[syllable-looper] gates A-{args.looper_gate} PASS; original event loop, not complete AppServer/Desktop",timeout=900,after=start)
+                wait("\nSYLLABLE_LOOPER_STATUS=0\r",after=start); wait("bash-5.3$ ",after=start)
+                for filename,contents in validate_looper_log(pump()[start:],args.looper_gate).items(): (out/filename).write_text(contents)
+            if args.syllable_messenger:
+                start = len(serial)
+                uart.sendall(f"/bin/syllable-messenger-probe --gate {args.messenger_gate}; echo SYLLABLE_MESSENGER_STATUS=$?\n".encode())
+                wait(f"[syllable-messenger] gates A-{args.messenger_gate} PASS; original toolkit transport, not complete AppServer/Desktop", timeout=300, after=start)
+                wait("\nSYLLABLE_MESSENGER_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_messenger_log(pump()[start:], args.messenger_gate).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -957,6 +1048,12 @@ def main():
                                      "enabled": args.native_heap, "muslVersion": "1.2.5", "cpu": 0,
                                      "allocatorReplaced": False, "stdioEnabled": False, "pthreadImplemented": False,
                                      "appServerBuilt": False} if args.native_heap or args.native_heap_disabled else None,
+                      "syllableLooper": {"gates": list("ABC"[:ord(args.looper_gate)-ord("A")+1]),"cpu":0,"originalLoop":True,
+                                         "nativeGnuExceptionTls":True,"stdioThreaded":False,"fullGnuThreading":False,"appServerBuilt":False} if args.syllable_looper else None,
+                      "syllableMessenger": {"gates": list("ABC"[:ord(args.messenger_gate)-ord("A")+1]), "cpu": 0,
+                                            "originalMessenger": True, "originalReplyMethods": True,
+                                            "independentExec": args.messenger_gate == "C", "variantImplemented": False,
+                                            "appServerBuilt": False} if args.syllable_messenger else None,
                       "syllableQueue": {"gates": list("ABC"[:ord(args.queue_gate)-ord("A")+1]),
                                        "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/messagequeue.cpp",
                                        "cpu": 0, "queueCycles": 160000 if args.queue_gate >= "B" else 0,

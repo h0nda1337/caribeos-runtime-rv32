@@ -1,0 +1,2 @@
+[graphics-gate-B] bounds overflow kernel-pointer fd-kind isolation and ioctl rejection PASS
+[graphics-gate-B] bounds overflow kernel-pointer fd-kind isolation and ioctl rejection PASS

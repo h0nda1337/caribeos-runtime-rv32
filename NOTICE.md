@@ -158,3 +158,23 @@ Both native compilation patches retain LGPL and complete original notices.
 Only the independently written source-preparation/audit/host tools are BSD.
 Successful standalone compilation is not a linked/running Looper, AppServer,
 node-monitor backend or complete desktop; no external component is relicensed.
+
+The separate experimental Looper runtime adaptation and private decoder-header
+patch remain LGPL-2.0-only with all original Syllable notices. Independently
+written native wake/diagnostic/context adapters, build tools and the test
+application are BSD-2-Clause only as classified in the runtime scope manifest.
+The native exception-context variant compiles unmodified GNU libsupc++
+eh_globals.cc and eh_alloc.cc under their GPL terms and GCC Runtime Library
+Exception 3.1; complete COPYING3/COPYING.RUNTIME are retained in prepared inputs.
+It does not relicense GNU, Syllable, musl or XNU, enable complete GNU threading,
+or publish a new binary Release. Running dependency gates is not a complete
+AppServer/Desktop port.
+
+The separate experimental Messenger profile additionally compiles the complete
+original Messenger implementation and enables original Message reply and
+return-address methods, without enabling Variant. Its native platform/deadline
+and failure-lifetime patch remains LGPL-2.0-only, not BSD, with original notices
+and complete COPYING.LIB preserved. Only the independent source preparer,
+probe and host guards carry original runtime BSD-2-Clause terms. This does not
+relicense Syllable, GNU, musl or XNU or constitute a complete AppServer/Desktop
+or a new binary Release.
