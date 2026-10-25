@@ -1,0 +1,19 @@
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::Application::GetInstance()
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::Message(int)
+         U os::Message::Message(void const*)
+         U os::Message::Message(os::Message const&)
+         U os::Message::~Message()
+         U os::Messenger::operator=(os::Messenger const&)
+         U os::Messenger::Messenger(os::Handler const*, os::Looper const*)
+         U os::Messenger::Messenger(os::Messenger const&)
+         U os::Messenger::Messenger()
+         U os::Messenger::~Messenger()
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U os::Messenger::IsTargetLocal() const
+         U os::Messenger::IsValid() const
+         U os::Messenger::GetTarget(os::Looper**) const
+         U vtable for __cxxabiv1::__class_type_info

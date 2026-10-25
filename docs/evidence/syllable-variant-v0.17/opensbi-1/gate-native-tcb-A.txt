@@ -1,0 +1,1 @@
+[native-tcb-gate-A] genuine musl __copy_tls TCB/DTV=16; native PT_TLS initialized/zero image; main pthread_self/errno PASS

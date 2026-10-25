@@ -1,0 +1,8 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-frontier\application.cpp:26:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/kernel.h:26:3: warning: #warning "kernel.h is deprecated." [-Wcpp]
+   26 | # warning "kernel.h is deprecated."
+      |   ^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/kernel.h:35:10: fatal error: syllable/threads.h: No such file or directory
+   35 | #include <syllable/threads.h>
+      |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.

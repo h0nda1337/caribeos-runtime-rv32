@@ -15,5 +15,6 @@ ports/musl/COPYRIGHT text eol=lf
 *.txt text eol=lf
 # Retained UART failure transcripts preserve original shell prompt spaces.
 docs/evidence/syllable-dispatch-v0.16/known-failed-attempts/*.txt whitespace=-blank-at-eol
+docs/evidence/syllable-variant-v0.17/known-failed-attempts/*.txt whitespace=-blank-at-eol
 Makefile text eol=lf
 *.ps1 text eol=crlf

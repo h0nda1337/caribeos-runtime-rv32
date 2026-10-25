@@ -1,0 +1,97 @@
+         U __addsf3
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __dynamic_cast
+         U __fixsfsi
+         U __floatunsisf
+         U __gtsf2
+         U __gxx_personality_v0
+         U __ltsf2
+         U __mulsf3
+         U __nesf2
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::Application::GetInstance()
+         U os::Application::GetQualifiers()
+         U os::ShortcutKey::SetFromLabel(os::String const&)
+         U os::ShortcutKey::ShortcutKey()
+         U os::ShortcutKey::~ShortcutKey()
+         U os::Font::SetProperties(float, float, float)
+         U os::Font::SetFamilyAndStyle(char const*, char const*)
+         U os::Font::AddRef()
+         U os::Font::Release()
+         U os::Font::Font(os::String const&)
+         U os::Font::Font()
+         U os::Menu::Open(os::Point)
+         U os::Looper::AddHandler(os::Handler*)
+         U os::Looper::RemoveHandler(os::Handler*)
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(os::String const&)
+         U os::String::String()
+         U os::Window::_MouseEvent(os::Point const&, unsigned int, os::Message*, bool)
+         U os::Window::AddShortcut(os::ShortcutKey const&, os::View*)
+         U os::Window::_ViewDeleted(os::View*)
+         U os::Window::_PutRenderCmd()
+         U os::Window::SetFocusChild(os::View*)
+         U os::Window::RemoveShortcut(os::ShortcutKey const&)
+         U os::Window::_AllocRenderCmd(unsigned int, os::View const*, unsigned int)
+         U os::Window::_GetPenPosition(int)
+         U os::Window::_DeleteViewFromServer(os::View*)
+         U os::Window::Sync()
+         U os::Window::Flush()
+         U os::Handler::HandleMessage(os::Message*)
+         U os::Handler::SetNextHandler(os::Handler*)
+         U os::Handler::__HA_reserved1__()
+         U os::Handler::__HA_reserved2__()
+         U os::Handler::__HA_reserved3__()
+         U os::Handler::__HA_reserved4__()
+         U os::Handler::__HA_reserved5__()
+         U os::Handler::TimerTick(int)
+         U os::Handler::Handler(os::String const&)
+         U os::Handler::~Handler()
+         U os::Message::AddColor32(char const*, os::Color32_s const&)
+         U os::Message::AddMessage(char const*, os::Message const*)
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::_SetReplyHandler(os::Handler*)
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddPoint(char const*, os::Point const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U os::Variant::Variant(float)
+         U os::Variant::~Variant()
+         U os::Messenger::Messenger(int)
+         U os::Messenger::~Messenger()
+         U os::ScrollBar::SetScrollTarget(os::View*)
+         U os::ShortcutKey::IsValid() const
+         U os::Font::GetTextExtent(os::String const&, unsigned int, int) const
+         U os::Font::GetStringWidth(char const*, int) const
+         U os::Font::GetStringWidth(os::String const&) const
+         U os::Font::GetStringLength(char const*, int, float, bool) const
+         U os::Font::GetStringLength(os::String const&, float, bool) const
+         U os::Font::GetStringWidths(char const**, int const*, int, float*) const
+         U os::Font::GetStringLengths(char const**, int const*, int, float, int*, bool) const
+         U os::Looper::GetDefaultHandler() const
+         U os::String::size() const
+         U os::String::c_str() const
+         U os::Window::_GetTopView() const
+         U os::Window::_GetAppserverPort() const
+         U os::Window::IsActive() const
+         U os::Handler::GetName() const
+         U os::Handler::GetLooper() const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindPoint(char const*, os::Point*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U os::Messenger::SendMessage(os::Message*, os::Message*, long long, long long) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U operator new(unsigned int)
+         U typeinfo for os::Handler
+         U vtable for __cxxabiv1::__si_class_type_info
+         U caribe_syllable_debug
+         U floorf
+         U memcpy
+         U strlen
+         U strncpy

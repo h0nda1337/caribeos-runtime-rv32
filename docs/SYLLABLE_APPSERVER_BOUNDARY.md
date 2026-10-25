@@ -47,6 +47,49 @@ contracts, stale-target/lifecycle races and the intermittent old Thread B
 counter assertion still need attention. Neither the native transport gates
 nor a green source compilation closes these contracts.
 
+## Next Client Integration Contracts
+
+The original `libsyllable/gui/control.cpp` stores a Variant and its Invoked
+hook calls `Message::AddVariant("value", ...)`. The separate original typed
+value profile addresses that dependency, not Control/View implementation.
+Original `libsyllable/util/invoker.cpp` supplies the actual GUI notification
+path through Messenger, including its `source` pointer and virtual Invoked
+hook. Its default constructors depend on `Application::GetInstance()`; do
+not provide a substitute Application singleton to make a test link.
+
+The genuine `util/application.h` directly includes Window, Font, Locale,
+Catalog and keyboard-event interfaces as well as Looper. Its implementation
+constructs a real Locale and keeps real Catalog references. Those contracts
+must be ported or reported unfinished, not replaced with empty success.
+
+At this revision the original Application constructor leaves its server
+application command port uninitialized before a possibly failed DR_CREATE_APP
+exchange, then asserts it is nonnegative. Native bring-up must initialize
+port IDs to invalid values, validate the actual reply and clean up/propagate
+failure. An arbitrary nonnegative value or a fake handshake cannot prove a
+working Application/AppServer connection. Its normal shutdown must terminate
+windows, unregister shortcuts, send M_QUIT and release owned reply/catalog
+resources through their real interfaces.
+
+An isolated complete-client compilation audit is versioned as
+`scripts/audit-syllable-client-compile.py`. It requires the ignored upstream
+audit clone at the exact revision above, verified cached original headers,
+and the already prepared genuine native/C++ dependencies. For a new audit
+clone, use `git clone --filter=blob:none --no-checkout` with the official
+`https://github.com/SyllableOS/Syllable.git` remote into
+`build/syllable-upstream-audit`, then select the exact revision with
+`git -C build/syllable-upstream-audit update-ref --no-deref HEAD <revision>`
+without materializing the entire source tree. The
+tool verifies Git blob identities before using sources or cached headers.
+It must not include the decorator's temporary Layer/GUI adapter directory.
+
+`--retain-evidence` retains compiler logs and unresolved symbols even when
+the audit is INCOMPLETE, with exit code 1 and `runtimeVerified: false`.
+Compiling a complete original translation unit is not a link, a successful
+Application handshake or GUI runtime verification. Original Application and
+Font still encounter obsolete historical platform include paths; following
+those through to real native APIs remains required.
+
 ## License Review
 
 Preserve original notices per file. In particular, server.cpp's historical

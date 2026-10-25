@@ -209,3 +209,12 @@ Variant remains excluded. These sources and patch retain all original LGPL
 notices and COPYING.LIB; they are not relicensed runtime BSD. The independent
 source preparer and test/host tools alone retain BSD-2-Clause. This is toolkit
 transport integration, not a complete AppServer or a new binary distribution.
+
+The separate Variant profile pins the original implementation and public
+header from that same revision, preserves their LGPL-2.0-only notices and
+COPYING.LIB, and enables original Message typed-value methods through a
+separate provider. `variant-runtime-rv32.patch` remains LGPL, not runtime BSD;
+only independent integration/probe/verification tools are original BSD code.
+This is a real Control dependency, not a replacement Control/GUI or complete
+AppServer. All GNU, musl and XNU licensing boundaries remain unchanged.
+See [original GUI typed values](docs/SYLLABLE_NATIVE_VARIANT.md).

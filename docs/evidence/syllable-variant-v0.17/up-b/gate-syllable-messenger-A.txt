@@ -1,0 +1,1 @@
+[syllable-messenger-gate-A] original Messenger sync=10000 async Handler replies=10000 reply-to-reply=64; loops=5 created=reaped=5 faults=0 cpu=0 PASS

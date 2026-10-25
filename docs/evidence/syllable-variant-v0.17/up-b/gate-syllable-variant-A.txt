@@ -1,0 +1,1 @@
+[syllable-variant-gate-A] original class ABI=16 vectors=19 offsets=4 exact-roundtrips=76 canonical wire; deep-copy self/alias and int64 conversions PASS

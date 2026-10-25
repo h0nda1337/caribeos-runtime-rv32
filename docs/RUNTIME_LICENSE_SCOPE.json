@@ -15,6 +15,15 @@
                    "generatedFilesMustNotCarryProjectHeader":  true
                },
     "licensedCodeFiles":  [
+                              "scripts/prepare-syllable-variant.py",
+                              "scripts/audit-syllable-client-compile.py",
+                              "tests/test_syllable_client_compile.py",
+                              "tests/test_syllable_variant.py",
+                              "userland/syllable_variant_probe.cpp",
+                              "tools/collect-syllable-variant-evidence.py",
+                              "tests/test_variant_evidence.py",
+                              "scripts/test-syllable-variant-rebuild.ps1",
+                              "scripts/test-syllable-variant-matrix.ps1",
                               "scripts/prepare-syllable-messenger.py",
                               "tests/test_syllable_messenger.py",
                               "userland/syllable_messenger_probe.cpp",
@@ -301,6 +310,16 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-client-frontier-20261015/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual complete GUI client compiler logs and unresolved symbols, including incomplete units; not runtime or desktop success."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-variant-v0.17/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original Variant/Message guest gates, source pins, scanouts and rebuild receipts; not original source or proof of a complete desktop."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-dispatch-v0.16/*",
                                           "classification": "GENERATED_EVIDENCE",

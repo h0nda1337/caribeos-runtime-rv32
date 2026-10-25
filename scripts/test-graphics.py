@@ -27,12 +27,12 @@ def qmp_capture_path(case, label):
 def guest_failure(text):
     markers = ("fatal user signal", "[native-ipc] FAIL", "[native-area] FAIL",
                "[native-cxx] FAIL", "[syllable-string] FAIL", "[syllable-message] FAIL",
-               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[native-heap] FAIL", "[syllable-looper] FAIL", "[syllable-messenger] FAIL", "[freetype] FAIL")
+               "[native-sync] FAIL", "[native-thread] FAIL", "[native-futex] FAIL", "[native-tcb] FAIL", "[native-locker] FAIL", "[syllable-thread] FAIL", "[syllable-queue] FAIL", "[native-heap] FAIL", "[syllable-looper] FAIL", "[syllable-messenger] FAIL", "[syllable-variant] FAIL", "[freetype] FAIL")
     return ("panic" in text.lower() or "unexpected trap" in text.lower()
             or any(marker in text for marker in markers)
             or bool(re.search(r"\[smp-gate-[a-f]\][^\r\n]* FAIL", text))
             or any(int(value) != 0 for value in re.findall(
-                r"(?m)^SYLLABLE_(?:LOOPER|MESSENGER)_STATUS=([0-9]+)\r?$", text)))
+                r"(?m)^SYLLABLE_(?:LOOPER|MESSENGER|VARIANT)_STATUS=([0-9]+)\r?$", text)))
 
 def scanout_fnv(image):
     value = 2166136261
@@ -226,6 +226,24 @@ def validate_messenger_log(text, gate):
     return checked
 
 
+def validate_variant_log(text, gate):
+    markers = {
+        "A": "original class ABI=16 vectors=19 offsets=4 exact-roundtrips=76 canonical wire; deep-copy self/alias and int64 conversions PASS",
+        "B": "guard-page truncations=253 deterministic fuzz=4096 shared depth=16; pointer wire denied; allocation failures=5 prior Variant/Message retained PASS",
+        "C": "workers=16 typed Variant/Message cycles=160000 cpu=0 created=reaped=16 faults=0 active-scopes=0 waiters=0; cross-exec replies=10000 PASS"}
+    checked = {}
+    for letter in "ABC"[:ord(gate)-ord("A")+1]:
+        marker = f"[syllable-variant-gate-{letter}] {markers[letter]}"
+        if marker not in text:
+            raise RuntimeError("missing original Variant gate: " + letter)
+        checked[f"gate-syllable-variant-{letter}.txt"] = marker + "\n"
+    if gate == "C" and "[syllable-variant-cross] independent fork/exec original Looper/Messenger typed request/reply=10000 value families=19 child exit(0) PASS" not in text:
+        raise RuntimeError("missing actual original Variant independent-exec transport")
+    if guest_failure(text) or f"[syllable-variant] gates A-{gate} PASS; original GUI typed values, not complete Application/AppServer/Desktop" not in text:
+        raise RuntimeError("failed or incomplete original Variant profile")
+    return checked
+
+
 def verify_looper_elf(path):
     verify_font_elf(path)
     data=path.read_bytes(); offset=struct.unpack_from("<I",data,28)[0]; size,count=struct.unpack_from("<HH",data,42)
@@ -357,11 +375,14 @@ def main():
     parser.add_argument("--looper-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--syllable-messenger", action="store_true", help="Original Messenger request/reply transport, not complete AppServer/Desktop")
     parser.add_argument("--messenger-gate", choices=tuple("ABC"), default="C")
+    parser.add_argument("--syllable-variant", action="store_true", help="Original typed GUI values and bounded Message/Variant transport, not complete AppServer/Desktop")
+    parser.add_argument("--variant-gate", choices=tuple("ABC"), default="C")
     parser.add_argument("--visible", action="store_true")
     parser.add_argument("--live", action="store_true", help="Open the real QEMU session; close its window to stop")
     parser.add_argument("--live-seconds", type=float, default=0,
                         help="Optional positive live-preview duration; zero waits for window close")
     args = parser.parse_args()
+    args.syllable_messenger = args.syllable_messenger or args.syllable_variant
     args.syllable_looper = args.syllable_looper or args.syllable_messenger
     if args.syllable_looper and (args.native_heap_disabled or args.native_threads_disabled or args.native_futex_disabled):
         parser.error("Looper gates require heap, native threads and private futex")
@@ -420,6 +441,8 @@ def main():
         name += f"-looper-{args.looper_gate.lower()}"
     if args.syllable_messenger:
         name += f"-messenger-{args.messenger_gate.lower()}"
+    if args.syllable_variant:
+        name += f"-variant-{args.variant_gate.lower()}"
     if args.syllable_message:
         name += "-syllable-message"
     elif args.syllable_string:
@@ -530,6 +553,17 @@ def main():
                 raise RuntimeError("missing genuine Messenger dependency: " + symbol)
         if any(symbol in symbols for symbol in ("os::Message::AddVariant", "os::Message::FindVariant", "__emutls_v.", "pthread_create")):
             raise RuntimeError("Messenger profile must not claim Variant, emulated TLS or pthread lifecycle")
+    if args.syllable_variant:
+        verify_looper_elf(ROOT / "build/syllable-variant-probe.elf")
+        for key, filename in (("initrd", "build/initrd-variant.img"), ("syllableVariantProbe", "build/syllable-variant-probe.elf"),
+                              ("syllableVariantLibrary", "build/libcaribe-syllable-variant.a"), ("syllableVariantSources", "build/syllable-variant/sources.json")):
+            artifacts[key] = hashlib.sha256((ROOT / filename).read_bytes()).hexdigest()
+        symbols = subprocess.check_output(["riscv64-unknown-elf-nm", "-C", str(ROOT / "build/syllable-variant-probe.elf")], text=True)
+        for symbol in ("os::Variant::Unflatten", "os::Variant::Flatten", "os::Message::AddVariant", "os::Message::FindVariant", "__wrap__Znaj", "os::Looper::_Loop()"):
+            if symbol not in symbols:
+                raise RuntimeError("missing original Variant/toolkit dependency: " + symbol)
+        if "__emutls_v." in symbols or "pthread_create" in symbols or "std::ios_base::Init" in symbols:
+            raise RuntimeError("Variant profile must not enable unsupported GNU TLS/stdio/thread initialization")
     if args.native_threads:
         verify_font_elf(ROOT / "build/native-thread-probe.elf")
         artifacts["nativeThreadProbe"] = hashlib.sha256((ROOT / "build/native-thread-probe.elf").read_bytes()).hexdigest()
@@ -850,6 +884,14 @@ def main():
                 wait("bash-5.3$ ", after=start)
                 for filename, contents in validate_messenger_log(pump()[start:], args.messenger_gate).items():
                     (out / filename).write_text(contents)
+            if args.syllable_variant:
+                start = len(serial)
+                uart.sendall(f"/bin/syllable-variant-probe --gate {args.variant_gate}; echo SYLLABLE_VARIANT_STATUS=$?\n".encode())
+                wait(f"[syllable-variant] gates A-{args.variant_gate} PASS; original GUI typed values, not complete Application/AppServer/Desktop", timeout=600, after=start)
+                wait("\nSYLLABLE_VARIANT_STATUS=0\r", after=start)
+                wait("bash-5.3$ ", after=start)
+                for filename, contents in validate_variant_log(pump()[start:], args.variant_gate).items():
+                    (out / filename).write_text(contents)
             if args.native_sync:
                 start = len(serial)
                 uart.sendall(f"/bin/native-sync-probe --gate {args.sync_gate}; echo NATIVE_SYNC_STATUS=$?\n".encode())
@@ -1054,6 +1096,10 @@ def main():
                                             "originalMessenger": True, "originalReplyMethods": True,
                                             "independentExec": args.messenger_gate == "C", "variantImplemented": False,
                                             "appServerBuilt": False} if args.syllable_messenger else None,
+                      "syllableVariant": {"gates": list("ABC"[:ord(args.variant_gate)-ord("A")+1]), "cpu": 0,
+                                          "originalVariant": True, "typedMessageMethods": True, "combinedDepthBudget": 16,
+                                          "allocationFaultInjectionProbeOnly": True, "nonNullPointerWireSupported": False,
+                                          "appServerBuilt": False} if args.syllable_variant else None,
                       "syllableQueue": {"gates": list("ABC"[:ord(args.queue_gate)-ord("A")+1]),
                                        "source": "Syllable 579e480a005321cc320e7e355e8dff398b689be8 util/messagequeue.cpp",
                                        "cpu": 0, "queueCycles": 160000 if args.queue_gate >= "B" else 0,

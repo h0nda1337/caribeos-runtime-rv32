@@ -1,0 +1,1 @@
+[syllable-messenger-gate-B] ports exhausted=32 no request posted; send/reply deadlines=2 preserved errno; failed late reply retry state retained; ports=0 messages=0 PASS

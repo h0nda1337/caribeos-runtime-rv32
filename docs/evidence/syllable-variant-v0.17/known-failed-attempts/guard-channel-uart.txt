@@ -1,0 +1,22 @@
+[linux-process] pid=64 state=ZOMBIE closed-fds=3 mmap-pages=1 brk-pages=2 pmap-pages=5 backing-pages=3
+SYLLABLE_MESSENGER_STATUS=0
+bash-5.3$ 
+<ant-probe --gate B; echo SYLLABLE_VARIANT_STATUS=$?
+[pmap] user root=0x00082a61 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x900024e0 min=0x00000000 max=0x80000000 first_free=0x900024f0 caller=0x80434ac8
+[linux-clone] real task/thread child pid=65 parent=2 affinity=cpu0
+[process-gate-11] fork child-first rendezvous armed PASS
+[linux-process] pid=65 scheduled cpu=0 active-pmap=0x90409c80 saved-state=0x9041bd00
+[linux-process] fork child pid=65 entered U-mode cpu=0
+[process-gate-11] child U-mode rendezvous pid=65 PASS
+[linux-waitid] parent=2 blocking selector=0 id=0 without polling
+[process-gate-11] exec argv/env collected argc=3 envc=11 PASS
+[pmap] user root=0x00082a64 shared kernel root slots=512
+[vm-bootstrap] vm_map_create map=0x90002410 min=0x00000000 max=0x80000000 first_free=0x90002420 caller=0x80483e3a
+[linux-exec] execve path=/bin/syllable-variant-probe transactional commit pid=65 generation=1 old-pmap=0x90409c80 new-pmap=0x90409c40 type=EXEC bias=0x00000000 entry=0x000107d8 sp=0x7ffefe40 PASS
+[syllable-variant-gate-A] original class ABI=16 vectors=19 offsets=4 exact-roundtrips=76 canonical wire; deep-copy self/alias and int64 conversions PASS
+[syllable-variant] FAIL actual unmapped-access guard page worker=0 errno=95
+[linux] exit status=1
+[linux-process] pid=65 state=ZOMBIE closed-fds=3 mmap-pages=147 brk-pages=2 pmap-pages=5 backing-pages=149
+SYLLABLE_VARIANT_STATUS=1
+bash-5.3$ 

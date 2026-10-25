@@ -53,6 +53,11 @@ service using native XNU ports. They do not implement complete GNU threading,
 Variant, Application/AppServer or the desktop and do not replace the stable
 v0.15 default profile.
 
+The additional opt-in [original Variant and typed Message values](docs/SYLLABLE_NATIVE_VARIANT.md)
+profile supplies the data interface needed by original GUI controls, using
+the real toolkit classes and native transport. It does not yet implement
+Application/Window/View, the complete AppServer or Desktop/Dock/FileBrowser.
+
 ## Required Boot Chain
 
 ```text

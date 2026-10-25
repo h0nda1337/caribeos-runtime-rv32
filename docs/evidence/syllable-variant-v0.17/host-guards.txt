@@ -1,0 +1,2 @@
+PASS 298 host tests, not guest proof
+Local log SHA-256: f166d19743fca8142bf88b14cc8485bad4297e3fa8260afc12e229f2dbc2cbb6

@@ -178,3 +178,11 @@ and complete COPYING.LIB preserved. Only the independent source preparer,
 probe and host guards carry original runtime BSD-2-Clause terms. This does not
 relicense Syllable, GNU, musl or XNU or constitute a complete AppServer/Desktop
 or a new binary Release.
+
+The separate experimental Variant profile additionally compiles the original
+LGPL-2.0-only Variant implementation/header and enables original Message typed
+value methods. Its derived four-file patch retains LGPL and all original
+notices; it is not runtime BSD. Only the independent preparer, probe, runners,
+verifier and host guards are classified original BSD-2-Clause code. This does
+not relicense Syllable, GNU, musl or XNU, implement the actual GUI/AppServer,
+or publish a new binary Release.

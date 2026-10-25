@@ -1,0 +1,31 @@
+{
+  "commit": "579e480a005321cc320e7e355e8dff398b689be8",
+  "files": [
+    {
+      "path": "system/sys/appserver/libsyllable/util/variant.cpp",
+      "sha256": "f85f3591915e8b901eb7ae9da1d2c7a095f6a35cb7861bde539137c94b6f14da",
+      "license": "LGPL-2.0-only"
+    },
+    {
+      "path": "system/sys/include/util/variant.h",
+      "sha256": "a9c396b0edb90dc93ec20530969ae759b64e5768bafa17888d30c453eebb8bc2",
+      "license": "LGPL-2.0-only"
+    }
+  ],
+  "baseMessengerSourceSha256": "7fbd5d0467b384e4804dd6e7aef08217acfc95900e29b853f472352709b47194",
+  "patchSha256": "52cb1ea91688a12c7b155416a181cb1328e6431b3faf6b53663bfbbd7abfa148",
+  "adaptedSha256": {
+    "variant.cpp": "f753f701d91c2e834d69ec45f525d56e58de33a18f4ed9f863b368053348f688",
+    "include/util/variant.h": "fb6ef2c055b50cb996446a4b487663ff0103990dafa703b9bc557691f7426d53",
+    "message.cpp": "c642719188f35482291799f5b597dc3cb91f3f6f4d085d5ba9e2985d71e56a64",
+    "include/util/message.h": "bcceaf7b92f53bec762ba86bc6a83412c211d3389de703d5cf650595917e3cb2",
+    "include/util/messenger.h": "5906a53ddf672497748ed66c10870698bef585da5af0331b79827e43001c9425",
+    "include/util/flattenable.h": "1e7008ac81d8a87b780a5b2d7ad189e11146ba702d990c985e06091bbfca7cce",
+    "include/util/typecodes.h": "34ef0392dfe16f31d636b64f616585cba5baa4e76f3b8dcc92bb11d7d38e64d2"
+  },
+  "license": "LGPL-2.0-only; original public methods and notices preserved",
+  "maxWireBytes": 8192,
+  "maxCombinedMessageVariantDepth": 16,
+  "profile": "CARIBE_SYLLABLE_MESSAGE_VARIANT + existing delivery/core profile",
+  "scope": "Original Variant and Message typed values for genuine GUI controls; not Application/AppServer/Desktop"
+}

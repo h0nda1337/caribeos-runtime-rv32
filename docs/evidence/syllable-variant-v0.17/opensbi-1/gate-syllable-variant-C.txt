@@ -1,0 +1,1 @@
+[syllable-variant-gate-C] workers=16 typed Variant/Message cycles=160000 cpu=0 created=reaped=16 faults=0 active-scopes=0 waiters=0; cross-exec replies=10000 PASS

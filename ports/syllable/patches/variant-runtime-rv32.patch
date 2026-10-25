@@ -1,0 +1,641 @@
+diff --git a/variant.cpp b/variant.cpp
+index 8752fb1..f268059 100644
+--- a/variant.cpp
++++ b/variant.cpp
+@@ -1,4 +1,10 @@
+ 
++/* CaribeOS modification notice: h0nda1337, 2026-10-15.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Preserve the original Variant class/conversions; make native serialization
++ * alignment-safe, bounded and transactional and repair allocation lifetimes.
++ * Original notices follow unchanged.
++ */
+ /*  libatheos.so - the highlevel API library for AtheOS
+  *  Copyright (C) 2001  Kurt Skauen
+  *
+@@ -44,17 +50,22 @@
+ */
+ 
+ #include <stdio.h>
++#include <string.h>
++#include <strings.h>
+ #include <util/variant.h>
+ #include <util/message.h>
+-#include <iostream>
++#include <errno.h>
++#include <new>
++#include <stdexcept>
++#include <utility>
+ 
+-#define HEAP_ALLOC(type, var)		m_eType = type;	\
+-									m_uData.sBuffer.nSize = sizeof( var ); \
+-									m_uData.sBuffer.pBuffer = new int8[m_uData.sBuffer.nSize]; \
+-									memcpy( m_uData.sBuffer.pBuffer, &var, m_uData.sBuffer.nSize );
++#define HEAP_ALLOC(type, var) _SetBuffer( type, &(var), sizeof( var ) )
+ 
+ using namespace os;
+ 
++static_assert( sizeof( type_code ) == 4 && sizeof( void* ) == 4 && sizeof( size_t ) == 4, "RV32 Variant ABI" );
++static_assert( sizeof( float ) == 4 && sizeof( double ) == 8 && sizeof( bool ) == 1, "Variant scalar wire ABI" );
++
+ /**************************************************************************/
+ /*** CONSTRUCTORS *********************************************************/
+ /**************************************************************************/
+@@ -62,96 +73,91 @@ using namespace os;
+ Variant::Variant()
+ {
+ 	m_eType = T_ANY_TYPE;
++	memset( &m_uData, 0, sizeof( m_uData ) );
+ }
+ 
+-Variant::Variant( int nValue )
++Variant::Variant( int nValue ) : Variant()
+ {
+ 	m_eType = T_INT32;
+ 	m_uData.nInt32 = nValue;
+ }
+ 
+-Variant::Variant( int64 nValue )
++Variant::Variant( int64 nValue ) : Variant()
+ {
+ 	m_eType = T_INT64;
+ 	m_uData.nInt64 = nValue;
+ }
+ 
+-Variant::Variant( float vValue )
++Variant::Variant( float vValue ) : Variant()
+ {
+ 	m_eType = T_FLOAT;
+ 	m_uData.vFloat = vValue;
+ }
+ 
+-Variant::Variant( double vValue )
++Variant::Variant( double vValue ) : Variant()
+ {
+ 	m_eType = T_DOUBLE;
+ 	m_uData.vDouble = vValue;
+ }
+ 
+-Variant::Variant( bool bValue )
++Variant::Variant( bool bValue ) : Variant()
+ {
+ 	m_eType = T_BOOL;
+ 	m_uData.bBool = bValue;
+ }
+ 
+-Variant::Variant( const String &cString )
++Variant::Variant( const String &cString ) : Variant()
+ {
+-	m_eType = T_STRING;
+-	m_uData.pzString = new char[cString.size() + 1];
+-
+-	memcpy( m_uData.pzString, cString.c_str(), cString.size(  ) + 1 );
++	SetString( cString );
+ }
+ 
+-Variant::Variant( const Point & cValue )
++Variant::Variant( const Point & cValue ) : Variant()
+ {
+ 	HEAP_ALLOC( T_POINT, cValue );
+ }
+ 
+-Variant::Variant( const IPoint & cValue )
++Variant::Variant( const IPoint & cValue ) : Variant()
+ {
+ 	HEAP_ALLOC( T_IPOINT, cValue );
+ }
+ 
+-Variant::Variant( const Rect & cValue )
++Variant::Variant( const Rect & cValue ) : Variant()
+ {
+ 	HEAP_ALLOC( T_RECT, cValue );
+ }
+ 
+-Variant::Variant( const IRect & cValue )
++Variant::Variant( const IRect & cValue ) : Variant()
+ {
+ 	HEAP_ALLOC( T_IRECT, cValue );
+ }
+ 
+-Variant::Variant( const Message & cValue )
++Variant::Variant( const Message & cValue ) : Variant()
+ {
+ 	m_eType = T_MESSAGE;
+ 	m_uData.sBuffer.nSize = cValue.GetFlattenedSize();
+ 	m_uData.sBuffer.pBuffer = new int8[m_uData.sBuffer.nSize];
+ 
+-	cValue.Flatten( ( uint8 * )m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize );
++	if( cValue.Flatten( ( uint8 * )m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize ) < 0 )
++		throw std::invalid_argument( "invalid Message in Variant" );
+ }
+ 
+-Variant::Variant( const Color32_s& cValue )
++Variant::Variant( const Color32_s& cValue ) : Variant()
+ {
+ 	HEAP_ALLOC( T_COLOR32, cValue );
+ }
+ 
+-Variant::Variant( void *pValue )
++Variant::Variant( void *pValue ) : Variant()
+ {
+ 	m_eType = T_POINTER;
+ 	m_uData.pData = pValue;
+ }
+ 
+-Variant::Variant( void *pData, int nSize )
++Variant::Variant( void *pData, int nSize ) : Variant()
+ {
+-	m_eType = T_RAW;
+-	m_uData.sBuffer.nSize = nSize;
+-	m_uData.sBuffer.pBuffer = new int8[nSize];
+-
+-	memcpy( m_uData.sBuffer.pBuffer, pData, nSize );
++	SetRaw( pData, nSize );
+ }
+ 
+-Variant::Variant( const Variant & cOther )
++Variant::Variant( const Variant & cOther ) : Variant()
+ {
+ 	m_eType = T_ANY_TYPE;
+ 	*this = cOther;
+@@ -187,6 +193,24 @@ void Variant::_Clear()
+ 		break;
+ 	}
+ 	m_eType = T_ANY_TYPE;
++	memset( &m_uData, 0, sizeof( m_uData ) );
++}
++
++void Variant::_Swap( Variant& cOther )
++{
++	std::swap( m_eType, cOther.m_eType );
++	std::swap( m_uData, cOther.m_uData );
++}
++
++void Variant::_SetBuffer( type_code nType, const void* pData, size_t nSize )
++{
++	if( nSize != 0 && pData == NULL ) throw std::invalid_argument( "NULL Variant buffer" );
++	int8* pNew = nSize != 0 ? new int8[nSize] : NULL;
++	if( nSize != 0 ) memcpy( pNew, pData, nSize );
++	_Clear();
++	m_eType = nType;
++	m_uData.sBuffer.nSize = nSize;
++	m_uData.sBuffer.pBuffer = pNew;
+ }
+ 
+ /**************************************************************************/
+@@ -238,36 +262,33 @@ void Variant::SetBool( bool bValue )
+ }
+ void Variant::SetString( const String &cValue )
+ {
++	if( cValue.size() == static_cast<size_t>( -1 ) || memchr( cValue.c_str(), 0, cValue.size() ) != NULL )
++		throw std::invalid_argument( "invalid Variant string" );
++	char* pNew = new char[cValue.size() + 1];
++	memcpy( pNew, cValue.c_str(), cValue.size() + 1 );
+ 	_Clear();
+ 	m_eType = T_STRING;
+-	m_uData.pzString = new char[cValue.size() + 1];
+-
+-	memcpy( m_uData.pzString, cValue.c_str(), cValue.size(  ) + 1 );
++	m_uData.pzString = pNew;
+ }
+ 
+ void Variant::SetPoint( const Point & cValue )
+ {
+-	_Clear();
+ 	HEAP_ALLOC( T_POINT, cValue );
+ }
+ void Variant::SetIPoint( const IPoint & cValue )
+ {
+-	_Clear();
+ 	HEAP_ALLOC( T_IPOINT, cValue );
+ }
+ void Variant::SetRect( const Rect & cValue )
+ {
+-	_Clear();
+ 	HEAP_ALLOC( T_RECT, cValue );
+ }
+ void Variant::SetIRect( const IRect & cValue )
+ {
+-	_Clear();
+ 	HEAP_ALLOC( T_IRECT, cValue );
+ }
+ void Variant::SetColor32( const Color32 & cValue )
+ {
+-	_Clear();
+ 	HEAP_ALLOC( T_COLOR32, cValue );
+ }
+ 
+@@ -280,12 +301,8 @@ void Variant::SetPointer( void *pValue )
+ 
+ void Variant::SetRaw( const void *pData, int nSize )
+ {
+-	_Clear();
+-	m_eType = T_RAW;
+-	m_uData.sBuffer.nSize = nSize;
+-	m_uData.sBuffer.pBuffer = new int8[nSize];
+-
+-	memcpy( m_uData.sBuffer.pBuffer, pData, nSize );
++	if( nSize < 0 ) throw std::invalid_argument( "negative Variant buffer size" );
++	_SetBuffer( T_RAW, pData, static_cast<size_t>( nSize ) );
+ }
+ 
+ /**************************************************************************/
+@@ -425,7 +442,7 @@ int64 Variant::AsInt64() const
+ 		{
+ 			int64 nValue;
+ 
+-			if( sscanf( m_uData.pzString, "%Ld", &nValue ) == 1 )
++			if( sscanf( m_uData.pzString, "%lld", &nValue ) == 1 )
+ 			{
+ 				return ( nValue );
+ 			}
+@@ -571,7 +588,7 @@ String Variant::AsString() const
+ 		cValue.Format( "%d", m_uData.nInt32 );
+ 		break;
+ 	case T_INT64:
+-		cValue.Format( "%Ld", m_uData.nInt64 );
++		cValue.Format( "%lld", static_cast<long long>( m_uData.nInt64 ) );
+ 		break;
+ 	case T_BOOL:
+ 		cValue.Format( "%s", ( m_uData.bBool ) ? "true" : "false" );
+@@ -719,6 +736,7 @@ void *Variant::AsPointer() const
+ 
+ void *Variant::AsRaw( size_t *pnSize )
+ {
++	if( pnSize == NULL ) { errno = EINVAL; return NULL; }
+ 	if( m_eType == T_RAW )
+ 	{
+ 		*pnSize = m_uData.sBuffer.nSize;
+@@ -736,16 +754,17 @@ void *Variant::AsRaw( size_t *pnSize )
+ 
+ Variant & Variant::operator=( const Variant & cOther )
+ {
+-	_Clear();
+-	m_eType = cOther.m_eType;
+-	switch ( m_eType )
++	if( this == &cOther ) return *this;
++	Variant cNew;
++	cNew.m_eType = cOther.m_eType;
++	switch ( cNew.m_eType )
+ 	{
+ 	case T_ANY_TYPE:
+ 		break;
+ 	case T_STRING:
+-		m_uData.pzString = new char[strlen( cOther.m_uData.pzString ) + 1];
++		cNew.m_uData.pzString = new char[strlen( cOther.m_uData.pzString ) + 1];
+ 
+-		strcpy( m_uData.pzString, cOther.m_uData.pzString );
++		strcpy( cNew.m_uData.pzString, cOther.m_uData.pzString );
+ 		break;
+ 	case T_MESSAGE:
+ 	case T_VARIANT:
+@@ -755,14 +774,15 @@ Variant & Variant::operator=( const Variant & cOther )
+ 	case T_RECT:
+ 	case T_IRECT:
+ 	case T_COLOR32:
+-		m_uData.sBuffer.nSize = cOther.m_uData.sBuffer.nSize;
+-		m_uData.sBuffer.pBuffer = new int8[m_uData.sBuffer.nSize];
+-		memcpy( m_uData.sBuffer.pBuffer, cOther.m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize );
++		cNew.m_uData.sBuffer.nSize = cOther.m_uData.sBuffer.nSize;
++		cNew.m_uData.sBuffer.pBuffer = cNew.m_uData.sBuffer.nSize ? new int8[cNew.m_uData.sBuffer.nSize] : NULL;
++		if( cNew.m_uData.sBuffer.nSize ) memcpy( cNew.m_uData.sBuffer.pBuffer, cOther.m_uData.sBuffer.pBuffer, cNew.m_uData.sBuffer.nSize );
+ 		break;
+ 	default:
+-		m_uData = cOther.m_uData;
++		cNew.m_uData = cOther.m_uData;
+ 		break;
+ 	}
++	_Swap( cNew );
+ 	return ( *this );
+ }
+ 
+@@ -932,7 +952,7 @@ bool Variant::operator==( const Variant & cOther ) const
+ 	case T_POINT:
+ 		return ( ( cOther.m_eType == T_POINT || cOther.m_eType == T_IPOINT ) && AsPoint() == cOther.AsPoint(  ) );
+ 	case T_RAW:
+-		return ( cOther.m_eType == T_RAW && cOther.m_uData.sBuffer.nSize == m_uData.sBuffer.nSize && memcmp( cOther.m_uData.sBuffer.pBuffer, m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize ) == 0 );
++		return ( cOther.m_eType == T_RAW && cOther.m_uData.sBuffer.nSize == m_uData.sBuffer.nSize && ( m_uData.sBuffer.nSize == 0 || memcmp( cOther.m_uData.sBuffer.pBuffer, m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize ) == 0 ) );
+ 	default:
+ 		return ( false );
+ 	}
+@@ -947,6 +967,45 @@ bool Variant::operator!=( const Variant & cValue ) const
+ /*** FLATTEN/UNFLATTEN METHODS ********************************************/
+ /**************************************************************************/
+ 
++bool Variant::_ValidateFlattened( const uint8* pBuffer, size_t nSize, unsigned nDepth )
++{
++	if( pBuffer == NULL || nSize < 4 || nSize > 8192 || nDepth > 16 ) return false;
++	uint32 nType;
++	memcpy( &nType, pBuffer, 4 );
++	size_t nPayload = nSize - 4;
++	switch( static_cast<type_code>( nType ) )
++	{
++	case T_ANY_TYPE: return nPayload == 0;
++	case T_POINTER:
++		if( nPayload != 4 ) return false;
++		memcpy( &nType, pBuffer + 4, 4 );
++		return nType == 0;
++	case T_INT8: case T_INT16:
++	{
++		if( nPayload != 4 ) return false;
++		int32 nValue;
++		memcpy( &nValue, pBuffer + 4, 4 );
++		return nType == T_INT8 ? ( nValue >= -128 && nValue <= 127 ) : ( nValue >= -32768 && nValue <= 32767 );
++	}
++	case T_INT32: case T_FLOAT: case T_COLOR32: return nPayload == 4;
++	case T_INT64: case T_DOUBLE: case T_POINT: case T_IPOINT: return nPayload == 8;
++	case T_BOOL: return nPayload == 1 && pBuffer[4] <= 1;
++	case T_RECT: case T_IRECT: return nPayload == 16;
++	case T_STRING: case T_RAW: case T_MESSAGE:
++	{
++		if( nPayload < 4 ) return false;
++		int32 nLength;
++		memcpy( &nLength, pBuffer + 4, 4 );
++		if( nLength < 0 || static_cast<size_t>( nLength ) != nPayload - 4 ) return false;
++		if( nType == T_STRING )
++			return nLength > 0 && pBuffer[nSize-1] == 0 && memchr( pBuffer + 8, 0, nLength-1 ) == NULL;
++		if( nType == T_MESSAGE ) return Message::_ValidateFlattened( pBuffer + 8, nLength, nDepth + 1 );
++		return true;
++	}
++	default: return false;
++	}
++}
++
+ size_t Variant::GetFlattenedSize() const
+ {
+ 	switch ( m_eType )
+@@ -995,13 +1054,17 @@ status_t Variant::Flatten( void *pBuffer, size_t nBufSize ) const
+ {
+ 	uint nLen = GetFlattenedSize();
+ 
+-	if( nBufSize < nLen )
++	if( pBuffer == NULL || nBufSize < nLen )
+ 	{
+ 		errno = EINVAL;
+ 		return ( -1 );
+ 	}
+ 
+-	*( ( int * )pBuffer ) = m_eType;
++	if( nLen > 8192 ) { errno = EMSGSIZE; return -1; }
++	if( m_eType == T_VARIANT || ( m_eType == T_POINTER && m_uData.pData != NULL ) ) { errno = ENOTSUP; return -1; }
++	if( m_eType == T_MESSAGE && !Message::_ValidateFlattened( static_cast<const uint8*>( m_uData.sBuffer.pBuffer ), m_uData.sBuffer.nSize, 1 ) )
++		{ errno = EINVAL; return -1; }
++	memcpy( pBuffer, &m_eType, sizeof( int ) );
+ 	pBuffer = ( ( int8 * )pBuffer ) + sizeof( int );
+ 	nLen -= sizeof( int );
+ 
+@@ -1011,7 +1074,7 @@ status_t Variant::Flatten( void *pBuffer, size_t nBufSize ) const
+ 		{
+ 			int nLen = strlen( m_uData.pzString ) + 1;
+ 
+-			*( ( int * )pBuffer ) = nLen;
++			memcpy( pBuffer, &nLen, sizeof( int ) );
+ 			pBuffer = ( ( int8 * )pBuffer ) + sizeof( int );
+ 			memcpy( pBuffer, m_uData.pzString, nLen );
+ 			break;
+@@ -1020,44 +1083,35 @@ status_t Variant::Flatten( void *pBuffer, size_t nBufSize ) const
+ 	case T_IRECT:
+ 	case T_POINT:
+ 	case T_IPOINT:
+-	case T_MESSAGE:
+ 	case T_VARIANT:
+ 	case T_COLOR32:
+-	case T_RAW:
+ 		memcpy( pBuffer, m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize );
+ 		break;
++	case T_MESSAGE:
++	case T_RAW:
++		memcpy( pBuffer, &m_uData.sBuffer.nSize, sizeof( int ) );
++		pBuffer = static_cast<uint8*>( pBuffer ) + sizeof( int );
++		if( m_uData.sBuffer.nSize ) memcpy( pBuffer, m_uData.sBuffer.pBuffer, m_uData.sBuffer.nSize );
++		break;
+ 	default:
+ 		memcpy( pBuffer, &m_uData, nLen );
+ 	}
+-	return ( sizeof( int ) );
+-
+ 	return ( 0 );
+ }
+ 
+ status_t Variant::Unflatten( const void *pBuffer, size_t nBufSize )
+ {
+-	switch ( m_eType )
+-	{
+-	case T_STRING:
+-		delete[]m_uData.pzString;
+-		break;
+-	case T_MESSAGE:
+-	case T_VARIANT:
+-	case T_RAW:
+-		delete[]reinterpret_cast < int8 *>( m_uData.sBuffer.pBuffer );
+-
+-		break;
+-	default:
+-		break;
+-	}
+-	m_eType = T_ANY_TYPE;
++	if( !_ValidateFlattened( static_cast<const uint8*>( pBuffer ), nBufSize, 0 ) ) { errno = EINVAL; return -1; }
++	Variant cOriginal;
++	_Swap( cOriginal );
++	try {
+ 
+ 	if( nBufSize < 4 )
+ 	{
+ 		errno = EINVAL;
+ 		return ( -1 );
+ 	}
+-	m_eType = ( type_code ) ( *( ( int * )pBuffer ) );
++	memcpy( &m_eType, pBuffer, sizeof( int ) );
+ 	pBuffer = ( ( int8 * )pBuffer ) + sizeof( int );
+ 	nBufSize -= sizeof( int );
+ 
+@@ -1131,7 +1185,8 @@ status_t Variant::Unflatten( const void *pBuffer, size_t nBufSize )
+ 				nError = -1;
+ 				break;
+ 			}
+-			int nSize = ( *( ( int * )pBuffer ) );
++			int nSize;
++			memcpy( &nSize, pBuffer, sizeof( int ) );
+ 			pBuffer = ( ( int8 * )pBuffer ) + sizeof( int );
+ 			if( nBufSize < nSize + sizeof( int ) )
+ 			{
+@@ -1169,7 +1224,11 @@ status_t Variant::Unflatten( const void *pBuffer, size_t nBufSize )
+ 		memcpy( m_uData.sBuffer.pBuffer, pBuffer, m_uData.sBuffer.nSize );
+ 		break;
+ 	case T_MESSAGE:
+-		return ( sizeof( int ) + sizeof( int ) + m_uData.sBuffer.nSize );
++		memcpy( &m_uData.sBuffer.nSize, pBuffer, sizeof( int ) );
++		pBuffer = static_cast<const uint8*>( pBuffer ) + sizeof( int );
++		m_uData.sBuffer.pBuffer = new int8[m_uData.sBuffer.nSize];
++		memcpy( m_uData.sBuffer.pBuffer, pBuffer, m_uData.sBuffer.nSize );
++		break;
+ 	case T_COLOR32:
+ 		if( nBufSize < sizeof( Color32_s ) )
+ 		{
+@@ -1217,7 +1276,7 @@ status_t Variant::Unflatten( const void *pBuffer, size_t nBufSize )
+ 			nError = -1;
+ 			break;
+ 		}
+-		m_uData.sBuffer.nSize = ( *( ( int * )pBuffer ) );
++		memcpy( &m_uData.sBuffer.nSize, pBuffer, sizeof( int ) );
+ 		pBuffer = ( ( int8 * )pBuffer ) + sizeof( int );
+ 		if( nBufSize < sizeof( int ) + m_uData.sBuffer.nSize )
+ 		{
+@@ -1236,12 +1295,16 @@ status_t Variant::Unflatten( const void *pBuffer, size_t nBufSize )
+ 	}
+ 	if( nError < 0 )
+ 	{
+-		m_eType = T_ANY_TYPE;
++		_Clear();
++		_Swap( cOriginal );
+ 		return ( -1 );
+ 	}
+ 	else
+ 	{
+ 		return ( 0 );
+ 	}
++	} catch( const std::bad_alloc& ) {
++		_Clear(); _Swap( cOriginal ); errno = ENOMEM; return -1;
++	}
+ }
+ 
+diff --git a/include/util/variant.h b/include/util/variant.h
+index 8b2e000..d17545c 100644
+--- a/include/util/variant.h
++++ b/include/util/variant.h
+@@ -1,3 +1,8 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-15.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Private bounded-wire/allocation helpers; public interfaces stay intact.
++ * Original copyright and license notices follow unchanged.
++ */
+ /*  libatheos.so - the highlevel API library for AtheOS
+  *  Copyright (C) 2001 Kurt Skauen
+  *
+@@ -129,6 +134,10 @@ public:
+     status_t Unflatten( const void* pBuffer, size_t nBufSize );
+     
+ private:
++    friend class Message;
++    static bool _ValidateFlattened( const uint8* pBuffer, size_t nSize, unsigned nDepth );
++    void _Swap( Variant& cOther );
++    void _SetBuffer( type_code nType, const void* pData, size_t nSize );
+     void _Clear();
+ 
+     type_code m_eType;
+diff --git a/message.cpp b/message.cpp
+index d755e74..9403786 100644
+--- a/message.cpp
++++ b/message.cpp
+@@ -1,3 +1,8 @@
++/* CaribeOS Variant modification notice: h0nda1337, 2026-10-15.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Enable original typed Variant methods with bounded shared-depth validation.
++ * Original notices and existing delivery/data-core adaptations remain intact.
++ */
+ /* CaribeOS delivery modification notice: h0nda1337, 2026-10-15.
+  * SPDX-License-Identifier: LGPL-2.0-only
+  * Enable original Handler/Messenger delivery separately from Variant.
+@@ -40,6 +45,7 @@
+ #include <unistd.h>
+ #include <new>
+ #include <utility>
++#include <memory>
+ #include "looper_runtime.h"
+ #define dbprintf(...) caribe_syllable_debug(__VA_ARGS__)
+ 
+@@ -51,7 +57,7 @@
+ #include <util/messenger.h>
+ #include <atheos/threads.h>
+ #endif
+-#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
++#if !defined(CARIBE_SYLLABLE_MESSAGE_CORE) || defined(CARIBE_SYLLABLE_MESSAGE_VARIANT)
+ #include <util/variant.h>
+ #endif
+ 
+@@ -374,6 +380,7 @@ bool Message::_ValidateFlattened( const uint8 *pBuffer, size_t nSize, unsigned n
+ 			if( cArray.nTypeCode == T_STRING && ( nChunk == 0 || pBuffer[nData + nChunk - 1] != 0 ) ) return false;
+ 			if( cArray.nTypeCode == T_BOOL && pBuffer[nData] > 1 ) return false;
+ 			if( cArray.nTypeCode == T_MESSAGE && !_ValidateFlattened( pBuffer + nData, nChunk, nDepth + 1 ) ) return false;
++			if( cArray.nTypeCode == T_VARIANT && !Variant::_ValidateFlattened( pBuffer + nData, nChunk, nDepth + 1 ) ) return false;
+ 			nData += nChunk;
+ 		}
+ 		if( nData != nEnd ) return false;
+@@ -1261,37 +1268,16 @@ status_t Message::AddColor32( const char *pzName, const Color32_s & cVal )
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
+-#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
++#if !defined(CARIBE_SYLLABLE_MESSAGE_CORE) || defined(CARIBE_SYLLABLE_MESSAGE_VARIANT)
+ status_t Message::AddVariant( const char *pzName, const Variant & cVal )
+ {
+-	DataArray_s *psArray;
+-
+-	assert( pzName != NULL );
+-
+ 	size_t nSize = cVal.GetFlattenedSize();
+-
+-	psArray = _FindArray( pzName, T_VARIANT );
+-
+-	uint8 *pBuffer;
+-
+-	if( psArray == NULL )
+-	{
+-		pBuffer = _CreateArray( pzName, T_VARIANT, NULL, nSize, false, 1 );
+-	}
+-	else
+-	{
+-		pBuffer = _ExpandArray( psArray, NULL, nSize );
+-	}
+-	if( pBuffer != NULL )
+-	{
+-		cVal.Flatten( pBuffer, nSize );
+-		return ( 0 );
+-	}
+-	else
+-	{
+-		errno = ENOMEM;
+-		return ( -1 );
+-	}
++	if( pzName == NULL || nSize > CARIBE_MESSAGE_LIMIT ) { errno = EINVAL; return -1; }
++	std::unique_ptr<uint8[]> pBuffer( new( std::nothrow ) uint8[nSize] );
++	if( !pBuffer ) { errno = ENOMEM; return -1; }
++	if( cVal.Flatten( pBuffer.get(), nSize ) < 0 ) return -1;
++	if( !Variant::_ValidateFlattened( pBuffer.get(), nSize, 1 ) ) { errno = EINVAL; return -1; }
++	return AddData( pzName, T_VARIANT, pBuffer.get(), nSize, false, 1 );
+ }
+ 
+ //----------------------------------------------------------------------------
+@@ -1797,9 +1783,10 @@ status_t Message::FindString( const char *pzName, String * pcString, int nIndex
+ // SEE ALSO:
+ //----------------------------------------------------------------------------
+ 
+-#ifndef CARIBE_SYLLABLE_MESSAGE_CORE
++#if !defined(CARIBE_SYLLABLE_MESSAGE_CORE) || defined(CARIBE_SYLLABLE_MESSAGE_VARIANT)
+ status_t Message::FindVariant( const char *pzName, Variant * pcVal, int nIndex ) const
+ {
++	if( pcVal == NULL ) { errno = EINVAL; return -1; }
+ 	const void *pBuffer;
+ 	size_t nSize;
+ 	status_t nError = FindData( pzName, T_VARIANT, &pBuffer, &nSize, nIndex );
+diff --git a/include/util/message.h b/include/util/message.h
+index 28c38cc..11b2eee 100644
+--- a/include/util/message.h
++++ b/include/util/message.h
+@@ -1,3 +1,8 @@
++/* CaribeOS Variant modification notice: h0nda1337, 2026-10-15.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Private friend validation shares the bounded Message/Variant depth budget.
++ * Original notices and public interfaces remain intact.
++ */
+ /* CaribeOS delivery modification notice: h0nda1337, 2026-10-15.
+  * SPDX-License-Identifier: LGPL-2.0-only
+  * Add a private deadline overload; original public methods remain intact.
+@@ -196,6 +201,7 @@ public:
+     Message& operator=(const Message& cOther );
+ 
+ private:
++    friend class Variant;
+     friend class Looper;
+     friend class MessageQueue;
+     friend class Messenger;

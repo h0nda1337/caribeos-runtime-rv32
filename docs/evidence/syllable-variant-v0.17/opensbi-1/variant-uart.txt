@@ -1,0 +1,8 @@
+<ant-probe --gate C; echo SYLLABLE_VARIANT_STATUS=$?
+[syllable-variant-gate-A] original class ABI=16 vectors=19 offsets=4 exact-roundtrips=76 canonical wire; deep-copy self/alias and int64 conversions PASS
+[syllable-variant-cross] independent fork/exec original Looper/Messenger typed request/reply=10000 value families=19 child exit(0) PASS
+[syllable-variant-gate-B] guard-page truncations=253 deterministic fuzz=4096 shared depth=16; pointer wire denied; allocation failures=5 prior Variant/Message retained PASS
+[syllable-variant-gate-C] workers=16 typed Variant/Message cycles=160000 cpu=0 created=reaped=16 faults=0 active-scopes=0 waiters=0; cross-exec replies=10000 PASS
+[syllable-variant] gates A-C PASS; original GUI typed values, not complete Application/AppServer/Desktop
+SYLLABLE_VARIANT_STATUS=0
+[process-gate-11] Bash exited status=0 and PID1 reaped PID2 PASS

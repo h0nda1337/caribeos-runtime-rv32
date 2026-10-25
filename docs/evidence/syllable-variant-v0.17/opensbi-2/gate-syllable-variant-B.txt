@@ -1,0 +1,1 @@
+[syllable-variant-gate-B] guard-page truncations=253 deterministic fuzz=4096 shared depth=16; pointer wire denied; allocation failures=5 prior Variant/Message retained PASS
