@@ -1,0 +1,18 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/control.h:24,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp:21:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp: In member function 'virtual bool os::Control::PreValueChange(os::Variant*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp:190:41: warning: unused parameter 'pcNewValue' [-Wunused-parameter]
+  190 | bool Control::PreValueChange( Variant * pcNewValue )
+      |                               ~~~~~~~~~~^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp: In member function 'virtual void os::Control::PostValueChange(const os::Variant&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp:195:48: warning: unused parameter 'cNewValue' [-Wunused-parameter]
+  195 | void Control::PostValueChange( const Variant & cNewValue )
+      |                                ~~~~~~~~~~~~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp: In member function 'virtual void os::Control::LabelChanged(const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\control.cpp:199:44: warning: unused parameter 'cNewLabel' [-Wunused-parameter]
+  199 | void Control::LabelChanged( const String & cNewLabel )
+      |                             ~~~~~~~~~~~~~~~^~~~~~~~~

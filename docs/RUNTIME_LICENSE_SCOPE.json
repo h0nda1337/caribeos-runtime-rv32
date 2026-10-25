@@ -17,6 +17,9 @@
     "licensedCodeFiles":  [
                               "scripts/prepare-syllable-variant.py",
                               "scripts/audit-syllable-client-compile.py",
+                              "scripts/audit-syllable-server-compile.py",
+                              "ports/syllable/server-native/atheos/kernel.h",
+                              "tests/test_syllable_server_compile.py",
                               "tests/test_syllable_client_compile.py",
                               "tests/test_syllable_variant.py",
                               "userland/syllable_variant_probe.cpp",
@@ -310,6 +313,16 @@
                               }
                           ],
     "reviewedNonCodeBoundaries":  [
+                                      {
+                                          "path": "docs/evidence/syllable-client-platform-20261025/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual complete client compiler logs, native relocatable link and unresolved contracts; no executable or GUI runtime success."
+                                      },
+                                      {
+                                          "path": "docs/evidence/syllable-server-frontier-20261025/*",
+                                          "classification": "GENERATED_EVIDENCE",
+                                          "reason": "Actual original 27-unit AppServer compiler inventory, including unported architecture units; not a running server or source relicensing."
+                                      },
                                       {
                                           "path": "docs/evidence/syllable-client-frontier-20261015/*",
                                           "classification": "GENERATED_EVIDENCE",

@@ -90,6 +90,12 @@ Application handshake or GUI runtime verification. Original Application and
 Font still encounter obsolete historical platform include paths; following
 those through to real native APIs remains required.
 
+The optional `--native-platform` mode now applies explicit Application/Font
+include patches in a separate output tree and compiles all six complete
+client units. A real native relocatable link and the complete 27-unit server
+audit are documented in [the client/server frontier](SYLLABLE_CLIENT_SERVER_FRONTIER.md).
+That server audit remains INCOMPLETE; neither tool constitutes a running GUI.
+
 ## License Review
 
 Preserve original notices per file. In particular, server.cpp's historical

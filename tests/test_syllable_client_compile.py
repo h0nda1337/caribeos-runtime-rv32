@@ -50,6 +50,24 @@ class ClientCompilationGuards(unittest.TestCase):
                       "riscv64-unknown-elf-nm.exe", "GUI client object is not RV32 ELF/soft-float"):
             self.assertIn(token, text)
 
+    def test_native_platform_patches_preserve_classes_and_licenses(self):
+        for name in ("application", "font"):
+            text = (ROOT / f"ports/syllable/patches/client-{name}-platform-rv32.patch").read_text()
+            self.assertIn("SPDX-License-Identifier: LGPL-2.0-only", text)
+            self.assertNotIn("BSD-2-Clause", text)
+            self.assertIn("-#include <atheos/kernel.h>", text)
+            self.assertIn("+#include <atheos/msgport.h>", text)
+            self.assertNotIn("+class ", text)
+
+    def test_partial_link_uses_real_providers_and_is_not_an_executable(self):
+        text = (ROOT / "scripts/audit-syllable-client-compile.py").read_text()
+        for token in ('"rcsD"', '"-r", "-m", "elf32lriscv"', '"--start-group"',
+                      '"executableLinked": False', '"runtimeVerified": False',
+                      '"os::Application::GetInstance()"', '"os::Message::AddVariant"', '"create_port"'):
+            self.assertIn(token, text)
+        self.assertNotIn("--defsym", text)
+        self.assertNotIn("--unresolved-symbols=ignore", text)
+
 
 if __name__ == "__main__":
     unittest.main()

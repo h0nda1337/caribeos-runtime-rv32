@@ -1,0 +1,76 @@
+{
+  "result": "PASS",
+  "before": [
+    {
+      "path": "build/syllable-client-native/application.o",
+      "sha256": "9f8ff7e842e593986e534fa1105eb9a022180580e36ec74d325da9bbb0cbf7e7"
+    },
+    {
+      "path": "build/syllable-client-native/invoker.o",
+      "sha256": "01e3ba1f3b9fbbc0b25fc9b4dfd9316ec77223122f98a4a5e8d8d1e6eca3ee42"
+    },
+    {
+      "path": "build/syllable-client-native/window.o",
+      "sha256": "0a74a5d523d03ded223a2c8a15635925838f5c1559b57fe7bf3a66e514409573"
+    },
+    {
+      "path": "build/syllable-client-native/view.o",
+      "sha256": "3d865d56e3379211efcfa1354ccc236d0888d2eda81cdaa6692f7bae445a0295"
+    },
+    {
+      "path": "build/syllable-client-native/font.o",
+      "sha256": "f6f0ec96c259307ad551d278bd8a6f984f2dfbad5c54e6c031ed554b2a832e9c"
+    },
+    {
+      "path": "build/syllable-client-native/control.o",
+      "sha256": "a146513c0bf9510579e87c12e8e6fb34447cc1465cd73a4778a501bcf1acb223"
+    },
+    {
+      "path": "build/syllable-client-native/libcaribe-syllable-gui-client.a",
+      "sha256": "4b27418d663bf0c961548e5fe6b16131d947af4e4d196b0c0e2184e9b4e24014"
+    },
+    {
+      "path": "build/syllable-client-native/client-foundation.o",
+      "sha256": "ec879e9382f50adf5986f896e3d15b24b0ca1510078f35e55a0c97a0061e5e6e"
+    }
+  ],
+  "after": [
+    {
+      "path": "build/syllable-client-native/application.o",
+      "sha256": "9f8ff7e842e593986e534fa1105eb9a022180580e36ec74d325da9bbb0cbf7e7"
+    },
+    {
+      "path": "build/syllable-client-native/invoker.o",
+      "sha256": "01e3ba1f3b9fbbc0b25fc9b4dfd9316ec77223122f98a4a5e8d8d1e6eca3ee42"
+    },
+    {
+      "path": "build/syllable-client-native/window.o",
+      "sha256": "0a74a5d523d03ded223a2c8a15635925838f5c1559b57fe7bf3a66e514409573"
+    },
+    {
+      "path": "build/syllable-client-native/view.o",
+      "sha256": "3d865d56e3379211efcfa1354ccc236d0888d2eda81cdaa6692f7bae445a0295"
+    },
+    {
+      "path": "build/syllable-client-native/font.o",
+      "sha256": "f6f0ec96c259307ad551d278bd8a6f984f2dfbad5c54e6c031ed554b2a832e9c"
+    },
+    {
+      "path": "build/syllable-client-native/control.o",
+      "sha256": "a146513c0bf9510579e87c12e8e6fb34447cc1465cd73a4778a501bcf1acb223"
+    },
+    {
+      "path": "build/syllable-client-native/libcaribe-syllable-gui-client.a",
+      "sha256": "4b27418d663bf0c961548e5fe6b16131d947af4e4d196b0c0e2184e9b4e24014"
+    },
+    {
+      "path": "build/syllable-client-native/client-foundation.o",
+      "sha256": "ec879e9382f50adf5986f896e3d15b24b0ca1510078f35e55a0c97a0061e5e6e"
+    }
+  ],
+  "actualCompleteUnits": 6,
+  "archiveMembers": 6,
+  "relocatableLink": true,
+  "executableLinked": false,
+  "runtimeVerified": false
+}

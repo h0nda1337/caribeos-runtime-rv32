@@ -1,0 +1,22 @@
+         U __cxa_atexit
+         U __dso_handle
+         U __errno_location
+         U __floatsisf
+         U __gesf2
+         U __gxx_personality_v0
+         U __lesf2
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::Region::Exclude(os::IRect const&)
+         U os::Region::Region(os::IRect const&)
+         U os::Region::~Region()
+         U SrvBitmap::SrvBitmap(int, int, os::color_space, unsigned char*, int)
+         U operator new(unsigned int)
+         U std::__throw_length_error(char const*)
+         U create_semaphore
+         U delete_semaphore
+         U get_thread_id
+         U lock_semaphore
+         U memcpy
+         U memmove
+         U unlock_semaphore

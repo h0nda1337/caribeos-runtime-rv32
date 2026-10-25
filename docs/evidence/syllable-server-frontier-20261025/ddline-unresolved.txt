@@ -1,0 +1,11 @@
+         U __adddf3
+         U __divsf3
+         U __extendsfdf2
+         U __fixdfsi
+         U __floatsidf
+         U __floatsisf
+         U __mulsf3
+         U __nesf2
+         U os::__5_to_8_bit_table
+         U os::__6_to_8_bit_table
+         U dbprintf

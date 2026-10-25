@@ -1,0 +1,43 @@
+         U __errno_location
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(char const*, int)
+         U os::String::String(os::String const&)
+         U os::String::String()
+         U os::Message::AddMessage(char const*, os::Message const*)
+         U os::Message::AddBool(char const*, bool)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddString(char const*, os::String const&)
+         U os::Message::SendReply(int, os::Handler*)
+         U os::Message::SendReply(os::Message*, os::Handler*, unsigned int)
+         U os::Message::operator=(os::Message const&)
+         U os::Message::Message(int)
+         U os::Message::Message(os::Message const&)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int, int, int)
+         U os::Messenger::~Messenger()
+         U os::String::c_str() const
+         U os::String::Length() const
+         U os::String::operator==(char const*) const
+         U os::String::operator==(os::String const&) const
+         U os::String::operator+(char const*) const
+         U os::String::operator+(os::String const&) const
+         U os::Message::FindString(char const*, os::String*, int) const
+         U os::Message::FindMessage(char const*, os::Message*, int) const
+         U os::Message::IsSourceWaiting() const
+         U os::Message::FindInt64(char const*, long long*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U operator new(unsigned int)
+         U std::__throw_length_error(char const*)
+         U create_semaphore
+         U dbprintf
+         U delete_semaphore
+         U get_thread_id
+         U lock_semaphore
+         U memcpy
+         U memmove
+         U unlock_semaphore

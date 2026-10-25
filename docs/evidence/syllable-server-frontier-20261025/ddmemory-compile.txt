@@ -1,0 +1,122 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddmemory.cpp:29:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/mouse.h:41:8: warning: extra tokens at end of '#endif' directive [-Wendif-labels]
+   41 | #endif __ATHEOS_MOUSE_H_
+      |        ^~~~~~~~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:33:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:30:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   30 |   uint8  WinAAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:31:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   31 |   uint8  WinBAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:41:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   41 |   uint8  XCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:42:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   42 |   uint8  YCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:43:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   43 |   uint8  NumberOfPlanes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:44:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   44 |   uint8  BitsPerPixel           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:45:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   45 |   uint8  NumberOfBanks          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:46:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   46 |   uint8  MemoryModel            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:47:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   47 |   uint8  BankSize               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:48:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   48 |   uint8  NumberOfImagePages     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:49:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   49 |   uint8  Reserved               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:51:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   51 |   uint8  RedMaskSize            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:52:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   52 |   uint8  RedFieldPosition       __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:53:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   53 |   uint8  GreenMaskSize          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:54:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   54 |   uint8  GreenFieldPosition     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:55:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   55 |   uint8  BlueMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:56:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   56 |   uint8  BlueFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:57:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   57 |   uint8  RsvdMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:58:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   58 |   uint8  RsvdFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:59:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   59 |   uint8  DirectColorModeInfo    __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:63:55: warning: 'packed' attribute ignored for field of type 'uint8 [206]' {aka 'unsigned char [206]'} [-Wattributes]
+   63 |   uint8  UnUsed[206]            __attribute__((packed));        /* VBE 2.0 Info */
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:77:63: warning: 'packed' attribute ignored for field of type 'char [4]' [-Wattributes]
+   77 |     char        VesaSignature[4]        __attribute__((packed));
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:87:63: warning: 'packed' attribute ignored for field of type 'uint8 [222]' {aka 'unsigned char [222]'} [-Wattributes]
+   87 |     uint8       RESERVED[222]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:88:63: warning: 'packed' attribute ignored for field of type 'uint8 [256]' {aka 'unsigned char [256]'} [-Wattributes]
+   88 |     uint8       OEM_DATA[256]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\swindow.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\desktop.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:28:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::MovePenTo(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:157:79: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  157 |     void                MovePenTo( const os::Point& cPos )      { m_cPenPos = cPos;  }
+      |                                                                               ^~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:27:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::DrawLine(const os::Point&, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:160:102: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  160 |     void                DrawLine( const os::Point& cFromPnt, const os::Point& cToPnt ) { m_cPenPos = cFromPnt; DrawLine( cToPnt ); }
+      |                                                                                                      ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h: In member function 'DisplayDriver* AppServer::GetDisplayDriver(int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:77:63: warning: unused parameter 'nIndex' [-Wunused-parameter]
+   77 |     DisplayDriver*                      GetDisplayDriver( int nIndex )  { return( m_pcDispDriver ); }
+      |                                                           ~~~~^~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddmemory.cpp:27:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddmemory.cpp: In member function 'void DisplayDriver::InitMemory(uint32, uint32, uint32, uint32)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddmemory.cpp:63:9: note: in expansion of macro '__assertw'
+   63 |         __assertw( m_psFirstMemObj == NULL );
+      |         ^~~~~~~~~

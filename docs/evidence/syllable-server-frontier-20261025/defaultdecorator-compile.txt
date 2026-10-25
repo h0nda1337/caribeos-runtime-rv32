@@ -1,0 +1,29 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\defaultdecorator.cpp:23:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::MovePenTo(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:157:79: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  157 |     void                MovePenTo( const os::Point& cPos )      { m_cPenPos = cPos;  }
+      |                                                                               ^~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\windowdecorator.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\defaultdecorator.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\defaultdecorator.cpp:22:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::DrawLine(const os::Point&, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:160:102: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  160 |     void                DrawLine( const os::Point& cFromPnt, const os::Point& cToPnt ) { m_cPenPos = cFromPnt; DrawLine( cToPnt ); }
+      |                                                                                                      ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\defaultdecorator.cpp: In member function 'virtual void DefaultDecorator::Render(const os::Rect&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\defaultdecorator.cpp:355:45: warning: unused parameter 'cUpdateRect' [-Wunused-parameter]
+  355 | void DefaultDecorator::Render( const Rect & cUpdateRect )
+      |                                ~~~~~~~~~~~~~^~~~~~~~~~~

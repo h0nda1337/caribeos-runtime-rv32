@@ -1,0 +1,129 @@
+         U __addsf3
+         U __assert_fail
+         U __copy_tls
+         U __cxa_allocate_exception
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __cxa_free_exception
+         w __cxa_pure_virtual
+         U __cxa_rethrow
+         U __cxa_throw
+         U __divdi3
+         U __dso_handle
+         U __dynamic_cast
+         U __eqdf2
+         U __eqsf2
+         U __errno_location
+         U __extendsfdf2
+         U __fixdfdi
+         U __fixdfsi
+         U __fixsfdi
+         U __fixsfsi
+         U __floatdidf
+         U __floatdisf
+         U __floatsidf
+         U __floatsisf
+         U __floatunsidf
+         U __floatunsisf
+         U __gesf2
+         U __gtsf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __libc
+         U __ltsf2
+         U __moddi3
+         U __mulsf3
+         U __nedf2
+         U __nesf2
+         U __subsf3
+         U __truncdfsf2
+         U __udivdi3
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U os::ShortcutKey::SetFromLabel(os::String const&)
+         U os::ShortcutKey::ShortcutKey(os::String const&, unsigned int)
+         U os::ShortcutKey::ShortcutKey(os::ShortcutKey const&)
+         U os::ShortcutKey::ShortcutKey()
+         U os::ShortcutKey::~ShortcutKey()
+         U os::Menu::Open(os::Point)
+         U os::Keymap::GetKeymapDirectory()
+         U os::Locale::GetLocalizedCatalog(os::String const&)
+         U os::Locale::operator=(os::Locale const&)
+         U os::Locale::Locale()
+         U os::Locale::~Locale()
+         U os::Desktop::Desktop(int)
+         U os::Desktop::~Desktop()
+         U os::ScrollBar::SetScrollTarget(os::View*)
+         U operator new[](unsigned int)
+         U operator new[](unsigned int, std::nothrow_t const&)
+         U os::ShortcutKey::IsValid() const
+         U os::ShortcutKey::operator==(os::ShortcutKey const&) const
+         U os::ShortcutKey::operator<(os::ShortcutKey const&) const
+         U os::Bitmap::GetBounds() const
+         U os::Desktop::GetResolution() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned int, unsigned int) const
+         U std::runtime_error::runtime_error(char const*)
+         U std::runtime_error::~runtime_error()
+         U std::invalid_argument::invalid_argument(char const*)
+         U std::invalid_argument::~invalid_argument()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct(unsigned int, char)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::swap(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::resize(unsigned int, char)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_erase(unsigned int, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned int, unsigned int, char const*, unsigned int)
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U std::__detail::_List_node_base::_M_unhook()
+         U std::bad_alloc::~bad_alloc()
+         U std::exception::~exception()
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::__throw_logic_error(char const*)
+         U std::__throw_length_error(char const*)
+         U std::__throw_out_of_range_fmt(char const*, ...)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::nothrow
+         U typeinfo for char const*
+         U typeinfo for std::runtime_error
+         U typeinfo for std::invalid_argument
+         U typeinfo for std::bad_alloc
+         U typeinfo for std::exception
+         U vtable for __cxxabiv1::__class_type_info
+         U vtable for __cxxabiv1::__si_class_type_info
+         U vtable for __cxxabiv1::__vmi_class_type_info
+         U vtable for std::bad_alloc
+         U caribe_context_lock
+         U caribe_context_unlock
+         U floorf
+         U free
+         U isspace
+         U malloc
+         U memchr
+         U memcmp
+         U memcpy
+         U memmove
+         U memset
+         U mmap
+         U munmap
+         U nanosleep
+         U sscanf
+         U strcasecmp
+         U strcmp
+         U strcpy
+         U strerror
+         U strlen
+         U strncmp
+         U strncpy
+         U tolower
+         U toupper
+         U vsnprintf
+         U write

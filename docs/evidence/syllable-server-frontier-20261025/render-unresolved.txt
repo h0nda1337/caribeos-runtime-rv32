@@ -1,0 +1,59 @@
+         U __adddf3
+         U __addsf3
+         U __cxa_throw_bad_array_new_length
+         U __extendsfdf2
+         U __fixdfsi
+         U __fixsfsi
+         U __floatsidf
+         U __floatsisf
+         U __floatunsisf
+         U __gesf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __muldf3
+         U __mulsf3
+         U __subdf3
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U FontServer::Lock()
+         U FontServer::Unlock()
+         U DisplayDriver::RenderGlyph(SrvBitmap*, Glyph*, os::IPoint const&, os::IRect const&, unsigned int const*)
+         U DisplayDriver::RenderGlyph(SrvBitmap*, Glyph*, os::IPoint const&, os::IRect const&, os::Color32_s const&)
+         U DisplayDriver::RenderGlyphBlend(SrvBitmap*, Glyph*, os::IPoint const&, os::IRect const&, os::Color32_s const&)
+         U SFontInstance::GetTextExtent(char const*, int, unsigned int, int)
+         U os::ClipRectList::RemoveHead()
+         U os::ClipRectList::AddRect(os::ClipRect*)
+         U os::ClipRectList::ClipRectList()
+         U os::ClipRectList::~ClipRectList()
+         U os::get_default_color(os::default_color_t)
+         U os::Region::FreeClipRect(os::ClipRect*)
+         U os::Region::AllocClipRect()
+         U os::Region::Exclude(os::IRect const&)
+         U os::Region::Include(os::IRect const&)
+         U os::Region::Optimize()
+         U os::Region::Region(os::Region const&, os::IRect const&, bool)
+         U os::Region::Region()
+         U os::Region::~Region()
+         U os::String::operator=(char const*)
+         U os::String::operator=(os::String const&)
+         U os::String::operator+=(char)
+         U Layer::Invalidate(os::IRect const&, bool)
+         U Layer::SetBgColor(os::Color32_s)
+         U Layer::SetFgColor(os::Color32_s)
+         U Layer::GetRegion()
+         U Layer::PutRegion(os::Region*)
+         U FontNode::GetGlyph(int)
+         U SrvSprite::Hide(os::IRect const&)
+         U SrvSprite::Unhide()
+         U operator new[](unsigned int)
+         U Layer::ConvertToBitmap(os::Point const&) const
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U operator new(unsigned int)
+         U dbprintf
+         U floorf
+         U g_pcScreenBitmap
+         U puts
+         U qsort
+         U strlen

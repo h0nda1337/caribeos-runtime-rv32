@@ -1,0 +1,33 @@
+         U __addsf3
+         U __extendsfdf2
+         U __fixsfsi
+         U __gtsf2
+         U __gxx_personality_v0
+         U __ltsf2
+         U __muldf3
+         U __mulsf3
+         U __nesf2
+         U __subsf3
+         U __truncdfsf2
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::WindowDecorator::WindowDecorator(Layer*, unsigned int)
+         U os::WindowDecorator::~WindowDecorator()
+         U os::get_default_color(os::default_color_t)
+         U Layer::DrawString(char const*, int)
+         U Layer::Invalidate(bool)
+         U Layer::Invalidate(os::IRect const&, bool)
+         U Layer::SetBgColor(os::Color32_s)
+         U Layer::SetFgColor(int, int, int, int)
+         U Layer::FillRect(os::Rect, os::Color32_s)
+         U Layer::DrawFrame(os::Rect const&, unsigned int)
+         U os::WindowDecorator::GetLayer() const
+         U Layer::GetFontHeight() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
+         U typeinfo for os::WindowDecorator
+         U vtable for __cxxabiv1::__si_class_type_info
+         U ceil
+         U ceilf
+         U floor
+         U strlen

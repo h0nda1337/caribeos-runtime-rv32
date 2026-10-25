@@ -1,0 +1,22 @@
+diff --git a/font.cpp b/font.cpp
+--- a/font.cpp
++++ b/font.cpp
+@@ -1,3 +1,8 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-25.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Use RV32A atomics and native ports, not the obsolete kernel umbrella.
++ * Original notices and complete Font implementation remain below.
++ */
+ /*  libsyllable.so - the highlevel API library for Syllable
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *  Copyright (C) 2003 - 2004 The Syllable Team
+@@ -23,7 +28,8 @@
+ #include <stdexcept>
+ 
+-#include <atheos/kernel.h>
++#include <atheos/atomic.h>
++#include <atheos/msgport.h>
+ 
+ #include <gui/font.h>
+ #include <util/application.h>
+ #include <util/message.h>

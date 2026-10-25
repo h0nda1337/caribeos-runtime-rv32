@@ -1,0 +1,12 @@
+         U __gxx_personality_v0
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U DisplayDriver::FreeMemory(unsigned int)
+         U operator new[](unsigned int)
+         U vtable for __cxxabiv1::__class_type_info
+         U vtable for __cxxabiv1::__si_class_type_info
+         U calloc
+         U dbprintf
+         U delete_area
+         U g_pcBitmaps
+         U g_pcDispDrv

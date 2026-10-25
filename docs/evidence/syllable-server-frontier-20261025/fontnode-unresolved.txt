@@ -1,0 +1,42 @@
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __divsf3
+         U __errno_location
+         U __fixsfsi
+         U __floatsisf
+         U __gxx_personality_v0
+         U __ltsf2
+         U __mulsf3
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U FontServer::s_pcInstance
+         U FontServer::OpenFont(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U SFontInstance::SetProperties(FontProperty const&)
+         U SFontInstance::GetGlyph(int)
+         U AppserverConfig::GetInstance()
+         U AppserverConfig::GetFontConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U os::String::operator=(os::String const&)
+         U os::String::String()
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U SFont::OpenInstance(FontProperty const&)
+         U SFont::CharToUnicode(unsigned int)
+         U os::String::operator std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&() const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U SFont::FindInstance(FontProperty const&) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U std::__detail::_List_node_base::_M_unhook()
+         U operator new(unsigned int)
+         U vtable for __cxxabiv1::__class_type_info
+         U vtable for __cxxabiv1::__si_class_type_info
+         U create_semaphore
+         U dbprintf
+         U delete_semaphore
+         U g_cFontLock
+         U get_thread_id
+         U lock_semaphore
+         U strcmp
+         U unlock_semaphore

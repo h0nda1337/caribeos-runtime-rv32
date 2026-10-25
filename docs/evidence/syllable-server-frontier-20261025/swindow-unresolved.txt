@@ -1,0 +1,159 @@
+         U __addsf3
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __dso_handle
+         U __errno_location
+         U __fixsfsi
+         U __floatsisf
+         U __gesf2
+         U __gtsf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __ltsf2
+         U __nesf2
+         U __subsf3
+         U _Unwind_Resume
+         U GetQualifiers()
+         U get_active_window(bool)
+         U set_active_window(SrvWindow*, bool)
+         U get_active_desktop()
+         U add_window_to_desktop(SrvWindow*)
+         U remove_from_focusstack(SrvWindow*)
+         U remove_window_from_desktop(SrvWindow*)
+         U FindLayer(int)
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U SrvClipboard::SetData(char const*, unsigned char*, int, int, int)
+         U SrvApplication::GetFont(unsigned int)
+         U AppserverConfig::GetInstance()
+         U os::Region::AddRect(os::IRect const&)
+         U os::Region::Region()
+         U os::String::Format(char const*, ...)
+         U os::String::String(char const*)
+         U os::String::String()
+         U os::Message::AddMessage(char const*, os::Message const*)
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::AddBool(char const*, bool)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddIRect(char const*, os::IRect const&)
+         U os::Message::AddPoint(char const*, os::Point const&)
+         U os::Message::AddIPoint(char const*, os::IPoint const&)
+         U os::Message::AddString(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::MakeEmpty()
+         U os::Message::SendReply(int, os::Handler*)
+         U os::Message::SendReply(os::Message*, os::Handler*, unsigned int)
+         U os::Message::Message(int)
+         U os::Message::Message(void const*)
+         U os::Message::Message(os::Message const&)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int, int, int)
+         U os::Messenger::~Messenger()
+         U Layer::DrawBitMap(SrvBitmap*, os::Rect, os::Rect)
+         U Layer::DrawString(char const*, int)
+         U Layer::GetChildAt(os::Point)
+         U Layer::Invalidate(bool)
+         U Layer::Invalidate(os::IRect const&, bool)
+         U Layer::RemoveThis()
+         U Layer::SetBgColor(os::Color32_s)
+         U Layer::SetFgColor(os::Color32_s)
+         U Layer::BeginUpdate()
+         U Layer::MoveToFront()
+         U Layer::ToggleDepth()
+         U Layer::GetSelection(os::String&)
+         U Layer::SetDrawRegion(os::Region*)
+         U Layer::SetEraseColor(os::Color32_s)
+         U Layer::SetShapeRegion(os::Region*)
+         U Layer::SetDirtyRegFlags()
+         U Layer::GetNonTransparentParent(os::IRect&)
+         U Layer::Show(bool)
+         U Layer::SetFont(FontNode*)
+         U Layer::CopyRect(os::GRndCopyRect_s*)
+         U Layer::DrawLine(os::Point const&)
+         U Layer::DrawText(os::Rect const&, char const*, int, unsigned int, os::IPoint const&, os::IPoint const&, unsigned int)
+         U Layer::FillRect(os::Rect, os::Color32_s)
+         U Layer::ScrollBy(os::Point const&)
+         U Layer::EndUpdate()
+         U Layer::SetBitmap(SrvBitmap*)
+         U Layer::SetWindow(SrvWindow*)
+         U Layer::Layer(SrvWindow*, Layer*, char const*, os::Rect const&, int, void*)
+         U TopLayer::RedrawLayer(Layer*, Layer*, bool)
+         U AppServer::GetInstance()
+         U AppServer::CreateWindowDecorator(Layer*, unsigned int)
+         U InputNode::GetMousePos()
+         U InputNode::SetMousePos(os::Point const&)
+         U InputNode::GetMouseButtons()
+         U SrvEvents::RegisterEvent(os::String, long long, os::String, long long, long long, long long)
+         U SrvEvents::UnregisterEvent(os::String, long long, long long)
+         U SrvEvents::PostEvent(SrvEvent_s*, os::Message*)
+         U SrvSprite::Hide(os::IRect const&)
+         U SrvSprite::Hide()
+         U SrvSprite::Unhide()
+         U SrvSprite::SrvSprite(os::IRect const&, os::IPoint const&, os::IPoint const&, SrvBitmap*, SrvBitmap*, bool)
+         U SrvSprite::~SrvSprite()
+         U WinSelect::RemoveWindow(SrvWindow*)
+         U WinSelect::UpdateWindow(SrvWindow*)
+         U WndBorder::MouseMoved(os::Messenger*, os::Point const&, int)
+         U WndBorder::SetAlignment(os::IPoint const&, os::IPoint const&, os::IPoint const&, os::IPoint const&)
+         U WndBorder::SetDecorator(os::WindowDecorator*)
+         U WndBorder::WndMoveReply(os::Messenger*)
+         U WndBorder::SetSizeLimits(os::Point const&, os::Point const&)
+         U WndBorder::MouseUp(os::Messenger*, os::Point const&, int)
+         U WndBorder::SetFlags(unsigned int)
+         U WndBorder::MouseDown(os::Messenger*, os::Point const&, int)
+         U WndBorder::WndBorder(SrvWindow*, Layer*, char const*, bool)
+         U operator new[](unsigned int)
+         U AppserverConfig::GetDoubleClickTime() const
+         U AppserverConfig::GetPopoupSelectedWindows() const
+         U os::String::c_str() const
+         U os::Message::FindIPoint(char const*, os::IPoint*, int) const
+         U os::Message::FindString(char const*, char const**, int) const
+         U os::Message::FindColor32(char const*, os::Color32_s*, int) const
+         U os::Message::FindMessage(char const*, os::Message*, int) const
+         U os::Message::FindPointer(char const*, void**, int) const
+         U os::Message::IsSourceWaiting() const
+         U os::Message::GetFlattenedSize() const
+         U os::Message::Flatten(unsigned char*, unsigned int) const
+         U os::Message::FindBool(char const*, bool*, int) const
+         U os::Message::FindRect(char const*, os::Rect*, int) const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindInt64(char const*, long long*, int) const
+         U os::Message::FindPoint(char const*, os::Point*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U Layer::ConvertToRoot(os::Rect const&) const
+         U WndBorder::HasPendingSizeEvents() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U operator new(unsigned int)
+         U std::__throw_logic_error(char const*)
+         U create_port
+         U create_semaphore
+         U dbprintf
+         U delete_port
+         U delete_semaphore
+         U exit_thread
+         U g_cLayerGate
+         U g_pcBitmaps
+         U g_pcEvents
+         U g_pcScreenBitmap
+         U g_pcTopView
+         U g_pcWinSelector
+         U get_msg
+         U get_msg_size
+         U get_system_time
+         U get_thread_id
+         U lock_semaphore
+         U lock_semaphore_x
+         U memcpy
+         U rename_thread
+         U resume_thread
+         U send_msg
+         U signal
+         U spawn_thread
+         U sprintf
+         U strlen
+         U unlock_semaphore
+         U unlock_semaphore_x

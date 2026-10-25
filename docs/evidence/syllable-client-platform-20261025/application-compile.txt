@@ -1,0 +1,129 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/looper.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:24,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:33:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:30:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:15:42: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   15 |                 m_cKey = os::ShortcutKey();
+      |                                          ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:34,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/window.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:25:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent(const os::ShortcutKey&, const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:22:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   22 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In member function 'void os::KeyboardEvent::SetShortcutKey(const os::ShortcutKey&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:27:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   27 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:36:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h: In constructor 'os::AR_MoveSprite_s::AR_MoveSprite_s(uint32, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h:514:42: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  514 |         m_nSprite = nHandle; m_cNewPos = cNewPos;
+      |                                          ^~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/bitmap.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/window.h:24:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'int os::Application::UnlockDesktop(int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:942:37: warning: unused parameter 'nCookie' [-Wunused-parameter]
+  942 | int Application::UnlockDesktop( int nCookie )
+      |                                 ~~~~^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'void os::Application::SetScreenMode(int, uint32, os::screen_mode*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:955:55: warning: unused parameter 'nValidityMask' [-Wunused-parameter]
+  955 | void Application::SetScreenMode( int nDesktop, uint32 nValidityMask, screen_mode * psMode )
+      |                                                ~~~~~~~^~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'void os::Application::UnregisterKeyEvent(const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:1056:24: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<os::KeyboardEvent>::size_type' {aka 'unsigned int'} [-Wsign-compare]
+ 1056 |         for (int i=0; i<m->m_cKeyEvents.size(); i++)
+      |                       ~^~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In instantiation of 'void std::__assign_one(_OutIter&, _InIter&) [with bool _IsMove = true; _OutIter = os::KeyboardEvent*; _InIter = os::KeyboardEvent*]':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_algobase.h:462:28:   required from '_OutIter std::__copy_move_a2(_InIter, _Sent, _OutIter) [with bool _IsMove = true; _InIter = os::KeyboardEvent*; _Sent = os::KeyboardEvent*; _OutIter = os::KeyboardEvent*]'
+  462 |         std::__assign_one<_IsMove>(__result, __first);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_algobase.h:492:42:   required from '_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = true; _II = os::KeyboardEvent*; _OI = os::KeyboardEvent*]'
+  492 |     { return std::__copy_move_a2<_IsMove>(__first, __last, __result); }
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_algobase.h:501:31:   required from '_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = true; _II = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, vector<os::KeyboardEvent> >; _OI = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, vector<os::KeyboardEvent> >]'
+  501 |                 std::__copy_move_a1<_IsMove>(std::__niter_base(__first),
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  502 |                                              std::__niter_base(__last),
+      |                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~
+  503 |                                              std::__niter_base(__result)));
+      |                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_algobase.h:674:38:   required from '_OI std::move(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, vector<os::KeyboardEvent> >; _OI = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, vector<os::KeyboardEvent> >]'
+  674 |       return std::__copy_move_a<true>(std::__miter_base(__first),
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  675 |                                       std::__miter_base(__last), __result);
+      |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/vector.tcc:185:2:   required from 'std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::_M_erase(iterator) [with _Tp = os::KeyboardEvent; _Alloc = std::allocator<os::KeyboardEvent>; iterator = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, std::vector<os::KeyboardEvent> >]'
+  678 | #define _GLIBCXX_MOVE3(_Tp, _Up, _Vp) std::move(_Tp, _Up, _Vp)
+      |                                       ~~~~~~~~~^~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_vector.h:1793:24:   required from 'std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::erase(const_iterator) [with _Tp = os::KeyboardEvent; _Alloc = std::allocator<os::KeyboardEvent>; iterator = __gnu_cxx::__normal_iterator<os::KeyboardEvent*, std::vector<os::KeyboardEvent> >; const_iterator = __gnu_cxx::__normal_iterator<const os::KeyboardEvent*, std::vector<os::KeyboardEvent> >]'
+ 1793 |       { return _M_erase(begin() + (__position - cbegin())); }
+      |                ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:1066:25:   required from here
+ 1066 |                         m->m_cKeyEvents.erase(m->m_cKeyEvents.begin()+i);
+      |                         ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:10:7: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   10 | class KeyboardEvent
+      |       ^~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/string:53,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-string\include/util/string.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:25:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\cxx-rv32-sysroot\usr\include\c++\15.1.0/bits/stl_algobase.h:404:16: note: synthesized method 'os::KeyboardEvent& os::KeyboardEvent::operator=(os::KeyboardEvent&&)' first required here
+  404 |         *__out = std::move(*__in);
+      |         ~~~~~~~^~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'int os::Application::GetScreenModeCount()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:342:25: warning: 'nCount' may be used uninitialized [-Wmaybe-uninitialized]
+  342 |         return ( nCount );
+      |                         ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:338:13: note: 'nCount' was declared here
+  338 |         int nCount;
+      |             ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'int os::Application::GetScreenModeInfo(int, os::screen_mode*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:367:33: warning: 'nColorSpace' may be used uninitialized [-Wmaybe-uninitialized]
+  367 |         psMode->m_eColorSpace = ( color_space ) nColorSpace;
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:355:13: note: 'nColorSpace' was declared here
+  355 |         int nColorSpace;
+      |             ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:370:9: warning: 'nError' may be used uninitialized [-Wmaybe-uninitialized]
+  370 |         if( nError != 0 )
+      |         ^~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:356:13: note: 'nError' was declared here
+  356 |         int nError;
+      |             ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'port_id os::Application::CreateWindow(os::View*, const os::Rect&, const os::String&, uint32, uint32, port_id, int*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:727:27: warning: 'hCmdPort' may be used uninitialized [-Wmaybe-uninitialized]
+  727 |         return ( hCmdPort );
+      |                           ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:723:17: note: 'hCmdPort' was declared here
+  723 |         port_id hCmdPort;
+      |                 ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp: In member function 'port_id os::Application::CreateWindow(os::View*, int, int*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:753:27: warning: 'hCmdPort' may be used uninitialized [-Wmaybe-uninitialized]
+  753 |         return ( hCmdPort );
+      |                           ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\application.cpp:748:17: note: 'hCmdPort' was declared here
+  748 |         port_id hCmdPort;
+      |                 ^~~~~~~~

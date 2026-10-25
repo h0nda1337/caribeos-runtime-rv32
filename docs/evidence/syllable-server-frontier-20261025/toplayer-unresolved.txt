@@ -1,0 +1,46 @@
+         U __cxa_throw_bad_array_new_length
+         U __fixsfsi
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U DisplayDriver::AllocateBitmap(int, int, os::color_space)
+         U os::ClipRectList::RemoveHead()
+         U os::get_default_color(os::default_color_t)
+         U os::Region::FreeClipRect(os::ClipRect*)
+         U os::Region::AddRect(os::IRect const&)
+         U os::Region::Exclude(os::IRect const&)
+         U os::Region::Exclude(os::Region const&)
+         U os::Region::Optimize()
+         U os::Region::Intersect(os::Region const&)
+         U os::Region::Region(os::IRect const&)
+         U os::Region::Region(os::Region const&)
+         U os::Region::Region()
+         U os::Region::~Region()
+         U Layer::Invalidate(bool)
+         U Layer::RemoveChild(Layer*)
+         U Layer::RebuildRegion(bool)
+         U Layer::UpdateIfNeeded()
+         U Layer::ClearDirtyRegFlags()
+         U Layer::InvalidateNewAreas()
+         U Layer::RebuildRedrawRegion(Layer*, bool)
+         U Layer::Paint(os::IRect const&, bool)
+         U Layer::AddChild(Layer*, bool)
+         U Layer::SetFrame(os::Rect const&)
+         U Layer::SetBitmap(SrvBitmap*)
+         U Layer::Layer(SrvBitmap*)
+         U Layer::~Layer()
+         U SrvSprite::DoIntersect(os::IRect const&)
+         U SrvSprite::HideForCopy(os::IRect const&)
+         U SrvSprite::CoveredByRect(os::IRect const&)
+         U SrvSprite::Hide(os::IRect const&)
+         U SrvSprite::Hide()
+         U SrvSprite::Unhide()
+         U operator new[](unsigned int)
+         U Layer::ConvertToRoot(os::Point const&) const
+         U operator new(unsigned int)
+         U typeinfo for Layer
+         U vtable for __cxxabiv1::__si_class_type_info
+         U dbprintf
+         U g_pcScreenBitmap
+         U qsort

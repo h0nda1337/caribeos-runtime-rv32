@@ -1,0 +1,120 @@
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __divsf3
+         U __dso_handle
+         U __errno_location
+         U __fixsfsi
+         U __gxx_personality_v0
+         U __mulsf3
+         U _Unwind_Resume
+         U GetQualifiers()
+         U get_active_window(bool)
+         U get_active_desktop()
+         U get_desktop_config(int*, os::screen_mode*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
+         U FindLayer(int)
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U FontServer::s_pcInstance
+         U FontServer::OpenFont(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U FontServer::GetFamily(int, char*, unsigned int*)
+         U DisplayDriver::SetCursorBitmap(os::mouse_ptr_mode, os::IPoint const&, void const*, int, int)
+         U SFontInstance::GetTextExtent(char const*, int, unsigned int, int)
+         U SFontInstance::GetStringWidth(char const*, int)
+         U SFontInstance::GetStringLength(char const*, int, int, bool)
+         U SFontInstance::GetNextSupportedChar(unsigned int*)
+         U SFontInstance::GetFirstSupportedChar(unsigned int*)
+         U AppserverConfig::GetInstance()
+         U AppserverConfig::SetDesktopScreenMode(int, os::screen_mode const&)
+         U os::get_default_color(os::default_color_t)
+         U os::Message::AddColor32(char const*, os::Color32_s const&)
+         U os::Message::AddBool(char const*, bool)
+         U os::Message::AddFloat(char const*, float)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddIPoint(char const*, os::IPoint const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::SendReply(int, os::Handler*)
+         U os::Message::SendReply(os::Message*, os::Handler*, unsigned int)
+         U os::Message::Message(int)
+         U os::Message::Message(void const*)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int, int, int)
+         U Layer::Invalidate(bool)
+         U Layer::SetDirtyRegFlags()
+         U FontNode::SetProperties(int, int, int, unsigned int)
+         U FontNode::SetFamilyAndStyle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U FontNode::FontNode()
+         U AppServer::GetInstance()
+         U SrvBitmap::SrvBitmap(int, int, os::color_space, unsigned char*, int)
+         U SrvEvents::ProcessKilled(int)
+         U SrvSprite::MoveBy(os::IPoint const&)
+         U SrvSprite::SrvSprite(os::IRect const&, os::IPoint const&, os::IPoint const&, SrvBitmap*, SrvBitmap*, bool)
+         U SrvSprite::~SrvSprite()
+         U SrvWindow::DispatchMessage(void const*, int)
+         U SrvWindow::DispatchMessage(os::Message*)
+         U SrvWindow::ReplaceDecorator()
+         U SrvWindow::HandleMouseTransaction()
+         U SrvWindow::NotifyWindowFontChanged(bool)
+         U SrvWindow::Quit()
+         U SrvWindow::Show(bool)
+         U SrvWindow::PostEvent(bool)
+         U SrvWindow::SrvWindow(SrvApplication*, SrvBitmap*)
+         U SrvWindow::SrvWindow(char const*, void*, unsigned int, unsigned int, os::Rect const&, SrvApplication*, int)
+         U SrvWindow::~SrvWindow()
+         U operator new[](unsigned int)
+         U FontServer::GetStyleCount(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+         U FontServer::GetFamilyCount() const
+         U FontServer::GetStyle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, char*, unsigned int*) const
+         U os::Message::FindIPoint(char const*, os::IPoint*, int) const
+         U os::Message::FindString(char const*, char const**, int) const
+         U os::Message::FindColor32(char const*, os::Color32_s*, int) const
+         U os::Message::FindPointer(char const*, void**, int) const
+         U os::Message::IsSourceWaiting() const
+         U os::Message::FindData(char const*, int, void const**, unsigned int*, int) const
+         U os::Message::FindRect(char const*, os::Rect*, int) const
+         U os::Message::FindFloat(char const*, float*, int) const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindIRect(char const*, os::IRect*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U FontNode::SnapPointSize(float*) const
+         U FontNode::NotifyDependent() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::__throw_logic_error(char const*)
+         U std::__throw_length_error(char const*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U create_area
+         U create_port
+         U create_semaphore
+         U dbprintf
+         U delete_port
+         U delete_semaphore
+         U exit_thread
+         U g_anMouseImg
+         U g_cLayerGate
+         U g_pcBitmaps
+         U g_pcDispDrv
+         U g_pcEvents
+         U g_pcScreenBitmap
+         U g_pcTopView
+         U get_msg
+         U get_msg_size
+         U get_system_time
+         U get_thread_id
+         U lock_semaphore
+         U lock_semaphore_x
+         U memcpy
+         U memmove
+         U printf
+         U resume_thread
+         U send_msg
+         U signal
+         U spawn_thread
+         U strlen
+         U unlock_semaphore
+         U unlock_semaphore_x

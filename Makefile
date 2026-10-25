@@ -917,6 +917,12 @@ build/syllable-variant-probe.elf: build/syllable_variant_probe.o $(CXX_CONTEXT_O
 	  -Wl,--start-group build/libcaribe-syllable-variant.a build/libcaribe-syllable-messenger.a build/libcaribe-syllable-looper.a build/libcaribe-syllable-queue.a build/libcaribe-syllable-thread.a build/libcaribe-syllable-string.a -L$(CXX_SYSROOT)/lib/rv32imac/ilp32 -lstdc++ -Wl,--end-group -o $@
 build/initrd-variant.img: build/initrd-messenger.img build/syllable-variant-probe.elf
 
+.PHONY: audit-syllable-clients audit-syllable-server
+audit-syllable-clients:
+	$(PYTHON) scripts/audit-syllable-client-compile.py --native-platform
+audit-syllable-server:
+	$(PYTHON) scripts/audit-syllable-server-compile.py
+
 FREETYPE_LIBRARY = build/freetype-rv32-sysroot/usr/lib/libfreetype.a
 FREETYPE_FLAGS = $(NATIVE_IPC_FLAGS) -Ibuild/freetype-rv32-sysroot/usr/include/freetype2
 

@@ -1,0 +1,64 @@
+         U __addsf3
+         U __cxa_atexit
+         w __cxa_pure_virtual
+         U __dso_handle
+         U __extendsfdf2
+         U __fixsfsi
+         U __floatsisf
+         U __gtsf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __ltsf2
+         U __muldf3
+         U __mulsf3
+         U __subsf3
+         U __truncdfsf2
+         U _Unwind_Resume
+         U GetQualifiers()
+         U HandleKeyboard(bool, int)
+         U operator delete(void*, unsigned int)
+         U DisplayDriver::SetMousePos(os::IPoint)
+         U AppserverConfig::GetInstance()
+         U os::MessageQueue::AddMessage(os::Message*)
+         U os::MessageQueue::NextMessage()
+         U os::MessageQueue::Lock()
+         U os::MessageQueue::Unlock()
+         U os::MessageQueue::MessageQueue()
+         U os::MessageQueue::~MessageQueue()
+         U os::Message::RemoveName(char const*)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddPoint(char const*, os::Point const&)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U AppServer::GetInstance()
+         U AppServer::ResetEventTime()
+         U SrvWindow::HandleInputEvent(os::Message*)
+         U AppserverConfig::GetMouseSpeed() const
+         U AppserverConfig::GetMouseSwapButtons() const
+         U AppserverConfig::GetMouseAcceleration() const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindPoint(char const*, os::Point*, int) const
+         U operator new(unsigned int)
+         U vtable for __cxxabiv1::__class_type_info
+         U ceil
+         U dbprintf
+         U floor
+         U g_cLayerGate
+         U g_pcDispDrv
+         U g_pcScreenBitmap
+         U get_symbol_address
+         U get_system_time
+         U load_library
+         U lock_semaphore_x
+         U memcpy
+         U memset
+         U opendir
+         U readdir
+         U resume_thread
+         U snooze
+         U spawn_thread
+         U sqrtf
+         U strcat
+         U unload_library
+         U unlock_semaphore_x

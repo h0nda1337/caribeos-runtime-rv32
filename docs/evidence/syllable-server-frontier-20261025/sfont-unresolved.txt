@@ -1,0 +1,61 @@
+         U __assert_fail
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __cxa_rethrow
+         U __cxa_throw_bad_array_new_length
+         U __divsf3
+         U __dso_handle
+         U __errno_location
+         U __fixsfsi
+         U __floatsisf
+         U __gxx_personality_v0
+         U __mulsf3
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U operator new[](unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::__throw_logic_error(char const*)
+         U std::__throw_length_error(char const*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U vtable for __cxxabiv1::__class_type_info
+         U vtable for __cxxabiv1::__si_class_type_info
+         U closedir
+         U cosf
+         U create_semaphore
+         U dbprintf
+         U delete_semaphore
+         U FT_Done_Face
+         U FT_Done_FreeType
+         U FT_Get_Char_Index
+         U FT_Get_First_Char
+         U FT_Get_Next_Char
+         U FT_GlyphSlot_Embolden
+         U FT_Init_FreeType
+         U FT_Load_Glyph
+         U FT_New_Face
+         U FT_Render_Glyph
+         U FT_Set_Char_Size
+         U FT_Set_Pixel_Sizes
+         U FT_Set_Transform
+         U get_thread_id
+         U lock_semaphore
+         U memcmp
+         U memcpy
+         U memset
+         U opendir
+         U readdir
+         U sinf
+         U stpcpy
+         U strcpy
+         U strlen
+         U tanf
+         U unlock_semaphore

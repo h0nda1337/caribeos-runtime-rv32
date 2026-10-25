@@ -1,0 +1,8 @@
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U SrvBitmap::SrvBitmap(int, int, os::color_space, unsigned char*, int)
+         U operator new(unsigned int)
+         U dbprintf
+         U g_nFrameBufferArea
+         U get_area_info

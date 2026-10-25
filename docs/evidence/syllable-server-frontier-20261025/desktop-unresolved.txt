@@ -1,0 +1,76 @@
+         U __addsf3
+         U __assert_fail
+         U __clzsi2
+         U __cxa_atexit
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __divsf3
+         U __dso_handle
+         U __floatsisf
+         U __gtsf2
+         U __gxx_personality_v0
+         U __mulsf3
+         U __nesf2
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U VesaDriver::Open()
+         U VesaDriver::VesaDriver()
+         U DisplayDriver::SetCursorBitmap(os::mouse_ptr_mode, os::IPoint const&, void const*, int, int)
+         U DisplayDriver::MouseOn()
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U Layer::Invalidate(bool)
+         U Layer::RemoveThis()
+         U Layer::DeleteRegions()
+         U Layer::SetDirtyRegFlags()
+         U Layer::ScreenModeChanged()
+         U TopLayer::FreeBackbuffers()
+         U TopLayer::TopLayer(SrvBitmap*)
+         U InputNode::GetMousePos()
+         U InputNode::SetMousePos(os::Point const&)
+         U SrvBitmap::SrvBitmap(int, int, os::color_space, unsigned char*, int)
+         U SrvSprite::ColorSpaceChanged()
+         U SrvWindow::WindowActivated(bool)
+         U SrvWindow::DesktopActivated(int, bool, os::IPoint, os::color_space)
+         U SrvWindow::ScreenModeChanged(os::IPoint, os::color_space)
+         U SrvWindow::HandleMouseTransaction()
+         U SrvWindow::SetFrame(os::Rect const&)
+         U SrvWindow::MakeFocus(bool)
+         U WndBorder::AlignFrame(os::Rect const&)
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U SrvWindow::GetTopView() const
+         U SrvWindow::GetDecorator() const
+         U SrvWindow::GetWndBorder() const
+         U SrvWindow::GetDesktopMask() const
+         U SrvWindow::GetFrame(bool) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::__throw_length_error(char const*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U close
+         U closedir
+         U dbprintf
+         U exit
+         U floorf
+         U g_pcDispDrv
+         U g_pcTopView
+         U get_area_info
+         U get_symbol_address
+         U ioctl
+         U load_library
+         U memcmp
+         U memcpy
+         U memmove
+         U memset
+         U open
+         U opendir
+         U readdir
+         U strcat
+         U strcpy
+         U unload_library

@@ -218,3 +218,11 @@ only independent integration/probe/verification tools are original BSD code.
 This is a real Control dependency, not a replacement Control/GUI or complete
 AppServer. All GNU, musl and XNU licensing boundaries remain unchanged.
 See [original GUI typed values](docs/SYLLABLE_NATIVE_VARIANT.md).
+
+The complete original GUI client and 27-unit AppServer compilation audits
+use that same pinned revision and retain original notices. Only the two
+Application/Font include patches alter upstream sources, under their original
+LGPL-2.0-only terms. The scoped server include umbrella and independent
+auditors alone are original BSD integration code. Mixed server license text
+is retained for review; compiling it does not authorize relicensing or a new
+binary Release. See [the authentic client/server frontier](docs/SYLLABLE_CLIENT_SERVER_FRONTIER.md).

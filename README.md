@@ -58,6 +58,11 @@ profile supplies the data interface needed by original GUI controls, using
 the real toolkit classes and native transport. It does not yet implement
 Application/Window/View, the complete AppServer or Desktop/Dock/FileBrowser.
 
+The [authentic client/server frontier](docs/SYLLABLE_CLIENT_SERVER_FRONTIER.md)
+now compiles the complete six core client units and 24 of the original 27
+server units. The real native relocatable client link is not an executable,
+and the server audit remains incomplete rather than claiming a full GUI.
+
 ## Required Boot Chain
 
 ```text

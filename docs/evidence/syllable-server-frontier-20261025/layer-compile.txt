@@ -1,0 +1,373 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:28:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/mouse.h:41:8: warning: extra tokens at end of '#endif' directive [-Wendif-labels]
+   41 | #endif __ATHEOS_MOUSE_H_
+      |        ^~~~~~~~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:27:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:30:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   30 |   uint8  WinAAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:31:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   31 |   uint8  WinBAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:41:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   41 |   uint8  XCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:42:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   42 |   uint8  YCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:43:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   43 |   uint8  NumberOfPlanes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:44:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   44 |   uint8  BitsPerPixel           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:45:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   45 |   uint8  NumberOfBanks          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:46:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   46 |   uint8  MemoryModel            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:47:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   47 |   uint8  BankSize               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:48:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   48 |   uint8  NumberOfImagePages     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:49:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   49 |   uint8  Reserved               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:51:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   51 |   uint8  RedMaskSize            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:52:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   52 |   uint8  RedFieldPosition       __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:53:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   53 |   uint8  GreenMaskSize          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:54:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   54 |   uint8  GreenFieldPosition     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:55:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   55 |   uint8  BlueMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:56:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   56 |   uint8  BlueFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:57:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   57 |   uint8  RsvdMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:58:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   58 |   uint8  RsvdFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:59:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   59 |   uint8  DirectColorModeInfo    __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:63:55: warning: 'packed' attribute ignored for field of type 'uint8 [206]' {aka 'unsigned char [206]'} [-Wattributes]
+   63 |   uint8  UnUsed[206]            __attribute__((packed));        /* VBE 2.0 Info */
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:77:63: warning: 'packed' attribute ignored for field of type 'char [4]' [-Wattributes]
+   77 |     char        VesaSignature[4]        __attribute__((packed));
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:87:63: warning: 'packed' attribute ignored for field of type 'uint8 [222]' {aka 'unsigned char [222]'} [-Wattributes]
+   87 |     uint8       RESERVED[222]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:88:63: warning: 'packed' attribute ignored for field of type 'uint8 [256]' {aka 'unsigned char [256]'} [-Wattributes]
+   88 |     uint8       OEM_DATA[256]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\swindow.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\desktop.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:28:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::MovePenTo(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:157:79: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  157 |     void                MovePenTo( const os::Point& cPos )      { m_cPenPos = cPos;  }
+      |                                                                               ^~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:23:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::DrawLine(const os::Point&, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:160:102: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  160 |     void                DrawLine( const os::Point& cFromPnt, const os::Point& cToPnt ) { m_cPenPos = cFromPnt; DrawLine( cToPnt ); }
+      |                                                                                                      ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h: In member function 'DisplayDriver* AppServer::GetDisplayDriver(int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:77:63: warning: unused parameter 'nIndex' [-Wunused-parameter]
+   77 |     DisplayDriver*                      GetDisplayDriver( int nIndex )  { return( m_pcDispDriver ); }
+      |                                                           ~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::Init()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:97:15: warning: 'void* memset(void*, int, size_t)' writing to an object of non-trivial type 'struct os::Color32_s'; use assignment instead [-Wclass-memaccess]
+   97 |         memset( m_asFontPallette, 255, sizeof( m_asFontPallette ) );
+      |         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:24:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/gfxtypes.h:40:8: note: 'struct os::Color32_s' declared here
+   40 | struct Color32_s
+      |        ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::Show(bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:202:37: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  202 |         m_cDeltaSize = IPoint( 0, 0 );
+      |                                     ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:203:37: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  203 |         m_cDeltaMove = IPoint( 0, 0 );
+      |                                     ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::RemoveChild(Layer*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:388:46: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  388 |         pcChild->m_cDeltaSize = IPoint( 0, 0 );
+      |                                              ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:389:46: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  389 |         pcChild->m_cDeltaMove = IPoint( 0, 0 );
+      |                                              ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::ScrollBy(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:779:69: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  779 |         m_cIScrollOffset = static_cast < IPoint > ( m_cScrollOffset );
+      |                                                                     ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:857:44: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  857 |                         pcClips->m_cMove = cIOffset;
+      |                                            ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::InvalidateNewAreas()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1132:45: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+ 1132 |                 m_cDeltaSize = IPoint( 0, 0 );
+      |                                             ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1133:45: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+ 1133 |                 m_cDeltaMove = IPoint( 0, 0 );
+      |                                             ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::MoveChilds()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1194:51: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+ 1194 |                                 pcClip->m_cMove = cChildMove;
+      |                                                   ^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::RebuildRegion(bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1297:37: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'Layer*' [-Wformat=]
+ 1297 |                         dbprintf( "%x %x\n", this, g_pcTopView );
+      |                                    ~^        ~~~~
+      |                                     |        |
+      |                                     |        Layer*
+      |                                     unsigned int
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1297:40: warning: format '%x' expects argument of type 'unsigned int', but argument 3 has type 'TopLayer*' [-Wformat=]
+ 1297 |                         dbprintf( "%x %x\n", this, g_pcTopView );
+      |                                       ~^           ~~~~~~~~~~~
+      |                                        |           |
+      |                                        |           TopLayer*
+      |                                        unsigned int
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::PutRegion(os::Region*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1546:33: warning: unused parameter 'pcReg' [-Wunused-parameter]
+ 1546 | void Layer::PutRegion( Region * pcReg )
+      |                        ~~~~~~~~~^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::Paint(const os::IRect&, bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1763:52: warning: unused parameter 'bUpdate' [-Wunused-parameter]
+ 1763 | void Layer::Paint( const IRect & cUpdateRect, bool bUpdate )
+      |                                               ~~~~~^~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:25:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::DeleteRegions()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:423:9: note: in expansion of macro '__assertw'
+  423 |         __assertw( m_pcPrevBitmapReg == NULL );
+      |         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:424:9: note: in expansion of macro '__assertw'
+  424 |         __assertw( m_pcPrevBitmapFullReg == NULL );
+      |         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::RebuildRegion(bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1293:17: note: in expansion of macro '__assertw'
+ 1293 |                 __assertw( m_pcPrevBitmapReg == NULL );
+      |                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1294:17: note: in expansion of macro '__assertw'
+ 1294 |                 __assertw( m_pcPrevBitmapFullReg == NULL );
+      |                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1308:25: note: in expansion of macro '__assertw'
+ 1308 |                         __assertw( m_pcParent->m_pcBitmapFullReg != NULL );
+      |                         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::RemoveChild(Layer*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:366:9: note: in expansion of macro '__assertw'
+  366 |         __assertw( pcChild->m_pcParent == this );
+      |         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::AddChild(Layer*, bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:311:33: note: in expansion of macro '__assertw'
+  311 |                                 __assertw( m_pcBottomChild != NULL );
+      |                                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:264:33: note: in expansion of macro '__assertw'
+  264 |                                 __assertw( m_pcTopChild != NULL );
+      |                                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'virtual void Layer::MoveChilds()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1196:33: note: in expansion of macro '__assertw'
+ 1196 |                                 __assertw( pcClip->m_cBounds.IsValid() );
+      |                                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1210:33: note: in expansion of macro '__assertw'
+ 1210 |                                 __assertw( apsClips[i] != NULL );
+      |                                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::ScrollBy(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:879:17: note: in expansion of macro '__assertw'
+  879 |                 __assertw( apsClips[i] != NULL );
+      |                 ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'void Layer::RebuildRedrawRegion(Layer*, bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1437:9: note: in expansion of macro '__assertw'
+ 1437 |         __assertw( m_pcBitmap != NULL );
+      |         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp: In member function 'os::Region* Layer::GetRegion()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1535:9: note: in expansion of macro '__assertw'
+ 1535 |         __assertw( NULL != m_pcDrawReg );
+      |         ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/macros.h:58:11: warning: calling 'void* __builtin_return_address(unsigned int)' with a nonzero argument is unsafe [-Wframe-address]
+   58 |   dbprintf( "Assertion failure (" #expr ")\n"                                                   \
+      |   ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |           "file: " __FILE__ " function: %s() line: %d\n%p\n%p\n",                               \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   60 |           __FUNCTION__, __LINE__, __builtin_return_address(0), __builtin_return_address(1)      \
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   61 |           ); } while(0)
+      |           ~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.cpp:1526:17: note: in expansion of macro '__assertw'
+ 1526 |                 __assertw( m_pcActiveDamageReg != NULL );
+      |                 ^~~~~~~~~

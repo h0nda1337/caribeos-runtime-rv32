@@ -1,0 +1,199 @@
+         U __addsf3
+         U __assert_fail
+         U __cxa_allocate_exception
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __cxa_rethrow
+         U __cxa_throw
+         U __dynamic_cast
+         U __errno_location
+         U __floatsisf
+         U __gesf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __mulsf3
+         U __subsf3
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::Application::GetInstance()
+         U os::Application::CreateWindow(os::View*, int, int*)
+         U os::Application::CreateWindow(os::View*, os::Rect const&, os::String const&, unsigned int, unsigned int, int, int*)
+         U os::Application::RemoveWindow(os::Window*)
+         U os::Application::AddWindow(os::Window*)
+         U os::ShortcutKey::ShortcutKey(os::String const&, unsigned int)
+         U os::ShortcutKey::ShortcutKey(os::ShortcutKey const&)
+         U os::ShortcutKey::~ShortcutKey()
+         U os::MessageQueue::AddMessage(os::Message*)
+         U os::MessageQueue::NextMessage()
+         U os::MessageQueue::Lock()
+         U os::MessageQueue::Unlock()
+         U os::MessageQueue::MessageQueue()
+         U os::MessageQueue::~MessageQueue()
+         U os::View::_EndUpdate()
+         U os::View::WheelMoved(os::Point const&)
+         U os::View::AllAttached()
+         U os::View::AllDetached()
+         U os::View::FontChanged(os::Font*)
+         U os::View::RemoveChild(os::View*)
+         U os::View::SetShortcut(os::ShortcutKey const&)
+         U os::View::SetTabOrder(int)
+         U os::View::ToggleDepth()
+         U os::View::_BeginUpdate()
+         U os::View::ViewScrolled(os::Point const&)
+         U os::View::_SetMouseMode(int)
+         U os::View::SetShapeRegion(os::Region const&)
+         U os::View::WindowActivated(bool)
+         U os::View::__VW_reserved2__()
+         U os::View::__VW_reserved3__()
+         U os::View::__VW_reserved4__()
+         U os::View::__VW_reserved5__()
+         U os::View::__VW_reserved6__()
+         U os::View::__VW_reserved7__()
+         U os::View::__VW_reserved8__()
+         U os::View::__VW_reserved9__()
+         U os::View::_SetMouseMoveRun(int)
+         U os::View::_WindowActivated(bool)
+         U os::View::AttachedToWindow()
+         U os::View::ClearShapeRegion()
+         U os::View::__VW_reserved10__()
+         U os::View::__VW_reserved11__()
+         U os::View::__VW_reserved12__()
+         U os::View::__VW_reserved13__()
+         U os::View::__VW_reserved14__()
+         U os::View::__VW_reserved15__()
+         U os::View::__VW_reserved16__()
+         U os::View::__VW_reserved17__()
+         U os::View::__VW_reserved18__()
+         U os::View::__VW_reserved19__()
+         U os::View::__VW_reserved20__()
+         U os::View::DetachedFromWindow()
+         U os::View::_ConstrictRectangle(os::Rect*, os::Point const&)
+         U os::View::SetShortcutFromLabel(os::String const&)
+         U os::View::Show(bool)
+         U os::View::KeyUp(char const*, char const*, unsigned int)
+         U os::View::Paint(os::Rect const&)
+         U os::View::MoveBy(float, float)
+         U os::View::MoveBy(os::Point const&)
+         U os::View::MoveTo(float, float)
+         U os::View::MoveTo(os::Point const&)
+         U os::View::MouseUp(os::Point const&, unsigned int, os::Message*)
+         U os::View::AddChild(os::View*, bool)
+         U os::View::ResizeBy(float, float)
+         U os::View::ResizeBy(os::Point const&)
+         U os::View::ResizeTo(float, float)
+         U os::View::ResizeTo(os::Point const&)
+         U os::View::ScrollBy(os::Point const&)
+         U os::View::ScrollTo(os::Point)
+         U os::View::SetFrame(os::Rect const&, bool)
+         U os::View::_Attached(os::Window*, os::View*, int, int)
+         U os::View::_Detached(bool, int)
+         U os::View::Activated(bool)
+         U os::View::MakeFocus(bool)
+         U os::View::MouseDown(os::Point const&, unsigned int)
+         U os::View::MouseMove(os::Point const&, int, unsigned int, os::Message*)
+         U os::View::View(os::Rect const&, os::String const&, unsigned int, unsigned int)
+         U os::View::~View()
+         U os::Looper::PostMessage(os::Message*, os::Handler*, os::Handler*)
+         U os::Looper::SpoolMessages()
+         U os::Looper::DispatchMessage(os::Message*, os::Handler*)
+         U os::Looper::__LO_reserved1__()
+         U os::Looper::__LO_reserved2__()
+         U os::Looper::__LO_reserved3__()
+         U os::Looper::__LO_reserved4__()
+         U os::Looper::__LO_reserved5__()
+         U os::Looper::__LO_reserved6__()
+         U os::Looper::__LO_reserved7__()
+         U os::Looper::__LO_reserved8__()
+         U os::Looper::SetDefaultHandler(os::Handler*)
+         U os::Looper::Run()
+         U os::Looper::Idle()
+         U os::Looper::Quit()
+         U os::Looper::Unlock()
+         U os::Looper::Started()
+         U os::Looper::OkToQuit()
+         U os::Looper::Looper(os::String const&, int, int)
+         U os::Looper::~Looper()
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(os::String const&)
+         U os::Desktop::Desktop(int)
+         U os::Desktop::~Desktop()
+         U os::Handler::HandleMessage(os::Message*)
+         U os::Handler::__HA_reserved1__()
+         U os::Handler::__HA_reserved2__()
+         U os::Handler::__HA_reserved3__()
+         U os::Handler::__HA_reserved4__()
+         U os::Handler::__HA_reserved5__()
+         U os::Handler::TimerTick(int)
+         U os::Message::AddBool(char const*, bool)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddPoint(char const*, os::Point const&)
+         U os::Message::AddIPoint(char const*, os::IPoint const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int)
+         U os::Messenger::~Messenger()
+         U os::ShortcutKey::IsValid() const
+         U os::ShortcutKey::operator==(os::ShortcutKey const&) const
+         U os::ShortcutKey::operator<(os::ShortcutKey const&) const
+         U os::MessageQueue::FindMessage(int, int) const
+         U os::View::_GetHandle() const
+         U os::View::GetChildAt(os::Point const&) const
+         U os::View::GetShortcut() const
+         U os::View::GetTabOrder() const
+         U os::View::_GetMouseMode() const
+         U os::View::GetContentSize() const
+         U os::View::GetScrollOffset() const
+         U os::View::_GetMouseMoveRun() const
+         U os::View::GetPreferredSize(bool) const
+         U os::View::ConvertFromScreen(os::Point const&) const
+         U os::View::GetFont() const
+         U os::View::GetFrame() const
+         U os::View::HasFocus() const
+         U os::View::GetBounds() const
+         U os::View::GetParent() const
+         U os::View::IsVisible() const
+         U os::Bitmap::GetBounds() const
+         U os::Looper::GetMsgPort() const
+         U os::Looper::_FindHandler(int) const
+         U os::Looper::GetHandlerMap() const
+         U os::Looper::GetMessageQueue() const
+         U os::Looper::GetDefaultHandler() const
+         U os::String::c_str() const
+         U os::Desktop::GetResolution() const
+         U os::Message::FindIPoint(char const*, os::IPoint*, int) const
+         U os::Message::FindString(char const*, char const**, int) const
+         U os::Message::FindMessage(char const*, os::Message*, int) const
+         U os::Message::FindPointer(char const*, void**, int) const
+         U os::Message::FindBool(char const*, bool*, int) const
+         U os::Message::FindRect(char const*, os::Rect*, int) const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindPoint(char const*, os::Point*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U os::Messenger::SendMessage(os::Message*, os::Message*, long long, long long) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::exception::~exception()
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U typeinfo for os::View
+         U typeinfo for os::Looper
+         U typeinfo for os::Handler
+         U typeinfo for std::exception
+         U vtable for __cxxabiv1::__si_class_type_info
+         U caribe_syllable_debug
+         U create_port
+         U create_semaphore
+         U delete_port
+         U delete_semaphore
+         U get_msg
+         U get_thread_id
+         U lock_semaphore
+         U memmove
+         U memset
+         U send_msg
+         U strncpy
+         U unlock_semaphore

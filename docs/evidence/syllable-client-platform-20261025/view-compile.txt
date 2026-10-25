@@ -1,0 +1,129 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/window.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:24:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:30,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:28:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:15:42: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   15 |                 m_cKey = os::ShortcutKey();
+      |                                          ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:34:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent(const os::ShortcutKey&, const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:22:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   22 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In member function 'void os::KeyboardEvent::SetShortcutKey(const os::ShortcutKey&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:27:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   27 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:35:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h: In constructor 'os::AR_MoveSprite_s::AR_MoveSprite_s(uint32, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h:514:42: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  514 |         m_nSprite = nHandle; m_cNewPos = cNewPos;
+      |                                          ^~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/bitmap.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/window.h:24:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::SetShortcut(const os::ShortcutKey&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:371:21: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+  371 |         m->m_cKey = cShortcut;
+      |                     ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::MouseMove(const os::Point&, int, uint32, os::Message*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:1225:50: warning: unused parameter 'nCode' [-Wunused-parameter]
+ 1225 | void View::MouseMove( const Point & cNewPos, int nCode, uint32 nButtons, Message * pcData )
+      |                                              ~~~~^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::FrameMoved(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:1792:38: warning: unused parameter 'cDelta' [-Wunused-parameter]
+ 1792 | void View::FrameMoved( const Point & cDelta )
+      |                        ~~~~~~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::FrameSized(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:1810:38: warning: unused parameter 'cDelta' [-Wunused-parameter]
+ 1810 | void View::FrameSized( const Point & cDelta )
+      |                        ~~~~~~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::ViewScrolled(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:1831:40: warning: unused parameter 'cDelta' [-Wunused-parameter]
+ 1831 | void View::ViewScrolled( const Point & cDelta )
+      |                          ~~~~~~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::MovePenTo(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2093:44: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+ 2093 |                         psCmd->sPosition = cPos;
+      |                                            ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::MovePenBy(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2117:44: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+ 2117 |                         psCmd->sPosition = cPos;
+      |                                            ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::DrawSelectedText(const os::Rect&, const os::String&, const os::IPoint&, const os::IPoint&, uint32, uint32)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2288:32: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+ 2288 |                 psCmd->cSel1 = cSel1;
+      |                                ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2289:32: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+ 2289 |                 psCmd->cSel2 = cSel2;
+      |                                ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::DrawLine(const os::Point&, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2602:41: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+ 2602 |                         psCmd->sToPos = cToPnt;
+      |                                         ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::DrawLine(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2625:41: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+ 2625 |                         psCmd->sToPos = cToPnt;
+      |                                         ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::ScrollBy(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2895:49: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+ 2895 |                                 psCmd->cDelta = cDelta;
+      |                                                 ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::Activated(bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:3622:28: warning: unused parameter 'bIsActive' [-Wunused-parameter]
+ 3622 | void View::Activated( bool bIsActive )
+      |                       ~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::WindowActivated(bool)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:3644:34: warning: unused parameter 'bIsActive' [-Wunused-parameter]
+ 3644 | void View::WindowActivated( bool bIsActive )
+      |                             ~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'virtual void os::View::FontChanged(os::Font*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:3676:32: warning: unused parameter 'pcNewFont' [-Wunused-parameter]
+ 3676 | void View::FontChanged( Font * pcNewFont )
+      |                         ~~~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp: In member function 'void os::View::GetSelection(const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\view.cpp:2305:24: warning: 'char* strncpy(char*, const char*, size_t)' specified bound 64 equals destination size [-Wstringop-truncation]
+ 2305 |                 strncpy( psCmd->m_zName, cClipboard.c_str(), 64 );
+      |                 ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

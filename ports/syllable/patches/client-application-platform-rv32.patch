@@ -1,0 +1,22 @@
+diff --git a/application.cpp b/application.cpp
+--- a/application.cpp
++++ b/application.cpp
+@@ -1,3 +1,8 @@
++/* CaribeOS modification notice: h0nda1337, 2026-10-25.
++ * SPDX-License-Identifier: LGPL-2.0-only
++ * Use native platform headers instead of the obsolete kernel umbrella.
++ * Original notices and complete Application implementation remain below.
++ */
+ /*  libsyllable.so - the highlevel API library for Syllable
+  *  Copyright (C) 1999 - 2001 Kurt Skauen
+  *  Copyright (C) 2003 - 2004 Syllable Team
+@@ -25,7 +30,8 @@
+ #include <atheos/types.h>
+ #include <atheos/threads.h>
+-#include <atheos/kernel.h>
++#include <atheos/msgport.h>
++#include <atheos/time.h>
+ #include <util/application.h>
+ #include <util/message.h>
+ #include <util/messenger.h>
+ #include <appserver/protocol.h>

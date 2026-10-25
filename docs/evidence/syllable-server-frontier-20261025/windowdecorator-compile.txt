@@ -1,0 +1,4 @@
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\windowdecorator.cpp: In constructor 'os::WindowDecorator::WindowDecorator(Layer*, uint32)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\windowdecorator.cpp:25:59: warning: unused parameter 'nWndFlags' [-Wunused-parameter]
+   25 | WindowDecorator::WindowDecorator( Layer * pcLayer, uint32 nWndFlags )
+      |                                                    ~~~~~~~^~~~~~~~~

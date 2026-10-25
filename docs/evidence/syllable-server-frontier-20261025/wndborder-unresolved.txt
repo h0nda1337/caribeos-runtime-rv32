@@ -1,0 +1,51 @@
+         U __addsf3
+         U __fixsfsi
+         U __floatsisf
+         U __gtsf2
+         U __gxx_personality_v0
+         U __ltsf2
+         U __subsf3
+         U _Unwind_Resume
+         U get_active_desktop()
+         U get_desktop_max_window_frame(int)
+         U operator delete(void*, unsigned int)
+         U SrvApplication::RestoreCursor()
+         U SrvApplication::SetCursor(os::mouse_ptr_mode, os::IPoint const&, void const*, int, int)
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U Layer::MoveChilds()
+         U Layer::BeginUpdate()
+         U Layer::RemoveChild(Layer*)
+         U Layer::ToggleDepth()
+         U Layer::RebuildRegion(bool)
+         U Layer::UpdateRegions(bool)
+         U Layer::SetShapeRegion(os::Region*)
+         U Layer::UpdateIfNeeded()
+         U Layer::InvalidateNewAreas()
+         U Layer::SetFont(FontNode*)
+         U Layer::AddChild(Layer*, bool)
+         U Layer::SetFrame(os::Rect const&)
+         U Layer::EndUpdate()
+         U Layer::Layer(SrvWindow*, Layer*, char const*, os::Rect const&, int, void*)
+         U Layer::Layer(SrvWindow*, Layer*, char const*, os::Rect const&, int, void*)
+         U Layer::~Layer()
+         U TopLayer::RedrawLayer(Layer*, Layer*, bool)
+         U TopLayer::LayerFrameChanged(Layer*, os::IRect)
+         U AppServer::GetInstance()
+         U InputNode::GetMouseButtons()
+         U SrvSprite::Hide()
+         U SrvSprite::Unhide()
+         U SrvWindow::HandleMouseTransaction()
+         U SrvWindow::Show(bool)
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U SrvWindow::HasFocus() const
+         U operator new(unsigned int)
+         U typeinfo for Layer
+         U vtable for __cxxabiv1::__si_class_type_info
+         U dbprintf
+         U g_cLayerGate
+         U g_pcTopView
+         U lock_semaphore_x
+         U memset
+         U unlock_semaphore_x

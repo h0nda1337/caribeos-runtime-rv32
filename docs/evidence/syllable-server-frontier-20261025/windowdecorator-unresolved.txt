@@ -1,0 +1,3 @@
+         w __cxa_pure_virtual
+         U operator delete(void*, unsigned int)
+         U vtable for __cxxabiv1::__class_type_info

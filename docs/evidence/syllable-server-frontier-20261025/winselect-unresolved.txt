@@ -1,0 +1,66 @@
+         U __addsf3
+         U __divsf3
+         U __fixsfsi
+         U __floatsisf
+         U __floatunsisf
+         U __gtsf2
+         U __gxx_personality_v0
+         U __ltsf2
+         U __mulsf3
+         U __subsf3
+         U _Unwind_Resume
+         U get_active_window(bool)
+         U get_desktop_config(int*, os::screen_mode*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
+         U operator delete(void*, unsigned int)
+         U SFontInstance::GetStringWidth(char const*, int)
+         U AppserverConfig::GetInstance()
+         U AppserverConfig::GetFontConfig(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U os::get_default_color(os::default_color_t)
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U Layer::DrawBitMap(SrvBitmap*, os::Rect, os::Rect)
+         U Layer::DrawString(char const*, int)
+         U Layer::Invalidate(bool)
+         U Layer::MoveChilds()
+         U Layer::SetBgColor(os::Color32_s)
+         U Layer::SetFgColor(int, int, int, int)
+         U Layer::SetFgColor(os::Color32_s)
+         U Layer::BeginUpdate()
+         U Layer::MoveToFront()
+         U Layer::RemoveChild(Layer*)
+         U Layer::RebuildRegion(bool)
+         U Layer::UpdateRegions(bool)
+         U Layer::UpdateIfNeeded()
+         U Layer::InvalidateNewAreas()
+         U Layer::SetFont(FontNode*)
+         U Layer::AddChild(Layer*, bool)
+         U Layer::FillRect(os::Rect)
+         U Layer::SetFrame(os::Rect const&)
+         U Layer::DrawFrame(os::Rect const&, unsigned int)
+         U Layer::EndUpdate()
+         U Layer::Layer(SrvWindow*, Layer*, char const*, os::Rect const&, int, void*)
+         U Layer::~Layer()
+         U FontNode::SetProperties(int, int, int, unsigned int)
+         U FontNode::SetFamilyAndStyle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U FontNode::FontNode()
+         U TopLayer::RedrawLayer(Layer*, Layer*, bool)
+         U TopLayer::LayerFrameChanged(Layer*, os::IRect)
+         U SrvWindow::SetFrame(os::Rect const&)
+         U SrvWindow::MakeFocus(bool)
+         U os::String::operator std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&() const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U SrvWindow::GetTopView() const
+         U SrvWindow::GetFrame(bool) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U operator new(unsigned int)
+         U std::__throw_length_error(char const*)
+         U typeinfo for Layer
+         U vtable for __cxxabiv1::__si_class_type_info
+         U dbprintf
+         U g_pcScreenBitmap
+         U g_pcTopView
+         U memcpy
+         U memmove
+         U roundf
+         U strlen

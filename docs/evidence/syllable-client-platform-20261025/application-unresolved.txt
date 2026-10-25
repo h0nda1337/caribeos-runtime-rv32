@@ -1,0 +1,94 @@
+         U __assert_fail
+         U __errno_location
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U operator delete(void*, unsigned int)
+         U os::ShortcutKey::ShortcutKey(os::ShortcutKey const&)
+         U os::ShortcutKey::ShortcutKey()
+         U os::ShortcutKey::~ShortcutKey()
+         U os::get_default_color(os::default_color_t)
+         U os::__set_default_color(os::default_color_t, os::Color32_s const&)
+         U os::Keymap::GetKeymapDirectory()
+         U os::Locale::GetLocalizedCatalog(os::String const&)
+         U os::Locale::operator=(os::Locale const&)
+         U os::Locale::Locale()
+         U os::Locale::~Locale()
+         U os::Looper::_SetThread(int)
+         U os::Looper::DispatchMessage(os::Message*, os::Handler*)
+         U os::Looper::__LO_reserved1__()
+         U os::Looper::__LO_reserved2__()
+         U os::Looper::__LO_reserved3__()
+         U os::Looper::__LO_reserved4__()
+         U os::Looper::__LO_reserved5__()
+         U os::Looper::__LO_reserved6__()
+         U os::Looper::__LO_reserved7__()
+         U os::Looper::__LO_reserved8__()
+         U os::Looper::Idle()
+         U os::Looper::Lock()
+         U os::Looper::Quit()
+         U os::Looper::_Loop()
+         U os::Looper::Unlock()
+         U os::Looper::Started()
+         U os::Looper::OkToQuit()
+         U os::Looper::Terminate()
+         U os::Looper::Looper(os::String const&, int, int)
+         U os::Looper::~Looper()
+         U os::String::operator=(char const*)
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(os::String const&)
+         U os::String::String()
+         U os::String::operator+=(char const*)
+         U os::Handler::HandleMessage(os::Message*)
+         U os::Handler::__HA_reserved1__()
+         U os::Handler::__HA_reserved2__()
+         U os::Handler::__HA_reserved3__()
+         U os::Handler::__HA_reserved4__()
+         U os::Handler::__HA_reserved5__()
+         U os::Handler::TimerTick(int)
+         U os::Message::AddColor32(char const*, os::Color32_s const&)
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::AddData(char const*, int, void const*, unsigned int, bool, int)
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::AddFloat(char const*, float)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddIPoint(char const*, os::IPoint const&)
+         U os::Message::AddObject(char const*, os::Flattenable const&)
+         U os::Message::AddString(char const*, os::String const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int)
+         U os::Messenger::~Messenger()
+         U os::Looper::GetMsgPort() const
+         U os::Looper::GetName() const
+         U os::String::c_str() const
+         U os::String::operator==(os::String const&) const
+         U os::Message::FindIPoint(char const*, os::IPoint*, int) const
+         U os::Message::FindObject(char const*, os::Flattenable&, int) const
+         U os::Message::FindString(char const*, os::String*, int) const
+         U os::Message::FindString(char const*, char const**, int) const
+         U os::Message::FindColor32(char const*, os::Color32_s*, int) const
+         U os::Message::FindFloat(char const*, float*, int) const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Message::FindInt64(char const*, long long*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U os::Messenger::SendMessage(os::Message*, os::Message*, long long, long long) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U operator new(unsigned int)
+         U std::__throw_length_error(char const*)
+         U typeinfo for os::Looper
+         U vtable for __cxxabiv1::__si_class_type_info
+         U caribe_syllable_debug
+         U create_port
+         U delete_port
+         U get_app_server_port
+         U get_msg
+         U get_process_id
+         U get_thread_id
+         U memcpy
+         U memmove
+         U send_msg
+         U snooze
+         U strcpy
+         U strerror

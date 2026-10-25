@@ -1,0 +1,97 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/looper.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:24,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:34:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:30:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:15:42: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   15 |                 m_cKey = os::ShortcutKey();
+      |                                          ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:34,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/window.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/application.h:25:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In constructor 'os::KeyboardEvent::KeyboardEvent(const os::ShortcutKey&, const os::String&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:22:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   22 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h: In member function 'void os::KeyboardEvent::SetShortcutKey(const os::ShortcutKey&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/keyevent.h:27:26: warning: implicitly-declared 'constexpr os::ShortcutKey& os::ShortcutKey::operator=(const os::ShortcutKey&)' is deprecated [-Wdeprecated-copy]
+   27 |                 m_cKey = cKey;
+      |                          ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/util/shortcutkey.h:34:9: note: because 'os::ShortcutKey' has user-provided 'os::ShortcutKey::ShortcutKey(const os::ShortcutKey&)'
+   34 |         ShortcutKey( const ShortcutKey& cShortcut );
+      |         ^~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:38:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h: In constructor 'os::AR_MoveSprite_s::AR_MoveSprite_s(uint32, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\include/appserver/protocol.h:514:42: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  514 |         m_nSprite = nHandle; m_cNewPos = cNewPos;
+      |                                          ^~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/font.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:33:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp: In member function 'void os::Font::Release()':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:163:17: warning: deleting object of polymorphic class type 'os::Font' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+  163 |                 delete this;
+      |                 ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp: In member function 'void os::Font::GetTextExtents(const char**, const int*, int, os::Point*, uint32, int) const':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:507:112: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  507 |                                         acExtentArray[i] = Point(psReply->acExtent[i].x, psReply->acExtent[i].y);
+      |                                                                                                                ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp: In member function 'virtual status_t os::Font::Flatten(uint8*, size_t) const':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:841:16: warning: 'char* strncpy(char*, const char*, size_t)' specified bound 63 equals destination size [-Wstringop-truncation]
+  841 |         strncpy( sProps.m_zFamily, m_sProps.m_cFamily.c_str(), 63 );
+      |         ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:842:16: warning: 'char* strncpy(char*, const char*, size_t)' specified bound 63 equals destination size [-Wstringop-truncation]
+  842 |         strncpy( sProps.m_zStyle, m_sProps.m_cStyle.c_str(), 63 );
+      |         ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp: In member function 'status_t os::Font::SetFamilyAndStyle(const char*, const char*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:217:36: warning: 'nAscender' may be used uninitialized [-Wmaybe-uninitialized]
+  217 |                 m_sHeight.ascender = nAscender;
+      |                 ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:209:23: note: 'nAscender' was declared here
+  209 |                 int32 nAscender;
+      |                       ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:218:39: warning: 'nDescender' may be used uninitialized [-Wmaybe-uninitialized]
+  218 |                 m_sHeight.descender = -nDescender;
+      |                                       ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:210:23: note: 'nDescender' was declared here
+  210 |                 int32 nDescender;
+      |                       ^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:219:36: warning: 'nLineGap' may be used uninitialized [-Wmaybe-uninitialized]
+  219 |                 m_sHeight.line_gap = nLineGap;
+      |                 ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:211:23: note: 'nLineGap' was declared here
+  211 |                 int32 nLineGap;
+      |                       ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp: In member function 'status_t os::Font::_SetProperties(const os::font_properties&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:299:44: warning: 'nAscender' may be used uninitialized [-Wmaybe-uninitialized]
+  299 |                         m_sHeight.ascender = nAscender;
+      |                         ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:291:31: note: 'nAscender' was declared here
+  291 |                         int32 nAscender;
+      |                               ^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:300:47: warning: 'nDescender' may be used uninitialized [-Wmaybe-uninitialized]
+  300 |                         m_sHeight.descender = -nDescender;
+      |                                               ^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:292:31: note: 'nDescender' was declared here
+  292 |                         int32 nDescender;
+      |                               ^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:301:44: warning: 'nLineGap' may be used uninitialized [-Wmaybe-uninitialized]
+  301 |                         m_sHeight.line_gap = nLineGap;
+      |                         ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-client-native\font.cpp:293:31: note: 'nLineGap' was declared here
+  293 |                         int32 nLineGap;
+      |                               ^~~~~~~~

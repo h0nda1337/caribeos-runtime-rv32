@@ -1,0 +1,65 @@
+         U __addsf3
+         U __cxa_atexit
+         U __cxa_throw_bad_array_new_length
+         U __dso_handle
+         U __eqsf2
+         U __fixsfsi
+         U __floatsisf
+         U __gesf2
+         U __gtsf2
+         U __gxx_personality_v0
+         U __lesf2
+         U __ltsf2
+         U __nesf2
+         U __subsf3
+         U _Unwind_Resume
+         U get_active_desktop()
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U os::ClipRectList::RemoveHead()
+         U os::ClipRectList::RemoveRect(os::ClipRect*)
+         U os::ClipRectList::AddRect(os::ClipRect*)
+         U os::ClipRectList::ClipRectList()
+         U os::ClipRectList::~ClipRectList()
+         U os::Region::FreeClipRect(os::ClipRect*)
+         U os::Region::AllocClipRect()
+         U os::Region::AddRect(os::IRect const&)
+         U os::Region::Exclude(os::IRect const&)
+         U os::Region::Exclude(os::Region const&)
+         U os::Region::Exclude(os::Region const&, os::IPoint const&)
+         U os::Region::Include(os::IRect const&)
+         U os::Region::Optimize()
+         U os::Region::Intersect(os::Region const&)
+         U os::Region::Region(os::IRect const&)
+         U os::Region::Region(os::Region const&)
+         U os::Region::Region(os::Region const&, os::IRect const&, bool)
+         U os::Region::~Region()
+         U os::String::String()
+         U os::Message::AddPointer(char const*, void const*)
+         U os::Message::AddRect(char const*, os::Rect const&)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U FontNode::AddDependency(os::Messenger*, void*)
+         U FontNode::RemoveDependency(std::_List_iterator<std::pair<os::Messenger*, void*> >&)
+         U SrvWindow::HasPendingSizeEvents(Layer*)
+         U SrvWindow::HandleMouseTransaction()
+         U operator new[](unsigned int)
+         U os::Region::GetBounds() const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U Layer::ConvertToRoot(os::Point const&) const
+         U Layer::ConvertToBitmap(os::Point const&) const
+         U SrvWindow::GetDesktopMask() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U operator new(unsigned int)
+         U std::__throw_logic_error(char const*)
+         U vtable for __cxxabiv1::__class_type_info
+         U create_semaphore
+         U dbprintf
+         U delete_semaphore
+         U g_pcLayers
+         U g_pcTopView
+         U memcpy
+         U memset
+         U qsort
+         U strlen

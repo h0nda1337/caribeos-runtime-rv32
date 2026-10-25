@@ -186,3 +186,10 @@ notices; it is not runtime BSD. Only the independent preparer, probe, runners,
 verifier and host guards are classified original BSD-2-Clause code. This does
 not relicense Syllable, GNU, musl or XNU, implement the actual GUI/AppServer,
 or publish a new binary Release.
+
+The client-platform include patches retain original Syllable LGPL-2.0-only
+terms and notices. The new compilation auditor and scoped server header
+umbrella are independently written BSD-2-Clause integration code, not kernel
+or GUI implementations. Original server sources remain unmodified inputs;
+their mixed historical license notices require review and are not reassigned
+to BSD. No external component is relicensed and no binary Release is added.

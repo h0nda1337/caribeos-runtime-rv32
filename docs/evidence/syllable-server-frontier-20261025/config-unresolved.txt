@@ -1,0 +1,62 @@
+         U __cxa_begin_catch
+         U __cxa_end_catch
+         U __cxa_rethrow
+         U __extendsfdf2
+         U __gxx_personality_v0
+         U __nesf2
+         U _Unwind_Resume
+         U get_desktop_config(int*, os::screen_mode*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
+         U set_desktop_config(int, os::screen_mode const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U set_desktop_screenmode(int, os::screen_mode const&)
+         U SetKeymap(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U operator delete(void*, unsigned int)
+         U os::get_default_color(os::default_color_t)
+         U os::__set_default_color(os::default_color_t, os::Color32_s const&)
+         U os::String::operator=(os::String const&)
+         U os::String::String(char const*)
+         U os::String::String(os::String const&)
+         U os::Message::AddColor32(char const*, os::Color32_s const&)
+         U os::Message::AddMessage(char const*, os::Message const*)
+         U os::Message::AddBool(char const*, bool)
+         U os::Message::AddFloat(char const*, float)
+         U os::Message::AddInt64(char const*, long long)
+         U os::Message::AddString(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U AppServer::GetInstance()
+         U AppServer::LoadWindowDecorator(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U os::String::c_str() const
+         U os::Message::FindString(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, int) const
+         U os::Message::FindColor32(char const*, os::Color32_s*, int) const
+         U os::Message::FindMessage(char const*, os::Message*, int) const
+         U os::Message::FindBool(char const*, bool*, int) const
+         U os::Message::FindFloat(char const*, float*, int) const
+         U os::Message::FindInt64(char const*, long long*, int) const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+         U operator new(unsigned int)
+         U std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_increment(std::_Rb_tree_node_base*)
+         U std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+         U dbprintf
+         U fclose
+         U fgets
+         U fopen
+         U fprintf
+         U fputc
+         U g_cLayerGate
+         U isspace
+         U lock_semaphore_x
+         U memcmp
+         U memcpy
+         U rename
+         U sscanf
+         U strcmp
+         U strlen
+         U strncmp
+         U strrchr
+         U unlock_semaphore_x

@@ -1,0 +1,26 @@
+         U __cxa_atexit
+         U __dso_handle
+         U __gxx_personality_v0
+         U _Unwind_Resume
+         U load_keymap(_IO_FILE*)
+         U operator delete(void*, unsigned int)
+         U AppserverConfig::GetInstance()
+         U AppServer::GetInstance()
+         U AppServer::SendKeyCode(int, int)
+         U AppserverConfig::GetKeyDelay() const
+         U AppserverConfig::GetKeyRepeat() const
+         U AppserverConfig::GetKeymapPath[abi:cxx11]() const
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U create_semaphore
+         U dbprintf
+         U delete_semaphore
+         U fclose
+         U fopen
+         U free
+         U g_sDefaultKeyMap
+         U get_system_time
+         U lock_semaphore
+         U malloc
+         U resume_thread
+         U spawn_thread
+         U unlock_semaphore

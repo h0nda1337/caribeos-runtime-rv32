@@ -1,0 +1,62 @@
+         U __assert_fail
+         U __cxa_allocate_exception
+         U __cxa_free_exception
+         U __cxa_throw
+         U __eqsf2
+         U __errno_location
+         U __fixsfsi
+         U __floatsisf
+         U __gxx_personality_v0
+         U __nesf2
+         U _Unwind_Resume
+         U operator delete[](void*)
+         U operator delete(void*, unsigned int)
+         U os::Application::GetInstance()
+         U os::Application::GetFontStyle(char const*, int, char*, unsigned int*)
+         U os::Application::GetFontFamily(int, char*)
+         U os::Application::AddDefaultFont(os::String const&, os::font_properties const&)
+         U os::Application::SetDefaultFont(os::String const&, os::font_properties const&)
+         U os::Application::GetFontStyleCount(char const*)
+         U os::Application::GetFontFamilyCount()
+         U os::String::operator=(char const*)
+         U os::String::operator=(os::String const&)
+         U os::String::String(os::String const&)
+         U os::String::String()
+         U os::Message::AddFloat(char const*, float)
+         U os::Message::AddInt32(char const*, int)
+         U os::Message::AddString(char const*, os::String const&)
+         U os::Message::AddString(char const*, char const*)
+         U os::Message::Message(int)
+         U os::Message::~Message()
+         U os::Messenger::Messenger(int)
+         U os::Messenger::~Messenger()
+         U operator new[](unsigned int)
+         U os::Application::GetAppPort() const
+         U os::Application::GetServerPort() const
+         U os::Application::GetDefaultFont(os::String const&, os::font_properties*) const
+         U os::Application::GetFontConfigNames(std::vector<os::String, std::allocator<os::String> >*) const
+         U os::String::size() const
+         U os::String::c_str() const
+         U os::String::operator==(os::String const&) const
+         U os::Message::FindBool(char const*, bool*, int) const
+         U os::Message::FindFloat(char const*, float*, int) const
+         U os::Message::FindInt32(char const*, int*, int) const
+         U os::Messenger::SendMessage(os::Message*, os::Handler*, long long) const
+         U os::Messenger::SendMessage(os::Message*, os::Message*, long long, long long) const
+         U std::runtime_error::runtime_error(char const*)
+         U std::runtime_error::~runtime_error()
+         U std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+         U operator new(unsigned int)
+         U std::__throw_length_error(char const*)
+         U typeinfo for std::runtime_error
+         U vtable for __cxxabiv1::__class_type_info
+         U vtable for __cxxabiv1::__si_class_type_info
+         U caribe_syllable_debug
+         U create_port
+         U delete_port
+         U get_msg
+         U memcpy
+         U send_msg
+         U strerror
+         U strlen
+         U strncpy

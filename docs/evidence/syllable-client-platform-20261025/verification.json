@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "preservedBaselineRecords": 65,
+  "kernelRecompiled": false,
+  "newGuestBoot": false,
+  "hostTests": 303,
+  "hostLogSha256": "547b2922046bd74d89364e3722c9d348043584baee79aa24bbe7fbc10337a117",
+  "clientActualRebuildArtifacts": 8,
+  "clientExecutableLinked": false,
+  "serverInventory": 27,
+  "serverUnitsCompiled": 24,
+  "appServerRunning": false
+}

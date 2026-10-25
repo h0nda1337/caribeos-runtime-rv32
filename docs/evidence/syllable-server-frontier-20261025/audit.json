@@ -1,0 +1,2391 @@
+{
+  "result": "INCOMPLETE",
+  "upstreamRevision": "579e480a005321cc320e7e355e8dff398b689be8",
+  "inventory": [
+    "ddriver",
+    "ddline",
+    "ddmemory",
+    "event",
+    "vesadrv",
+    "server",
+    "input",
+    "config",
+    "keyboard",
+    "keymap",
+    "defaultkeymap",
+    "sapplication",
+    "swindow",
+    "layer",
+    "toplayer",
+    "render",
+    "bitmap",
+    "crdtrans",
+    "sfont",
+    "fontnode",
+    "wndborder",
+    "desktop",
+    "winselect",
+    "sprite",
+    "clipboard",
+    "windowdecorator",
+    "defaultdecorator"
+  ],
+  "auditorSha256": "a6c824df32335cedf4f44d6a0171059cc05c6da258c333094363e980b20bde5a",
+  "platformHeaders": [
+    {
+      "path": "ports/syllable/server-native/atheos/kernel.h",
+      "sha256": "69fa68beef87c666b996f52c2ffbc0d1e61213d171f100e8d6a7e436435428f2"
+    }
+  ],
+  "sources": [
+    {
+      "path": "system/sys/appserver/appserver/server/Makefile",
+      "upstreamGitBlob": "66d59a91fde00a0bfaf1b823d96e5ca537bec521",
+      "normalizedSha256": "0816d0b7fc56200e9cbd17145ee038c9b23f8a775e54d29886baab5ed4a7ff43"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/bitmap.h",
+      "upstreamGitBlob": "aa194050362b85a4f2ae3b307cc4a745bf9cdc7a",
+      "normalizedSha256": "e6223d24f5d816d83a3fc387a9af764dcd5741aa5d9fe0cd2bf06f222e463e7a"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/clipboard.h",
+      "upstreamGitBlob": "42988cd073e663d7a906d0136239a1dd29aa635e",
+      "normalizedSha256": "6a691282edd45df4c6c60863cf1e6b8f63df2fb2eb490de98e8a4ebb274e7aed"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/config.h",
+      "upstreamGitBlob": "a51c75e3dda5106e817263502f81d8c60228fe19",
+      "normalizedSha256": "f127a96fbc36eb770539591a47c2c7a145c3d463da912cd4b0f4862cc3324b37"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/ddriver.h",
+      "upstreamGitBlob": "ad612812fbc340c2320e52efd53c07af0dd0b414",
+      "normalizedSha256": "f5149e2ff21bbcd356f159f2ca8bd7a34a45252202dff3fbdd4be0d2605c4312"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/defaultdecorator.h",
+      "upstreamGitBlob": "444cd498e7f7b1a3a65d91ae3ade77f194d862c3",
+      "normalizedSha256": "fc82c6d3d6353d484ea0d02173103a843add0ba0f31650d58ea662c0fea99fa8"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/desktop.h",
+      "upstreamGitBlob": "b1f8b635a0344d537224874999837e3d2af7e421",
+      "normalizedSha256": "91bf137479c033e245756fef095356a3fa78a718979ac2b371e777ea3ac70a19"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/event.h",
+      "upstreamGitBlob": "44e3e7d51d1513c16dcb981b963964db3966e688",
+      "normalizedSha256": "c599ced55dda78f587d0937151dda06e464e4ef2d8b5bed416b7392d978b94c9"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/fontnode.h",
+      "upstreamGitBlob": "64df114e30ff6543845b6380a5a7025e6fe65a89",
+      "normalizedSha256": "60611acc7db636f7d1cab0113cb9cae76a7d2025618c821c2b569817d04f434e"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/inputnode.h",
+      "upstreamGitBlob": "b68e90f9c4f7980bdbe1b667fcdef75c0bd26b81",
+      "normalizedSha256": "1f6a7627735c6403b4700c597f40e5f06bfa66da3e6422a305173068e8bab888"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/keyboard.h",
+      "upstreamGitBlob": "d0a02a19457b2a396092978241023b9bffd3ed86",
+      "normalizedSha256": "4c455108737801df2b76d97d9bc2fb22a8dfa17fb67288ac36d6e91eaf84e76b"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/keyevent.h",
+      "upstreamGitBlob": "1f5f88aa0fded80f13bdeaf12d8c962e770987a0",
+      "normalizedSha256": "bdefba937802465b5411412a9ff016e6f280f1b36258dec652dfd0a1bd0cb153"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/layer.h",
+      "upstreamGitBlob": "9899fc3de9febdadbbde0f643ec6530986933afa",
+      "normalizedSha256": "d1300f1d043d408fdd437c71a1f86d1b895a5532ec30b871da4e938406dfe388"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/mmx.h",
+      "upstreamGitBlob": "8901f610348c0c4beb14141ef1a68393d91e57c0",
+      "normalizedSha256": "d0935792dd47f992e9da49ecc7c8aaf18b6ecb68ce98a2da113bddae82dbad75"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sapplication.h",
+      "upstreamGitBlob": "461c291ff4620ba8190e2d75f86f80988854c4fd",
+      "normalizedSha256": "1be991a337a18bcd5747819bb9802de4580b20813283282c6aa7dc16c223c668"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/server.h",
+      "upstreamGitBlob": "c6d99c23c8ec9af89f2ccd37c47275e12ef05f0a",
+      "normalizedSha256": "735043fec5ba7ef0e6d25ad70a14ce4caa8e8256677adef5730ede2e12643f84"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sfont.h",
+      "upstreamGitBlob": "bf786eaf83b9d0279a50fb18c14220d05ddfed0f",
+      "normalizedSha256": "0622b6cb5a8e1be396c5055c97781b270986945afc11287a23cdc086c644025e"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sprite.h",
+      "upstreamGitBlob": "40126887cd82231e40aa28ab3ff7ad8e65a8dfeb",
+      "normalizedSha256": "a9ecd7376fd5b6ce15e3b6c0c0529aaad1112b51e0a7587a4d1a8fea221f0fff"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/swindow.h",
+      "upstreamGitBlob": "eb855ec1799051c972ae42a070481c9dacbdb485",
+      "normalizedSha256": "503f6ad1b7ab0cc11cf878640ea9dd0265a52dc58ef7678497ba261740c700f3"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/toplayer.h",
+      "upstreamGitBlob": "0736c17a23fc5a3bd8d8599485614b63d5ffc5d6",
+      "normalizedSha256": "764640337b80359a901fdf951505c502ec7d78f39c7d85e4418a48b6039bbb3b"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/vesadrv.h",
+      "upstreamGitBlob": "57c510a9a947d1b89f0aa1144af2781653fb33b2",
+      "normalizedSha256": "64339a87be07d0a938c07d1b5f8694b2b470fc8fd7eb610a654ba0138dc38445"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/windowdecorator.h",
+      "upstreamGitBlob": "5acceb783bb96eca8946241ff441265c7f9eabac",
+      "normalizedSha256": "df3a83923a7c6f8b69ec8ea95d8f2ca1c95d9e17af53707e71cfd7ff89a51573"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/winselect.h",
+      "upstreamGitBlob": "3c79e4012b03005fe786c23c7378fb8fe1af0524",
+      "normalizedSha256": "f066d2af65904af0343f6d48696299254c9cca486523194edaf9d5bf218efdee"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/wndborder.h",
+      "upstreamGitBlob": "e1bef089be59304a36724eb2cd5702c8591f8dad",
+      "normalizedSha256": "6cbcac0db1891a18fa352046b542cc25c301a4de60aeac17ac97fff036640bdf"
+    },
+    {
+      "path": "system/sys/include/atheos/acpi.h",
+      "upstreamGitBlob": "890579c79e8a5e7c93850c39c33a4ec145fd85aa",
+      "normalizedSha256": "39ac8062ae91f38a4224116b9983ece7fe32cd10064c245288970c1f2f8c5871"
+    },
+    {
+      "path": "system/sys/include/atheos/areas.h",
+      "upstreamGitBlob": "05431cef3d0c1b98551c4da9b0551fdffad8366a",
+      "normalizedSha256": "2d86daf76aae206e5ad9924e83663d9ba38c39796d368565c40664c19b8f4187"
+    },
+    {
+      "path": "system/sys/include/atheos/atomic.h",
+      "upstreamGitBlob": "835a2a620bf835a53df04583c291064c213fddfa",
+      "normalizedSha256": "59d27d61e95f5a3b8820d7b633c4ba7417fcf382340ed72eee56ecb86de1a149"
+    },
+    {
+      "path": "system/sys/include/atheos/cdrom.h",
+      "upstreamGitBlob": "599589be692373c70ddc936648481262d4ac8a46",
+      "normalizedSha256": "c84750455d02f70d256f932f5fe184257469c3e3a888b2c37409acbbb4e4e3b4"
+    },
+    {
+      "path": "system/sys/include/atheos/device.h",
+      "upstreamGitBlob": "d83a51086306a1f9b70959364a3e9acfdfb17d02",
+      "normalizedSha256": "80b74c8633d6c8cfaa18cde3d2f6f77e09187438fa93842e576f01d1c29ac125"
+    },
+    {
+      "path": "system/sys/include/atheos/elf.h",
+      "upstreamGitBlob": "0e91f577227e81bdbfba07f888180c7c33187351",
+      "normalizedSha256": "5f1ff62c2214d494819c6c2bb0a4319cb78f9164d7fc8b76b67ecdd9e8c63ce2"
+    },
+    {
+      "path": "system/sys/include/atheos/filesystem.h",
+      "upstreamGitBlob": "144ded87ffbb2a6a2a191b837e18c809ab8fd004",
+      "normalizedSha256": "c2a24439f475ea12f7195bd0f08652fe7f515993faa5d1114fa84ec407a6018e"
+    },
+    {
+      "path": "system/sys/include/atheos/fs_attribs.h",
+      "upstreamGitBlob": "07c8c09eb806479bf196a2872f990d4439027ede",
+      "normalizedSha256": "e56af453d0552dc92ca77690e3658b2671d28c52c38747d6a09501884dd5c881"
+    },
+    {
+      "path": "system/sys/include/atheos/image.h",
+      "upstreamGitBlob": "1d584dfb68dcc03e43d31991b560d765294a8a89",
+      "normalizedSha256": "df98632a7a1aa4a8ea3d60e2e44b27adbc4b748eb54019f9c2f6d78668fb9b50"
+    },
+    {
+      "path": "system/sys/include/atheos/in_systm.h",
+      "upstreamGitBlob": "99d41581bdeeca3725d18b1649a7f684d4c32de2",
+      "normalizedSha256": "6d2a35c5a44bdcd3277c3fb9349e68124c332dd122064e405e7f11f2011c20e9"
+    },
+    {
+      "path": "system/sys/include/atheos/inttypes.h",
+      "upstreamGitBlob": "4379f3ebc2d43ed422ed1a96d170b1b796ab0ca3",
+      "normalizedSha256": "c90bd684d8b5a901a6201c84d8580d0fed27cbdea0053c4451d6d71e13e3b283"
+    },
+    {
+      "path": "system/sys/include/atheos/isa_io.h",
+      "upstreamGitBlob": "e2d5884ea71c9cbacf8d27d0f1ee8931b3eb05e2",
+      "normalizedSha256": "784b2819d534fc89eae67e85af1896f0de941e6abffcad10e5266eeabc8a632f"
+    },
+    {
+      "path": "system/sys/include/atheos/kdebug.h",
+      "upstreamGitBlob": "0cee7bb65469ee98750ad9c1b901618896220791",
+      "normalizedSha256": "d3235f17ce9405636d8904ee74992c12ed0279e915980e05ba6be69582ad6557"
+    },
+    {
+      "path": "system/sys/include/atheos/kernel.h",
+      "upstreamGitBlob": "c08cd32cb785df395d9700b4aa49cc0f27ecb97f",
+      "normalizedSha256": "eb69ba9f08ad005320b2275b3263800cdf6f4cb3024ca521a67f954b0df0260a"
+    },
+    {
+      "path": "system/sys/include/atheos/libusb.h",
+      "upstreamGitBlob": "3206c32bdaa165d4c1390d3ea0991f11b483c086",
+      "normalizedSha256": "a9344e8482d108a10a82d62573a8db5adbac5850983a898601572a152bf4b458"
+    },
+    {
+      "path": "system/sys/include/atheos/lp.h",
+      "upstreamGitBlob": "3d0314331801d5bfdefb69dc9dd9be0bd21236a2",
+      "normalizedSha256": "597902debd68da17ea2f79ceadbabfb292f2701e607429017e8153bd4b27c6a7"
+    },
+    {
+      "path": "system/sys/include/atheos/messages.h",
+      "upstreamGitBlob": "6271383d7bd268776db9dea9d18ec7ceac5fced1",
+      "normalizedSha256": "18b6d2bae97aecae214ce20d4dc8f97da42d59a23fa42f146c9dcd20089cda51"
+    },
+    {
+      "path": "system/sys/include/atheos/mouse.h",
+      "upstreamGitBlob": "dad25a4d0176e4ed8b9cca69a8a09226f8b33e8b",
+      "normalizedSha256": "1c6484dda39670dddb1a5a798b3e44a4c45e04b30580505c2a7fd3ea38033584"
+    },
+    {
+      "path": "system/sys/include/atheos/msgport.h",
+      "upstreamGitBlob": "2bef5978c7ab8d2e9dd6ab492caaf3fa36a53c05",
+      "normalizedSha256": "d6f2dc81ec504e780debb17c69d22e0d3a0ca964e5cfcf04be0aea18b735cb9d"
+    },
+    {
+      "path": "system/sys/include/atheos/pci.h",
+      "upstreamGitBlob": "a3b5044bd4b5cef56418d7ea0d8b05e62dab379e",
+      "normalizedSha256": "fb6b47263f98a918119f64d7191acd591896a71ccfeed59f813790bfde6945ab"
+    },
+    {
+      "path": "system/sys/include/atheos/pci_vendors.h",
+      "upstreamGitBlob": "43cee40e2022161ada372291a2ec213bb57dc28d",
+      "normalizedSha256": "3eca21b0f3764a316b48f82fbeaf31e0b9f28f647562147710f5a7c000e0b077"
+    },
+    {
+      "path": "system/sys/include/atheos/power.h",
+      "upstreamGitBlob": "b47011a6dd18a683f1ae874ea73ad6ff085626cf",
+      "normalizedSha256": "61189c0312f0d3d6f5e08719f25a15fd45c66cb5ff7f1039b1369dcebdf88411"
+    },
+    {
+      "path": "system/sys/include/atheos/pthreadtypes.h",
+      "upstreamGitBlob": "983461b33f43beb4090ba5fc0d966af1d98dc255",
+      "normalizedSha256": "0b19686436c5c1cf363a8997b2b152a05d5bc44eac98d10859f139227926a155"
+    },
+    {
+      "path": "system/sys/include/atheos/ptrace.h",
+      "upstreamGitBlob": "10f64ee05f8f540c648b845f8cd779d35ad93096",
+      "normalizedSha256": "08b671fe2334a3f75164c72fc5c99f1f4450dfeb229d12a60ba06bcc91f66a0d"
+    },
+    {
+      "path": "system/sys/include/atheos/semaphore.h",
+      "upstreamGitBlob": "c2185e6d321830465baedc8cdf1cdad173197588",
+      "normalizedSha256": "804102b669523edd9b18e1642f08199ee8e7ad42ad227420a3a41ea772d307f1"
+    },
+    {
+      "path": "system/sys/include/atheos/sigcontext.h",
+      "upstreamGitBlob": "680687f4d70d63cbb83febe82aacf3b72e87ca03",
+      "normalizedSha256": "4dc90433ea536088523be3b07287d10664625070a0eb589840718e35262923bb"
+    },
+    {
+      "path": "system/sys/include/atheos/socket.h",
+      "upstreamGitBlob": "8d851bce2aba9ade8d9b23ff8bb98031d2ba9b59",
+      "normalizedSha256": "7112411d57b5e92293071830f20f8127f9bd46231314f4beea104eca972eede2"
+    },
+    {
+      "path": "system/sys/include/atheos/soundcard.h",
+      "upstreamGitBlob": "90c66d5e364634b731358bb34060e0fab663d4e0",
+      "normalizedSha256": "c07bcc3969e6d1d34615a7403094fb58c3760fe573dd886a7dc88e1cce71716f"
+    },
+    {
+      "path": "system/sys/include/atheos/stddef.h",
+      "upstreamGitBlob": "946eeee573dcc42c3e6f164422c547fd48e87ea8",
+      "normalizedSha256": "bfd42207db3c301293b29565e1607f1e9322e1093765829ac3b71d1e767ccd01"
+    },
+    {
+      "path": "system/sys/include/atheos/strace.h",
+      "upstreamGitBlob": "9e6ce174350495242eb0669a9c3136dc977871a0",
+      "normalizedSha256": "3986f801233bf9d0a7dfa04e35d69fa0cba78e6a69c3335fdebc7431b314cc16"
+    },
+    {
+      "path": "system/sys/include/atheos/syscall.h",
+      "upstreamGitBlob": "341a9e8cdbacb1e0de7c0328e7d755a9b4f6f75a",
+      "normalizedSha256": "289308511b37505875b85963693c1a99eaf3f3f8f03ecacbdebfb4a045cf18f1"
+    },
+    {
+      "path": "system/sys/include/atheos/syscalltable.h",
+      "upstreamGitBlob": "ca18a3407247f3a71cd2ff30be146a7da0053c44",
+      "normalizedSha256": "f4b1af70ad42d5e9284266756ee6c4de8acd9440b9442b1150b6dbb19bea0c1d"
+    },
+    {
+      "path": "system/sys/include/atheos/sysinfo.h",
+      "upstreamGitBlob": "cb063bfff3da7af254128f38872be43a098960b8",
+      "normalizedSha256": "7bdc01918a8e8b912f5be15ceaffd9d057a635843a1830e4199fc08957c80051"
+    },
+    {
+      "path": "system/sys/include/atheos/threads.h",
+      "upstreamGitBlob": "14cd258c017d3a3d41d8ec7ac20c7901358f2c47",
+      "normalizedSha256": "4d0cf6a5ecf996208dd85d002ea25238acd12bc38057ac62758623931c2d9988"
+    },
+    {
+      "path": "system/sys/include/atheos/time.h",
+      "upstreamGitBlob": "037530695f6002ab2efb2713076fceb9cc78901d",
+      "normalizedSha256": "ad29a1c042d77b4ca3880acd2431fc512c09319566a5d642aa26d836e3c934fe"
+    },
+    {
+      "path": "system/sys/include/atheos/tld.h",
+      "upstreamGitBlob": "88299b1035cc8a5a7d8faaad7d17938ad1548d32",
+      "normalizedSha256": "f4b09368b763bf2c350703db1728356ca7bab72d442f5a969aeaa39134b8c33b"
+    },
+    {
+      "path": "system/sys/include/atheos/types.h",
+      "upstreamGitBlob": "7387c2e3c1a673a2165c7df2c9ff4af8e1a99a12",
+      "normalizedSha256": "acf7f6062a7c3234d7c179292101948cbce3b6c6e84d9a87a1cf983137836fca"
+    },
+    {
+      "path": "system/sys/include/atheos/v86.h",
+      "upstreamGitBlob": "1d997628ee4ce8ddacd41bb718ccc3229583c355",
+      "normalizedSha256": "49ddc198075371ecd40fe3fe536f916bce443366e569056ecf0f7e1b4e5bc93e"
+    },
+    {
+      "path": "system/sys/include/atheos/vesa_gfx.h",
+      "upstreamGitBlob": "2a99ecda3f85162d625b0a0772f0b886c62dea57",
+      "normalizedSha256": "b5ed1937863f81965d6799d1538b1d6df7715b394230178893e827fea66baa7e"
+    },
+    {
+      "path": "system/sys/include/gui/bitmap.h",
+      "upstreamGitBlob": "160c2c9792cc6b6da20e200bf688ec754349c361",
+      "normalizedSha256": "e28df4cc7b98ca7e6ef10711f230ca702b0c4cd5a41ac840215f2dc7d53c75f9"
+    },
+    {
+      "path": "system/sys/include/gui/button.h",
+      "upstreamGitBlob": "2b6c009283291b56e7d115c08c5d6769f4e31323",
+      "normalizedSha256": "6f3c596d63ebad76a4406c9a1e4e9677bd2dda7957b23db28ce7a776b37df290"
+    },
+    {
+      "path": "system/sys/include/gui/checkbox.h",
+      "upstreamGitBlob": "5b03e943ec3701f0e378206edc2bdf1c6968c5b8",
+      "normalizedSha256": "38b8044aa745700897b0677c4a4faef9024f0d5c9217d810f725b4ebf15a4659"
+    },
+    {
+      "path": "system/sys/include/gui/checkmenu.h",
+      "upstreamGitBlob": "60d4a7a4df050a04d37c9679c5b684592c840a8b",
+      "normalizedSha256": "74fc2380f5d9378cbf2737befccfeef59a5db7a0383a23f43185e1f081a47b9f"
+    },
+    {
+      "path": "system/sys/include/gui/colorrequester.h",
+      "upstreamGitBlob": "c7ca0a87b31cf1746b5f3747d5de0f23e1b9016e",
+      "normalizedSha256": "d16488d34a87181303ef6af0e8625d4c6d25c299f094b84a340ddd97bec2b119"
+    },
+    {
+      "path": "system/sys/include/gui/colorselector.h",
+      "upstreamGitBlob": "0db4e8cd72aebbd4f26e450b3df0973a17e42806",
+      "normalizedSha256": "a8571f1810f2c5d367e7632557efa6131594a8cd444b4eec6ebd4bf23933f78c"
+    },
+    {
+      "path": "system/sys/include/gui/control.h",
+      "upstreamGitBlob": "2d5992f5d27c3925ec78f37b952e990e317bb4c0",
+      "normalizedSha256": "edcc1fc509a010693a843b80da202e467a987cc5f147ff18934bc5a3d859b359"
+    },
+    {
+      "path": "system/sys/include/gui/desktop.h",
+      "upstreamGitBlob": "e1ff15c7226becad48fe5b7b641c946c9e64599c",
+      "normalizedSha256": "78a12be0665aec68e3db818955dd145ee7cddf1dbef0c3efb36defb4c63ec412"
+    },
+    {
+      "path": "system/sys/include/gui/directoryview.h",
+      "upstreamGitBlob": "da62ae483a31f88c79b0ca139061e172ecc4dcc9",
+      "normalizedSha256": "c4d26ff992244668157926be5909c09ff8463ea133713975206826ecf12a2cff"
+    },
+    {
+      "path": "system/sys/include/gui/dropdownmenu.h",
+      "upstreamGitBlob": "647aabe519a4e648d0cb5246a0e9468c1a5c0a05",
+      "normalizedSha256": "9f3b4afa9c8594393a838b5f13a67115f860268a5e2d1496708fb16bdb13124d"
+    },
+    {
+      "path": "system/sys/include/gui/exceptions.h",
+      "upstreamGitBlob": "f49caf9bee638b8541b8800c4d578540eb0df0ff",
+      "normalizedSha256": "57aa2f5ad3faac50600339165e11785b1d2cec5dd90b1467ec60efe4f84552b9"
+    },
+    {
+      "path": "system/sys/include/gui/filerequester.h",
+      "upstreamGitBlob": "496bbfb9eec9838d89ecb9697ab8d226dbf1582a",
+      "normalizedSha256": "8f57bc03f29c500267492177610f65458f4b9c7990533bcc7f60ee165a7b331f"
+    },
+    {
+      "path": "system/sys/include/gui/font.h",
+      "upstreamGitBlob": "c0f41b2ff2e739461bbf0fe6178a101ee46c7641",
+      "normalizedSha256": "440148c1995bb22d0d9e043aa3375b4bec89c406052d85521345b98ea0229894"
+    },
+    {
+      "path": "system/sys/include/gui/fontrequester.h",
+      "upstreamGitBlob": "81110ddeb1c83ad12e7a847faaeef2f93768072b",
+      "normalizedSha256": "7be80a403e0c05bdd6f5b68dab6a0690e1889cfa39082872851c45809fa192bf"
+    },
+    {
+      "path": "system/sys/include/gui/frameview.h",
+      "upstreamGitBlob": "e01c93fd627c614539ace41c3901a58d050de5d6",
+      "normalizedSha256": "f279c7107397a682ec975df07ea6b00d63746bfb7c6ae3da4e1adf1f0900274d"
+    },
+    {
+      "path": "system/sys/include/gui/gfxtypes.h",
+      "upstreamGitBlob": "8ef440e0f735ee8d1c0cc83a91740a209af9c19d",
+      "normalizedSha256": "d0a3badf8e2cdf0943c28653ec9bb689a7583fbff5c93960338b242e73c24f14"
+    },
+    {
+      "path": "system/sys/include/gui/guidefines.h",
+      "upstreamGitBlob": "7af152a3387a35f31713f56fc0da2cdadb4d4fed",
+      "normalizedSha256": "e9545385b311cf9a473a51eea44170d1367e51826c0d7b9ea737886609d89c57"
+    },
+    {
+      "path": "system/sys/include/gui/icon.h",
+      "upstreamGitBlob": "fe02c2bc6e72349ef6cf9a3ba3520da2cab83db7",
+      "normalizedSha256": "fa3afd1322a9ef79ca1d874721a61c45dcfc8a1bd5f2f1f5ef559d1e0fa6ff04"
+    },
+    {
+      "path": "system/sys/include/gui/icondirview.h",
+      "upstreamGitBlob": "185ca290d5ff429efbcd9f4cc694b254c8dc56c5",
+      "normalizedSha256": "f800356936a2db796897a041ee1f41137ef48e65618706355d28a5f86c2e158a"
+    },
+    {
+      "path": "system/sys/include/gui/iconview.h",
+      "upstreamGitBlob": "b8e988fdc2e67e203075b1feb79a4b235869c6fb",
+      "normalizedSha256": "6bd8b5be7a2a64b03484d0fb367b63d057df83496b4099cc554944d6a5d57906"
+    },
+    {
+      "path": "system/sys/include/gui/image.h",
+      "upstreamGitBlob": "a9f88d30e9e1e55a10f5c33ec90da09ea24316ce",
+      "normalizedSha256": "c842b1ee108541ee3ae673a8bec9123e6387796bfb1a99b797c5bcf71c8fc2a4"
+    },
+    {
+      "path": "system/sys/include/gui/imagebutton.h",
+      "upstreamGitBlob": "043f100d54232d55b28fac949b6c97579e540a1f",
+      "normalizedSha256": "f984b1d546636ff2544a304e0b4b01d5de3e003aacfebe4b46852b9c5d3b1bc7"
+    },
+    {
+      "path": "system/sys/include/gui/imageview.h",
+      "upstreamGitBlob": "42a9e16718ea8d267f279d336bc1ea9cd7402a02",
+      "normalizedSha256": "8761d95ada180ba32e9ccf708733feed73514f1596c70b024a448520d4a3e0e8"
+    },
+    {
+      "path": "system/sys/include/gui/inputbox.h",
+      "upstreamGitBlob": "0534fa58a14fc249f848d6346b9591a4a5425e99",
+      "normalizedSha256": "9c13188262a738af3757af27d91072d5456500039188e66f717e306c089473d8"
+    },
+    {
+      "path": "system/sys/include/gui/keyevent.h",
+      "upstreamGitBlob": "86eb12fa0271186575d4a301c3558daff027e50e",
+      "normalizedSha256": "2aed1603299f99cfcfdf1171650f1d32a61b72de2b7c5fd486c6ad361d1ed6c7"
+    },
+    {
+      "path": "system/sys/include/gui/layoutview.h",
+      "upstreamGitBlob": "2ab332f6b77126cb0c5333f9ca8c0f8b21af3ba5",
+      "normalizedSha256": "917e4f2947014ac6aa44b412e2d284d4f7ca34f617a5c820c9b600d1c21610ac"
+    },
+    {
+      "path": "system/sys/include/gui/listview.h",
+      "upstreamGitBlob": "0c92c0eedf37432959e1ef7bd94046df0a876569",
+      "normalizedSha256": "894dd6d3e608c21e00d3ecc0501f3a80ad9895f92ef9a516304b17c9fcc0527b"
+    },
+    {
+      "path": "system/sys/include/gui/menu.h",
+      "upstreamGitBlob": "889eafe64bc8864c861f90b5c45e4ca2ab279412",
+      "normalizedSha256": "1173710dc3213fe400ff06cfd08b434b85d5056375f0a67c7fb3e92704783c14"
+    },
+    {
+      "path": "system/sys/include/gui/point.h",
+      "upstreamGitBlob": "0008092081a5c2ee3e3f48a84f7c0565c4cfe30b",
+      "normalizedSha256": "d169476f71eed6a11ef782a6c37237a0cf786c5e63461f4021a8943c3a8d5b18"
+    },
+    {
+      "path": "system/sys/include/gui/popupmenu.h",
+      "upstreamGitBlob": "a975a139db7d0e0a0093e9a4791d21d0e808258f",
+      "normalizedSha256": "b46bc6cb80ea7ff1923883f5e0c9b3c87e19066c3bce255bb540dd8dcc6e5bfe"
+    },
+    {
+      "path": "system/sys/include/gui/progressbar.h",
+      "upstreamGitBlob": "4728fe95b05cc090be2ce41153b36898e9961a47",
+      "normalizedSha256": "3e265732ba399112090ee01ed859afd26c53517570c8b6097e482c890222e0ca"
+    },
+    {
+      "path": "system/sys/include/gui/radiobutton.h",
+      "upstreamGitBlob": "a54a8fcb35ff0eb2717e457fa0e3f21c80dda377",
+      "normalizedSha256": "776ba022b8ade7951a5a1602b10dbe0b69e759cd3a5a5cbef60ff898413ac1ed"
+    },
+    {
+      "path": "system/sys/include/gui/rect.h",
+      "upstreamGitBlob": "5a8befd63824639fd50e007d5a920f691a9f2fe6",
+      "normalizedSha256": "463772a0b43fd34e587b7b6fba297aa2933da576f95c189e045927270a248578"
+    },
+    {
+      "path": "system/sys/include/gui/region.h",
+      "upstreamGitBlob": "398a75218c8a8fd381c7b04537f87b25a718963e",
+      "normalizedSha256": "8587972cac2ef0a2eb5b65de2c06287a75f80b2dcab270f6510ab940f847dde9"
+    },
+    {
+      "path": "system/sys/include/gui/requesters.h",
+      "upstreamGitBlob": "65a724a7fbe93e228aea118ed17161b9f4291959",
+      "normalizedSha256": "2db0585b9e5ec5ebb38f9f6dcd47bb589d8b6e0b15deba1fc364b0f7d34ab735"
+    },
+    {
+      "path": "system/sys/include/gui/scrollbar.h",
+      "upstreamGitBlob": "f675be1f855602325a00d699f8b719ad5369e5c1",
+      "normalizedSha256": "42af4e2e3440fa5565e0e87dfd4cdfd53aebed5f3a595d6f0f8ef2ff0dd81d49"
+    },
+    {
+      "path": "system/sys/include/gui/separator.h",
+      "upstreamGitBlob": "7a9cc19db584e790c93278662077e0a0fc49dceb",
+      "normalizedSha256": "67327b166057a59ded7f873dcb968edd95a299dda1ceda34733cd03e773ddf28"
+    },
+    {
+      "path": "system/sys/include/gui/slider.h",
+      "upstreamGitBlob": "e0dbb7d6aff9c18c599be2f9e51316414a8dcc1a",
+      "normalizedSha256": "337f1d045ab635b18f47f6b7d520d78375f50793baf0c9f365cacba9e8613bf6"
+    },
+    {
+      "path": "system/sys/include/gui/spinner.h",
+      "upstreamGitBlob": "f9417bf642e13cb098a0c815492e68a16eb6ed71",
+      "normalizedSha256": "1b05e8d824355f75ceae75da01b1a88a3665e955e4a40eb6253bbc5d626f9f6a"
+    },
+    {
+      "path": "system/sys/include/gui/splitter.h",
+      "upstreamGitBlob": "a7ed685bda6d67ea190707cf4936968a8d549269",
+      "normalizedSha256": "c4eddb0e6bc2c9929f3a8eb0ca17b9f382e5647e28f3cffe0d125ce7f042092a"
+    },
+    {
+      "path": "system/sys/include/gui/sprite.h",
+      "upstreamGitBlob": "6789dd5e25bfc3de210d785197a4d21b8410f8be",
+      "normalizedSha256": "5f89be9b654cafc01ccd9e2aadb6ec99822efa56683d9303e3c75d85fc5d6be3"
+    },
+    {
+      "path": "system/sys/include/gui/statusbar.h",
+      "upstreamGitBlob": "10e16e52c03852e5565fc1942b292a6dab46929a",
+      "normalizedSha256": "b77812f1523033176284d1be6587e07ad560215dec2ad294976044a5f67fc9b1"
+    },
+    {
+      "path": "system/sys/include/gui/stringview.h",
+      "upstreamGitBlob": "908e9c98ca5554fb53ba02c204c2fd72e72d8ac2",
+      "normalizedSha256": "0aaf8d1ecc01df2e02a84f5b5d53b9e3ff79047af816d433bd3897f1d37bc8d5"
+    },
+    {
+      "path": "system/sys/include/gui/tableview.h",
+      "upstreamGitBlob": "6c00f8b11fa5a8534c07ff94a09c8ab31eb8e3c2",
+      "normalizedSha256": "ee2655f50f7e7ece6f3a41ed753fa9fbc9cd4faafbe546f5a572866144d3e9a7"
+    },
+    {
+      "path": "system/sys/include/gui/tabview.h",
+      "upstreamGitBlob": "4602e128c535bd41d19e348042658e81735fd9ad",
+      "normalizedSha256": "5142dbb31a8d00e004247ac8afb77724ea6116ef0587ca3a7fa77798988f3553"
+    },
+    {
+      "path": "system/sys/include/gui/textview.h",
+      "upstreamGitBlob": "c0e51a700e2ae2335409364b624a910411b07eb2",
+      "normalizedSha256": "f9c91feaa2c89fb7c2b400d9db00cbba7e58568facb33a8697b230bb51233d6c"
+    },
+    {
+      "path": "system/sys/include/gui/toolbar.h",
+      "upstreamGitBlob": "7f48633dae13b2b8b876bb32f4b839e362b9b58e",
+      "normalizedSha256": "f774d1929ccb6787e25b6740d7df23ba080c818742cf0a422af59211aff764e8"
+    },
+    {
+      "path": "system/sys/include/gui/treeview.h",
+      "upstreamGitBlob": "345fa1781b7549d82bed68d93d171abcb841bb04",
+      "normalizedSha256": "1d230a58030bfa055c86a96c7d266c75342363f6bf4694d384e130c6810a2674"
+    },
+    {
+      "path": "system/sys/include/gui/view.h",
+      "upstreamGitBlob": "cd3ab7a84879aa1835a652c96e14e908a661312b",
+      "normalizedSha256": "82fd1820629ec2ae785881a0a9413800dd286861ddcee97b36c4830011911700"
+    },
+    {
+      "path": "system/sys/include/gui/window.h",
+      "upstreamGitBlob": "7121c58daeb1257029a93da5905159825e2c8828",
+      "normalizedSha256": "688544959a601dd1bbf0f739f66f4b0e5f99824e03fcd180a89e778b3e2d0d7e"
+    },
+    {
+      "path": "system/sys/include/macros.h",
+      "upstreamGitBlob": "798caec61d7b81223b43751fde8418d80d2fe504",
+      "normalizedSha256": "954660dcde2aa339b904799ba32a95efc9ed690191d7d321a773d17d0e3e54ba"
+    },
+    {
+      "path": "system/sys/include/Makefile",
+      "upstreamGitBlob": "6c37aeb47a6afa94e871ae7638a9c6b1b069711c",
+      "normalizedSha256": "2f3394e68bc5b6cd76288d0b2b1c579cbddcb1811e5328377e3bf6389b58d6a0"
+    },
+    {
+      "path": "system/sys/include/pthread.h",
+      "upstreamGitBlob": "63e57653387f6065b9f9d405b94d972519fa6982",
+      "normalizedSha256": "b11c1ca6f3098cf5f7448a1646a447ba1e2505f05858ae44c5ecf5286b48b1ad"
+    },
+    {
+      "path": "system/sys/include/README",
+      "upstreamGitBlob": "6defcf2f029276e8566069f6d04b7e094257788f",
+      "normalizedSha256": "3f21eabb7f0caf728f6dc66942cc889d5e23e57d187cadaa6aadd78a352910bb"
+    },
+    {
+      "path": "system/sys/include/util/application.h",
+      "upstreamGitBlob": "fbf1a254676f1f45a1f952a6beeef62da1b63241",
+      "normalizedSha256": "50d26387a6b4a2a7bf932f3de07cc15970821908496923aa08ab817493e11e4b"
+    },
+    {
+      "path": "system/sys/include/util/appserverconfig.h",
+      "upstreamGitBlob": "e5861c3f3798c234ba567553429b7a30bc06fd5a",
+      "normalizedSha256": "8ec33c38d7fd7389d3786aa8b7bff1481952b431d7fe20be205fd5d79167fd70"
+    },
+    {
+      "path": "system/sys/include/util/array.h",
+      "upstreamGitBlob": "03b7dda1829e80c4156e3c581acc4cd1c50f47f3",
+      "normalizedSha256": "ac305861a33638e295860cc17d4f3db278fa8def3e35ffed88070e7084cbb7ec"
+    },
+    {
+      "path": "system/sys/include/util/catalog.h",
+      "upstreamGitBlob": "f356fb3f48d00c1c8fe0bc289ced81d4094f12cb",
+      "normalizedSha256": "c399bed26c5c01255c3339b49cdcf8d4b0b6066992dd1492bb5807253c431990"
+    },
+    {
+      "path": "system/sys/include/util/circularbuffer.h",
+      "upstreamGitBlob": "6f7e587a2423afe7e79353df5654871c7192fc68",
+      "normalizedSha256": "556c9bf88419d69e5ddea6e9762c252b87910d3042d6c1260eeaa3354059055b"
+    },
+    {
+      "path": "system/sys/include/util/clipboard.h",
+      "upstreamGitBlob": "32d055075cdd5d6a9fb5a477b1564742a0a3ff7c",
+      "normalizedSha256": "8a338e308a39be6f3f80990ab28a326e7baf9fd8ae274f1b6f29597dfbc46d2b"
+    },
+    {
+      "path": "system/sys/include/util/datetime.h",
+      "upstreamGitBlob": "2b560d928d5e0ca11bebd30c3c005f9ba781d9ac",
+      "normalizedSha256": "b5b15d7ffe303482ad39e8f91357d019f74b8207e87f8d22fa934eef732588eb"
+    },
+    {
+      "path": "system/sys/include/util/event.h",
+      "upstreamGitBlob": "b7b6fb20d465385fb0ed2d35d98cfeae98ead4de",
+      "normalizedSha256": "8222e612e76d90327e4d39e6aecfb2c4de1ac9de7b4de26d263b4286e66b7e6a"
+    },
+    {
+      "path": "system/sys/include/util/exceptions.h",
+      "upstreamGitBlob": "33817e6c2acf8dcfdb2b40c04f971c1350ad27b1",
+      "normalizedSha256": "fc8c95376c9d555cd919aa37567f6b47b3b59b0fb6adbfc46a10bd4f529f0f92"
+    },
+    {
+      "path": "system/sys/include/util/flattenable.h",
+      "upstreamGitBlob": "adbc3782925f6e1bdb086115330b1d57fdfc0b34",
+      "normalizedSha256": "1e7008ac81d8a87b780a5b2d7ad189e11146ba702d990c985e06091bbfca7cce"
+    },
+    {
+      "path": "system/sys/include/util/handler.h",
+      "upstreamGitBlob": "28a8e07ff475db88e53df190994739bf2027336a",
+      "normalizedSha256": "301ba2adf69f16594cb354830763af18f9fdcef2b0e6978c1f1eadd1c3712b5d"
+    },
+    {
+      "path": "system/sys/include/util/invoker.h",
+      "upstreamGitBlob": "5018f3279ab20ba53bb64c2b52be7f6465740907",
+      "normalizedSha256": "d62ab8c941cdd6090fd36483dd9a699ff296b3cfbbaee7c4abf32120e24471b4"
+    },
+    {
+      "path": "system/sys/include/util/keymap.h",
+      "upstreamGitBlob": "c0481419df1fd1fbe4282347595c9a112e442817",
+      "normalizedSha256": "cecc5fbd34a2212b35113745341b42721f810481ba6608c7fcb75b7da02878f6"
+    },
+    {
+      "path": "system/sys/include/util/locale.h",
+      "upstreamGitBlob": "f97ea5d964788dff661c8d63faf6c0d4caf9a3c1",
+      "normalizedSha256": "4521779bbd2dc7ec4a62e96ce72167c0eb192614f6202d6d42e3f67881a977b8"
+    },
+    {
+      "path": "system/sys/include/util/locker.h",
+      "upstreamGitBlob": "8d399165b31ccb5b6dd31177d5040045b173abdc",
+      "normalizedSha256": "55743b5932e41f4b2041359229185961bb8b2691c0cc2bec29c0d549c243a74e"
+    },
+    {
+      "path": "system/sys/include/util/looper.h",
+      "upstreamGitBlob": "8c72d0796d347351f3ba2cf70a1c49707ef4d91c",
+      "normalizedSha256": "24179b1f0f4af4d556f48999c3076428fb3e1d560648b51bec3905e429b9d2a5"
+    },
+    {
+      "path": "system/sys/include/util/message.h",
+      "upstreamGitBlob": "f9836e4e0c66110531fe04a4b0450905ad6fb44c",
+      "normalizedSha256": "4052416bbeba977470c890cddcc0c0e45a0d444ea1c3c1e4a20deb38beeb63b6"
+    },
+    {
+      "path": "system/sys/include/util/messagefilter.h",
+      "upstreamGitBlob": "02853fb2f90e22a848e7a893451a07aec2ac95ff",
+      "normalizedSha256": "21b5eac6118c88d5cb10ef2dd8df532b1c7fdd58a8ce64e8395589ff6b75ab48"
+    },
+    {
+      "path": "system/sys/include/util/messagequeue.h",
+      "upstreamGitBlob": "a2ea217372fbd66d1149d6843c89656ddf664614",
+      "normalizedSha256": "4b21fba59c97129984aab7668b68efd1736b9536ebb2a7ba8f1caea898af3c33"
+    },
+    {
+      "path": "system/sys/include/util/messenger.h",
+      "upstreamGitBlob": "c89187233ccc85c054c0619638dc16f5d5261135",
+      "normalizedSha256": "5906a53ddf672497748ed66c10870698bef585da5af0331b79827e43001c9425"
+    },
+    {
+      "path": "system/sys/include/util/optionparser.h",
+      "upstreamGitBlob": "fb9456aee006a99d57b8cee4702fcd936ab6cabb",
+      "normalizedSha256": "1a90347e5307ed232482d980d203674e6c5ecf5db9b6af3d266c087c0b860f6d"
+    },
+    {
+      "path": "system/sys/include/util/regexp.h",
+      "upstreamGitBlob": "48581285b98876abf40e0d03d80e195d2a25c0c1",
+      "normalizedSha256": "653508b5d7808b5b564b0ea454d1a28e60dd3392430356daee00ffda183a9891"
+    },
+    {
+      "path": "system/sys/include/util/resource.h",
+      "upstreamGitBlob": "61bf5fb9c1db076baabe963f993b4135b1557bd3",
+      "normalizedSha256": "770a61cb917e1262da6ee2d3bc3b8992e7565edda15fd601970fc2801398ba12"
+    },
+    {
+      "path": "system/sys/include/util/resources.h",
+      "upstreamGitBlob": "c367280abb46da9ebd50932c32bab1923a4b35bd",
+      "normalizedSha256": "eb72bdffa61cf73187cfc2831cb5777b03e6927d8386f5a8e132b91823729806"
+    },
+    {
+      "path": "system/sys/include/util/settings.h",
+      "upstreamGitBlob": "3e8415c94d29e47ec9a46b92bff2ebc40ef243fa",
+      "normalizedSha256": "4248f0004060dc1847bbc88fbb1ae9ff4cca925270a746b4ed53145cfce07422"
+    },
+    {
+      "path": "system/sys/include/util/shortcutkey.h",
+      "upstreamGitBlob": "ae87651d49c9d169fc88646d6332bb0c74ca381f",
+      "normalizedSha256": "159cc13043e624617fe3061e67b715ecf5dfb7f98e28f453e3923201fcb25fb9"
+    },
+    {
+      "path": "system/sys/include/util/string.h",
+      "upstreamGitBlob": "b5b3ff415caa3d1fd9f9730ae69b352815c79837",
+      "normalizedSha256": "a7931e6500afbb5f5bb8aea8cbf558500b0d7258aab354c650e08df89ffb9ab7"
+    },
+    {
+      "path": "system/sys/include/util/thread.h",
+      "upstreamGitBlob": "7cc68ac6f5e00a97ddf8b41f582c6351c200aa65",
+      "normalizedSha256": "6e6660e056b6f4ef0b395b9691a9f6ddd66ffb17e9199d4c3b681a01d9173666"
+    },
+    {
+      "path": "system/sys/include/util/typecodes.h",
+      "upstreamGitBlob": "c23a794025b78d453a72e39c15ebed58d272173f",
+      "normalizedSha256": "34ef0392dfe16f31d636b64f616585cba5baa4e76f3b8dcc92bb11d7d38e64d2"
+    },
+    {
+      "path": "system/sys/include/util/variant.h",
+      "upstreamGitBlob": "8b2e00034e748adc1a59de5cc7949a816e7246c6",
+      "normalizedSha256": "a9c396b0edb90dc93ec20530969ae759b64e5768bafa17888d30c453eebb8bc2"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/ddriver.cpp",
+      "upstreamGitBlob": "1d9547829e6ad6329b695b0038c1257c504a7530",
+      "normalizedSha256": "705e20b3f421f5a8da84af40c929c945c2936344a69d11d18ca1003298b6d043"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/ddriver_mmx.cpp",
+      "upstreamGitBlob": "79973d2976d2d4184bfbf95574c864c1142ca449",
+      "normalizedSha256": "e61a809f6112975bb1a9c6fcd558e47d0d1702bf1afc7cac784336ee4dd071ad"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/ddline.cpp",
+      "upstreamGitBlob": "e6db039b0afcfa5959618807cace37f45f5c6bfb",
+      "normalizedSha256": "e0813ebd1f7395416423207a26a65f0421e93aa6658c29e5a9b0ee6dc7b1314d"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/ddmemory.cpp",
+      "upstreamGitBlob": "2c62b8b2b76b3c694aaf2c99634ea5e4c3e49cf9",
+      "normalizedSha256": "d64d620741586907e6fa761eb35500739da40c073c8f82770ea79c6030bfb9a6"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/event.cpp",
+      "upstreamGitBlob": "7b3e33df00215753fdebc45f22cc02202a105866",
+      "normalizedSha256": "1065dcf7740a2b8b78c147aaa800b0b2ef0fdbbc716fc7a9afa30339c18567af"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/vesadrv.cpp",
+      "upstreamGitBlob": "3f8e5735e6575ecc9dbf214b773d6ce282e89f28",
+      "normalizedSha256": "2f360ad96e11a7be26084449a65c0c923af38a6e0b26264d01093e17f003b6d4"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/server.cpp",
+      "upstreamGitBlob": "87c857bce11ae519cb7bc90b3d87c7c00d55da1a",
+      "normalizedSha256": "aa0e73b4b1c50b0ae4d09fba089db8ea42686684032f5d70083245740da554fa"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/input.cpp",
+      "upstreamGitBlob": "cc04c8e4f119e12bf733ccb27fd90809b85457c2",
+      "normalizedSha256": "2db801a43c367f87cb94a20af91b6486f9bdceefb5cc0aa50e73bc2206831e71"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/config.cpp",
+      "upstreamGitBlob": "7ccfac984ea763bcef144fe064992b49a4e08b01",
+      "normalizedSha256": "539717721384c389032ccb827446ea24e24cbce55e75a60bca7c504b94a14238"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/keyboard.cpp",
+      "upstreamGitBlob": "f3a5e29b9ee8e7f18e026e97725eb189a9043fc6",
+      "normalizedSha256": "d699e210246bee9e6d159b5e5763a7ba66f248666f07b22cbb263219836f5025"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/keymap.cpp",
+      "upstreamGitBlob": "6fa964ad61b24f77c372924b51673c789b09dc96",
+      "normalizedSha256": "bca1e4f5c0ac2d541f2f3dc5421030c0dc4d35e2b43f02f521ae9ed12bc108e6"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/defaultkeymap.cpp",
+      "upstreamGitBlob": "ea541ed3e95213f7503b49c43770423f6c0425d4",
+      "normalizedSha256": "63fc877932b2bb34e13951e87b304005ea5ae693bb1a02b0a0dbf1afa15eb16e"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sapplication.cpp",
+      "upstreamGitBlob": "978212ca2550de95f896d0f2fe10d688b2433d82",
+      "normalizedSha256": "5f9c2469914850525b543c323322c57e1a92bedde0bcab6928210a309e265f44"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/swindow.cpp",
+      "upstreamGitBlob": "7c3aadb3d420e34d34ee59ce1616fd62f331f449",
+      "normalizedSha256": "0d3b02c1787f4ae71a393290dd925234146844c7117ad8f6c322ad89df6389d2"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/layer.cpp",
+      "upstreamGitBlob": "3c4c32ba5c0a4778432f74388d5051a9f2cad9ce",
+      "normalizedSha256": "fab5661ae5ab06f8530ba2cc643f8d28eae0b9c0077cb8fa0504b67895332355"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/toplayer.cpp",
+      "upstreamGitBlob": "63d987d91818d86593fccbd07d0b0b06244677cb",
+      "normalizedSha256": "58a25eaac74b8ae7cc52801814274faca961f4488e8ab8ed868f97409d3fcf81"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/render.cpp",
+      "upstreamGitBlob": "57c3b14468c2d5e78c674088ccdca5fa5d57e280",
+      "normalizedSha256": "2f14d1523b8f674070b60e6119bbe464d9518239143c8d1328b15b9c71150d79"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/bitmap.cpp",
+      "upstreamGitBlob": "26cded50ac3af5730e4aaee9508bf17cfc51d830",
+      "normalizedSha256": "8e7081afc312f4948decdff6c650f126a6ceba6c35eae31501e80edf11634f4a"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/crdtrans.cpp",
+      "upstreamGitBlob": "229cfb820f729b13f8c3ed8b25f5da5828d18662",
+      "normalizedSha256": "222030506dfa53d0640d5a5fbf11a257c3db8c0588a576fb0413ea604562b6b1"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sfont.cpp",
+      "upstreamGitBlob": "8292112df259f6014af2a67dc254cc769bdafe9b",
+      "normalizedSha256": "43391cb1fd752a48d29302dbcccc452db7e2b1bee2e4be6e105b3155ad7ddda6"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/fontnode.cpp",
+      "upstreamGitBlob": "132be3dfff0564104b6135db7e0dd5998bb29dd4",
+      "normalizedSha256": "b37d9fa148cdef2c7cd1f3e8d09c48846837f3f052e0af14d17b25cef3f70d66"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/wndborder.cpp",
+      "upstreamGitBlob": "69c65d17a0965cc380a4462a1df95c1b871af3b7",
+      "normalizedSha256": "6fed94a283680e8d91c07514d2d3cd6aabacea87f2d8f12df384d882c1c6a52f"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/desktop.cpp",
+      "upstreamGitBlob": "89d1428d2d9a17010bc3654e9b760adcfc66e749",
+      "normalizedSha256": "03b1e15882c36a58e9e98b6704a093d22c97f518af3100442d9d4304bac186d4"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/winselect.cpp",
+      "upstreamGitBlob": "ec000ff924376c50335010cbba419172d20d9feb",
+      "normalizedSha256": "b1fffa88d7604865ffdaad892fb3f96d3dd41f1ca9b52dd29bc8d1b728ddd143"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/sprite.cpp",
+      "upstreamGitBlob": "e1be92219e1b32121b0f162ba10bc088a82112b7",
+      "normalizedSha256": "dfd7186c7cb31b16b8dd65a6869c04f12738e80b66240a6a50f19a9001937bae"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/clipboard.cpp",
+      "upstreamGitBlob": "c95344b3c8a85ba8c82abdfbe0d2e8050fd66034",
+      "normalizedSha256": "c39b385f7226cd6204866ff40014298ec5696500039f1a59a4090393a432e4ad"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/windowdecorator.cpp",
+      "upstreamGitBlob": "de40774eeed3e9f13c8eaf3e093a9af79a67c26f",
+      "normalizedSha256": "82623c0d3e9443406fda6236ac0b90edb9f6c0908376dfc45eec43fa752eb1bb"
+    },
+    {
+      "path": "system/sys/appserver/appserver/server/defaultdecorator.cpp",
+      "upstreamGitBlob": "d8f553f4e437b9e24df30c67358a046f1c6cb566",
+      "normalizedSha256": "a732e8186630dc491f9027b3e09c8ecd4f955ef7dbd1ea324416fa5a5219a1e6"
+    }
+  ],
+  "units": [
+    {
+      "unit": "ddriver",
+      "exitCode": 1,
+      "sourceSha256": "705e20b3f421f5a8da84af40c929c945c2936344a69d11d18ca1003298b6d043",
+      "firstCompilerErrors": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddriver.cpp:1362:14: error: 'g_pCopyRowCode' aliased to undefined symbol 'g_nCopyRow'"
+      ],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddriver.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddriver.o"
+      ],
+      "compilerLogSha256": "42f5426f207ce039cb006313ea094e825302a511c4257fb81a1eaa14eab01ced"
+    },
+    {
+      "unit": "ddline",
+      "exitCode": 0,
+      "sourceSha256": "e0813ebd1f7395416423207a26a65f0421e93aa6658c29e5a9b0ee6dc7b1314d",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddline.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddline.o"
+      ],
+      "compilerLogSha256": "4534c5facd05e30c2ab7aad0c4b3f807948f0680ae2ca612c9fd0216c30c2cb2",
+      "objectSha256": "3ab4a8c886c414f61024a8f794ceef68670b26b1cb460d0ced48e29bdccc4ce6",
+      "unresolvedSha256": "b2d801b7b7130aba7154a63014bf983a7a3f25009fcb21b4d30cd11f5eea170e"
+    },
+    {
+      "unit": "ddmemory",
+      "exitCode": 0,
+      "sourceSha256": "d64d620741586907e6fa761eb35500739da40c073c8f82770ea79c6030bfb9a6",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddmemory.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\ddmemory.o"
+      ],
+      "compilerLogSha256": "dff961177c3771a25d1fc3a7ef5c7cec5a1edb4908fe403386ca64642f658603",
+      "objectSha256": "be5ff4fa3d1ed190c7612b5a00974a98c9c0a10dc1eec474ab3d041b347a51cd",
+      "unresolvedSha256": "00f52aa058414c6d6ff8c55f7f8cf995a6f31ef6583a287b2d79131eb09f2d6c"
+    },
+    {
+      "unit": "event",
+      "exitCode": 0,
+      "sourceSha256": "1065dcf7740a2b8b78c147aaa800b0b2ef0fdbbc716fc7a9afa30339c18567af",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\event.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\event.o"
+      ],
+      "compilerLogSha256": "21e8b94bcaa82098ea43cc04902364040439d2b2e0f70109ed3f357d5b42ed21",
+      "objectSha256": "c58dcd3b505aecf644001a109327ca203ba8583097c3e1207016c7eb67f82cdf",
+      "unresolvedSha256": "4b6b889f74d76b885fe2a149beba6d41ff9e32acf16b94b5b0e8b89bc4e0f67a"
+    },
+    {
+      "unit": "vesadrv",
+      "exitCode": 1,
+      "sourceSha256": "2f360ad96e11a7be26084449a65c0c923af38a6e0b26264d01093e17f003b6d4",
+      "firstCompilerErrors": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp:278:23: error: aggregate 'VesaDriver::SetVesaMode(uint32)::RMREGS rm' has incomplete type and cannot be defined",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp:280:25: error: invalid application of 'sizeof' to incomplete type 'VesaDriver::SetVesaMode(uint32)::RMREGS'",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp:285:9: error: 'realint' was not declared in this scope; did you mean 'rint'?",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp:288:25: error: invalid application of 'sizeof' to incomplete type 'VesaDriver::SetVesaMode(uint32)::RMREGS'",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp:293:25: error: invalid application of 'sizeof' to incomplete type 'VesaDriver::SetVesaMode(uint32)::RMREGS'"
+      ],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\vesadrv.o"
+      ],
+      "compilerLogSha256": "7184e049f2a9ce620dfdaf15dec972ecbe1a71038f88a12153eeecda66583354"
+    },
+    {
+      "unit": "server",
+      "exitCode": 1,
+      "sourceSha256": "aa0e73b4b1c50b0ae4d09fba089db8ea42686684032f5d70083245740da554fa",
+      "firstCompilerErrors": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\server.cpp:868:56: error: 'O_NOTRAVERSE' was not declared in this scope",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\server.cpp:895:31: error: narrowing conversion of '-1' from 'int' to 'unsigned int' [-Wnarrowing]"
+      ],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\server.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\server.o"
+      ],
+      "compilerLogSha256": "47e17043c7dbc5dfdadc8589a4bcb9d8bb847424f5b647c1cf98e6f58899ecd0"
+    },
+    {
+      "unit": "input",
+      "exitCode": 0,
+      "sourceSha256": "2db801a43c367f87cb94a20af91b6486f9bdceefb5cc0aa50e73bc2206831e71",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\input.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\input.o"
+      ],
+      "compilerLogSha256": "c5cdd28950aef98429488cd71fbfdb8bb405d2ad874e73d4f5fce1c4f6d721d8",
+      "objectSha256": "58382ab3620dced7fce2ab234dafd39b49e1e9a828f3bc707c17eb2d49c14d9f",
+      "unresolvedSha256": "423f21e127c331d62996f8cc218be4687662334a50021626e0d436b198324c84"
+    },
+    {
+      "unit": "config",
+      "exitCode": 0,
+      "sourceSha256": "539717721384c389032ccb827446ea24e24cbce55e75a60bca7c504b94a14238",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\config.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\config.o"
+      ],
+      "compilerLogSha256": "432da502e3ad863a87ca0a8638e3cd88cb05235df289ea90855fa530362c6375",
+      "objectSha256": "b8b60e502135b9bd0fd814c16f9a3a29c70777cf3a5ac6f97ac96ab76bbf804c",
+      "unresolvedSha256": "9d846eaba765999a5bdad551bab23345adeb22af6803210fa6a0324995ff819d"
+    },
+    {
+      "unit": "keyboard",
+      "exitCode": 0,
+      "sourceSha256": "d699e210246bee9e6d159b5e5763a7ba66f248666f07b22cbb263219836f5025",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\keyboard.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\keyboard.o"
+      ],
+      "compilerLogSha256": "24cdfdc6d27ae8142437a9364ddb8b3245fb792d33bf582ee63ebf96be89b580",
+      "objectSha256": "34124f3eccbca5789f6f28c00591a837cbf908c785b34c7fffd134858c6b0bf7",
+      "unresolvedSha256": "3b399a9873c6f326a54b23fe371c2e0cdcf7e8dd68559046e88b9b90aa5bed3d"
+    },
+    {
+      "unit": "keymap",
+      "exitCode": 0,
+      "sourceSha256": "bca1e4f5c0ac2d541f2f3dc5421030c0dc4d35e2b43f02f521ae9ed12bc108e6",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\keymap.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\keymap.o"
+      ],
+      "compilerLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "objectSha256": "8d71575d4c4f76e513efedc8d6097009807d32b725343601c8bee403ee00bccf",
+      "unresolvedSha256": "016d0dcc6d7f9c9c5b489baf52c94dd4e7f9f893b2441623fd66bb897996d365"
+    },
+    {
+      "unit": "defaultkeymap",
+      "exitCode": 0,
+      "sourceSha256": "63fc877932b2bb34e13951e87b304005ea5ae693bb1a02b0a0dbf1afa15eb16e",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\defaultkeymap.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\defaultkeymap.o"
+      ],
+      "compilerLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "objectSha256": "78261bfe74121a7c268b026a9029e54c749736225761c3101f512fb16544bb5b",
+      "unresolvedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "unit": "sapplication",
+      "exitCode": 0,
+      "sourceSha256": "5f9c2469914850525b543c323322c57e1a92bedde0bcab6928210a309e265f44",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sapplication.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sapplication.o"
+      ],
+      "compilerLogSha256": "84995d61ed129feb14aaae740a4977a2bac960ca18da8e456e4d87ca6dd3f0a2",
+      "objectSha256": "2b9014420bdab697ad4c54f82d45ece6f6e398f051a29103b90ae9eaee816aa1",
+      "unresolvedSha256": "b9fb715ac258974e6cb887ace9e8963033fb95f00ac350230d368570e7e839fe"
+    },
+    {
+      "unit": "swindow",
+      "exitCode": 0,
+      "sourceSha256": "0d3b02c1787f4ae71a393290dd925234146844c7117ad8f6c322ad89df6389d2",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\swindow.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\swindow.o"
+      ],
+      "compilerLogSha256": "32995426b8101332a4ad975694a11a2a4caa765b9c75b89cb65a9aec9e317dd8",
+      "objectSha256": "6d684ca87c1018a991c3cc53cfef491414e04569c6c37291293de8df3ad51af0",
+      "unresolvedSha256": "019a4aca9afe4c0964967cf2733f5651df85912ffd894795b4522de79a4825cb"
+    },
+    {
+      "unit": "layer",
+      "exitCode": 0,
+      "sourceSha256": "fab5661ae5ab06f8530ba2cc643f8d28eae0b9c0077cb8fa0504b67895332355",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\layer.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\layer.o"
+      ],
+      "compilerLogSha256": "b97e1a4ca285a549151b6a3769b784f7457be833aa6239765b8b0a3994f79f4d",
+      "objectSha256": "9d1321189aefb5128e672110af429ddc0d8193f70f8d385948bd9c671fd4288a",
+      "unresolvedSha256": "11f16cfe0c9a3896d2687145f05d3e80360b4da9014fa0d0148248e093b3349b"
+    },
+    {
+      "unit": "toplayer",
+      "exitCode": 0,
+      "sourceSha256": "58a25eaac74b8ae7cc52801814274faca961f4488e8ab8ed868f97409d3fcf81",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\toplayer.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\toplayer.o"
+      ],
+      "compilerLogSha256": "5d1c8b39c6d4126c7ca976f8133d8925d12654c05361ec52eeaedbc3c3882836",
+      "objectSha256": "69e759a1629e228f9577f2478898c187c2b82982e698da494223291c2cdb240d",
+      "unresolvedSha256": "ac7bb47da6cdebf8988a7e3daec293c9bdcc86c3381186c3ee49063cf3615984"
+    },
+    {
+      "unit": "render",
+      "exitCode": 0,
+      "sourceSha256": "2f14d1523b8f674070b60e6119bbe464d9518239143c8d1328b15b9c71150d79",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\render.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\render.o"
+      ],
+      "compilerLogSha256": "19d9c4aeef7da6c0f5c68914c9c5f484451028c03222fddf5de11730e930e6f3",
+      "objectSha256": "3373178a03adad5d1a47224e297bf44e009fbc4da8f79e238fbeb538749fcbbe",
+      "unresolvedSha256": "c613749aa36868767d3bafc69df9a27a892d99da7b4311b6749ef34144170101"
+    },
+    {
+      "unit": "bitmap",
+      "exitCode": 0,
+      "sourceSha256": "8e7081afc312f4948decdff6c650f126a6ceba6c35eae31501e80edf11634f4a",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\bitmap.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\bitmap.o"
+      ],
+      "compilerLogSha256": "43fb1f561e11b5af46582194c9633d694e55213ae8f346b26d63d42ca726b96b",
+      "objectSha256": "813acc7ae3628d37f7efc41a03a915a6356a0b604f417e13136098ef44848051",
+      "unresolvedSha256": "ba157d1429946448ba6ca8c4a69069e03e2d356d831569721c39fa1c85cb0afc"
+    },
+    {
+      "unit": "crdtrans",
+      "exitCode": 0,
+      "sourceSha256": "222030506dfa53d0640d5a5fbf11a257c3db8c0588a576fb0413ea604562b6b1",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\crdtrans.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\crdtrans.o"
+      ],
+      "compilerLogSha256": "9388bdc25f76a0bd6121d160cd77bbaaa9dc6d3fd2d9a1f0028baabc9e9512ce",
+      "objectSha256": "87445e3f4e03639682a9a16edda18330f690cbfc3e6729ec785615afb597ff0f",
+      "unresolvedSha256": "eebb83d39547f3904b96e9dbbb7ce7cc9f594b3261b744d719fb413c8cd38a9d"
+    },
+    {
+      "unit": "sfont",
+      "exitCode": 0,
+      "sourceSha256": "43391cb1fd752a48d29302dbcccc452db7e2b1bee2e4be6e105b3155ad7ddda6",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sfont.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sfont.o"
+      ],
+      "compilerLogSha256": "3c8a7e0a5930e0f8c51046bf602236cdb2f2ffab5b15e27fbc236e779fee60f7",
+      "objectSha256": "da8f1d7e113025b1c5f3fae0e42807a949d5e51fca92c0663b503d466f6c45f8",
+      "unresolvedSha256": "17ab4d455bcac7acdfa2b6eaecb5a373e7a092f5dd8f910729d28b72bd430da9"
+    },
+    {
+      "unit": "fontnode",
+      "exitCode": 0,
+      "sourceSha256": "b37d9fa148cdef2c7cd1f3e8d09c48846837f3f052e0af14d17b25cef3f70d66",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\fontnode.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\fontnode.o"
+      ],
+      "compilerLogSha256": "1e8999fe31055f234606514ef4b1b41fe3964cfb6cc4a923b5baf3e0efd6c0f6",
+      "objectSha256": "427e1c522cdc10d5e7a618fee150dd5c456e41ac61905c789f2ff1866767b15f",
+      "unresolvedSha256": "014ce99d6bf4d3e662c830b0344bc81e12234aed2464a29d27f7998dbe9735c0"
+    },
+    {
+      "unit": "wndborder",
+      "exitCode": 0,
+      "sourceSha256": "6fed94a283680e8d91c07514d2d3cd6aabacea87f2d8f12df384d882c1c6a52f",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\wndborder.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\wndborder.o"
+      ],
+      "compilerLogSha256": "14937352f97ebff5f60edac978c5c2f4354728ad49b0faf169c220ae6aa3c105",
+      "objectSha256": "cc83ae5deae2553eca79e25c55958b6078d468a256d53566c986cf1f265a42f1",
+      "unresolvedSha256": "744a211aed3147fefda92bf5b3e5698b770fbaba76e7776f12e1ee42bad60bb3"
+    },
+    {
+      "unit": "desktop",
+      "exitCode": 0,
+      "sourceSha256": "03b1e15882c36a58e9e98b6704a093d22c97f518af3100442d9d4304bac186d4",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\desktop.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\desktop.o"
+      ],
+      "compilerLogSha256": "cad3efb25903f3cac440708759d8e91c53a80d9dbdfe2d506be68daa4d59a30f",
+      "objectSha256": "62bb8816279791d09d0a16c9b36c2e1305b3cfd4e6eb75f4a61c56a0988733af",
+      "unresolvedSha256": "ff1644c8b9cd728e30c89e74ceba7b72f9441c6047c0784380ddfff64daa59e4"
+    },
+    {
+      "unit": "winselect",
+      "exitCode": 0,
+      "sourceSha256": "b1fffa88d7604865ffdaad892fb3f96d3dd41f1ca9b52dd29bc8d1b728ddd143",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\winselect.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\winselect.o"
+      ],
+      "compilerLogSha256": "568832f269e285cccb7949ba7795ee397777043b8099aaea4ca92846b368dd20",
+      "objectSha256": "4b2a01e21b90d942df9c1de9f3856bbdbb438f42f55e618edb9d974a94e20b01",
+      "unresolvedSha256": "49d97eaadaec797187b188808dfba7adedef3fcf6e3f50452e5a5be6b5566e86"
+    },
+    {
+      "unit": "sprite",
+      "exitCode": 0,
+      "sourceSha256": "dfd7186c7cb31b16b8dd65a6869c04f12738e80b66240a6a50f19a9001937bae",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sprite.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\sprite.o"
+      ],
+      "compilerLogSha256": "71d71b704014ade8ea0053e103c8803ac8e1411723c0ebb7ee4879404595a50e",
+      "objectSha256": "96ef596ce609da73e6fd52fded231f9b5bed1b110b81dd1cb30d88d78df569a3",
+      "unresolvedSha256": "0ca1245ce21744d291d3a20f87f0dfaeb9a21b90aaf3c85645ce864189a7ecbc"
+    },
+    {
+      "unit": "clipboard",
+      "exitCode": 0,
+      "sourceSha256": "c39b385f7226cd6204866ff40014298ec5696500039f1a59a4090393a432e4ad",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\clipboard.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\clipboard.o"
+      ],
+      "compilerLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "objectSha256": "cfaa191b2ad97ecd25fedad4c4ec5e6e3c4971d17b169b9a20219a4622f48234",
+      "unresolvedSha256": "d310ee640182e5d522390d14bf2afde082452457796a118e8317b7147a1f98fe"
+    },
+    {
+      "unit": "windowdecorator",
+      "exitCode": 0,
+      "sourceSha256": "82623c0d3e9443406fda6236ac0b90edb9f6c0908376dfc45eec43fa752eb1bb",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\windowdecorator.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\windowdecorator.o"
+      ],
+      "compilerLogSha256": "377943f87a3b27c46cd9b22b129b504ad87d8cfa4720e3d9ab2c5bce7f874b59",
+      "objectSha256": "7a6e277e9b22d43ec3e3a098231942d6da1109e44c9029851fd03f6d679faae5",
+      "unresolvedSha256": "41ffaffb1eb11eeedaa3ae990e78dd7176e20780d48ca7ea6c6bbdcebe698d50"
+    },
+    {
+      "unit": "defaultdecorator",
+      "exitCode": 0,
+      "sourceSha256": "a732e8186630dc491f9027b3e09c8ecd4f955ef7dbd1ea324416fa5a5219a1e6",
+      "firstCompilerErrors": [],
+      "command": [
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\msys64\\usr\\bin\\bash.exe",
+        "scripts/riscv32-musl-cxx.sh",
+        "-O2",
+        "-std=gnu++17",
+        "-D_GNU_SOURCE",
+        "-D__NO_SCREENSHOT_SUPPORT__=1",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-msmall-data-limit=0",
+        "-Wall",
+        "-Wextra",
+        "-DCARIBE_SYLLABLE_MESSAGE_CORE",
+        "-DCARIBE_SYLLABLE_MESSAGE_DELIVERY",
+        "-DCARIBE_SYLLABLE_MESSAGE_VARIANT",
+        "-include",
+        "third_party/syllable/system/sys/include/atheos/kdebug.h",
+        "-include",
+        "string.h",
+        "-include",
+        "limits.h",
+        "-include",
+        "ports/syllable/native/atheos/types.h",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\server-native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\cxx-rv32-sysroot\\usr\\include\\c++\\15.1.0\\riscv32-unknown-linux-musl",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-variant\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\ports\\syllable\\native",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-looper-runtime\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-queue\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-thread\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-locker\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-string\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-native\\include",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\freetype-rv32-sysroot\\usr\\include\\freetype2",
+        "-IF:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\third_party\\syllable\\system\\sys\\include",
+        "-c",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\defaultdecorator.cpp",
+        "-o",
+        "F:\\Codex\\2026-05-16\\baja-lo-mas-que-se-pueda\\caribeos-corrected-xnu-rv32imacsu\\caribeos\\build\\syllable-server-frontier\\defaultdecorator.o"
+      ],
+      "compilerLogSha256": "35e5734275a1e8d5de6ca03486c27c312f6632802540978a6d4ee4f379f75bf9",
+      "objectSha256": "4f854e5802e68079af068445840a0b60db191541a41ffa29e8c6e72b62655421",
+      "unresolvedSha256": "19293accefcb5b778530290ba7cf30ffc0b9a5fbf60f58dba1c264a91c9de6e4"
+    }
+  ],
+  "sourcesModified": false,
+  "linked": false,
+  "runtimeVerified": false,
+  "displayBackendPorted": false,
+  "appServerRunning": false,
+  "scope": "Complete original AppServer compilation frontier, including unported VESA; not an executable server",
+  "licenseReviewRequired": [
+    "server.cpp historical mixed LGPL grant/GPL boilerplate; original notices retained"
+  ]
+}

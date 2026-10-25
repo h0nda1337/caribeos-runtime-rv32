@@ -1,0 +1,237 @@
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:29:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/mouse.h:41:8: warning: extra tokens at end of '#endif' directive [-Wendif-labels]
+   41 | #endif __ATHEOS_MOUSE_H_
+      |        ^~~~~~~~~~~~~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:33:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:30:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   30 |   uint8  WinAAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:31:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   31 |   uint8  WinBAttributes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:41:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   41 |   uint8  XCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:42:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   42 |   uint8  YCharSize              __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:43:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   43 |   uint8  NumberOfPlanes         __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:44:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   44 |   uint8  BitsPerPixel           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:45:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   45 |   uint8  NumberOfBanks          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:46:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   46 |   uint8  MemoryModel            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:47:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   47 |   uint8  BankSize               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:48:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   48 |   uint8  NumberOfImagePages     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:49:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   49 |   uint8  Reserved               __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:51:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   51 |   uint8  RedMaskSize            __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:52:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   52 |   uint8  RedFieldPosition       __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:53:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   53 |   uint8  GreenMaskSize          __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:54:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   54 |   uint8  GreenFieldPosition     __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:55:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   55 |   uint8  BlueMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:56:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   56 |   uint8  BlueFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:57:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   57 |   uint8  RsvdMaskSize           __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:58:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   58 |   uint8  RsvdFieldPosition      __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:59:55: warning: 'packed' attribute ignored for field of type 'uint8' {aka 'unsigned char'} [-Wattributes]
+   59 |   uint8  DirectColorModeInfo    __attribute__((packed));
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:63:55: warning: 'packed' attribute ignored for field of type 'uint8 [206]' {aka 'unsigned char [206]'} [-Wattributes]
+   63 |   uint8  UnUsed[206]            __attribute__((packed));        /* VBE 2.0 Info */
+      |                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:77:63: warning: 'packed' attribute ignored for field of type 'char [4]' [-Wattributes]
+   77 |     char        VesaSignature[4]        __attribute__((packed));
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:87:63: warning: 'packed' attribute ignored for field of type 'uint8 [222]' {aka 'unsigned char [222]'} [-Wattributes]
+   87 |     uint8       RESERVED[222]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/atheos/vesa_gfx.h:88:63: warning: 'packed' attribute ignored for field of type 'uint8 [256]' {aka 'unsigned char [256]'} [-Wattributes]
+   88 |     uint8       OEM_DATA[256]           __attribute__((packed));        /* VBE 2.0 Extensions */
+      |                                                               ^
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/view.h:33,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:27,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\swindow.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\desktop.h:23,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.h:28:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-looper\include/util/handler.h:74:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   74 |         const uint32 GetToken();
+      |         ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::MovePenTo(const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:157:79: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  157 |     void                MovePenTo( const os::Point& cPos )      { m_cPenPos = cPos;  }
+      |                                                                               ^~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/rect.h:25,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/region.h:26,
+                 from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:27:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h: In member function 'void Layer::DrawLine(const os::Point&, const os::Point&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\layer.h:160:102: warning: implicitly-declared 'constexpr os::Point& os::Point::operator=(const os::Point&)' is deprecated [-Wdeprecated-copy]
+  160 |     void                DrawLine( const os::Point& cFromPnt, const os::Point& cToPnt ) { m_cPenPos = cFromPnt; DrawLine( cToPnt ); }
+      |                                                                                                      ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:48:5: note: because 'os::Point' has user-provided 'os::Point::Point(const os::Point&)'
+   48 |     Point( const Point& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h: In member function 'DisplayDriver* AppServer::GetDisplayDriver(int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\server.h:77:63: warning: unused parameter 'nIndex' [-Wunused-parameter]
+   77 |     DisplayDriver*                      GetDisplayDriver( int nIndex )  { return( m_pcDispDriver ); }
+      |                                                           ~~~~^~~~~~
+In file included from F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:45:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp: In function 'void mmx_rgb16_to_rgb32(uint8*, uint8*, unsigned int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp:215:33: warning: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  215 |                 register uint16 nBGR = *pS++;
+      |                                 ^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp: In function 'void mmx_fill_alpha32(uint32*, int, int, int, uint32, uint32)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp:258:28: warning: narrowing conversion of 'nAlpha' from 'uint32' {aka 'unsigned int'} to 'uint8' {aka 'unsigned char'} [-Wnarrowing]
+  258 |         uint8 nTemp[8] = { nAlpha, 0, nAlpha, 0,
+      |                            ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp:258:39: warning: narrowing conversion of 'nAlpha' from 'uint32' {aka 'unsigned int'} to 'uint8' {aka 'unsigned char'} [-Wnarrowing]
+  258 |         uint8 nTemp[8] = { nAlpha, 0, nAlpha, 0,
+      |                                       ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver_mmx.cpp:259:49: warning: narrowing conversion of 'nAlpha' from 'uint32' {aka 'unsigned int'} to 'uint8' {aka 'unsigned char'} [-Wnarrowing]
+  259 |                                                 nAlpha, 0, 0, 0 };
+      |                                                 ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'void DisplayDriver::SetCursorBitmap(os::mouse_ptr_mode, const os::IPoint&, const void*, int, int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:371:28: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  371 |         m_cCursorHotSpot = cHotSpot;
+      |                            ^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'void DisplayDriver::SetMousePos(os::IPoint)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:460:23: warning: implicitly-declared 'constexpr os::IPoint& os::IPoint::operator=(const os::IPoint&)' is deprecated [-Wdeprecated-copy]
+  460 |         m_cMousePos = cNewPos;
+      |                       ^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\third_party\syllable\system\sys\include/gui/point.h:79:5: note: because 'os::IPoint' has user-provided 'os::IPoint::IPoint(const os::IPoint&)'
+   79 |     IPoint( const IPoint& cPnt ) { x = cPnt.x; y = cPnt.y; }
+      |     ^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual void DisplayDriver::LockBitmap(SrvBitmap*, SrvBitmap*, os::IRect, os::IRect)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:479:44: warning: unused parameter 'pcDstBitmap' [-Wunused-parameter]
+  479 | void DisplayDriver::LockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                 ~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:479:68: warning: unused parameter 'pcSrcBitmap' [-Wunused-parameter]
+  479 | void DisplayDriver::LockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                         ~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:479:91: warning: unused parameter 'cSrcRect' [-Wunused-parameter]
+  479 | void DisplayDriver::LockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                                                 ~~~~~~~~~~^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:479:111: warning: unused parameter 'cDstRect' [-Wunused-parameter]
+  479 | void DisplayDriver::LockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                                                                     ~~~~~~~~~~^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual void DisplayDriver::UnlockBitmap(SrvBitmap*, SrvBitmap*, os::IRect, os::IRect)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:497:46: warning: unused parameter 'pcDstBitmap' [-Wunused-parameter]
+  497 | void DisplayDriver::UnlockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                   ~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:497:70: warning: unused parameter 'pcSrcBitmap' [-Wunused-parameter]
+  497 | void DisplayDriver::UnlockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                           ~~~~~~~~~~~^~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:497:93: warning: unused parameter 'cSrcRect' [-Wunused-parameter]
+  497 | void DisplayDriver::UnlockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                                                   ~~~~~~~~~~^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:497:113: warning: unused parameter 'cDstRect' [-Wunused-parameter]
+  497 | void DisplayDriver::UnlockBitmap( SrvBitmap* pcDstBitmap, SrvBitmap* pcSrcBitmap, os::IRect cSrcRect, os::IRect cDstRect )
+      |                                                                                                       ~~~~~~~~~~^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In function 'void blit_convert_stretch_copy(SrvBitmap*, SrvBitmap*, const os::IRect&, const os::IRect&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1414:199: warning: matching constraint does not allow a register
+ 1414 |                                                         __asm__ __volatile__ ( "call g_pCopyRowCode"    : "=&D" ( nTemp1 ), "=&S" ( nTemp2 ) : "0" ( (uint8*)pDst ), "1" ( (uint8*)pSrc ) : "memory" );
+      |                                                                                                                                                                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1546:199: warning: matching constraint does not allow a register
+ 1546 |                                                         __asm__ __volatile__ ( "call g_pCopyRowCode"    : "=&D" ( nTemp1 ), "=&S" ( nTemp2 ) : "0" ( (uint8*)pDst ), "1" ( (uint8*)pSrc ) : "memory" );
+      |                                                                                                                                                                                                       ^
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In function 'void blit_convert_stretch_alpha(SrvBitmap*, SrvBitmap*, const os::IRect&, const os::IRect&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1657:54: warning: operation on 'pDst' may be undefined [-Wsequence-point]
+ 1657 |                                                 *pDst++ = ( ( *pDst ) & 0xff000000 ) | ( nSrc & 0x00ffffff );
+      |                                                  ~~~~^~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1657:54: warning: operation on 'pDst' may be undefined [-Wsequence-point]
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual bool DisplayDriver::BltBitmap(SrvBitmap*, SrvBitmap*, os::IRect, os::IRect, int, int)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1704:117: warning: unused parameter 'nAlpha' [-Wunused-parameter]
+ 1704 | bool DisplayDriver::BltBitmap( SrvBitmap * dstbm, SrvBitmap * srcbm, IRect cSrcRect, IRect cDstRect, int nMode, int nAlpha )
+      |                                                                                                                 ~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual bool DisplayDriver::CreateVideoOverlay(const os::IPoint&, const os::IRect&, os::color_space, os::Color32_s, area_id*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2013:60: warning: unused parameter 'cSize' [-Wunused-parameter]
+ 2013 | bool DisplayDriver::CreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, os::Color32_s sColorKey, area_id *phArea )
+      |                                         ~~~~~~~~~~~~~~~~~~~^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2013:85: warning: unused parameter 'cDst' [-Wunused-parameter]
+ 2013 | bool DisplayDriver::CreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, os::Color32_s sColorKey, area_id *phArea )
+      |                                                                   ~~~~~~~~~~~~~~~~~~^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2013:107: warning: unused parameter 'eFormat' [-Wunused-parameter]
+ 2013 | bool DisplayDriver::CreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, os::Color32_s sColorKey, area_id *phArea )
+      |                                                                                           ~~~~~~~~~~~~~~~~^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2013:130: warning: unused parameter 'sColorKey' [-Wunused-parameter]
+ 2013 | bool DisplayDriver::CreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, os::Color32_s sColorKey, area_id *phArea )
+      |                                                                                                                    ~~~~~~~~~~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2013:150: warning: unused parameter 'phArea' [-Wunused-parameter]
+ 2013 | bool DisplayDriver::CreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, os::Color32_s sColorKey, area_id *phArea )
+      |                                                                                                                                             ~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual bool DisplayDriver::RecreateVideoOverlay(const os::IPoint&, const os::IRect&, os::color_space, area_id*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2032:62: warning: unused parameter 'cSize' [-Wunused-parameter]
+ 2032 | bool DisplayDriver::RecreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, area_id *phArea )
+      |                                           ~~~~~~~~~~~~~~~~~~~^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2032:87: warning: unused parameter 'cDst' [-Wunused-parameter]
+ 2032 | bool DisplayDriver::RecreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, area_id *phArea )
+      |                                                                     ~~~~~~~~~~~~~~~~~~^~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2032:109: warning: unused parameter 'eFormat' [-Wunused-parameter]
+ 2032 | bool DisplayDriver::RecreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, area_id *phArea )
+      |                                                                                             ~~~~~~~~~~~~~~~~^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2032:127: warning: unused parameter 'phArea' [-Wunused-parameter]
+ 2032 | bool DisplayDriver::RecreateVideoOverlay( const os::IPoint & cSize, const os::IRect & cDst, os::color_space eFormat, area_id *phArea )
+      |                                                                                                                      ~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual void DisplayDriver::DeleteVideoOverlay(area_id*)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2046:50: warning: unused parameter 'phArea' [-Wunused-parameter]
+ 2046 | void DisplayDriver::DeleteVideoOverlay( area_id *phArea )
+      |                                         ~~~~~~~~~^~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In member function 'virtual status_t DisplayDriver::Control(int, void*, size_t)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2060:38: warning: unused parameter 'nCommand' [-Wunused-parameter]
+ 2060 | status_t DisplayDriver::Control( int nCommand, void* pData, size_t nDataSize )
+      |                                  ~~~~^~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2060:54: warning: unused parameter 'pData' [-Wunused-parameter]
+ 2060 | status_t DisplayDriver::Control( int nCommand, void* pData, size_t nDataSize )
+      |                                                ~~~~~~^~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:2060:68: warning: unused parameter 'nDataSize' [-Wunused-parameter]
+ 2060 | status_t DisplayDriver::Control( int nCommand, void* pData, size_t nDataSize )
+      |                                                             ~~~~~~~^~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: At global scope:
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1362:14: error: 'g_pCopyRowCode' aliased to undefined symbol 'g_nCopyRow'
+ 1362 | extern uint8 g_pCopyRowCode[16384] __attribute__ ((alias ("g_nCopyRow")));
+      |              ^~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp: In function 'void blit_convert_stretch_copy(SrvBitmap*, SrvBitmap*, const os::IRect&, const os::IRect&)':
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1414:57: warning: matching constraint does not allow a register
+ 1414 |                                                         __asm__ __volatile__ ( "call g_pCopyRowCode"    : "=&D" ( nTemp1 ), "=&S" ( nTemp2 ) : "0" ( (uint8*)pDst ), "1" ( (uint8*)pSrc ) : "memory" );
+      |                                                         ^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1546:57: warning: matching constraint does not allow a register
+ 1546 |                                                         __asm__ __volatile__ ( "call g_pCopyRowCode"    : "=&D" ( nTemp1 ), "=&S" ( nTemp2 ) : "0" ( (uint8*)pDst ), "1" ( (uint8*)pSrc ) : "memory" );
+      |                                                         ^~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1366:20: warning: matching constraint does not allow a register
+ 1366 | static inline void blit_convert_stretch_copy( SrvBitmap * pcDst, SrvBitmap * pcSrc, const IRect & cSrcRect, const IRect & cDstRect )
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+F:\Codex\2026-05-16\baja-lo-mas-que-se-pueda\caribeos-corrected-xnu-rv32imacsu\caribeos\build\syllable-server-frontier\ddriver.cpp:1366:20: warning: matching constraint does not allow a register
